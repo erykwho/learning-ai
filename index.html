@@ -17,13 +17,17 @@
     property="og:description"
     content="Guia interativo e gratuito em português para entender IA do zero até agentes, Google Antigravity e engenharia de sistemas sem precisar saber programar."
   />
-  <meta property="og:image" content="https://erykwho.github.io/learning-ai/assets/tour/01-inicio-comandos.png" />
+  <meta property="og:image" content="https://erykwho.github.io/learning-ai/assets/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="IA na Prática: do Zero aos Agentes — Guia Interativo Gratuito em Português" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="IA na Prática: do Zero aos Agentes" />
   <meta
     name="twitter:description"
-    content="Do primeiro prompt ao seu próprio sistema no ar: 8 gráficos interativos, tour visual do Google Antigravity e glossário de bolso."
+    content="Do primeiro prompt ao seu próprio sistema no ar: 8 gráficos interativos, tour visual do Google Antigravity, guia das 3 camadas e glossário de bolso."
   />
+  <meta name="twitter:image" content="https://erykwho.github.io/learning-ai/assets/og-cover.png" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,7 +54,7 @@
 
       <div class="header-actions">
         <span class="header-progress-pill" id="header-progress-pct">0% lido</span>
-        <button type="button" class="icon-btn toc-mobile-trigger" id="toc-mobile-open" aria-label="Abrir índice">
+        <button type="button" class="icon-btn toc-mobile-trigger" id="toc-mobile-open" aria-label="Abrir índice" aria-expanded="false" aria-controls="toc-sidebar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <line x1="4" y1="6" x2="20" y2="6" />
             <line x1="4" y1="12" x2="16" y2="12" />
@@ -158,7 +162,7 @@
         </p>
         <div class="hero-meta">
           <span>Trilha essencial: ~15–20 min · Completo: ~35–40 min</span>
-          <span>8 gráficos interativos · Tour visual com prints</span>
+          <span>8 gráficos interativos · Tour visual · Guia das 3 camadas</span>
           <span>Foco prático · Sem pré-requisitos de código</span>
         </div>
 
@@ -250,7 +254,7 @@
               <p class="sim-prompt-text" id="sim-prompt-text"></p>
 
               <div class="context-meter">
-                <div class="sim-panel-label" style="margin-bottom: 6px;">
+                <div class="sim-panel-label is-tight">
                   <span>Quadro branco (Contexto útil)</span>
                 </div>
                 <div class="context-meter-bar" aria-hidden="true">
@@ -263,7 +267,7 @@
                   <span><i class="legend-dot seg-ctx"></i>Contexto</span>
                   <span><i class="legend-dot seg-rules"></i>Formato &amp; Regras</span>
                 </div>
-                <p style="font-size:12.5px; color:var(--ink-muted); margin:8px 0 0;" id="sim-meter-note"></p>
+                <p class="sim-meter-note" id="sim-meter-note"></p>
               </div>
             </div>
 
@@ -273,8 +277,8 @@
                 <span>Saída</span>
               </div>
               <div class="sim-output-rich" id="sim-output-text"></div>
-              <div class="sim-metrics" id="sim-metrics" style="margin-top:12px;"></div>
-              <p style="font-size:13.2px; color:var(--ink-secondary); margin:12px 0 0;" id="sim-takeaway"></p>
+              <div class="sim-metrics sim-metrics-spaced" id="sim-metrics"></div>
+              <p class="sim-takeaway" id="sim-takeaway"></p>
             </div>
           </div>
 
@@ -284,7 +288,7 @@
         </div>
 
         <div class="safety-box">
-          <p class="safety-label">Segurança &amp; Privacidade no Dia a Dia (3 regras simples)</p>
+          <p class="safety-label">Segurança, Privacidade &amp; Olhar Crítico (regras simples)</p>
           <p>
             Antes de sair colando documentos em qualquer ferramenta de IA, vale guardar três hábitos que protegem você e seu trabalho:
           </p>
@@ -293,6 +297,12 @@
             <li><strong>Conta pessoal vs. conta de trabalho:</strong> em contas pessoais gratuitas, suas conversas podem ser usadas para melhorar modelos (você pode desligar o histórico/treinamento nas configurações). Contas corporativas (como Google Workspace empresarial) normalmente já isolam seus dados por contrato.</li>
             <li><strong>Atenção a instruções escondidas (<em>Prompt Injection</em>):</strong> quando um agente lê um site ou PDF desconhecido, alguém mal-intencionado pode esconder uma ordem falsa dentro do texto tentando enganar a IA. É exatamente por isso que ferramentas modernas como o Antigravity <strong>pausam e pedem sua aprovação</strong> antes de alterar arquivos ou enviar dados para fora!</li>
           </ul>
+          <div class="safety-check-strip">
+            <strong>Antes de confiar ou enviar algo criado com IA — 3 perguntas rápidas:</strong>
+            <span>1) Conferi números, datas e fatos numa fonte real?</span>
+            <span>2) Testei clicando na prática (inclusive no celular)?</span>
+            <span>3) Entendi o que será alterado antes de clicar em aprovar?</span>
+          </div>
         </div>
 
         <div class="bridge-note">
@@ -389,7 +399,7 @@
             <ul>
               <li><strong>Instruções Globais (System Prompts):</strong> regras fixas de persona e estilo (como os <em>Gems</em> do Gemini).</li>
               <li><strong>Multimodalidade:</strong> ler fotos, PDFs, áudio e vídeo no mesmo pedido.</li>
-              <li><strong>RAG:</strong> buscar nos seus documentos antes de responder (ex: <em>NotebookLM</em>).</li>
+              <li><strong>RAG:</strong> buscar nos seus documentos antes de responder (ex: <em>Gemini Notebook</em>, antigo NotebookLM).</li>
               <li><strong>Modelos de Raciocínio:</strong> "pensar passo a passo" antes de dar a resposta final.</li>
             </ul>
           </div>
@@ -474,15 +484,15 @@
         <div class="gemini-hub-grid">
           <article class="gemini-hub-card">
             <div class="gemini-hub-top">
-              <span class="gemini-hub-kicker">01 · Customização</span>
+              <span class="gemini-hub-kicker">01 · Assistentes &amp; Editor</span>
               <span class="gemini-hub-tier is-free">Grátis · + no Pro</span>
             </div>
-            <h4>Gems, Skills, Apps Conectados &amp; Canvas</h4>
+            <h4>Salvar seu estilo (Gems/Skills) &amp; editar no Canvas</h4>
             <p>
-              Com os <strong>Gems</strong> (agora evoluindo também para <strong>Skills</strong> reutilizáveis no próprio app), você salva <strong>Instruções Globais</strong> fixas para não repetir regras toda semana. Pela <em>Personal Intelligence</em>, o Gemini lembra suas preferências e se conecta a <strong>Gmail, Drive, Docs, Agenda e YouTube</strong>. Já o <strong>Canvas</strong> abre um editor lado a lado para escrever relatórios, montar apresentações e testar pequenas páginas interativas direto no chat.
+              Com os <strong>Gems</strong> (evoluindo também para <strong>Skills</strong> reutilizáveis no próprio app), você salva <strong>Instruções Globais</strong> fixas para não repetir regras toda semana. O Gemini também memoriza suas preferências (via <em>Personal Intelligence</em>), se conecta a <strong>Gmail, Drive, Docs, Agenda e YouTube</strong> e oferece o <strong>Canvas</strong> — um editor lado a lado para escrever relatórios, apresentações e mini-páginas ao vivo.
             </p>
             <div class="gemini-hub-example">
-              <strong>Na prática:</strong> crie um Gem <em>"Revisor de E-mails"</em> uma única vez ou abra o Canvas para montar um roteiro de reunião editando lado a lado com a IA. Na <a href="#sec-agents-md" data-open-layer="global">Seção 05 ↓</a> mostramos passo a passo como configurar suas próprias Instruções Globais e Skills.
+              <strong>Na prática:</strong> crie um Gem <em>"Revisor de E-mails"</em> uma única vez ou abra o Canvas para montar um roteiro de reunião editando lado a lado com a IA. Na <a href="#sec-agents-md" data-open-layer="global">Seção 05 ↓</a> mostramos passo a passo como configurar suas regras e Skills.
             </div>
           </article>
 
@@ -507,7 +517,7 @@
             </div>
             <h4>Criar e editar Imagens e Vídeos conversando</h4>
             <p>
-              No próprio chat você gera e edita <strong>imagens</strong> com a família <a href="https://gemini.google/overview/image-generation/" target="_blank" rel="noopener noreferrer">Nano Banana</a> (texto nítido em artes, combinação de fotos e retoques por frase — já no plano grátis, com <em>Nano Banana 2.1 / Pro</em> nos pagos). A partir dos planos pagos, também libera criação e edição de <strong>vídeos com áudio nativo</strong> via <a href="https://gemini.google/overview/video-generation/" target="_blank" rel="noopener noreferrer">Gemini Omni</a> (sucessor do antigo Veo), além de músicas. Toda mídia leva a marca d'água digital invisível <strong>SynthID</strong> (que permite verificar depois se foi feita com IA).
+              No próprio chat você gera e edita <strong>imagens</strong> com o motor <a href="https://gemini.google/overview/image-generation/" target="_blank" rel="noopener noreferrer">Nano Banana</a> (texto nítido em artes, combinação de fotos e retoques por frase — já no plano grátis). A partir dos planos pagos, também libera <strong>vídeos com áudio nativo</strong> via <a href="https://gemini.google/overview/video-generation/" target="_blank" rel="noopener noreferrer">Gemini Omni</a>, além de músicas. Toda mídia leva a marca d'água digital invisível <strong>SynthID</strong> (para identificar que foi feita com IA).
             </p>
             <div class="gemini-hub-example">
               <strong>Na prática:</strong> envie a foto de um produto e peça <em>"coloque sobre uma mesa de madeira clara"</em> — ou anime até 5 fotos de referência em um clipe curto.
@@ -519,9 +529,9 @@
               <span class="gemini-hub-kicker">04 · Piloto automático</span>
               <span class="gemini-hub-tier is-pro">Planos pagos · Pro / Ultra</span>
             </div>
-            <h4>Tarefas, Ações Agendadas &amp; Pesquisa Profunda</h4>
+            <h4>Agendar tarefas recorrentes &amp; Pesquisa Profunda</h4>
             <p>
-              Nos planos pagos (<strong>Google AI Plus, Pro, Ultra</strong> e Workspace qualificados), o Gemini sai do modo sob demanda e ganha <strong>Ações Agendadas</strong> (<em>Scheduled Actions</em>) e <strong>Resumo Diário</strong> (<em>Daily Brief</em>): você programa rotinas pontuais ou recorrentes e gerencia tudo numa aba própria. Já as novas <strong>Tarefas</strong> (<em>Tasks</em>) mais proativas — inclusive disparadas por eventos — estão sendo liberadas gradualmente a partir dos planos <strong>Pro e Ultra</strong> (em países selecionados), junto com cotas expandidas de <strong>Deep Research</strong> (pesquisa profunda que vasculha dezenas de fontes e entrega um relatório completo).
+              Nos planos pagos (<strong>Google AI Plus, Pro, Ultra</strong> e Workspace qualificados), o Gemini sai do modo sob demanda com <strong>Ações Agendadas</strong> (rotinas com hora marcada, como resumos diários ou semanais) e libera gradualmente <strong>Tarefas</strong> mais proativas (nos planos Pro/Ultra), além de cotas maiores de <strong>Deep Research</strong> — pesquisa profunda que vasculha dezenas de fontes e entrega um relatório completo.
             </p>
             <div class="gemini-hub-example">
               <strong>Na prática:</strong> peça <em>"toda segunda às 8h, resuma minha Agenda da semana e meus e-mails não lidos"</em> — o Gemini executa no horário marcado.
@@ -531,7 +541,7 @@
 
         <div class="gemini-tier-strip">
           <p>
-            <strong>Resumo rápido — Grátis vs. Planos Pagos no Gemini:</strong> na conta gratuita você já usa conversa por texto e voz (<em>Gemini Live</em>), <strong>Gems/Skills</strong>, <strong>Canvas</strong>, <strong>Gemini Notebook</strong>, <strong>Deep Research</strong> básico e criação/edição de imagens (<em>Nano Banana 2</em>). Os planos pagos (<a href="https://gemini.google/subscriptions/" target="_blank" rel="noopener noreferrer">Google AI Plus, Pro e Ultra</a>) ampliam limites e liberam <strong>geração de vídeos (Gemini Omni)</strong>, <strong>Ações Agendadas / Tarefas</strong>, Gemini dentro de Gmail/Docs e motores mais fortes como o <strong>Gemini 4 Neon</strong> (recursos mais novos podem chegar gradualmente por região).
+            <strong>Resumo rápido — Grátis vs. Planos Pagos no Gemini:</strong> na conta gratuita você já usa texto e voz (<em>Gemini Live</em>), <strong>Gems/Skills</strong>, <strong>Canvas</strong>, <strong>Gemini Notebook</strong>, <strong>Deep Research</strong> básico e criação/edição de imagens. Os planos pagos (<a href="https://gemini.google/subscriptions/" target="_blank" rel="noopener noreferrer">Google AI Plus, Pro e Ultra</a>) ampliam limites e liberam <strong>vídeos (Gemini Omni)</strong>, <strong>Ações Agendadas / Tarefas</strong>, Gemini dentro de Gmail/Docs e motores mais fortes como o <strong>Gemini 4 Neon</strong> (recursos mais novos chegam gradualmente por região).
           </p>
         </div>
 
@@ -594,14 +604,14 @@
             </div>
             <h4>Gemini 4 Carbon</h4>
             <p>
-              O peso-pesado da linha (ao lado do irmão <em>Argon</em>) para pesquisas muito longas, auditorias profundas e verificações que podem pensar por mais tempo em segundo plano.
+              O peso-pesado da linha para pesquisas muito longas, auditorias profundas e verificações que podem pensar por mais tempo em segundo plano.
             </p>
           </article>
         </div>
 
         <div class="gemini4-note-strip">
           <p>
-            <strong>Na prática (grátis vs. planos Pro/Ultra):</strong> você pode começar nos 4 degraus — incluindo o <strong>Google Antigravity</strong> — sem pagar nada usando modelos ágeis da cota gratuita (como <em>Gemini 3.8 Flash</em> e <em>Hydrogen</em>). Já o <strong>Gemini 4 Neon</strong> está disponível para assinantes <strong>Google AI Pro e Ultra</strong> (no app Gemini, AI Studio e Antigravity, onde também atua no modo coordenador <em>Orchestrator</em> para planejar e dividir tarefas maiores).
+            <strong>Na prática (grátis vs. planos Pro/Ultra):</strong> você pode começar nos 4 degraus — incluindo o <strong>Google Antigravity</strong> — sem pagar nada usando modelos ágeis da cota gratuita (como o <em>Hydrogen</em>). Já o <strong>Gemini 4 Neon</strong> está disponível para assinantes <strong>Google AI Pro e Ultra</strong> (no app Gemini, AI Studio e Antigravity, onde também atua como coordenador — modo <em>Orchestrator</em> — para planejar e dividir tarefas maiores).
           </p>
           <p>
             <strong>Sem surpresa na fatura:</strong> nos planos gratuitos do Google (e também nos serviços gratuitos da Seção 06), atingir o limite apenas pausa temporariamente ou troca para um modelo mais leve — nada é cobrado automaticamente sem você escolher um plano pago.
@@ -695,11 +705,11 @@
 
         <div class="contrast-strip">
           <div class="contrast-item">
-            <p class="contrast-item-label" style="color:var(--accent-blue);">No Chat Comum</p>
+            <p class="contrast-item-label is-blue">No Chat Comum</p>
             <p>Você pergunta → a IA responde texto → <strong>você</strong> abre o Google Drive, lê os recibos um por um e digita tudo na planilha.</p>
           </div>
           <div class="contrast-item">
-            <p class="contrast-item-label" style="color:var(--accent-green);">Com um Agente</p>
+            <p class="contrast-item-label is-green">Com um Agente</p>
             <p>Você dá o objetivo → a IA acessa o Drive, lê os recibos, monta a planilha e pede sua confirmação → <strong>você</strong> só revisa e aprova.</p>
           </div>
         </div>
@@ -717,9 +727,11 @@
             <div class="stage-title-group">
               <p class="stage-eyebrow">Gráfico Interativo 04</p>
               <h3 class="stage-title">Raio-X de um Agente Moderno (clique nas peças ou simule uma tarefa)</h3>
-              <p class="stage-hint">Clique em qualquer bloco do diagrama para inspecionar seu papel — ou aperte "Iniciar simulação" abaixo para ver todas as peças trabalhando juntas.</p>
+              <p class="stage-hint">Clique em qualquer bloco do diagrama (ou nos botões abaixo) para inspecionar seu papel — ou aperte "Iniciar simulação" para ver todas as peças trabalhando juntas.</p>
             </div>
           </div>
+
+          <div class="arch-pills" id="agent-xray-pills" role="group" aria-label="Selecionar peça do agente de IA"></div>
 
           <div class="agent-xray-grid">
             <div class="agent-svg-box" id="agent-xray-svg-wrap"></div>
@@ -730,8 +742,8 @@
             <div class="loop-status" id="agent-loop-status">
               <strong>Simulador de tarefa:</strong> clique para assistir o agente ler recibos no Drive e preencher o Google Sheets passo a passo.
             </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="nav-step-btn" id="agent-loop-reset-btn" style="display:none;">Reiniciar</button>
+            <div class="loop-actions">
+              <button type="button" class="nav-step-btn" id="agent-loop-reset-btn" hidden>Reiniciar</button>
               <button type="button" class="primary-action-btn" id="agent-loop-step-btn">Iniciar simulação →</button>
             </div>
           </div>
@@ -761,7 +773,7 @@
           </summary>
           <div class="deep-dive-body">
             <p>
-              Na prática, uma <strong>Skill</strong> é apenas uma pastinha com um arquivo de texto chamado <span class="inline-code">SKILL.md</span> (e, se quiser, modelos ou <em>scripts</em> — pequenos programas automáticos — auxiliares junto). O segredo está em dividir o arquivo em duas partes: um <strong>cartão de visita curto no topo</strong> e o <strong>manual detalhado embaixo</strong>.
+              Na prática, uma <strong>Skill</strong> é apenas uma pastinha com um arquivo de texto simples chamado <span class="inline-code">SKILL.md</span> (a terminação <span class="inline-code">.md</span> vem de <em>Markdown</em>, um texto comum organizado com títulos e listas — e você ainda pode colocar modelos ou <em>scripts</em>, pequenos programas automáticos, juntos). O segredo está em dividir o arquivo em duas partes: um <strong>cartão de visita curto no topo</strong> e o <strong>manual detalhado embaixo</strong>.
             </p>
             <div class="config-example-box">
               <div class="config-file-header">
@@ -820,11 +832,11 @@
           </summary>
           <div class="deep-dive-body">
             <p>
-              Para o usuário do dia a dia, conectar um plugin oficial no Antigravity (como Google Drive, Sheets ou GitHub) é só <strong>clicar em Conectar e autorizar sua conta</strong>. Por baixo dos panos, o Harness registra um conector <strong>MCP</strong> parecido com este bloquinho de configuração:
+              Para o usuário do dia a dia, conectar um plugin oficial no Antigravity (como Google Drive, Sheets ou GitHub) é só <strong>clicar em Conectar e autorizar sua conta</strong>. Por baixo dos panos, o Harness registra um conector <strong>MCP</strong> num arquivo de texto estruturado em pares <span class="inline-code">"chave": "valor"</span> (formato <strong>JSON</strong>) parecido com este:
             </p>
             <div class="config-example-box">
               <div class="config-file-header">
-                <span>⚙️ mcp.json (bastidores de uma conexão MCP)</span>
+                <span>⚙️ mcp.json (ficha de configuração nos bastidores)</span>
                 <span class="config-file-hint">Exemplo simplificado</span>
               </div>
               <pre class="config-snippet">{
@@ -920,7 +932,7 @@
           </summary>
           <div class="deep-dive-body">
             <p>
-              No Antigravity você pode escolher rodar <strong>100% na nuvem gerenciada</strong> (via <em>Remote Agents</em>, onde cada conversa ganha um computador virtual isolado do Google, sem salvar nada no seu PC) ou no <strong>modo local</strong> (com uma <em>Terminal Sandbox</em> protegendo os arquivos fora do projeto). Nos dois casos, o agente testa código com segurança e sem risco ao seu computador pessoal.
+              No Antigravity você pode escolher rodar <strong>100% na nuvem gerenciada</strong> (via <em>Remote Agents</em>, onde cada conversa ganha um computador virtual isolado do Google, sem salvar nada no seu PC) ou no <strong>modo local</strong> (com uma proteção isolada nos comandos de texto do computador, chamada <em>Terminal Sandbox</em>, blindando os arquivos fora do projeto). Nos dois casos, o agente testa código com segurança e sem risco ao seu computador pessoal.
             </p>
             <div class="config-example-box">
               <div class="config-file-header">
@@ -1071,6 +1083,16 @@
           </p>
         </div>
 
+        <nav class="section-jump-nav" aria-label="Atalhos dentro da Seção 05">
+          <span class="section-jump-label">Nesta seção:</span>
+          <a href="#sec-projetos-permissoes">1. Projetos</a>
+          <a href="#sec-antigravity-nuvem">2. Nuvem vs. PC</a>
+          <a href="#widget-antigravity-tour">3. Tour Visual</a>
+          <a href="#sec-roteiros">4. 2 Roteiros</a>
+          <a href="#sec-agents-md">5. Memória (Opcional)</a>
+          <a href="#sec-truques">6. 8 Truques</a>
+        </nav>
+
         <!-- Projects, Resources & Permissions Concept (Section 05) -->
         <h3 id="sec-projetos-permissoes">Projetos e Permissões: o agente só vê o que você autoriza</h3>
         <p>
@@ -1082,7 +1104,7 @@
             <span class="project-step-num">Chave 1 · Na sua Conta</span>
             <h4>Conectar o Plugin (Customizations)</h4>
             <p>
-              Em <strong>Customizations → Marketplace</strong>, você conecta a integração do serviço (ex.: <em>Google Drive</em>, <em>Google Sheets</em> ou <em>GitHub</em>) via login seguro (OAuth). Suas credenciais ficam guardadas no <strong>Sidecar</strong>, fora do código.
+              Em <strong>Customizations → Marketplace</strong>, você conecta a integração do serviço (ex.: <em>Google Drive</em>, <em>Google Sheets</em> ou <em>GitHub</em>) via login oficial da conta — aquele botão "Entrar com Google/GitHub", sem entregar sua senha ao app (padrão <em>OAuth</em>). Suas credenciais ficam guardadas no <strong>Sidecar</strong>, fora do código.
             </p>
           </div>
           <div class="project-step-arrow" aria-hidden="true">→</div>
@@ -1166,9 +1188,9 @@
               <span class="gemini-hub-kicker">02 · Modo Local</span>
               <span class="gemini-hub-tier is-free">Plano Grátis + Pagos</span>
             </div>
-            <h4>No seu Computador (App Desktop, CLI ou Extensão de Editor)</h4>
+            <h4>No seu Computador (App Desktop, linha de comando CLI ou Extensão)</h4>
             <p>
-              Você instala o Antigravity na sua máquina e aponta o projeto para <strong>pastas locais</strong> (<em>Folders</em>), com permissões por projeto e uma <em>Terminal Sandbox</em> protegendo o restante do computador. Mesmo trabalhando localmente, dá para acompanhar ou dar instruções de longe pelo navegador ou celular usando <strong>Remote Control</strong> (enquanto seu PC estiver ligado).
+              Você instala o Antigravity na sua máquina e aponta o projeto para <strong>pastas locais</strong> (<em>Folders</em>), com permissões por projeto e proteção isolada nos comandos de texto (<em>Terminal Sandbox</em>) blindando o restante do computador. Mesmo trabalhando localmente, dá para acompanhar ou dar instruções de longe pelo navegador ou celular usando <strong>Remote Control</strong> (enquanto seu PC estiver ligado).
             </p>
             <div class="gemini-hub-example">
               <strong>Ideal para começar de graça</strong> no plano individual ou quando você já tem arquivos e pastas no seu computador — e depois pode sincronizar tudo no GitHub como backup na nuvem.
@@ -1181,7 +1203,7 @@
             <strong>Dá para misturar os dois na mesma conta:</strong> você pode ter projetos 100% na nuvem (<em>Remote Agents</em>) ao lado de projetos locais — e, ao conectar o <strong>GitHub</strong> (<a href="#sec-sistemas">Seção 06</a>), guarda e publica seus sistemas para sempre sem depender de nenhum computador ligado.
           </p>
           <p>
-            <strong>Controle de autonomia por Projeto:</strong> cada projeto permite escolher o nível de aprovação — <strong>Request Review</strong> (pede seu clique antes de cada comando), <strong>Default</strong> (testa livremente na Sandbox e pede aprovação fora dela) ou <strong>Auto</strong> (só pausa em ações arriscadas ou irreversíveis).
+            <strong>Controle de autonomia por Projeto:</strong> cada projeto permite escolher o nível de aprovação — <strong>Request Review</strong> (pede seu clique antes de cada comando), <strong>Default</strong> (testa livremente na Sandbox e pede aprovação fora dela) ou <strong>Auto / Turbo</strong> (mais autonomia na nuvem, pausando apenas em ações arriscadas ou irreversíveis).
           </p>
           <p>
             <strong>Dica para quem não programa:</strong> no Antigravity App, você pode ativar o layout <strong>Knowledge Work</strong> (em <em>Settings → General → Interface Layout</em>), que esconde painéis técnicos de código e deixa a tela ainda mais limpa, focada em documentos, planilhas e artefatos.
@@ -1229,7 +1251,7 @@
                   id="tour-slide-img"
                   class="tour-slide-img"
                   src="assets/tour/01-inicio-comandos.png"
-                  alt="Tela inicial real do Google Antigravity"
+                  alt="Tela principal real do Google Antigravity"
                   loading="lazy"
                 />
                 <div class="tour-hotspots-layer" id="tour-hotspots-layer" aria-label="Marcadores interativos do passo"></div>
@@ -1246,7 +1268,7 @@
           <div class="tour-caption-box" id="tour-caption-box" aria-live="polite"></div>
         </div>
 
-        <h3>Dois roteiros prontos para copiar e testar hoje</h3>
+        <h3 id="sec-roteiros">Dois roteiros prontos para copiar e testar hoje</h3>
         <p>
           Abaixo estão dois exemplos reais e universais — o primeiro automatiza tarefas do seu Google Drive e Google Sheets; o segundo cria a primeira versão interativa de um mini-sistema web para você testar na hora. Clique em <strong>Copiar prompt</strong> e adapte para a sua rotina.
         </p>
@@ -1294,10 +1316,39 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           </div>
         </article>
 
+        <div class="iteration-box">
+          <p class="iteration-label">O segredo que evita frustração: peça 1 ajuste por vez</p>
+          <p>
+            O erro nº 1 de quem começa a usar agentes é mandar 10 pedidos diferentes na mesma mensagem. Em vez disso, trate o projeto como <strong>3 rodadas curtas</strong> — sempre testando antes de pedir o próximo passo:
+          </p>
+          <div class="iteration-strip">
+            <div class="iteration-step">
+              <span class="iteration-num">Rodada 1 · Base</span>
+              <strong>Criar a versão mínima</strong>
+              <span>"Monte o catálogo simples com lista e botão de adicionar."</span>
+            </div>
+            <div class="iteration-step">
+              <span class="iteration-num">Rodada 2 · Visual</span>
+              <strong>Testar e lapidar 1 coisa</strong>
+              <span>"Gostei! Agora deixe as letras maiores e adicione modo escuro."</span>
+            </div>
+            <div class="iteration-step">
+              <span class="iteration-num">Rodada 3 · Extra</span>
+              <strong>Somar 1 recurso novo</strong>
+              <span>"Perfeito. Agora inclua o filtro de notas de 1 a 5 estrelas."</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Agent Instructions, AGENTS.md & Skills (Practical 3-Layer Workshop) -->
         <h3 id="sec-agents-md">Como fazer o agente lembrar de você: Instruções Globais, <span class="inline-code">AGENTS.md</span> e Skills</h3>
+        <div class="optional-banner">
+          <span><strong>Para depois do 1º projeto (opcional na 1ª leitura):</strong> você já consegue testar os roteiros acima sem mexer aqui. Volte a este guia prático quando quiser que o agente memorize seu estilo e repita tarefas sem você explicar tudo de novo.</span>
+          <a href="#sec-truques" class="optional-skip-link">Pular para os 8 Truques ↓</a>
+        </div>
+
         <p>
-          Depois de rodar seus primeiros roteiros no Antigravity, surge uma dúvida natural: <em>"preciso repetir meu estilo, o objetivo do projeto e meus passos preferidos toda vez que abrir uma conversa nova?"</em> Não! O ecossistema moderno organiza a memória permanente em <strong>3 camadas complementares</strong> — como um <strong>crachá de preferências pessoais</strong> (Instruções Globais), um <strong>quadro de regras da sala</strong> (<span class="inline-code">AGENTS.md</span> daquele projeto) e uma <strong>estante de manuais passo a passo</strong> (Skills, abertas só quando a tarefa pede).
+          Quando você começar a usar o Antigravity toda semana, surge a dúvida natural: <em>"preciso repetir meu estilo, o objetivo do projeto e meus passos preferidos toda vez que abrir uma conversa nova?"</em> Não! O ecossistema moderno organiza a memória permanente em <strong>3 camadas complementares</strong> — como um <strong>crachá de preferências pessoais</strong> (Instruções Globais), um <strong>quadro de regras da sala</strong> (<span class="inline-code">AGENTS.md</span> daquele projeto) e uma <strong>estante de manuais passo a passo</strong> (Skills, abertas só quando a tarefa pede).
         </p>
         <p>
           Você não precisa decorar nomes de pastas nem saber programar para configurar nenhuma das três: em todas elas basta pedir ao próprio Antigravity criar ou atualizar o arquivo — ou digitar <span class="inline-code">/learn</span> no fim de uma conversa para ele transformar o que aprendeu em Regra ou Skill (sempre pedindo sua aprovação antes de salvar).
@@ -1346,8 +1397,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">Erro ou tela confusa</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p1">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">1. Mande um print para investigar</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>1. Mande um print para investigar</h4>
+              <p class="trick-why">
                 Não tente descrever um erro ou botão em palavras. Modelos modernos enxergam imagens: tire um print (ou foto) da tela e cole direto na conversa.
               </p>
             </div>
@@ -1361,8 +1412,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">Não sei por onde começar</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p2">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">2. Faça perguntas abertas</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>2. Faça perguntas abertas</h4>
+              <p class="trick-why">
                 Quando você sabe o destino mas não conhece o caminho, peça à IA para revelar seus pontos cegos antes de sair executando.
               </p>
             </div>
@@ -1376,8 +1427,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">Algo parou de funcionar</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p3">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">3. Peça ajuda explícita na causa raiz</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>3. Peça ajuda explícita na causa raiz</h4>
+              <p class="trick-why">
                 Dizer só "conserte" faz o agente tentar remendos rápidos. Pedir explicitamente para <em>investigar primeiro</em> gera soluções muito melhores.
               </p>
             </div>
@@ -1391,8 +1442,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">IA repetindo o mesmo erro</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p4">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">4. Limpe o "quadro branco"</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>4. Limpe o "quadro branco"</h4>
+              <p class="trick-why">
                 Conversas muito longas ficam poluídas de tentativas falhas. Peça um resumo limpo do ponto atual e abra um chat novo colando só esse resumo.
               </p>
             </div>
@@ -1406,8 +1457,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">Travado numa decisão</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p5">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">5. Peça 3 caminhos + recomendação</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>5. Peça 3 caminhos + recomendação</h4>
+              <p class="trick-why">
                 Em vez de aceitar a primeira ideia da IA ou travar sem saber o que escolher, force uma comparação rápida entre alternativas.
               </p>
             </div>
@@ -1421,8 +1472,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">Não sei escrever o pedido</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p6">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">6. Use o "Prompt Reverso"</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>6. Use o "Prompt Reverso"</h4>
+              <p class="trick-why">
                 Falta vocabulário para pedir do jeito certo? Peça para a própria IA redigir o pedido ideal para você revisar e aprovar.
               </p>
             </div>
@@ -1436,8 +1487,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">Resposta técnica demais</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p7">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">7. Corte o jargão na hora</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>7. Corte o jargão na hora</h4>
+              <p class="trick-why">
                 Não finja que entendeu quando a resposta vier cheia de siglas. Você pode interromper e calibrar o nível de explicação a qualquer segundo.
               </p>
             </div>
@@ -1451,8 +1502,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <span class="trick-symptom">Resultado fora do estilo</span>
                 <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p8">Copiar</button>
               </div>
-              <h4 style="margin-top:8px;">8. Mostre 1 exemplo ("Quero assim")</h4>
-              <p class="trick-why" style="margin-top:4px;">
+              <h4>8. Mostre 1 exemplo ("Quero assim")</h4>
+              <p class="trick-why">
                 Um único print de um site bonito, um texto que você admira ou uma linha de tabela pronta ensina mais à IA do que três parágrafos de regras.
               </p>
             </div>
@@ -1563,8 +1614,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           </table>
         </div>
 
-        <p style="font-size: 14.8px; color: var(--ink-secondary);">
-          <strong>Curiosidade real:</strong> esta página que você está lendo agora usa o pilar 1 e o pilar 3 — o código vive num repositório público no GitHub e é entregue gratuitamente pelo <strong>GitHub Pages</strong>. Quando o sistema precisa salvar dados dinâmicos de usuários (como o catálogo de metas da Seção 5), aí adicionamos o <strong>Neon Postgres</strong> (banco) + <strong>Vercel</strong> (servidor dinâmico).
+        <p class="inline-editorial-note">
+          <strong>Curiosidade real:</strong> esta página que você está lendo agora usa o pilar 1 e o pilar 3 — o código vive num repositório público no GitHub e é entregue gratuitamente pelo <strong>GitHub Pages</strong>. Quando o sistema precisa salvar dados dinâmicos de usuários (como o catálogo de metas da Seção 05), aí adicionamos o <strong>Neon Postgres</strong> (banco) + <strong>Vercel</strong> (servidor dinâmico).
         </p>
 
         <!-- Interactive Widget 5: Deep Dive into the 3 Pillars -->
@@ -1614,8 +1665,8 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           </div>
         </div>
 
-        <!-- Recipe 3: Graduating the Section 5 prototype to Production (completes the core 3-pillars journey) -->
-        <h3>Levando seu protótipo da Seção 5 para o nível profissional</h3>
+        <!-- Recipe 3: Graduating the Section 05 prototype to Production (completes the core 3-pillars journey) -->
+        <h3>Levando seu protótipo da Seção 05 para o nível profissional</h3>
         <p>
           Agora que você já entendeu os 3 pilares e o Escudo Anti-Quebra (GitHub, Neon, Vercel, Preview e <span class="inline-code">.env</span>), veja como é natural pedir ao Antigravity para colocar aquele catálogo de livros e metas no ar:
         </p>
@@ -1639,6 +1690,28 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             </ol>
           </div>
         </article>
+
+        <!-- Cost reassurance & Data ownership -->
+        <div class="cost-calm-box">
+          <p class="cost-calm-label">Sem medo de fatura surpresa — e seus dados são sempre seus</p>
+          <div class="cost-calm-grid">
+            <div class="cost-calm-card is-free">
+              <strong>Grátis sem cartão (projetos iniciais)</strong>
+              <p>
+                <strong>GitHub Pages</strong>, <strong>Vercel (Hobby)</strong>, <strong>Neon Free</strong> e <strong>Supabase Free</strong> permitem publicar projetos pessoais, portfólios e testes sem cadastrar cartão de crédito — se atingir a cota mensal, o serviço apenas pausa até o próximo ciclo, sem cobrar nada automaticamente.
+              </p>
+            </div>
+            <div class="cost-calm-card is-paid">
+              <strong>Quando existe custo real (opcional)</strong>
+              <p>
+                Um endereço personalizado (ex.: <span class="inline-code">.com.br</span>, cerca de R$ 40/ano) é opcional — o link gratuito da Vercel ou GitHub já funciona. Grandes nuvens pagas por uso (Google Cloud, AWS, Azure) exigem cartão: se um dia precisar delas, sempre ative <strong>alertas de orçamento</strong>.
+              </p>
+            </div>
+          </div>
+          <p class="cost-calm-ownership">
+            <strong>Posse real do seu trabalho:</strong> suas planilhas continuam no seu <strong>Google Drive</strong>, seu código fica no seu <strong>GitHub</strong> e seus dados vivem no seu banco — nada fica "preso" dentro de um chat de IA.
+          </p>
+        </div>
 
         <!-- Additional Software Engineering Components Subsection (Optional / As-needed map) -->
         <h3 id="sec-engenharia">Além dos 3 pilares: outros blocos da engenharia de software (Opcional — quando o sistema crescer)</h3>
@@ -1792,7 +1865,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
                 <td>Gems &amp; Skills (no Gemini)</td>
                 <td>Custom GPTs &amp; Projects</td>
                 <td>Projects &amp; Styles</td>
-                <td>System Prompt / Modelfile</td>
+                <td>System Prompt / Modelfile (regras no Ollama)</td>
               </tr>
               <tr>
                 <td><strong>Harness de Agentes</strong></td>
@@ -1873,7 +1946,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           Você chegou ao final da curva: agora entende por que a IA responde como responde, como evoluímos do paper do Google até agentes com Skills e MCP, qual ferramenta Google abrir em cada situação e o que mantém um sistema de pé no mundo real. Marque abaixo conforme for experimentando na prática:
         </p>
 
-        <p style="font-size:13.5px; font-weight:600; color:var(--accent-green); margin-bottom:8px;" id="checklist-summary"></p>
+        <p class="checklist-summary" id="checklist-summary"></p>
         <ul class="checklist-list" id="action-checklist"></ul>
 
         <h3 id="sec-cursos">Quer absorver com mais calma? Cursos rápidos e playlists de vídeos curtos</h3>
@@ -1885,7 +1958,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           <strong>Ritmo sem sobrecarga:</strong> não tente ver tudo num fim de semana. Assista a <strong>1 episódio curto por dia</strong> (no café ou no trajeto) e pratique 1 item do checklist acima por semana — em um mês esse vocabulário inteiro vira natural.
         </div>
 
-        <div class="resources-block" id="study-shelf-block" style="margin-top: 14px;">
+        <div class="resources-block study-shelf-block" id="study-shelf-block">
           <div class="resources-header-row">
             <p class="resources-title">Trilha de Reforço — Cursos Curtos &amp; Playlists Consolidadas</p>
             <div class="resources-filter-tabs" id="study-shelf-tabs" role="group" aria-label="Filtrar cursos e playlists">
@@ -1900,7 +1973,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
 
         <h3>Glossário de Bolso</h3>
         <p>
-          Esqueceu o que significa <em>Token</em>, <em>Harness</em>, <em>RAG</em>, <em>API</em> ou <em>Rollback</em>? Filtre por categoria ou digite qualquer termo abaixo:
+          Esqueceu o que significa <em>Token</em>, <em>Harness</em>, <em>RAG</em>, <em>OAuth</em> ou <em>Rollback</em>? Filtre por categoria ou digite qualquer termo abaixo (funciona mesmo sem acento!):
         </p>
 
         <div class="glossary-controls">
@@ -1908,18 +1981,19 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             type="search"
             id="glossary-search"
             class="glossary-search"
-            placeholder="Buscar termo (ex: MCP, Neon, Token, API, RAG...)"
+            placeholder="Buscar termo (ex: MCP, OAuth, alucinacao, Token, API...)"
             aria-label="Buscar termo no glossário"
           />
-          <div class="pill-tabs" id="glossary-tabs" role="group" aria-label="Filtrar termos do glossário por categoria" style="margin-bottom:0;">
-            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (40)</button>
-            <button type="button" class="pill-tab" data-cat="Fundamentos" aria-pressed="false">Fundamentos (13)</button>
-            <button type="button" class="pill-tab" data-cat="Agentes" aria-pressed="false">Agentes (12)</button>
-            <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (15)</button>
+          <div class="pill-tabs glossary-tabs-inline" id="glossary-tabs" role="group" aria-label="Filtrar termos do glossário por categoria">
+            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (49)</button>
+            <button type="button" class="pill-tab" data-cat="Fundamentos" aria-pressed="false">Fundamentos (16)</button>
+            <button type="button" class="pill-tab" data-cat="Agentes" aria-pressed="false">Agentes (16)</button>
+            <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (17)</button>
           </div>
         </div>
 
         <div class="glossary-grid" id="glossary-grid" aria-live="polite"></div>
+        <div class="glossary-footer" id="glossary-footer"></div>
       </section>
 
       <footer class="site-footer">
@@ -1935,9 +2009,14 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
       <div class="lightbox-header">
         <div class="lightbox-title-wrap">
           <span class="lightbox-step-pill" id="lightbox-step-pill">Passo 1 de 5 · Tour Visual</span>
-          <h3 class="lightbox-title" id="lightbox-title">Passo 1 — Tela inicial, barra lateral e comandos com barra (/)</h3>
+          <h3 class="lightbox-title" id="lightbox-title">Passo 1 — Tela principal, barra lateral e comandos com barra (/)</h3>
         </div>
-        <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Fechar ampliação">Fechar ✕</button>
+        <div class="lightbox-header-actions">
+          <button type="button" class="tour-zoom-btn" id="lightbox-pins-toggle" aria-pressed="true" hidden>
+            <span>Ocultar pinos</span>
+          </button>
+          <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Fechar ampliação">Fechar ✕</button>
+        </div>
       </div>
       <div class="lightbox-body">
         <div class="tour-hotspot-stage is-lightbox">

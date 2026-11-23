@@ -105,7 +105,7 @@ window.GUIDE_DATA = {
         "Limitação da era: o modelo só respondia texto preso na janela de chat — não acessava seus arquivos nem agia sozinho."
       ],
       refs: [
-        { label: "Deep Dive into LLMs (Karpathy)", url: "https://www.youtube.com/watch?v=7xTGNNLPyMI" },
+        { label: "Deep Dive into LLMs · 3h30 (Karpathy)", url: "https://www.youtube.com/watch?v=7xTGNNLPyMI" },
         { label: "Intro to LLMs — 1h (YouTube)", url: "https://www.youtube.com/watch?v=zjkBMFhNj_g" }
       ]
     },
@@ -117,12 +117,12 @@ window.GUIDE_DATA = {
       scope: "Modelos + Camada de Contexto",
       scopeType: "model",
       summary:
-        "Os modelos deixam de entender só texto e ficam multimodais (lendo fotos, PDFs, áudio e vídeo juntos). Surgem as Instruções Globais (System Prompts e Gems), o RAG (pesquisar nos seus próprios documentos antes de responder, como no NotebookLM) e modelos de raciocínio que 'pensam passo a passo' antes de responder.",
+        "Os modelos deixam de entender só texto e ficam multimodais (lendo fotos, PDFs, áudio e vídeo juntos). Surgem as Instruções Globais (System Prompts e Gems), o RAG (pesquisar nos seus próprios documentos antes de responder, como no Gemini Notebook, antigo NotebookLM) e modelos de raciocínio que 'pensam passo a passo' antes de responder.",
       analogy:
         "Você dá ao estagiário um crachá com regras fixas ('como você trabalha aqui'), uma pasta com os documentos oficiais da empresa e pede para ele fazer rascunho antes de entregar a resposta.",
       milestones: [
         "Instruções Globais (System Prompts / Gems): regras permanentes de tom e estilo — nasceu aqui, para modelos!",
-        "RAG (ex: NotebookLM): consultar suas fontes reais para responder com citações e menos invenções.",
+        "RAG (ex: Gemini Notebook / antigo NotebookLM): consultar suas fontes reais para responder com citações e menos invenções.",
         "Multimodalidade + janelas de contexto enormes (destaque da família Gemini) + modelos de raciocínio."
       ],
       refs: [
@@ -211,12 +211,12 @@ window.GUIDE_DATA = {
     },
     {
       eraGroup: "1-2",
-      kind: "YouTube · Era 2",
+      kind: "YouTube · Era 2 · 3h30 (Opcional)",
       isVideo: true,
       lang: "EN · legendas PT",
       title: "Deep Dive into LLMs like ChatGPT — Andrej Karpathy",
       url: "https://www.youtube.com/watch?v=7xTGNNLPyMI",
-      note: "Aula panorâmica sobre como LLMs são treinados, afinados e transformados em assistentes."
+      note: "Aula panorâmica longa (3h30 — ótima para assistir em blocos) sobre como LLMs são treinados, afinados e transformados em assistentes."
     },
     {
       eraGroup: "3",
@@ -358,9 +358,9 @@ window.GUIDE_DATA = {
       kind: "YouTube · Multi-Agentes Google",
       isVideo: true,
       lang: "EN · legendas PT",
-      title: "AI Agents & Multi-Agent Explained (com Google ADK)",
+      title: "AI Agents & Multi-Agent Explained (com Google ADK — kit de agentes)",
       url: "https://www.youtube.com/watch?v=Zqno_vux6d8",
-      note: "Introdução visual à teoria de agentes modernos e sistemas multi-agentes usando o kit do Google."
+      note: "Introdução visual à teoria de agentes modernos e sistemas multi-agentes usando o kit oficial de desenvolvimento do Google."
     },
     {
       eraGroup: "5",
@@ -640,12 +640,27 @@ window.GUIDE_DATA = {
     {
       term: "Instruções Globais (System Prompt)",
       category: "Fundamentos",
-      def: "Regras permanentes sobre seu estilo e preferências que valem em qualquer conversa — como Personal Intelligence / Instruções para o Gemini no chat ou regras globais na conta / ~/.gemini/AGENTS.md no Antigravity."
+      def: "Regras permanentes sobre seu estilo e preferências que valem em qualquer conversa — como as Instruções personalizadas no app Google Gemini ou as regras globais da sua conta no Antigravity."
+    },
+    {
+      term: "Multimodalidade",
+      category: "Fundamentos",
+      def: "Capacidade da IA moderna de entender e combinar vários formatos na mesma conversa: texto, fotos, prints de tela, PDFs, áudio e vídeo."
+    },
+    {
+      term: "Modelos de Raciocínio (Reasoning)",
+      category: "Fundamentos",
+      def: "Modelos treinados para 'pensar passo a passo' antes de entregar a resposta final, reduzindo erros em lógica, planejamento e tarefas complexas."
     },
     {
       term: "RAG (Geração com Busca)",
       category: "Fundamentos",
       def: "Técnica em que a IA pesquisa primeiro nos seus documentos reais (como no Gemini Notebook / antigo NotebookLM) antes de redigir a resposta."
+    },
+    {
+      term: "Gems & Gemini Notebook (ex-NotebookLM)",
+      category: "Fundamentos",
+      def: "No ecossistema Google Gemini, Gems são assistentes salvos com regras fixas; Gemini Notebook é o caderno onde a IA responde restrita aos seus PDFs, Docs e links, citando cada fonte."
     },
     {
       term: "Temperatura",
@@ -698,6 +713,26 @@ window.GUIDE_DATA = {
       def: "A 'sala fechada' de trabalho do agente: define exatamente quais pastas locais ou recursos na nuvem (repositórios do GitHub, arquivos/planilhas do Google Drive e Sheets) o agente tem permissão para ver e alterar."
     },
     {
+      term: "Remote Agents (Nuvem) vs. Modo Local",
+      category: "Agentes",
+      def: "Os dois modos do Google Antigravity: em Remote Agents tudo roda na nuvem gerenciada pelo Google (sem salvar arquivos no seu PC); no Modo Local o agente opera pastas escolhidas do seu computador."
+    },
+    {
+      term: "OAuth (Login Oficial Seguro)",
+      category: "Agentes",
+      def: "O botão 'Entrar com Google' ou 'Entrar com GitHub': autoriza um aplicativo ou agente a acessar apenas o que você permitir, sem nunca entregar sua senha real."
+    },
+    {
+      term: "CLI & Terminal",
+      category: "Agentes",
+      def: "Terminal é a janela de comandos por texto do computador; CLI (Interface de Linha de Comando) é um programa operado por comandos curtos ali dentro — que o próprio agente usa por você nos bastidores."
+    },
+    {
+      term: "Markdown (.md) & JSON (.json)",
+      category: "Agentes",
+      def: "Dois formatos simples de arquivo de texto: Markdown (.md, usado em AGENTS.md e SKILL.md) organiza títulos e listas fáceis de ler; JSON (.json) guarda configurações e dados em pares 'chave': 'valor'."
+    },
+    {
       term: "Artifacts (Painel de Artefatos)",
       category: "Agentes",
       def: "Painel lateral usado em ferramentas como Antigravity e Claude para exibir planos, documentos, tabelas e prévias interativas separados da conversa."
@@ -746,6 +781,16 @@ window.GUIDE_DATA = {
       term: "Branch, Pull Request e Merge",
       category: "Sistemas",
       def: "Branch é o rascunho paralelo; Pull Request é o pedido de revisão; Merge é o clique que aprova e junta o rascunho na versão oficial (main ou master)."
+    },
+    {
+      term: "Preview, Build & Produção",
+      category: "Sistemas",
+      def: "Build é o empacotamento automático do site antes de publicar; Preview é o link temporário exclusivo para você testar; Produção é a URL oficial que o público acessa."
+    },
+    {
+      term: "Testes Automatizados",
+      category: "Sistemas",
+      def: "Um checklist programado que o agente roda sozinho na Sandbox para conferir se botões, cálculos e filtros antigos continuam funcionando após cada mudança."
     },
     {
       term: "Banco de Dados (Neon / Supabase)",
@@ -945,7 +990,7 @@ window.GUIDE_DATA = {
           y: 92.0,
           box: { x: 32.6, y: 86.6, w: 50.0, h: 10.8 },
           label: "Caixa de prompt, Modelo e Permissões",
-          text: "Escreva em português normal, anexe arquivos/prints pelo botão \"+\", escolha o modelo (ex.: Gemini 4 Neon) e ajuste o nível de aprovação à direita."
+          text: "Escreva em português normal, anexe arquivos/prints pelo botão \"+\", escolha o modelo (ex.: Gemini 4 Neon) e ajuste o nível de aprovação à direita (ex.: Review, Default ou Turbo na nuvem)."
         }
       ]
     },
@@ -957,7 +1002,7 @@ window.GUIDE_DATA = {
       img: "assets/tour/02-plugins.png",
       alt: "Tela real de Customizations no Google Antigravity destacando o menu Customizations na barra lateral (1), os plugins do Google Workspace incluindo Google Sheets e Google Drive (2) e o plugin do GitHub em More Plugins (3).",
       intro:
-        "Chave 1 de acesso: abra Customizations para conectar sua conta Google Workspace (Sheets, Drive, Docs) e o GitHub via login seguro (OAuth protegido no Sidecar).",
+        "Chave 1 de acesso: abra Customizations para conectar sua conta Google Workspace (Sheets, Drive, Docs) e o GitHub via login oficial da conta — sem entregar sua senha ao app (padrão OAuth protegido no Sidecar).",
       pins: [
         {
           num: "1",
@@ -1029,7 +1074,7 @@ window.GUIDE_DATA = {
       img: "assets/tour/04-recursos-projeto.png",
       alt: "Modal real de Project Settings no Google Antigravity destacando a lista de projetos nas configurações (1), o repositório GitHub anexado na seção Resources (2) e o botão + Add Resource para adicionar repositórios, arquivos do Google Drive/Sheets ou uploads (3).",
       intro:
-        "Chave 2 de acesso: é aqui em Resources que você decide o que entra na mesa do agente. O que não for anexado ao Projeto continua invisível e protegido.",
+        "Chave 2 de acesso: é aqui em Resources que você decide o que entra na mesa do agente. O que não for anexado ao Projeto continua invisível e protegido — e pode ignorar o campo \"Setup script\" abaixo (o próprio agente configura se um dia o projeto precisar).",
       pins: [
         {
           num: "1",
@@ -1122,20 +1167,23 @@ window.GUIDE_DATA = {
         {
           title: "No Antigravity — jeito mais fácil (conversando ou com /learn)",
           body:
-            "Você não precisa caçar pastas escondidas: cole o <strong>prompt pronto abaixo</strong> em qualquer conversa para o Antigravity criar suas instruções pessoais (e pedir seu \"ok\" antes de salvar). Outra opção prática: corrigiu o agente numa conversa? Digite <span class=\"inline-code\">/learn</span> — ele propõe transformar a lição em regra global ou do projeto."
+            "Você não precisa procurar pastas escondidas: cole o <strong>prompt pronto abaixo</strong> em qualquer conversa para o Antigravity criar suas instruções pessoais (e pedir seu \"ok\" antes de salvar). Corrigiu o agente no meio do caminho? Digite <span class=\"inline-code\">/learn</span> — ele propõe transformar a lição em regra global ou do projeto."
         },
         {
-          title: "Nuvem gerenciada vs. modo local (onde suas regras ficam)",
+          title: "Onde conferir depois (na nuvem ou no app)",
           body:
-            "Em <strong>Customizations → Installed</strong> (filtro <strong>Rules</strong>), você confere as regras ativas com selo <strong>Global</strong> (na extensão/IDE, menu <span class=\"inline-code\">…</span> → <em>Customizations → Rules → + Global</em>). No <strong>modo local</strong>, o Antigravity salva em <span class=\"inline-code\">~/.gemini/AGENTS.md</span> (ou <span class=\"inline-code\">~/.gemini/GEMINI.md</span>) na sua máquina; já nos <strong>projetos na nuvem (Remote Agents)</strong>, suas configurações pessoais e recursos vivem na nuvem gerenciada sem precisar salvar arquivos no seu PC."
+            "Em <strong>Customizations → Installed</strong> (filtro <strong>Rules</strong>), você visualiza e edita suas regras com selo <strong>Global</strong>. Nos <strong>projetos na nuvem (Remote Agents)</strong>, tudo fica guardado direto na sua conta; no <strong>modo local</strong>, fica salvo numa pasta pessoal do seu computador."
         },
         {
           title: "No app Google Gemini (Degrau 1 — para chats do dia a dia)",
           body:
-            "Abra <a href=\"https://gemini.google.com/\" target=\"_blank\" rel=\"noopener noreferrer\">gemini.google.com</a>, clique em <strong>Configurações → Personal Intelligence / Instruções para o Gemini</strong> (antigo <em>Informações salvas</em>) e adicione frases curtas sobre seu perfil e estilo de resposta — elas passam a valer automaticamente nos seus chats."
+            "Abra <a href=\"https://gemini.google.com/\" target=\"_blank\" rel=\"noopener noreferrer\">gemini.google.com</a>, clique em <strong>Configurações → Personal Intelligence / Instruções para o Gemini</strong> (antigo <em>Informações salvas</em>) e adicione frases curtas sobre seu perfil e estilo — elas passam a valer em todos os seus chats."
         }
       ],
-      fileLabel: "📄 Instruções Globais (ex.: ~/.gemini/AGENTS.md)",
+      technicalDetailsTitle: "Onde esse arquivo fica salvo no computador? (Opcional · modo local)",
+      technicalDetailsHtml:
+        "No <strong>modo local</strong> (ou via extensão no editor de código / IDE, menu <span class=\"inline-code\">…</span> → <em>Customizations → Rules → + Global</em>), o Antigravity salva esse arquivo de texto simples (<em>Markdown</em>) dentro da sua pasta pessoal do usuário (<span class=\"inline-code\">~</span>) em <span class=\"inline-code\">~/.gemini/AGENTS.md</span> (ou <span class=\"inline-code\">~/.gemini/GEMINI.md</span>). Se um dia quiser várias regras separadas por tema, também lê <span class=\"inline-code\">~/.gemini/config/rules/*.md</span> com ativação configurável (sempre ligada, sob decisão do modelo ou manual com <span class=\"inline-code\">@</span>).",
+      fileLabel: "📄 Instruções Globais (texto simples · Markdown)",
       fileHint: "Vale em todos os projetos · Sempre ativo",
       templateHtml: `<span class="code-key"># Minhas Preferências Globais</span>
 - Responda sempre em português brasileiro claro e acolhedor.         <span class="code-comment">← Idioma e tom</span>
@@ -1149,9 +1197,9 @@ window.GUIDE_DATA = {
 - Nunca apague arquivos nem publique mudanças sem minha confirmação.`,
       promptTitle: "Atalho sem código — peça ao Antigravity (Instruções Globais)",
       promptText:
-        "Configure minhas instruções globais pessoais (em ~/.gemini/AGENTS.md no modo local ou nas regras da conta) com estas 4 preferências: responder sempre em português brasileiro claro, explicar termos técnicos com analogias simples, propor um plano curto antes de grandes mudanças e pedir minha confirmação antes de apagar arquivos ou publicar. Me mostre o rascunho para aprovação antes de salvar.",
+        "Configure minhas instruções globais pessoais no Antigravity com estas 4 preferências: responder sempre em português brasileiro claro, explicar termos técnicos com analogias simples, propor um plano curto antes de grandes mudanças e pedir minha confirmação antes de apagar arquivos ou publicar. Me mostre o rascunho para aprovação antes de salvar.",
       noteHtml:
-        "<strong>Bônus opcional (regras modulares):</strong> no modo local, se um dia quiser várias regras globais separadas por tema, o Antigravity também lê arquivos em <span class=\"inline-code\">~/.gemini/config/rules/*.md</span> com ativação configurável (sempre ligada, sob decisão do modelo, por tipo de arquivo ou manual com <span class=\"inline-code\">@</span>). Para começar, 5 a 15 linhas objetivas já resolvem muito!",
+        "<strong>Regra de ouro:</strong> comece curto! Entre <strong>5 e 15 linhas objetivas</strong> já transformam a qualidade das respostas sem gastar memória à toa.",
       links: [
         { label: "Documentação: Rules no Google Antigravity ↗", url: "https://antigravity.google/docs/rules/" },
         { label: "Comando /learn (salvar lições em regras) ↗", url: "https://antigravity.google/docs/commands/learn/" },
@@ -1168,7 +1216,7 @@ window.GUIDE_DATA = {
       panelTitle: "Camada 2 — Como configurar o AGENTS.md do seu Projeto",
       analogy: "O quadro de regras na parede da sala",
       lead:
-        "Um arquivo de texto comum salvo na <strong>raiz do projeto</strong>. Toda vez que você abre uma conversa nova ali, o agente lê esse arquivo sozinho — e, ao salvar no <strong>GitHub</strong> (Seção 06), essas regras vivem na nuvem junto com o projeto (sem precisar existir nada no seu PC) e funcionam em <strong>Antigravity, Codex, Cursor, Copilot</strong> e outros.",
+        "Um arquivo de texto simples (formato <em>Markdown</em>, terminação <span class=\"inline-code\">.md</span>) salvo na <strong>raiz do projeto</strong>. Toda vez que você abre uma conversa nova ali, o agente lê esse arquivo sozinho — e, ao salvar no <strong>GitHub</strong> (Seção 06), essas regras vivem na nuvem junto com o projeto e funcionam em <strong>Antigravity, Codex, Cursor, Copilot</strong> e outros.",
       putHere: [
         "Objetivo do projeto e quem vai usar (público-alvo e idioma dos textos).",
         "Regras de visual ou conteúdo que nunca podem quebrar (ex.: legível no celular de 390px).",
@@ -1187,7 +1235,7 @@ window.GUIDE_DATA = {
         {
           title: "Onde fica salvo (na nuvem ou no seu PC)",
           body:
-            "Basta existir um arquivo chamado <span class=\"inline-code\">AGENTS.md</span> (ou <span class=\"inline-code\">GEMINI.md</span>) na raiz do projeto. No <strong>modo nuvem (Remote Agents)</strong>, ele fica salvo direto no seu repositório do GitHub (ou nos arquivos do projeto na nuvem); no <strong>modo local</strong>, na pasta principal do seu computador. Em ambos os casos o agente carrega sozinho!"
+            "Basta existir um arquivo chamado <span class=\"inline-code\">AGENTS.md</span> (ou <span class=\"inline-code\">GEMINI.md</span>) na página inicial (raiz) do projeto. No <strong>modo nuvem (Remote Agents)</strong>, ele vive direto no seu repositório do GitHub; no <strong>modo local</strong>, na pasta principal do seu computador. Em ambos os casos o agente carrega sozinho!"
         },
         {
           title: "Evolua aos poucos com /learn",
@@ -1231,7 +1279,7 @@ window.GUIDE_DATA = {
       panelTitle: "Camada 3 — Como criar e usar suas próprias Skills",
       analogy: "Os manuais de receita na estante",
       lead:
-        "Enquanto Regras (Camadas 1 e 2) guardam <strong>princípios curtos</strong>, uma <strong>Skill</strong> é um <strong>manual passo a passo</strong> dentro de uma pasta com o arquivo <span class=\"inline-code\">SKILL.md</span>. Para não poluir o \"quadro branco\", o agente vê só o nome e a descrição curta — e só lê a receita inteira na hora em que a tarefa pede.",
+        "Enquanto Regras (Camadas 1 e 2) guardam <strong>princípios curtos</strong>, uma <strong>Skill</strong> é um <strong>manual passo a passo</strong> dentro de uma pastinha com o arquivo <span class=\"inline-code\">SKILL.md</span>. Para não poluir o \"quadro branco\", o agente vê só o nome e a descrição curta — e só lê a receita inteira na hora em que a tarefa pede.",
       putHere: [
         "Tarefas com vários passos que você repete sempre (ex.: revisar textos para leigos, lançar recibos no Sheets, montar ata de reunião).",
         "Um gatilho (<span class=\"inline-code\">description</span>) bem claro no topo explicando <strong>o que a Skill faz e quando o agente deve abri-la</strong>.",
@@ -1245,12 +1293,12 @@ window.GUIDE_DATA = {
         {
           title: "Jeito mais fácil — transformar uma tarefa que deu certo em Skill",
           body:
-            "Faça uma tarefa uma vez junto com o Antigravity até ficar do jeito ideal. Depois diga: <em>\"Salve esse passo a passo que usamos hoje como uma Skill reutilizável\"</em> (ou digite <span class=\"inline-code\">/learn</span>). O agente cria e registra a Skill no formato certo (na nuvem da sua conta ou na pasta certa) e pede sua aprovação!"
+            "Faça uma tarefa uma vez junto com o Antigravity até ficar do jeito ideal. Depois diga: <em>\"Salve esse passo a passo que usamos hoje como uma Skill reutilizável\"</em> (ou digite <span class=\"inline-code\">/learn</span>). O agente cria e registra a Skill no formato certo (na sua conta ou no projeto) e pede sua aprovação!"
         },
         {
-          title: "Onde fica salva (Nuvem da conta, Projeto no GitHub, Local ou App Gemini)",
+          title: "Onde gerenciar suas Skills (Antigravity e app Gemini)",
           body:
-            "<strong>Na nuvem gerenciada (Remote Agents):</strong> suas Skills pessoais ficam salvas direto na sua conta do Antigravity (sem ocupar nada no seu PC) e Skills do projeto ficam em <span class=\"inline-code\">.agents/skills/&lt;nome&gt;/SKILL.md</span> no GitHub. <strong>No modo local:</strong> ficam em <span class=\"inline-code\">~/.gemini/config/skills/&lt;nome&gt;/SKILL.md</span> (Global, visível em <strong>Customizations → Installed → Skills</strong>) ou <span class=\"inline-code\">.agents/skills/</span> (Projeto). <strong>No app Google Gemini:</strong> abra <strong>Personalizar → Skills → Criar</strong>."
+            "No <strong>Antigravity</strong>, você acompanha e ativa suas Skills em <strong>Customizations → Installed → Skills</strong> (nos projetos na nuvem elas ficam na sua conta, sem salvar nada no PC). Já no <strong>app Google Gemini</strong>, abra <strong>Personalizar → Skills → Criar</strong>."
         },
         {
           title: "Como acionar depois (automático ou chamando com barra /)",
@@ -1258,6 +1306,9 @@ window.GUIDE_DATA = {
             "Basta fazer seu pedido em português normal: o agente lê o campo <span class=\"inline-code\">description</span> e abre a Skill sozinho. Quer garantir que ela rode na hora? Digite <span class=\"inline-code\">/&lt;nome-da-skill&gt;</span> (ex.: <span class=\"inline-code\">/revisar-texto-claro</span>) direto na caixa de mensagem!"
         }
       ],
+      technicalDetailsTitle: "Onde as pastas de Skills ficam salvas? (Opcional · GitHub e modo local)",
+      technicalDetailsHtml:
+        "Para compartilhar uma Skill com um projeto no GitHub, ela fica na pasta <span class=\"inline-code\">.agents/skills/&lt;nome&gt;/SKILL.md</span> (o ponto inicial indica uma pasta oculta de configuração). No <strong>modo local</strong>, Skills globais pessoais ficam na sua pasta pessoal (<span class=\"inline-code\">~</span>) em <span class=\"inline-code\">~/.gemini/config/skills/&lt;nome&gt;/SKILL.md</span>.",
       fileLabel: "📁 skills/revisar-texto-claro/SKILL.md",
       fileHint: "Cabeçalho (gatilho) + receita sob demanda (nuvem ou local)",
       templateHtml: `---
@@ -1440,7 +1491,7 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
         "Quando alguma ação leva mais de 2–3 segundos ou quando um único evento precisa disparar várias ações independentes com nova tentativa automática se algo falhar.",
       examples:
         "<strong>Google Cloud Pub/Sub</strong>, <strong>Upstash QStash</strong>, <strong>Cloudflare Queues</strong>, <strong>RabbitMQ</strong> e <strong>Kafka</strong>.",
-      agentMode: "Conecta via terminal (CLI) ou API e cria fila + worker",
+      agentMode: "Conecta via linha de comando (CLI) ou API e cria fila + worker",
       agentTip:
         "O agente configura a fila ou tópico Pub/Sub, escreve o código do Worker com tentativas automáticas em caso de erro e te guia passo a passo para colar o endereço da fila no .env."
     },
@@ -1496,7 +1547,7 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
         "Sempre que existir um especialista confiável para aquela função — economiza meses de trabalho e evita dores de cabeça legais (como lidar com dados de cartão de crédito).",
       examples:
         "<strong>Stripe / Mercado Pago</strong> (pagamentos), <strong>Resend</strong> (e-mails), <strong>Gemini API</strong> (IA) e <strong>Google Maps / Drive</strong>.",
-      agentMode: "Lê documentações, instala bibliotecas oficiais (SDKs) e testa",
+      agentMode: "Lê documentações, instala o pacote oficial do serviço (SDK) e testa",
       agentTip:
         "Basta dizer qual serviço quer integrar (ex: \"envie e-mail de boas-vindas com o Resend\"): o agente instala a biblioteca oficial, lê a chave no .env e cria testes na Sandbox."
     },
@@ -1521,10 +1572,10 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
       analogy: "O Condomínio Completo de Infraestrutura",
       desc: "Em vez de comprar servidores físicos, empresas alugam computação sob demanda em grandes plataformas de <strong>Nuvem</strong> — verdadeiros 'supermercados' com dezenas de serviços integrados sob o mesmo teto (servidores, bancos, Pub/Sub, arquivos, IA, rede e segurança), cobrando apenas pelo que você usa (<em>pay-as-you-go</em>).",
       whenNeeded:
-        "Você <strong>não precisa começar aqui</strong>! Comece leve (GitHub + Neon + Vercel) e migre ou combine serviços da Nuvem grande quando precisar de escala alta, regras rígidas de empresas (compliance) ou recursos específicos (como Google Cloud Pub/Sub e Cloud Run).",
+        "Você <strong>não precisa começar aqui</strong>! Comece leve (GitHub + Neon + Vercel) e migre ou combine serviços da Nuvem grande quando precisar de escala alta, regras rígidas de privacidade e auditoria em empresas (<em>compliance</em>) ou recursos específicos (como Google Cloud Pub/Sub e Cloud Run).",
       examples:
         "<strong>Google Cloud (GCP)</strong>, <strong>AWS (Amazon)</strong> e <strong>Microsoft Azure</strong> — além de nuvens mais simples como <strong>Vercel</strong>, <strong>Cloudflare</strong> e <strong>Render</strong>.",
-      agentMode: "Usa comandos oficiais no terminal (CLI) ou guia clique a clique",
+      agentMode: "Usa linha de comando oficial da nuvem (CLI) ou guia clique a clique",
       agentTip:
         "Agentes como o Antigravity podem gerar scripts de infraestrutura, operar comandos oficiais da nuvem (gcloud, aws) ou — se você preferir fazer pelo navegador — te guiar clique a clique lendo prints do painel."
     }
@@ -1577,12 +1628,12 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
     {
       id: "step-antigravity",
       title: "Configurar seu primeiro Projeto e rodar uma automação no Google Antigravity",
-      desc: "Conecte o plugin de Google Drive/Sheets (ou GitHub) em Customizations, anexe o recurso no Projeto e teste o Roteiro 1 da Seção 5 começando com /plan."
+      desc: "Conecte o plugin de Google Drive/Sheets (ou GitHub) em Customizations, anexe o recurso no Projeto e teste o Roteiro 1 da Seção 05 começando com /plan."
     },
     {
       id: "step-agents-md",
       title: "Configurar suas Instruções Globais, um AGENTS.md e sua 1ª Skill",
-      desc: "Salve suas preferências pessoais (no app Gemini ou em ~/.gemini/AGENTS.md), crie um AGENTS.md curto no seu projeto e transforme uma tarefa repetitiva em Skill seguindo o guia da Seção 05 (ou com /learn)."
+      desc: "Salve suas preferências pessoais (no app Gemini ou nas Instruções Globais do Antigravity), crie um AGENTS.md curto no seu projeto e transforme uma tarefa repetitiva em Skill seguindo o guia da Seção 05 (ou com /learn)."
     },
     {
       id: "step-publish",
@@ -1610,10 +1661,10 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
       kind: "Curso Interativo · Univ. Helsinque",
       isVideo: false,
       duration: "Capítulos curtos",
-      badge: "Grátis · PT",
+      badge: "Grátis · PT (Portugal)",
       title: "Elementos de IA (Elements of AI) — Em Português",
       url: "https://course.elementsofai.com/pt/",
-      note: "Mais de 1 milhão de alunos no mundo: curso gratuito em português criado para leigos (zero código e zero matemática pesada), com exercícios curtos por capítulo."
+      note: "Mais de 1 milhão de alunos no mundo: curso gratuito em português (de Portugal) criado para leigos — zero código e zero matemática pesada, com exercícios curtos por capítulo."
     },
     {
       type: "course",

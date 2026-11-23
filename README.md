@@ -11,11 +11,12 @@ learning-ai/
 ├── css/
 │   └── style.css       # Sistema visual editorial (claro papel quente / escuro grafite) e layout responsivo
 ├── js/
-│   ├── data.js         # Fonte única de dados: 8 gráficos interativos, tour visual com hotspots, guia prático das 3 camadas (Instruções Globais, AGENTS.md e Skills), biblioteca das 5 eras, 3 pilares, mapa da engenharia, 10 cursos/playlists curtos, 40 termos do glossário e checklist
-│   └── app.js          # Lógica de interatividade, SVGs temáticos, carrossel com hotspots e Lightbox, filtros, cópia de prompts e localStorage
+│   ├── data.js         # Fonte única de dados: 8 gráficos interativos, tour visual com 5 prints e hotspots, guia prático das 3 camadas (Instruções Globais, AGENTS.md e Skills), biblioteca das 5 eras, 3 pilares, mapa da engenharia, 10 cursos/playlists curtos, 49 termos do glossário e checklist
+│   └── app.js          # Lógica de interatividade, SVGs temáticos, carrossel com hotspots e Lightbox, busca sem acento no glossário, filtros, cópia de prompts e localStorage
 └── assets/
     ├── favicon.svg     # Ícone vetorial da página
-    └── tour/           # Prints reais anonimizados do tour visual do Google Antigravity (Seção 05) com camada interativa de hotspots
+    ├── og-cover.png    # Cartão social editorial (1200×630) para compartilhamento
+    └── tour/           # Prints reais anonimizados de alta nitidez do Google Antigravity (Seção 05) com hotspots interativos
 ```
 
 ## Pré-visualização Local

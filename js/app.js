@@ -14,6 +14,7 @@
   const themeToggleBtn = document.getElementById("theme-toggle");
   const themeLabel = document.getElementById("theme-label");
   const themeIcon = document.getElementById("theme-icon");
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   const root = document.documentElement;
 
   const SUN_ICON_SVG =
@@ -31,6 +32,9 @@
     }
     if (themeToggleBtn) {
       themeToggleBtn.setAttribute("aria-pressed", String(theme === "dark"));
+    }
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute("content", theme === "dark" ? "#111418" : "#faf8f4");
     }
     try {
       localStorage.setItem("ia-guia-theme", theme);
@@ -63,6 +67,36 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
+  }
+
+  function normalizeSearch(str) {
+    return String(str || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  function bindTablistKeyboard(container, itemSelector, onActivate) {
+    if (!container) return;
+    container.addEventListener("keydown", (e) => {
+      const items = Array.from(container.querySelectorAll(itemSelector));
+      if (!items.length) return;
+      const current = e.target.closest(itemSelector);
+      const idx = items.indexOf(current);
+      if (idx === -1) return;
+
+      let nextIdx = -1;
+      if (e.key === "ArrowRight") nextIdx = (idx + 1) % items.length;
+      else if (e.key === "ArrowLeft") nextIdx = (idx - 1 + items.length) % items.length;
+      else if (e.key === "Home") nextIdx = 0;
+      else if (e.key === "End") nextIdx = items.length - 1;
+      else return;
+
+      e.preventDefault();
+      const target = items[nextIdx];
+      onActivate(target, nextIdx);
+      target.focus();
+    });
   }
 
   async function copyTextWithFeedback(text, btn) {
@@ -119,6 +153,9 @@
     if (!tocSidebar || !tocBackdrop) return;
     tocSidebar.classList.toggle("is-open", open);
     tocBackdrop.classList.toggle("is-open", open);
+    if (tocOpenBtn) {
+      tocOpenBtn.setAttribute("aria-expanded", String(open));
+    }
     document.body.style.overflow = open ? "hidden" : "";
   }
 
@@ -236,6 +273,9 @@
         renderPromptLevel(btn.dataset.level);
       }
     });
+    bindTablistKeyboard(promptTabsEl, ".pill-tab", (btn) => {
+      if (btn.dataset.level) renderPromptLevel(btn.dataset.level);
+    });
     renderPromptLevel(DATA.promptLevels[0].id);
   }
 
@@ -279,7 +319,7 @@
         fill: "var(--accent-amber-soft)",
         stroke: "var(--accent-amber)",
         title: "Camada 3 · Regras Globais, RAG & Raciocínio",
-        sub: "Gems, NotebookLM, visão/áudio e pensamento passo a passo"
+        sub: "Gems, Gemini Notebook, visão/áudio e pensamento passo a passo"
       },
       {
         era: 2,
@@ -473,11 +513,21 @@
   /* ------------------------------------------------------------------------
      6. Widget 4 — Agent X-Ray Anatomy & Task Loop Simulator
      ------------------------------------------------------------------------ */
+  const agentPillsEl = document.getElementById("agent-xray-pills");
   const agentSvgWrap = document.getElementById("agent-xray-svg-wrap");
   const agentInspectorEl = document.getElementById("agent-inspector");
   const loopStatusEl = document.getElementById("agent-loop-status");
   const loopStepBtn = document.getElementById("agent-loop-step-btn");
   const loopResetBtn = document.getElementById("agent-loop-reset-btn");
+
+  const AGENT_PILL_ORDER = [
+    { key: "harness", label: "Harness (Mesa)" },
+    { key: "model", label: "Modelo (Cérebro)" },
+    { key: "skills", label: "Skills (Manuais)" },
+    { key: "mcp", label: "Plugins / MCP" },
+    { key: "sandbox", label: "Sandbox" },
+    { key: "sidecar", label: "Sidecar" }
+  ];
 
   let activeAgentPart = "harness";
   let loopStepIdx = -1;
@@ -577,6 +627,14 @@
     activeAgentPart = partKey;
     renderAgentSvg(partKey);
 
+    if (agentPillsEl) {
+      Array.from(agentPillsEl.querySelectorAll(".arch-pill-btn")).forEach((btn) => {
+        const active = btn.dataset.part === partKey;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", String(active));
+      });
+    }
+
     if (restoreFocus && agentSvgWrap) {
       const activeNode = agentSvgWrap.querySelector(`.xray-node[data-part="${partKey}"]`);
       if (activeNode) activeNode.focus();
@@ -590,6 +648,19 @@
         <div class="agent-inspector-example">${info.example}</div>
       `;
     }
+  }
+
+  if (agentPillsEl) {
+    agentPillsEl.innerHTML = AGENT_PILL_ORDER.map(
+      (p) => `<button type="button" class="arch-pill-btn" data-part="${p.key}" aria-pressed="false">${p.label}</button>`
+    ).join("");
+
+    agentPillsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".arch-pill-btn");
+      if (btn && btn.dataset.part) {
+        selectAgentPart(btn.dataset.part);
+      }
+    });
   }
 
   if (agentSvgWrap) {
@@ -619,7 +690,7 @@
       loopStatusEl.innerHTML =
         "<strong>Simulador de tarefa:</strong> clique para assistir o agente ler recibos no Drive e preencher o Google Sheets passo a passo.";
       loopStepBtn.textContent = "Iniciar simulação →";
-      if (loopResetBtn) loopResetBtn.style.display = "none";
+      if (loopResetBtn) loopResetBtn.hidden = true;
       return;
     }
 
@@ -631,7 +702,7 @@
     } else {
       loopStepBtn.textContent = `Próximo passo (${loopStepIdx + 2}/${DATA.agentLoopSteps.length}) →`;
     }
-    if (loopResetBtn) loopResetBtn.style.display = "inline-block";
+    if (loopResetBtn) loopResetBtn.hidden = false;
   }
 
   if (loopStepBtn) {
@@ -677,108 +748,154 @@
   function renderPipelineSvg() {
     if (!pipeSvgWrapEl) return;
 
-    const coords = [
-      { x: 46, label: "Prompt", sub: "Você" },
-      { x: 146, label: "Sandbox", sub: "Testes" },
-      { x: 246, label: "GitHub", sub: "v1 / v2" },
-      { x: 346, label: "Preview", sub: "Link teste" },
-      { x: 446, label: "Neon", sub: "Dados" },
-      { x: 546, label: "Vercel", sub: "Servidor" },
-      { x: 646, label: "Usuário", sub: "URL final" }
+    // Top row: delivery flow Prompt -> Sandbox -> GitHub -> Preview -> Vercel -> Usuário
+    // Bottom connected node under Vercel: Neon (Banco SQL) read/written by the Server
+    const topNodes = [
+      { idx: 0, x: 52, label: "1. Prompt", sub: "Você" },
+      { idx: 1, x: 170, label: "2. Sandbox", sub: "Testes" },
+      { idx: 2, x: 288, label: "3. GitHub", sub: "v1 / v2" },
+      { idx: 3, x: 406, label: "4. Preview", sub: "Link teste" },
+      { idx: 5, x: 524, label: "6. Vercel", sub: "Servidor" },
+      { idx: 6, x: 642, label: "7. Usuário", sub: "URL final" }
     ];
+    const dbNode = { idx: 4, x: 524, y: 118, label: "5. Neon", sub: "Banco SQL" };
 
-    const arrows = coords
+    function styleForNode(stepIdx) {
+      let fill = "var(--bg-surface)";
+      let stroke = "var(--border-strong)";
+      let badge = "";
+      let badgeColor = "var(--accent-green)";
+
+      if (pipeMode === "normal") {
+        if (stepIdx === pipeIdx) {
+          fill = "var(--accent-blue-soft)";
+          stroke = "var(--accent-blue)";
+        } else if (stepIdx < pipeIdx) {
+          stroke = "var(--accent-blue)";
+        }
+      } else if (pipeMode === "bug") {
+        if (stepIdx === 5 || stepIdx === 6) {
+          fill = "var(--accent-red-soft)";
+          stroke = "var(--accent-red)";
+          badge = stepIdx === 5 ? "ERRO v2" : "AFETADO";
+          badgeColor = "var(--accent-red)";
+        } else if (stepIdx === 2 || stepIdx === 4) {
+          fill = "var(--accent-green-soft)";
+          stroke = "var(--accent-green)";
+          badge = stepIdx === 2 ? "v1 SALVA" : "INTACTO";
+          badgeColor = "var(--accent-green)";
+        }
+      } else if (pipeMode === "recovered") {
+        if (stepIdx === 2 || stepIdx === 4 || stepIdx === 5 || stepIdx === 6) {
+          fill = "var(--accent-green-soft)";
+          stroke = "var(--accent-green)";
+          badge = stepIdx === 5 ? "v1 NO AR" : stepIdx === 4 ? "INTACTO" : "";
+          badgeColor = "var(--accent-green)";
+        }
+      }
+      return { fill, stroke, badge, badgeColor };
+    }
+
+    const topArrows = topNodes
       .slice(0, -1)
-      .map((c, idx) => {
-        const next = coords[idx + 1];
+      .map((c, i) => {
+        const next = topNodes[i + 1];
         let color = "var(--border-strong)";
         let width = 1.8;
-        if (pipeMode === "normal" && idx < pipeIdx) {
+        if (pipeMode === "normal" && pipeIdx >= next.idx) {
           color = "var(--accent-blue)";
-          width = 2.4;
-        } else if (pipeMode === "bug" && idx === 5) {
+          width = 2.3;
+        } else if (pipeMode === "bug" && c.idx === 5) {
           color = "var(--accent-red)";
           width = 2.6;
-        } else if (pipeMode === "recovered" && idx >= 4) {
+        } else if (pipeMode === "recovered" && c.idx === 5) {
           color = "var(--accent-green)";
           width = 2.4;
         }
-        return `<line x1="${c.x + 34}" y1="68" x2="${next.x - 36}" y2="68" stroke="${color}" stroke-width="${width}" stroke-linecap="round" />
-                <polygon points="${next.x - 36},64 ${next.x - 30},68 ${next.x - 36},72" fill="${color}" />`;
+        return `<line x1="${c.x + 39}" y1="60" x2="${next.x - 45}" y2="60" stroke="${color}" stroke-width="${width}" stroke-linecap="round" />
+                <polygon points="${next.x - 46},56 ${next.x - 39},60 ${next.x - 46},64" fill="${color}" />`;
       })
       .join("");
 
-    const nodes = coords
-      .map((c, idx) => {
-        let fill = "var(--bg-surface)";
-        let stroke = "var(--border-strong)";
-        let badge = "";
+    // Bidirectional Server <-> Database vertical link (Vercel <-> Neon)
+    let dbLinkColor = "var(--border-strong)";
+    let dbLinkW = 1.8;
+    if (pipeMode === "normal" && (pipeIdx === 4 || pipeIdx >= 5)) {
+      dbLinkColor = "var(--accent-blue)";
+      dbLinkW = 2.3;
+    } else if (pipeMode === "bug" || pipeMode === "recovered") {
+      dbLinkColor = "var(--accent-green)";
+      dbLinkW = 2.2;
+    }
+    const dbConnector = `
+      <line x1="524" y1="88" x2="524" y2="112" stroke="${dbLinkColor}" stroke-width="${dbLinkW}" stroke-dasharray="4 3" />
+      <polygon points="520,90 524,83 528,90" fill="${dbLinkColor}" />
+      <polygon points="520,110 524,117 528,110" fill="${dbLinkColor}" />
+      <text x="534" y="104" fill="var(--ink-muted)" font-size="8.8" font-weight="600" font-family="JetBrains Mono, monospace">lê / grava (.env)</text>
+    `;
 
-        if (pipeMode === "normal") {
-          if (idx === pipeIdx) {
-            fill = "var(--accent-blue-soft)";
-            stroke = "var(--accent-blue)";
-          } else if (idx < pipeIdx) {
-            stroke = "var(--accent-blue)";
-          }
-        } else if (pipeMode === "bug") {
-          if (idx === 5 || idx === 6) {
-            fill = "var(--accent-red-soft)";
-            stroke = "var(--accent-red)";
-            badge = idx === 5 ? "ERRO v2" : "AFETADO";
-          } else if (idx === 2 || idx === 4) {
-            fill = "var(--accent-green-soft)";
-            stroke = "var(--accent-green)";
-            badge = idx === 2 ? "v1 SALVA" : "INTACTO";
-          }
-        } else if (pipeMode === "recovered") {
-          if (idx === 2 || idx === 4 || idx === 5 || idx === 6) {
-            fill = "var(--accent-green-soft)";
-            stroke = "var(--accent-green)";
-            badge = idx === 5 ? "v1 NO AR" : idx === 4 ? "INTACTO" : "";
-          }
-        }
-
-        const badgeColor = pipeMode === "bug" && (idx === 5 || idx === 6) ? "var(--accent-red)" : "var(--accent-green)";
-
+    const topNodesMarkup = topNodes
+      .map((c) => {
+        const st = styleForNode(c.idx);
         return `
-          <g>
+          <g class="pipe-svg-node" data-pipe-idx="${c.idx}" tabindex="0" role="button" aria-label="Etapa ${c.label}">
             ${
-              badge
-                ? `<text x="${c.x}" y="38" text-anchor="middle" fill="${badgeColor}" font-size="8.5" font-weight="700" font-family="JetBrains Mono, monospace">${badge}</text>`
+              st.badge
+                ? `<text x="${c.x}" y="30" text-anchor="middle" fill="${st.badgeColor}" font-size="8.6" font-weight="700" font-family="JetBrains Mono, monospace">${st.badge}</text>`
                 : ""
             }
-            <rect x="${c.x - 34}" y="46" width="68" height="44" rx="9" fill="${fill}" stroke="${stroke}" stroke-width="${
-          stroke === "var(--border-strong)" ? 1.3 : 2.2
+            <rect x="${c.x - 39}" y="38" width="78" height="44" rx="9" fill="${st.fill}" stroke="${st.stroke}" stroke-width="${
+          st.stroke === "var(--border-strong)" ? 1.3 : 2.2
         }" />
-            <text x="${c.x}" y="66" text-anchor="middle" fill="var(--ink-primary)" font-size="11" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">${c.label}</text>
-            <text x="${c.x}" y="81" text-anchor="middle" fill="var(--ink-muted)" font-size="9.2" font-family="Plus Jakarta Sans, sans-serif">${c.sub}</text>
+            <text x="${c.x}" y="58" text-anchor="middle" fill="var(--ink-primary)" font-size="10.8" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">${c.label}</text>
+            <text x="${c.x}" y="73" text-anchor="middle" fill="var(--ink-muted)" font-size="9.2" font-family="Plus Jakarta Sans, sans-serif">${c.sub}</text>
           </g>
         `;
       })
       .join("");
 
-    const rollbackArc =
+    const dbSt = styleForNode(dbNode.idx);
+    const dbNodeMarkup = `
+      <g class="pipe-svg-node" data-pipe-idx="${dbNode.idx}" tabindex="0" role="button" aria-label="Etapa ${dbNode.label}">
+        <rect x="${dbNode.x - 42}" y="${dbNode.y}" width="84" height="42" rx="9" fill="${dbSt.fill}" stroke="${dbSt.stroke}" stroke-width="${
+      dbSt.stroke === "var(--border-strong)" ? 1.3 : 2.2
+    }" />
+        <text x="${dbNode.x}" y="${dbNode.y + 19}" text-anchor="middle" fill="var(--ink-primary)" font-size="10.8" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">${dbNode.label}</text>
+        <text x="${dbNode.x}" y="${dbNode.y + 33}" text-anchor="middle" fill="var(--ink-muted)" font-size="9.2" font-family="Plus Jakarta Sans, sans-serif">${dbNode.sub}</text>
+        ${
+          dbSt.badge
+            ? `<text x="${dbNode.x + 50}" y="${dbNode.y + 25}" text-anchor="start" fill="${dbSt.badgeColor}" font-size="8.8" font-weight="700" font-family="JetBrains Mono, monospace">${dbSt.badge}</text>`
+            : ""
+        }
+      </g>
+    `;
+
+    const bottomNote =
       pipeMode === "recovered"
         ? `
-          <path d="M 246 92 C 246 132, 546 132, 546 94" fill="none" stroke="var(--accent-green)" stroke-width="2.4" stroke-dasharray="6 4" />
-          <polygon points="541,98 546,91 551,98" fill="var(--accent-green)" />
-          <rect x="308" y="108" width="176" height="20" rx="10" fill="var(--accent-green)" />
-          <text x="396" y="121.5" text-anchor="middle" fill="var(--ink-inverse)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">ROLLBACK v1 EM 1 CLIQUE ↺</text>
+          <path d="M 288 84 Q 388 148, 496 86" fill="none" stroke="var(--accent-green)" stroke-width="2.4" stroke-dasharray="6 4" />
+          <polygon points="491,87 498,83 498,91" fill="var(--accent-green)" />
+          <rect x="282" y="122" width="184" height="20" rx="10" fill="var(--accent-green)" />
+          <text x="374" y="135.5" text-anchor="middle" fill="var(--ink-inverse)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">ROLLBACK v1 EM 1 CLIQUE ↺</text>
+          <text x="20" y="176" text-anchor="start" fill="var(--accent-green)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">✓ VERSÃO v1 RESTAURADA DO GITHUB · BANCO NEON 100% PRESERVADO</text>
         `
         : pipeMode === "bug"
         ? `
-          <text x="396" y="118" text-anchor="middle" fill="var(--accent-red)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">⚠ BUG NA v2 DETECTADO — GITHUB (v1) E BANCO NEON ESTÃO PROTEGIDOS</text>
+          <text x="20" y="140" text-anchor="start" fill="var(--accent-red)" font-size="9.8" font-weight="700" font-family="JetBrains Mono, monospace">⚠ BUG NA v2 DETECTADO EM PRODUÇÃO</text>
+          <text x="20" y="156" text-anchor="start" fill="var(--accent-green)" font-size="9.3" font-weight="600" font-family="JetBrains Mono, monospace">✓ GitHub guarda v1 segura e Banco Neon (ao lado) segue intacto</text>
         `
         : `
-          <text x="346" y="118" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5" font-weight="600" font-family="JetBrains Mono, monospace">ETAPA ATUAL: ${pipeIdx + 1} DE 7 · FLUXO CONTÍNUO DO PROMPT ATÉ O LINK PÚBLICO</text>
+          <text x="20" y="140" text-anchor="start" fill="var(--ink-muted)" font-size="9.5" font-weight="600" font-family="JetBrains Mono, monospace">ETAPA ATUAL: ${pipeIdx + 1} DE 7 · CLIQUE EM QUALQUER BLOCO ACIMA</text>
+          <text x="20" y="156" text-anchor="start" fill="var(--ink-secondary)" font-size="9.6" font-family="Plus Jakarta Sans, sans-serif">O código flui até a Vercel (Servidor), que lê e grava os dados no Banco Neon separado.</text>
         `;
 
     pipeSvgWrapEl.innerHTML = `
-      <svg viewBox="0 0 692 138" role="img" aria-label="Diagrama visual do fluxo do prompt ao servidor">
-        ${arrows}
-        ${nodes}
-        ${rollbackArc}
+      <svg viewBox="0 0 692 184" role="img" aria-label="Diagrama visual do fluxo do prompt ao servidor com Banco Neon conectado à Vercel">
+        ${topArrows}
+        ${dbConnector}
+        ${topNodesMarkup}
+        ${dbNodeMarkup}
+        ${bottomNote}
       </svg>
     `;
   }
@@ -875,6 +992,27 @@
       }
     });
 
+    if (pipeSvgWrapEl) {
+      pipeSvgWrapEl.addEventListener("click", (e) => {
+        const node = e.target.closest(".pipe-svg-node");
+        if (node && node.dataset.pipeIdx !== undefined) {
+          pipeMode = "normal";
+          pipeIdx = Number(node.dataset.pipeIdx);
+          renderPipeline();
+        }
+      });
+      pipeSvgWrapEl.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        const node = e.target.closest(".pipe-svg-node");
+        if (node && node.dataset.pipeIdx !== undefined) {
+          e.preventDefault();
+          pipeMode = "normal";
+          pipeIdx = Number(node.dataset.pipeIdx);
+          renderPipeline();
+        }
+      });
+    }
+
     if (pipePrevBtn) {
       pipePrevBtn.addEventListener("click", () => {
         pipeMode = "normal";
@@ -968,14 +1106,17 @@
   }
 
   /* ------------------------------------------------------------------------
-     10. Searchable & Filterable Pocket Glossary
+     10. Searchable & Filterable Pocket Glossary (Accent-Insensitive + Expand)
      ------------------------------------------------------------------------ */
   const glossarySearchEl = document.getElementById("glossary-search");
   const glossaryTabsEl = document.getElementById("glossary-tabs");
   const glossaryGridEl = document.getElementById("glossary-grid");
+  const glossaryFooterEl = document.getElementById("glossary-footer");
 
+  const GLOSSARY_INITIAL_COUNT = 10;
   let glossaryCat = "Todos";
   let glossaryQuery = "";
+  let glossaryExpanded = false;
 
   function hydrateGlossaryTabCounts() {
     if (!glossaryTabsEl || !DATA.glossary) return;
@@ -994,36 +1135,71 @@
 
   function renderGlossary() {
     if (!glossaryGridEl) return;
-    const q = glossaryQuery.trim().toLowerCase();
+    const q = normalizeSearch(glossaryQuery.trim());
 
     const filtered = DATA.glossary.filter((item) => {
       const catOk = glossaryCat === "Todos" || item.category === glossaryCat;
       const textOk =
         !q ||
-        item.term.toLowerCase().includes(q) ||
-        item.def.toLowerCase().includes(q) ||
-        item.category.toLowerCase().includes(q);
+        normalizeSearch(item.term).includes(q) ||
+        normalizeSearch(item.def).includes(q) ||
+        normalizeSearch(item.category).includes(q);
       return catOk && textOk;
     });
 
     if (filtered.length === 0) {
       glossaryGridEl.innerHTML = `<p style="color:var(--ink-muted); font-size:14.5px; margin:8px 0;">Nenhum termo encontrado para "${escapeHtml(glossaryQuery)}".</p>`;
+      if (glossaryFooterEl) glossaryFooterEl.innerHTML = "";
       return;
     }
 
-    glossaryGridEl.innerHTML = filtered
+    const canCollapse = glossaryCat === "Todos" && !q && filtered.length > GLOSSARY_INITIAL_COUNT;
+    let visibleItems = filtered;
+    if (canCollapse && !glossaryExpanded) {
+      const f = filtered.filter((i) => i.category === "Fundamentos").slice(0, 4);
+      const a = filtered.filter((i) => i.category === "Agentes").slice(0, 3);
+      const s = filtered.filter((i) => i.category === "Sistemas").slice(0, 3);
+      visibleItems = [...f, ...a, ...s];
+    }
+
+    glossaryGridEl.innerHTML = visibleItems
       .map(
         (item) => `
           <article class="glossary-card">
             <div class="glossary-card-head">
-              <span class="glossary-term">${item.term}</span>
-              <span class="glossary-cat">${item.category}</span>
+              <span class="glossary-term">${escapeHtml(item.term)}</span>
+              <span class="glossary-cat">${escapeHtml(item.category)}</span>
             </div>
-            <p class="glossary-def">${item.def}</p>
+            <p class="glossary-def">${escapeHtml(item.def)}</p>
           </article>
         `
       )
       .join("");
+
+    if (glossaryFooterEl) {
+      if (canCollapse) {
+        glossaryFooterEl.innerHTML = `
+          <span class="glossary-count-note">Mostrando ${visibleItems.length} termos essenciais de ${filtered.length} no glossário</span>
+          <button type="button" class="nav-step-btn" id="glossary-toggle-btn" aria-expanded="${String(glossaryExpanded)}">
+            ${glossaryExpanded ? `Mostrar menos (${GLOSSARY_INITIAL_COUNT} essenciais)` : `Mostrar todos os ${filtered.length} termos ↓`}
+          </button>
+        `;
+      } else {
+        glossaryFooterEl.innerHTML =
+          q || glossaryCat !== "Todos"
+            ? `<span class="glossary-count-note">${filtered.length} termo${filtered.length === 1 ? "" : "s"} encontrado${filtered.length === 1 ? "" : "s"}</span>`
+            : "";
+      }
+    }
+  }
+
+  if (glossaryFooterEl) {
+    glossaryFooterEl.addEventListener("click", (e) => {
+      const btn = e.target.closest("#glossary-toggle-btn");
+      if (!btn) return;
+      glossaryExpanded = !glossaryExpanded;
+      renderGlossary();
+    });
   }
 
   if (glossarySearchEl) {
@@ -1159,6 +1335,9 @@
         renderEcosystem(btn.dataset.eco);
       }
     });
+    bindTablistKeyboard(ecoTabsEl, ".pill-tab", (btn) => {
+      if (btn.dataset.eco) renderEcosystem(btn.dataset.eco);
+    });
     renderEcosystem(DATA.ecosystems[0].id);
   }
 
@@ -1183,6 +1362,7 @@
   const lbTitleEl = document.getElementById("lightbox-title");
   const lbImgEl = document.getElementById("lightbox-img");
   const lbHotspotsLayerEl = document.getElementById("lightbox-hotspots-layer");
+  const lbPinsToggleBtn = document.getElementById("lightbox-pins-toggle");
   const lbPinsEl = document.getElementById("lightbox-pins-inline");
   const lbCloseBtn = document.getElementById("lightbox-close");
   const lbPrevBtn = document.getElementById("lightbox-prev-btn");
@@ -1288,14 +1468,18 @@
     syncTourPinHighlight();
   }
 
+  function syncPinsToggleButtons(hasPins) {
+    [tourPinsToggleBtn, lbPinsToggleBtn].forEach((btn) => {
+      if (!btn) return;
+      btn.hidden = !hasPins;
+      btn.setAttribute("aria-pressed", String(showTourPins));
+      btn.innerHTML = `<span>${showTourPins ? "Ocultar pinos" : "Mostrar pinos"}</span>`;
+    });
+  }
+
   function renderTourHotspots(slide) {
     const hasPins = slideHasHotspots(slide);
-
-    if (tourPinsToggleBtn) {
-      tourPinsToggleBtn.hidden = !hasPins;
-      tourPinsToggleBtn.setAttribute("aria-pressed", String(showTourPins));
-      tourPinsToggleBtn.innerHTML = `<span>${showTourPins ? "Ocultar pinos" : "Mostrar pinos"}</span>`;
-    }
+    syncPinsToggleButtons(hasPins);
 
     const markup = buildHotspotsHtml(slide);
     if (tourHotspotsLayerEl) {
@@ -1381,6 +1565,7 @@
   function syncLightbox(slide, total) {
     const hasPins = slideHasHotspots(slide);
     const activePin = getActiveTourPinNum();
+    syncPinsToggleButtons(hasPins);
     if (lbStepEl) lbStepEl.textContent = `Passo ${slide.step} de ${total} · Tour Visual do Google Antigravity`;
     if (lbTitleEl) lbTitleEl.textContent = slide.title;
     if (lbImgEl) {
@@ -1446,6 +1631,9 @@
           renderTourSlide(Number(btn.dataset.tourIdx));
         }
       });
+      bindTablistKeyboard(tourTabsEl, ".tour-tab-btn", (btn) => {
+        if (btn.dataset.tourIdx !== undefined) renderTourSlide(Number(btn.dataset.tourIdx));
+      });
     }
 
     if (tourDotsEl) {
@@ -1478,16 +1666,21 @@
       });
     }
 
+    function toggleTourPinsVisibility() {
+      showTourPins = !showTourPins;
+      if (!showTourPins) {
+        lockedTourPinNum = null;
+        hoverTourPinNum = null;
+      }
+      renderTourHotspots(tourSlides[tourIdx]);
+      syncTourPinHighlight();
+    }
+
     if (tourPinsToggleBtn) {
-      tourPinsToggleBtn.addEventListener("click", () => {
-        showTourPins = !showTourPins;
-        if (!showTourPins) {
-          lockedTourPinNum = null;
-          hoverTourPinNum = null;
-        }
-        renderTourHotspots(tourSlides[tourIdx]);
-        syncTourPinHighlight();
-      });
+      tourPinsToggleBtn.addEventListener("click", toggleTourPinsVisibility);
+    }
+    if (lbPinsToggleBtn) {
+      lbPinsToggleBtn.addEventListener("click", toggleTourPinsVisibility);
     }
 
     if (tourZoomBtn) {
@@ -1934,6 +2127,9 @@
       if (btn && btn.dataset.pillar) {
         renderPillar(btn.dataset.pillar);
       }
+    });
+    bindTablistKeyboard(pillarTabsEl, ".pill-tab", (btn) => {
+      if (btn.dataset.pillar) renderPillar(btn.dataset.pillar);
     });
 
     renderPillar(DATA.pillars[0].id);
@@ -2409,6 +2605,25 @@
           )
           .join("")}
       </ol>
+
+      ${
+        layer.technicalDetailsHtml
+          ? `
+        <details class="deep-dive is-compact">
+          <summary>
+            <span>${layer.technicalDetailsTitle || "Detalhes técnicos (opcional)"}</span>
+            <span>
+              <span class="deep-dive-badge">Opcional</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>${layer.technicalDetailsHtml}</p>
+          </div>
+        </details>
+      `
+          : ""
+      }
 
       <div class="config-example-box">
         <div class="config-file-header">
