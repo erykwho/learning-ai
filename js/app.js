@@ -422,7 +422,7 @@
   const compassGoalsEl = document.getElementById("compass-goals");
   const compassResultEl = document.getElementById("compass-result");
 
-  const RUNG_NAMES = ["1. Gemini & Gems", "2. NotebookLM", "3. AI Studio", "4. Antigravity"];
+  const RUNG_NAMES = ["1. Google Gemini", "2. Gemini Notebook", "3. AI Studio", "4. Antigravity"];
 
   function renderCompass(goalId) {
     const item = DATA.compassGoals.find((g) => g.id === goalId) || DATA.compassGoals[0];

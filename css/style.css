@@ -2892,6 +2892,121 @@ input {
 }
 
 /* ==========================================================================
+   Section 03: Google Gemini Hub Capability Cards (Degrau 1)
+   ========================================================================== */
+
+.gemini-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0 14px;
+}
+
+.gemini-hub-card {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.gemini-hub-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 8px;
+}
+
+.gemini-hub-kicker {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+
+.gemini-hub-tier {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.gemini-hub-tier.is-free {
+  background: var(--accent-green-soft);
+  color: var(--accent-green);
+}
+
+.gemini-hub-tier.is-hybrid {
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
+}
+
+.gemini-hub-tier.is-pro {
+  background: var(--accent-amber-soft);
+  color: var(--accent-amber);
+}
+
+.gemini-hub-card h4 {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.32;
+  color: var(--ink-primary);
+}
+
+.gemini-hub-card p {
+  margin: 0;
+  font-size: 13.9px;
+  line-height: 1.54;
+  color: var(--ink-secondary);
+}
+
+.gemini-hub-example {
+  margin-top: auto;
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  font-size: 12.6px;
+  line-height: 1.48;
+  color: var(--ink-secondary);
+}
+
+.gemini-hub-example strong {
+  color: var(--ink-primary);
+}
+
+.gemini-tier-strip {
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-blue);
+  font-size: 13.8px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 0 0 26px;
+}
+
+.gemini-tier-strip p {
+  margin: 0;
+  font-size: 13.8px;
+}
+
+.gemini-tier-strip strong {
+  color: var(--ink-primary);
+}
+
+/* ==========================================================================
    Section 03: Gemini 4 Family & Neon Spotlight Cards
    ========================================================================== */
 
@@ -3576,6 +3691,7 @@ input {
   .compass-goals,
   .agent-xray-grid,
   .instr-layers-grid,
+  .gemini-hub-grid,
   .gemini4-grid,
   .pillar-concepts-grid,
   .pillar-bottom-notes,

@@ -386,25 +386,36 @@ window.GUIDE_DATA = {
   compassGoals: [
     {
       id: "daily-chat",
-      goal: "Tirar dúvidas do dia a dia e ter um assistente fixo de textos",
-      tool: "Google Gemini + Gems",
+      goal: "Personalizar assistentes (Gems/Skills), conectar Drive/Gmail ou editar no Canvas",
+      tool: "Google Gemini (Gems, Skills & Canvas)",
       rung: 1,
       url: "https://gemini.google.com/",
       urlLabel: "Abrir Google Gemini",
       description:
-        "É a porta de entrada mais simples. Você conversa normalmente, envia fotos ou arquivos e pode criar um 'Gem' — um assistente com instruções globais fixas (por exemplo: um revisor de e-mails ou professor de inglês).",
-      tip: "Comece criando 1 Gem com o seu estilo de escrita e nunca mais repita as mesmas instruções todo dia."
+        "É a porta de entrada mais completa. Além do chat e da conversa por voz, você cria Gems (ou Skills reutilizáveis) com regras fixas, conecta Gmail/Drive/Agenda e usa o Canvas para montar relatórios, apresentações e mini-páginas editando lado a lado.",
+      tip: "Comece criando 1 Gem com o seu estilo de escrita — e teste abrir o Canvas na próxima vez que precisar estruturar um texto longo."
+    },
+    {
+      id: "media-tasks",
+      goal: "Criar imagens/vídeos conversando ou agendar tarefas e resumos recorrentes",
+      tool: "Google Gemini (Estúdio Criativo & Ações Agendadas)",
+      rung: 1,
+      url: "https://gemini.google/subscriptions/",
+      urlLabel: "Ver recursos e planos do Gemini",
+      description:
+        "Direto no app Gemini você gera e edita imagens com o Nano Banana (já disponível na cota grátis). A partir dos planos pagos (Plus, Pro e Ultra), desbloqueia também vídeos com áudio nativo (Gemini Omni), Ações Agendadas / Resumo Diário e acesso gradual às Tarefas proativas.",
+      tip: "Teste primeiro criar ou editar uma foto no plano grátis; se quiser rotinas automáticas semanais e geração de vídeo, avalie o plano Google AI Pro."
     },
     {
       id: "study-docs",
       goal: "Estudar vários PDFs, contratos ou aulas sem a IA inventar dados",
-      tool: "NotebookLM (Gemini Notebook)",
+      tool: "Gemini Notebook (antigo NotebookLM)",
       rung: 2,
       url: "https://notebook.google/",
-      urlLabel: "Abrir NotebookLM",
+      urlLabel: "Abrir Gemini Notebook",
       description:
-        "É o melhor exemplo prático de RAG sem precisar programar. Você sobe seus PDFs, links, Google Docs ou vídeos do YouTube e a IA responde estritamente baseada neles — apontando o trecho exato da fonte (e ainda cria resumos em áudio).",
-      tip: "Ideal para estudar para provas, revisar contratos, analisar relatórios longos ou consolidar anotações."
+        "É o melhor exemplo prático de RAG sem programar — agora acessível tanto no site dedicado quanto direto na barra lateral do app Gemini (com sincronização nos dois lados). Você sobe PDFs, links, Google Docs ou vídeos do YouTube e recebe respostas com citações exatas e resumos em áudio.",
+      tip: "Use direto no menu do Gemini para consultas rápidas do dia a dia ou abra notebook.google para montar guias de estudo e podcasts."
     },
     {
       id: "lab-prompts",
@@ -425,7 +436,7 @@ window.GUIDE_DATA = {
       url: "https://antigravity.google/",
       urlLabel: "Conhecer o Antigravity",
       description:
-        "Aqui a IA deixa de só dar conselhos e faz o trabalho com você. Conectando os plugins de Google Drive e Google Sheets no Antigravity, o agente lê seus arquivos, extrai informações, organiza abas e cria fórmulas automaticamente.",
+        "Aqui a IA deixa de só dar conselhos e faz o trabalho pesado com você. Conectando os plugins de Google Drive e Google Sheets no Antigravity, o agente lê lotes de arquivos, extrai informações, organiza abas e cria fórmulas automaticamente.",
       tip: "Sempre comece pedindo um plano (/plan) antes de o agente alterar sua planilha oficial."
     },
     {
@@ -634,12 +645,22 @@ window.GUIDE_DATA = {
     {
       term: "RAG (Geração com Busca)",
       category: "Fundamentos",
-      def: "Técnica em que a IA pesquisa primeiro nos seus documentos reais (como no NotebookLM) antes de redigir a resposta."
+      def: "Técnica em que a IA pesquisa primeiro nos seus documentos reais (como no Gemini Notebook / antigo NotebookLM) antes de redigir a resposta."
     },
     {
       term: "Temperatura",
       category: "Fundamentos",
       def: "Ajuste disponível em ferramentas como o Google AI Studio que controla se o modelo será mais criativo/variado ou mais direto e previsível."
+    },
+    {
+      term: "Canvas & Deep Research (Gemini)",
+      category: "Fundamentos",
+      def: "Canvas é o painel lateral editável do Gemini para montar textos, apresentações e mini-páginas ao vivo; Deep Research é o modo de pesquisa profunda que consulta dezenas de fontes e gera um relatório completo."
+    },
+    {
+      term: "Ações Agendadas, Tarefas & SynthID",
+      category: "Fundamentos",
+      def: "Nos planos pagos do Gemini, Ações Agendadas (e as novas Tarefas) executam rotinas e resumos no piloto automático; SynthID é a marca d'água digital invisível do Google para identificar imagens, áudios e vídeos feitos com IA."
     },
     {
       term: "Gemini 4 Neon vs. Neon Postgres",
@@ -876,7 +897,7 @@ window.GUIDE_DATA = {
         "<strong>Gemma:</strong> linha aberta (open-weights) do Google para rodar localmente ou em servidores próprios."
       ],
       tools: [
-        "<strong>Gemini + Gems &amp; NotebookLM:</strong> uso diário, assistentes fixos e pesquisa sem alucinação nos seus PDFs.",
+        "<strong>Google Gemini &amp; Gemini Notebook:</strong> chat e voz, Gems/Skills, Canvas, notebooks integrados (antigo NotebookLM), imagens (Nano Banana), vídeos (Gemini Omni) e Ações Agendadas / Tarefas nos planos pagos.",
         "<strong>Google AI Studio:</strong> laboratório gratuito no navegador para testar prompts, vídeos e modelos novos.",
         "<strong>Google Antigravity:</strong> harness agêntico com plano individual gratuito, Sandbox, Skills, Plugins (Drive, Sheets, GitHub), MCP e modo coordenador Orchestrator (Neon)."
       ],
@@ -1286,13 +1307,13 @@ window.GUIDE_DATA = {
   checklist: [
     {
       id: "step-gemini",
-      title: "Criar seu primeiro Gem no Google Gemini",
-      desc: "Configure um assistente com instruções globais fixas para uma tarefa que você repete toda semana (ex: revisar e-mails ou resumir reuniões)."
+      title: "Personalizar o Google Gemini (Gem/Skill, Canvas ou imagem)",
+      desc: "Crie um Gem com instruções fixas para uma tarefa semanal (ex: revisar e-mails) e teste gerar/editar uma imagem ou abrir o Canvas no próprio chat."
     },
     {
       id: "step-notebook",
-      title: "Testar o NotebookLM com 2 ou 3 PDFs reais",
-      desc: "Suba documentos seus e faça perguntas conferindo as citações clicáveis — sinta na prática a diferença do RAG sem alucinação."
+      title: "Testar o Gemini Notebook (antigo NotebookLM) com 2 ou 3 PDFs",
+      desc: "Suba documentos seus (no app Gemini ou em notebook.google) e faça perguntas conferindo as citações clicáveis — sinta na prática o RAG sem alucinação."
     },
     {
       id: "step-aistudio",

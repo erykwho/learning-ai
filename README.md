@@ -1,6 +1,6 @@
 # IA na Prática: do Zero aos Agentes — Guia Interativo em Português
 
-Página interativa estilo blog post feita para leigos aprenderem Inteligência Artificial do zero até automações e sistemas reais — com foco no ecossistema Google (**Gemini + Gems**, **NotebookLM**, **Google AI Studio**, **Google Antigravity** e geração **Gemini 4 Neon**), boas práticas de privacidade, instruções para agentes (`AGENTS.md`), engenharia de software profissional (**GitHub**, **Neon/Supabase**, **Vercel/GitHub Pages** e mapa de arquitetura em nuvem), cursos rápidos e Glossário de Bolso.
+Página interativa estilo blog post feita para leigos aprenderem Inteligência Artificial do zero até automações e sistemas reais — com foco no ecossistema Google (**Google Gemini** com Gems/Skills, Canvas, mídia e tarefas agendadas, **Gemini Notebook / antigo NotebookLM**, **Google AI Studio**, **Google Antigravity** e geração **Gemini 4 Neon**), boas práticas de privacidade, instruções para agentes (`AGENTS.md`), engenharia de software profissional (**GitHub**, **Neon/Supabase**, **Vercel/GitHub Pages** e mapa de arquitetura em nuvem), cursos rápidos e Glossário de Bolso.
 
 ## Estrutura do Projeto
 
@@ -11,7 +11,7 @@ learning-ai/
 ├── css/
 │   └── style.css       # Sistema visual editorial (claro papel quente / escuro grafite) e layout responsivo
 ├── js/
-│   ├── data.js         # Fonte única de dados: 8 gráficos interativos, tour visual, biblioteca das 5 eras, 3 pilares, mapa da engenharia, 10 cursos/playlists curtos, 37 termos do glossário e checklist
+│   ├── data.js         # Fonte única de dados: 8 gráficos interativos, tour visual, biblioteca das 5 eras, 3 pilares, mapa da engenharia, 10 cursos/playlists curtos, 39 termos do glossário e checklist
 │   └── app.js          # Lógica de interatividade, SVGs temáticos, carrossel com Lightbox, filtros, cópia de prompts e localStorage
 └── assets/
     ├── favicon.svg     # Ícone vetorial da página
