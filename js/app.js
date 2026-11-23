@@ -2095,4 +2095,211 @@
     });
     renderStudyShelf(activeStudyFilter);
   }
+
+  /* ------------------------------------------------------------------------
+     17. Section 05 — Interactive 3 Layers of Agent Memory Practical Guide
+     ------------------------------------------------------------------------ */
+  const instrCardsEl = document.getElementById("instr-layer-cards");
+  const instrPanelEl = document.getElementById("instr-layer-panel");
+  const instrPrevBtn = document.getElementById("instr-prev-btn");
+  const instrNextBtn = document.getElementById("instr-next-btn");
+  const instrCounterEl = document.getElementById("instr-counter");
+  let activeInstrIndex = 0;
+
+  function renderInstrLayer(idx, shouldFocusTab) {
+    if (!instrCardsEl || !instrPanelEl || !Array.isArray(DATA.instructionLayers)) return;
+    const layers = DATA.instructionLayers;
+    const clamped = Math.max(0, Math.min(layers.length - 1, idx));
+    activeInstrIndex = clamped;
+    const layer = layers[clamped];
+
+    const buttons = Array.from(instrCardsEl.querySelectorAll(".instr-layer-card"));
+    buttons.forEach((btn, i) => {
+      const active = i === clamped;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-selected", String(active));
+      btn.setAttribute("tabindex", active ? "0" : "-1");
+      const cta = btn.querySelector(".instr-layer-cta");
+      if (cta) {
+        cta.textContent = active ? "Mostrando passo a passo ✓" : "Ver como configurar →";
+      }
+      if (active && shouldFocusTab) {
+        btn.focus();
+      }
+    });
+
+    instrPanelEl.setAttribute("aria-labelledby", `instr-tab-${layer.id}`);
+    instrPanelEl.innerHTML = `
+      <div class="instr-panel-head">
+        <h5 class="instr-panel-title">${layer.panelTitle}</h5>
+        <span class="pillar-analogy-tag">${layer.analogy}</span>
+      </div>
+      <p class="instr-panel-lead">${layer.lead}</p>
+
+      <div class="instr-dodont-grid">
+        <div class="instr-dodont-card is-do">
+          <span class="instr-dodont-label">✓ O que colocar aqui</span>
+          <ul>
+            ${layer.putHere.map((item) => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="instr-dodont-card is-dont">
+          <span class="instr-dodont-label">✕ O que evitar aqui</span>
+          <ul>
+            ${layer.avoidHere.map((item) => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+
+      <p class="instr-sublabel">Passo a passo para configurar hoje</p>
+      <ol class="instr-steps-list">
+        ${layer.steps
+          .map(
+            (step, sIdx) => `
+          <li class="instr-step-item">
+            <span class="instr-step-num" aria-hidden="true">${sIdx + 1}</span>
+            <div class="instr-step-content">
+              <strong class="instr-step-title">${step.title}</strong>
+              <span>${step.body}</span>
+            </div>
+          </li>
+        `
+          )
+          .join("")}
+      </ol>
+
+      <div class="config-example-box">
+        <div class="config-file-header">
+          <div class="config-file-meta">
+            <span class="config-file-name">${layer.fileLabel}</span>
+            <span class="config-file-hint">${layer.fileHint}</span>
+          </div>
+          <button type="button" class="copy-btn trick-copy-mini" id="instr-copy-template-btn">Copiar modelo</button>
+        </div>
+        <pre class="config-snippet">${layer.templateHtml}</pre>
+      </div>
+
+      <div class="instr-prompt-box">
+        <div class="instr-prompt-top">
+          <span class="instr-prompt-label">${layer.promptTitle}</span>
+          <button type="button" class="copy-btn trick-copy-mini" id="instr-copy-prompt-btn">Copiar prompt</button>
+        </div>
+        <pre class="instr-prompt-quote">${escapeHtml(layer.promptText)}</pre>
+      </div>
+
+      <div class="instr-layer-footer">
+        <p>${layer.noteHtml}</p>
+        <div class="gemini4-note-links">
+          ${layer.links
+            .map(
+              (lnk) =>
+                `<a class="era-ref-chip" href="${lnk.url}" target="_blank" rel="noopener noreferrer">${lnk.label}</a>`
+            )
+            .join("")}
+        </div>
+      </div>
+    `;
+
+    const copyTemplateBtn = document.getElementById("instr-copy-template-btn");
+    if (copyTemplateBtn) {
+      copyTemplateBtn.addEventListener("click", () => {
+        copyTextWithFeedback(layer.templateRaw, copyTemplateBtn);
+      });
+    }
+
+    const copyPromptBtn = document.getElementById("instr-copy-prompt-btn");
+    if (copyPromptBtn) {
+      copyPromptBtn.addEventListener("click", () => {
+        copyTextWithFeedback(layer.promptText, copyPromptBtn);
+      });
+    }
+
+    if (instrCounterEl) {
+      instrCounterEl.textContent = `Camada ${clamped + 1} de ${layers.length}`;
+    }
+    if (instrPrevBtn) {
+      instrPrevBtn.disabled = clamped === 0;
+    }
+    if (instrNextBtn) {
+      instrNextBtn.disabled = clamped === layers.length - 1;
+    }
+  }
+
+  if (instrCardsEl && instrPanelEl && Array.isArray(DATA.instructionLayers)) {
+    instrCardsEl.innerHTML = DATA.instructionLayers
+      .map(
+        (layer, idx) => `
+        <button
+          type="button"
+          class="instr-layer-card${idx === 0 ? " is-active" : ""}"
+          id="instr-tab-${layer.id}"
+          role="tab"
+          aria-selected="${idx === 0 ? "true" : "false"}"
+          aria-controls="instr-layer-panel"
+          tabindex="${idx === 0 ? "0" : "-1"}"
+          data-layer-index="${idx}"
+          data-layer-id="${layer.id}"
+        >
+          <span class="instr-layer-scope">${layer.scopeLabel}</span>
+          <span class="instr-layer-title">${layer.cardTitleHtml}</span>
+          <span class="instr-layer-summary">${layer.cardSummary}</span>
+          <span class="instr-layer-when"><strong>Quando usar:</strong> ${layer.whenShort}</span>
+          <span class="instr-layer-cta">${idx === 0 ? "Mostrando passo a passo ✓" : "Ver como configurar →"}</span>
+        </button>
+      `
+      )
+      .join("");
+
+    instrCardsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".instr-layer-card");
+      if (btn && btn.dataset.layerIndex !== undefined) {
+        renderInstrLayer(Number(btn.dataset.layerIndex), false);
+      }
+    });
+
+    instrCardsEl.addEventListener("keydown", (e) => {
+      const total = DATA.instructionLayers.length;
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        renderInstrLayer((activeInstrIndex + 1) % total, true);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        renderInstrLayer((activeInstrIndex - 1 + total) % total, true);
+      }
+    });
+
+    if (instrPrevBtn) {
+      instrPrevBtn.addEventListener("click", () => {
+        renderInstrLayer(activeInstrIndex - 1, false);
+      });
+    }
+    if (instrNextBtn) {
+      instrNextBtn.addEventListener("click", () => {
+        renderInstrLayer(activeInstrIndex + 1, false);
+      });
+    }
+
+    renderInstrLayer(0, false);
+  }
+
+  /* Cross-links: open specific instruction layer or <details> accordion when jumped to */
+  document.addEventListener("click", (e) => {
+    const layerLink = e.target.closest("a[data-open-layer]");
+    if (layerLink && Array.isArray(DATA.instructionLayers)) {
+      const targetLayerId = layerLink.getAttribute("data-open-layer");
+      const foundIdx = DATA.instructionLayers.findIndex((l) => l.id === targetLayerId);
+      if (foundIdx !== -1) {
+        renderInstrLayer(foundIdx, false);
+      }
+    }
+
+    const detailsLink = e.target.closest("a[data-open-details]");
+    if (detailsLink) {
+      const detailsId = detailsLink.getAttribute("data-open-details");
+      const detailsEl = detailsId ? document.getElementById(detailsId) : null;
+      if (detailsEl && detailsEl.tagName === "DETAILS") {
+        detailsEl.open = true;
+      }
+    }
+  });
 })();

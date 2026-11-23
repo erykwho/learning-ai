@@ -482,7 +482,7 @@
               Com os <strong>Gems</strong> (agora evoluindo também para <strong>Skills</strong> reutilizáveis no próprio app), você salva <strong>Instruções Globais</strong> fixas para não repetir regras toda semana. Pela <em>Personal Intelligence</em>, o Gemini lembra suas preferências e se conecta a <strong>Gmail, Drive, Docs, Agenda e YouTube</strong>. Já o <strong>Canvas</strong> abre um editor lado a lado para escrever relatórios, montar apresentações e testar pequenas páginas interativas direto no chat.
             </p>
             <div class="gemini-hub-example">
-              <strong>Na prática:</strong> crie um Gem <em>"Revisor de E-mails"</em> uma única vez ou abra o Canvas para montar um roteiro de reunião editando lado a lado com a IA.
+              <strong>Na prática:</strong> crie um Gem <em>"Revisor de E-mails"</em> uma única vez ou abra o Canvas para montar um roteiro de reunião editando lado a lado com a IA. Na <a href="#sec-agents-md" data-open-layer="global">Seção 05 ↓</a> mostramos passo a passo como configurar suas próprias Instruções Globais e Skills.
             </div>
           </article>
 
@@ -804,7 +804,7 @@
               </div>
             </div>
             <div class="deep-dive-tip">
-              <strong>Atalho sem código:</strong> no Antigravity você nem precisa criar essa pasta na mão. Depois de fazer uma tarefa que ficou ótima, basta dizer: <em>"Salve esse passo a passo que usamos hoje como uma Skill reutilizável"</em>.
+              <strong>Quer criar a sua agora?</strong> No Antigravity você nem precisa montar essa pasta na mão — basta pedir para ele salvar o passo a passo como Skill (ou usar <span class="inline-code">/learn</span>). Veja o roteiro completo, onde salvar e modelos prontos no <a href="#sec-agents-md" data-open-layer="skills">Guia Prático das 3 Camadas (Seção 05) ↓</a>.
             </div>
           </div>
         </details>
@@ -871,7 +871,7 @@
           </summary>
           <div class="deep-dive-body">
             <p>
-              Um <strong>Harness</strong> (como o Antigravity) não é só uma caixa de chat: ele funciona como o <strong>gerente da mesa de trabalho</strong>. Antes de enviar seu pedido ao modelo, ele reúne as regras do projeto (veremos como criar seu arquivo <a href="#sec-agents-md"><span class="inline-code">AGENTS.md</span> na Seção 05</a>), coordena cada ferramenta e freia antes de qualquer ação sensível.
+              Um <strong>Harness</strong> (como o Antigravity) não é só uma caixa de chat: ele funciona como o <strong>gerente da mesa de trabalho</strong>. Antes de enviar seu pedido ao modelo, ele reúne suas regras e manuais (veremos passo a passo como configurar <a href="#sec-agents-md" data-open-layer="global">Instruções Globais, <span class="inline-code">AGENTS.md</span> e Skills na Seção 05 ↓</a>), coordena cada ferramenta e freia antes de qualquer ação sensível.
             </p>
             <div class="config-example-box">
               <div class="config-file-header">
@@ -1166,67 +1166,42 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           </div>
         </article>
 
-        <!-- Agent Instructions & AGENTS.md (Moved here right after seeing Antigravity in action!) -->
-        <h3 id="sec-agents-md">Como fazer o agente lembrar das suas regras: Instruções Globais e <span class="inline-code">AGENTS.md</span></h3>
+        <!-- Agent Instructions, AGENTS.md & Skills (Practical 3-Layer Workshop) -->
+        <h3 id="sec-agents-md">Como fazer o agente lembrar de você: Instruções Globais, <span class="inline-code">AGENTS.md</span> e Skills</h3>
         <p>
-          Depois de criar seus primeiros projetos no Antigravity, surge uma dúvida natural: <em>"preciso repetir o objetivo do projeto e minhas regras toda vez que abrir uma conversa nova?"</em> Não! O ecossistema moderno resolve isso com <strong>Instruções para Agentes</strong> — e o arquivo padrão aberto <span class="inline-code">AGENTS.md</span>, apelidado de <strong>"o manual permanente do projeto para agentes"</strong>.
+          Depois de rodar seus primeiros roteiros no Antigravity, surge uma dúvida natural: <em>"preciso repetir meu estilo, o objetivo do projeto e meus passos preferidos toda vez que abrir uma conversa nova?"</em> Não! O ecossistema moderno organiza a memória permanente em <strong>3 camadas complementares</strong> — como um <strong>crachá de preferências pessoais</strong> (Instruções Globais), um <strong>quadro de regras da sala</strong> (<span class="inline-code">AGENTS.md</span> daquele projeto) e uma <strong>estante de manuais passo a passo</strong> (Skills, abertas só quando a tarefa pede).
         </p>
         <p>
-          Ele é apenas um arquivo de texto comum salvo na raiz da pasta do seu projeto (que na próxima seção veremos como versionar no GitHub) para ser <strong>lido automaticamente toda vez que uma conversa começa ali</strong>. Entender as 3 camadas evita bagunça:
+          Você não precisa decorar nomes de pastas nem saber programar para configurar nenhuma das três: em todas elas basta pedir ao próprio Antigravity criar ou atualizar o arquivo — ou digitar <span class="inline-code">/learn</span> no fim de uma conversa para ele transformar o que aprendeu em Regra ou Skill (sempre pedindo sua aprovação antes de salvar).
         </p>
 
-        <div class="instr-layers-grid">
-          <article class="instr-layer-card">
-            <span class="instr-layer-scope">Camada 1 · Sua Conta</span>
-            <h4>Instruções Globais</h4>
-            <p>
-              Preferências pessoais que te acompanham em <strong>qualquer projeto</strong> (ex.: responder sempre em português brasileiro claro e propor um plano antes de grandes mudanças).
-            </p>
-            <div class="instr-layer-when"><strong>Quando usar:</strong> estilo pessoal fixo.</div>
-          </article>
-
-          <article class="instr-layer-card is-highlight">
-            <span class="instr-layer-scope">Camada 2 · Projeto</span>
-            <h4>Arquivo <span class="inline-code">AGENTS.md</span></h4>
-            <p>
-              O <strong>contrato permanente daquela pasta de projeto</strong> (padrão aberto): guarda o objetivo do produto, público-alvo, regras visuais, como testar e travas de segurança. Lido por Antigravity, Codex, Cursor, Copilot e outros.
-            </p>
-            <div class="instr-layer-when"><strong>Quando usar:</strong> regras que nunca podem se perder entre conversas.</div>
-          </article>
-
-          <article class="instr-layer-card">
-            <span class="instr-layer-scope">Camada 3 · Sob Demanda</span>
-            <h4>Skills (<span class="inline-code">SKILL.md</span>)</h4>
-            <p>
-              Receitas detalhadas para <strong>tarefas específicas</strong> (ex.: lançar recibos no Sheets). Só entram na memória do agente quando o seu pedido aciona o gatilho certo.
-            </p>
-            <div class="instr-layer-when"><strong>Quando usar:</strong> fluxos longos e repetitivos.</div>
-          </article>
-        </div>
-
-        <div class="config-example-box">
-          <div class="config-file-header">
-            <span>📄 AGENTS.md (exemplo simples que você pode pedir ao agente para criar)</span>
-            <span class="config-file-hint">Lido automaticamente em toda conversa nova</span>
+        <!-- Interactive Practical Guide: 3 Layers of Agent Memory -->
+        <div class="interactive-stage" id="widget-instr-layers" aria-label="Guia prático para configurar as 3 camadas de instruções e Skills">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Guia Prático · Configurar as 3 Camadas</p>
+              <h4 class="stage-title">Escolha uma camada para ver passo a passo, onde configurar e modelos prontos</h4>
+              <p class="stage-hint">Clique em qualquer um dos 3 cartões abaixo (ou use os botões Próxima / Anterior) para abrir o roteiro completo — com arquivo pronto e prompt para copiar.</p>
+            </div>
           </div>
-          <pre class="config-snippet"><span class="code-key"># Regras deste projeto</span>
-- Responda sempre em português claro, sem jargão desnecessário. <span class="code-comment">← Estilo fixo</span>
-- Antes de publicar mudanças no site, rode os testes visuais.   <span class="code-comment">← Checklist automático</span>
-- Nunca apague arquivos nem altere a planilha oficial sem        <span class="code-comment">← Trava de segurança</span>
-  mostrar um resumo e pedir minha confirmação primeiro.</pre>
+
+          <div class="instr-layers-grid" id="instr-layer-cards" role="tablist" aria-label="Escolher camada de memória do agente"></div>
+          <div class="instr-detail-panel" id="instr-layer-panel" role="tabpanel" aria-live="polite"></div>
+
+          <div class="era-nav-row">
+            <button type="button" class="nav-step-btn" id="instr-prev-btn">← Camada anterior</button>
+            <span class="era-counter" id="instr-counter">Camada 1 de 3</span>
+            <button type="button" class="nav-step-btn" id="instr-next-btn">Próxima camada →</button>
+          </div>
         </div>
 
         <div class="gemini4-note-strip">
           <p>
-            <strong>Regra de ouro:</strong> mantenha o <span class="inline-code">AGENTS.md</span> <strong>curto, direto e concreto</strong> (5 a 30 linhas bem objetivas valem mais que um texto gigante) — e <strong>nunca</strong> escreva senhas ou chaves nele! Você nem precisa criar na mão: basta pedir ao Antigravity <em>"Crie um AGENTS.md curto resumindo o objetivo e as regras que combinamos hoje"</em>.
+            <strong>Regra ou Skill? A cola rápida para nunca confundir:</strong> precisa de uma <strong>regra curta que vale sempre</strong> (<em>"fale sem jargão"</em>, <em>"nunca apague sem confirmar"</em>)? Vai nas <strong>Instruções Globais</strong> (se vale em tudo) ou no <span class="inline-code">AGENTS.md</span> (se vale só naquele projeto). Precisa de um <strong>passo a passo detalhado para uma tarefa repetitiva</strong> (<em>"revisar textos"</em>, <em>"lançar recibos no Sheets"</em>)? Vira uma <strong>Skill (<span class="inline-code">SKILL.md</span>)</strong>!
           </p>
           <p>
-            <strong>Exemplo real vivo:</strong> este próprio guia tem um <span class="inline-code">AGENTS.md</span> público guardando o objetivo pedagógico, o foco em iniciantes e a checagem visual obrigatória para que nada disso se perca nas próximas conversas.
+            <strong>Na dúvida, deixe o <span class="inline-code">/learn</span> organizar por você:</strong> terminou de ensinar ou corrigir o agente em uma conversa no Antigravity? Digite <span class="inline-code">/learn</span> — ele analisa a conversa, decide se aquilo vira Regra ou Skill, escolhe o local certo e mostra uma proposta para você revisar e aprovar antes de salvar.
           </p>
-          <div class="gemini4-note-links">
-            <a class="era-ref-chip" href="https://github.com/erykwho/learning-ai/blob/master/AGENTS.md" target="_blank" rel="noopener noreferrer">Ver o AGENTS.md real deste guia no GitHub ↗</a>
-            <a class="era-ref-chip" href="https://agents.md/" target="_blank" rel="noopener noreferrer">Padrão aberto agents.md (Oficial) ↗</a>
-          </div>
         </div>
 
         <!-- Unblocking Tricks Cheat-Sheet (Section 05) -->
