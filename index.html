@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inteligência Artificial sem Mistério — Do Primeiro Prompt ao Seu Próprio Sistema</title>
+  <meta
+    name="description"
+    content="Guia interativo em português para leigos aprenderem Inteligência Artificial na prática: da evolução dos modelos até agentes, Google Antigravity, GitHub, Neon e Vercel."
+  />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Thin Top Reading Progress -->
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <!-- Mobile Backdrop for TOC Drawer -->
+  <div class="toc-backdrop" id="toc-backdrop" aria-hidden="true"></div>
+
+  <!-- Sticky Top Navigation Bar -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#topo" class="brand">
+        <img src="assets/favicon.svg" alt="" class="brand-mark" width="28" height="28" />
+        <span>IA sem Mistério</span>
+      </a>
+
+      <div class="header-actions">
+        <span class="header-progress-pill" id="header-progress-pct">0% lido</span>
+        <button type="button" class="icon-btn toc-mobile-trigger" id="toc-mobile-open" aria-label="Abrir índice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="16" y2="12" />
+            <line x1="4" y1="18" x2="12" y2="18" />
+          </svg>
+          <span>Índice</span>
+        </button>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Alternar modo claro ou escuro">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+          <span id="theme-label">Escuro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Two-Column Editorial Layout -->
+  <div class="page-shell" id="topo">
+    <!-- Sticky Sidebar Table of Contents -->
+    <aside class="toc-sidebar" id="toc-sidebar" aria-label="Índice do guia">
+      <div class="toc-header">
+        <h2 class="toc-title">Índice da Leitura</h2>
+        <button type="button" class="toc-close" id="toc-mobile-close" aria-label="Fechar índice">&times;</button>
+      </div>
+
+      <nav>
+        <ul class="toc-list">
+          <li class="toc-item">
+            <a href="#sec-fundamentos" class="toc-link is-active">
+              <span class="toc-num">01</span>
+              <span>O que é IA hoje (sem fórmulas)</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#sec-evolucao" class="toc-link">
+              <span class="toc-num">02</span>
+              <span>As 5 Eras da IA (2017 → Hoje)</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#sec-google" class="toc-link">
+              <span class="toc-num">03</span>
+              <span>Na prática: Ecossistema Google</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#sec-agentes" class="toc-link">
+              <span class="toc-num">04</span>
+              <span>Agentes, Harnesses, Skills e MCP</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#sec-antigravity" class="toc-link">
+              <span class="toc-num">05</span>
+              <span>Mão na massa com Antigravity</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#sec-sistemas" class="toc-link">
+              <span class="toc-num">06</span>
+              <span>Do Prompt ao Servidor</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#sec-proximos-passos" class="toc-link">
+              <span class="toc-num">07</span>
+              <span>Plano prático &amp; Glossário</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="toc-curve-box">
+        <div class="toc-curve-label">Curva de Aprendizado</div>
+        <div class="curve-steps" aria-hidden="true">
+          <span class="curve-bar is-done"></span>
+          <span class="curve-bar"></span>
+          <span class="curve-bar"></span>
+          <span class="curve-bar"></span>
+          <span class="curve-bar"></span>
+          <span class="curve-bar"></span>
+          <span class="curve-bar"></span>
+        </div>
+        <p class="toc-curve-caption" id="curve-caption">Fundamentos: entendendo o básico sem fórmulas</p>
+      </div>
+    </aside>
+
+    <!-- Editorial Article Content -->
+    <main class="article-main">
+      <!-- Hero -->
+      <header class="hero">
+        <p class="eyebrow">Guia Interativo · Do Zero ao Sistema no Ar</p>
+        <h1>Inteligência Artificial sem Mistério: Do Primeiro Prompt ao Seu Próprio Sistema</h1>
+        <p class="hero-lead">
+          Você não precisa estudar matemática avançada nem saber programar para entender o que existe hoje em IA — e usar isso de verdade. Este guia vai do mais simples ao prático: como modelos funcionam por cima, como evoluíram até agentes autônomos e como usar ferramentas do Google (até o <strong>Antigravity</strong>) para criar automações e colocar sistemas confiáveis no ar.
+        </p>
+        <div class="hero-meta">
+          <span>Leitura estimada: ~18 minutos</span>
+          <span>5 gráficos interativos</span>
+          <span>Foco prático · Sem pré-requisitos de código</span>
+        </div>
+
+        <div class="journey-strip">
+          <p class="journey-strip-title">Mapa da jornada — do simples ao profissional</p>
+          <div class="journey-nodes">
+            <a href="#sec-fundamentos" class="journey-node">
+              <span class="journey-node-tag">Fase 1</span>
+              <span class="journey-node-name">Entender</span>
+              <span class="journey-node-sub">O que a IA faz hoje e como evoluiu</span>
+            </a>
+            <a href="#sec-google" class="journey-node">
+              <span class="journey-node-tag">Fase 2</span>
+              <span class="journey-node-name">Usar bem</span>
+              <span class="journey-node-sub">Ferramentas grátis do Google no dia a dia</span>
+            </a>
+            <a href="#sec-agentes" class="journey-node">
+              <span class="journey-node-tag">Fase 3</span>
+              <span class="journey-node-name">Delegar</span>
+              <span class="journey-node-sub">Agentes que executam tarefas com você</span>
+            </a>
+            <a href="#sec-sistemas" class="journey-node">
+              <span class="journey-node-tag">Fase 4</span>
+              <span class="journey-node-name">Publicar</span>
+              <span class="journey-node-sub">Do pedido até um sistema que não quebra</span>
+            </a>
+          </div>
+          <p class="hero-reassurance">
+            <strong>Promessa deste guia:</strong> nenhum termo técnico aparece aqui sem antes ganhar uma analogia simples do cotidiano — e você pode testar cada ideia nos gráficos interativos.
+          </p>
+        </div>
+      </header>
+
+      <!-- ==================================================================
+           SEÇÃO 01 — FUNDAMENTOS
+           ================================================================== -->
+      <section class="guide-section" id="sec-fundamentos">
+        <div class="section-kicker">
+          <span class="section-number">01</span>
+          <span class="section-level">Nível Inicial · Simples e Abstrato</span>
+        </div>
+        <h2>O que é Inteligência Artificial hoje (sem uma única fórmula)</h2>
+
+        <p>
+          Durante décadas, programas de computador funcionavam como <strong>receitas rígidas</strong>: um humano precisava prever cada botão, cada regra e cada exceção. Se acontecesse algo fora do roteiro, o programa travava.
+        </p>
+        <p>
+          A IA generativa moderna — chamada de <strong>LLM</strong> (<em>Large Language Model</em>, ou Grande Modelo de Linguagem) — funciona de outro jeito. Em vez de decorar regras prontas, ela foi treinada lendo bilhões de páginas de texto, livros, conversas e código até aprender os <strong>padrões da linguagem e do raciocínio humano</strong>. Quando você escreve uma pergunta (o <strong>prompt</strong>), o modelo calcula qual continuação faz mais sentido para ajudar você.
+        </p>
+
+        <div class="analogy-box">
+          <p class="analogy-label">Analogia do Mundo Real</p>
+          <p>
+            Pense em um LLM como um <strong>estagiário brilhante que leu quase toda a biblioteca da humanidade</strong>, mas chegou hoje no seu escritório sem saber nada sobre a sua vida ou o seu projeto.
+          </p>
+          <p>
+            Tudo o que ele consegue enxergar agora está num <strong>quadro branco</strong> na frente dele — isso é a <strong>Janela de Contexto</strong> (a memória de curto prazo da conversa). Se o quadro branco estiver vazio, ele vai chutar. E, como ele adora tentar ser útil, às vezes <strong>inventa um dado com cara de certeza</strong> — o que chamamos de <strong>alucinação</strong>.
+          </p>
+        </div>
+
+        <p>
+          Você só precisa guardar <strong>três ideias</strong> desta seção para usar qualquer IA muito melhor do que a maioria das pessoas:
+        </p>
+        <ul>
+          <li><strong>Prompt é direção, não magia:</strong> quanto mais claro o contexto, o papel e o formato desejado, menos o modelo precisa adivinhar.</li>
+          <li><strong>Contexto é memória temporária:</strong> o modelo não "lê sua mente" entre conversas novas; o que importa é o que você coloca na mesa naquela conversa.</li>
+          <li><strong>Confiante não significa certo:</strong> se você precisa de fatos exatos (um contrato, um preço, um estudo), forneça o documento ou peça para a IA avisar quando não souber.</li>
+        </ul>
+
+        <!-- Interactive Widget 1 -->
+        <div class="interactive-stage" id="widget-prompt-sim">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 01</p>
+              <h3 class="stage-title">O Efeito do Quadro Branco: como o seu prompt muda a resposta</h3>
+              <p class="stage-hint">Clique nos 3 níveis abaixo para ver a memória de contexto sendo preenchida e a resposta mudar.</p>
+            </div>
+          </div>
+
+          <div class="pill-tabs" id="prompt-sim-tabs" role="tablist" aria-label="Níveis de qualidade de prompt"></div>
+
+          <div class="prompt-sim-grid">
+            <div class="sim-panel">
+              <div class="sim-panel-label">
+                <span>O que você digita (Prompt)</span>
+                <span>Entrada</span>
+              </div>
+              <p class="sim-prompt-text" id="sim-prompt-text"></p>
+
+              <div class="context-meter">
+                <div class="sim-panel-label" style="margin-bottom: 6px;">
+                  <span>Quadro branco (Contexto útil)</span>
+                </div>
+                <div class="context-meter-bar" aria-hidden="true">
+                  <div class="context-seg seg-task" id="seg-task"></div>
+                  <div class="context-seg seg-ctx" id="seg-ctx"></div>
+                  <div class="context-seg seg-rules" id="seg-rules"></div>
+                </div>
+                <div class="context-legend">
+                  <span><i class="legend-dot seg-task"></i>Tarefa</span>
+                  <span><i class="legend-dot seg-ctx"></i>Contexto</span>
+                  <span><i class="legend-dot seg-rules"></i>Formato &amp; Regras</span>
+                </div>
+                <p style="font-size:12.5px; color:var(--ink-muted); margin:8px 0 0;" id="sim-meter-note"></p>
+              </div>
+            </div>
+
+            <div class="sim-panel">
+              <div class="sim-panel-label">
+                <span>O que a IA devolve</span>
+                <span>Saída</span>
+              </div>
+              <div class="sim-output-rich" id="sim-output-text"></div>
+              <div class="sim-metrics" id="sim-metrics" style="margin-top:12px;"></div>
+              <p style="font-size:13.2px; color:var(--ink-secondary); margin:12px 0 0;" id="sim-takeaway"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bridge-note">
+          <strong>Por que isso importa para o próximo passo?</strong> Agora você entende o "cérebro" básico. Mas o mundo de IA não parou no chat de texto: em menos de uma década, passamos de um artigo científico do Google para agentes que operam sistemas inteiros. Vamos ver como cada peça foi encaixada nessa história.
+        </div>
+
+        <!-- Curated Resources Section 1 -->
+        <div class="resources-block">
+          <p class="resources-title">Para aprofundar — Blogs confiáveis e vídeos</p>
+          <div class="resources-grid">
+            <a class="resource-card" href="https://cloud.google.com/discover/what-is-prompt-engineering" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Guia Oficial · Google</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">Prompt Engineering for AI Guide — Google Cloud</span>
+              <span class="resource-note">Explicação direta e clara de como estruturar bons pedidos para modelos de linguagem.</span>
+            </a>
+            <a class="resource-card" href="https://www.promptingguide.ai/" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Blog / Guia Aberto</span>
+                <span class="lang-tag">EN / PT</span>
+              </div>
+              <span class="resource-name">Prompt Engineering Guide (DAIR.AI)</span>
+              <span class="resource-note">Referência gratuita e organizada por nível de dificuldade com exemplos reais.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=-3VK7qF-6dY" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Vídeo</span>
+                <span class="lang-tag">PT-BR</span>
+              </div>
+              <span class="resource-name">Por que você não deveria CONFIAR em IAs — Ciência Todo Dia</span>
+              <span class="resource-note">Vídeo curto e didático em português sobre por que LLMs alucinam e como pensar criticamente.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Palestra Clássica</span>
+                <span class="lang-tag">EN · legendas PT</span>
+              </div>
+              <span class="resource-name">Intro to Large Language Models (1h) — Andrej Karpathy</span>
+              <span class="resource-note">Uma das melhores explicações para público geral feitas por um dos criadores da área, sem matemática pesada.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SEÇÃO 02 — EVOLUÇÃO EM 5 ERAS
+           ================================================================== -->
+      <section class="guide-section" id="sec-evolucao">
+        <div class="section-kicker">
+          <span class="section-number">02</span>
+          <span class="section-level">Linha do Tempo · 2017 até Hoje</span>
+        </div>
+        <h2>Como chegamos aqui: As 5 Eras da IA Moderna</h2>
+
+        <p>
+          Quem acompanha notícias de tecnologia sente que tudo apareceu do nada, cheio de siglas novas toda semana: <em>Transformer</em>, <em>LLM</em>, <em>RAG</em>, <em>Skills</em>, <em>Agentes</em>, <em>Harness</em>, <em>MCP</em>, <em>Sandboxes</em>, <em>Sidecars</em>. Na prática, essas peças não são aleatórias — elas foram construídas <strong>em camadas</strong>, cada uma resolvendo uma limitação da camada anterior.
+        </p>
+
+        <!-- Interactive Widget 2 (Centerpiece Evolution Timeline) -->
+        <div class="interactive-stage" id="widget-evolution">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 02 · Peça Central</p>
+              <h3 class="stage-title">Evolução em Camadas: do Paper do Google (2017) aos Agentes Conectados</h3>
+              <p class="stage-hint">Clique em cada era (ou use os botões Próxima / Anterior) e veja a arquitetura crescer camada por camada à esquerda.</p>
+            </div>
+          </div>
+
+          <div class="era-timeline-track" id="era-timeline-track" role="group" aria-label="Eras da evolução da IA"></div>
+
+          <div class="era-body-grid">
+            <div class="era-diagram-wrap" id="era-layered-svg"></div>
+            <div class="era-details" id="era-details"></div>
+          </div>
+
+          <div class="era-nav-row">
+            <button type="button" class="nav-step-btn" id="era-prev-btn">← Era anterior</button>
+            <span class="era-counter" id="era-counter">Era 1 de 5</span>
+            <button type="button" class="nav-step-btn" id="era-next-btn">Próxima era →</button>
+          </div>
+        </div>
+
+        <h3>Desfazendo uma confusão comum: o que nasceu para Modelos vs. o que nasceu para Agentes?</h3>
+        <p>
+          Como a evolução foi muito rápida, é comum misturar conceitos. A regra de bolso para nunca mais se perder é simples: tudo que serve para <strong>melhorar uma resposta dentro de um chat</strong> nasceu para os <em>Modelos</em>; tudo que serve para <strong>dar mãos, manuais, integrações e segurança enquanto a IA executa tarefas</strong> nasceu para os <em>Agentes</em>.
+        </p>
+
+        <div class="compare-grid">
+          <div class="compare-card">
+            <span class="compare-card-tag tag-model">Era dos Modelos (Chats)</span>
+            <h4>Foco: responder melhor</h4>
+            <ul>
+              <li><strong>Instruções Globais (System Prompts):</strong> regras fixas de persona e estilo (como os <em>Gems</em> do Gemini).</li>
+              <li><strong>Multimodalidade:</strong> ler fotos, PDFs, áudio e vídeo no mesmo pedido.</li>
+              <li><strong>RAG:</strong> buscar nos seus documentos antes de responder (ex: <em>NotebookLM</em>).</li>
+              <li><strong>Modelos de Raciocínio:</strong> "pensar passo a passo" antes de dar a resposta final.</li>
+            </ul>
+          </div>
+          <div class="compare-card">
+            <span class="compare-card-tag tag-agent">Era dos Agentes (Ação)</span>
+            <h4>Foco: executar trabalho ponta a ponta</h4>
+            <ul>
+              <li><strong>Harnesses:</strong> a interface/chassi que opera o modelo com arquivos, comandos e aprovações (ex: <em>Antigravity</em>).</li>
+              <li><strong>Skills:</strong> manuais especializados que o agente abre só quando precisa.</li>
+              <li><strong>Plugins &amp; MCP:</strong> conectores padronizados para Drive, Sheets, GitHub e bancos.</li>
+              <li><strong>Sandboxes, Sidecars e Subagentes:</strong> isolamento, proteção de senhas e trabalho em equipe.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Expandable "Bastidores" Accordions for Advanced Terms -->
+        <h3>Quer ver os bastidores da Era 5? (Opcional — clique para abrir)</h3>
+        <p>
+          Você <em>não precisa</em> decorar estes três nomes para começar a usar IA, mas saber o que significam faz você entender por que ferramentas modernas conseguem operar seu código e suas pastas com segurança:
+        </p>
+
+        <details class="deep-dive">
+          <summary>
+            <span>O que são <strong>Cápsulas / Sandboxes</strong>?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Bastidores</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Imagine deixar um aprendiz testar uma receita nova na cozinha da sua casa vs. numa cozinha de testes separada. Uma <strong>Sandbox</strong> (ou cápsula/container) é um pequeno computador virtual descartável na nuvem onde o agente pode criar arquivos, rodar programas e testar sites sem risco de bagunçar seu computador pessoal.
+            </p>
+          </div>
+        </details>
+
+        <details class="deep-dive">
+          <summary>
+            <span>O que são <strong>Sidecars</strong> (processos auxiliares)?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Bastidores</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              O nome vem do carrinho acoplado ao lado de uma motocicleta. Em sistemas de agentes, um <strong>Sidecar</strong> é um programinha silencioso que roda ao lado da cápsula do agente para cuidar de tarefas críticas — como guardar suas credenciais do GitHub ou Google Drive e só assinar a requisição na saída, sem que o código rodando dentro da cápsula jamais veja sua senha real.
+            </p>
+          </div>
+        </details>
+
+        <details class="deep-dive">
+          <summary>
+            <span>O que são <strong>Subagentes</strong> (orquestração)?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Bastidores</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Quando uma tarefa é grande demais para um único "quadro branco" de contexto, o agente principal pode chamar <strong>Subagentes</strong> — como um maestro delegando para um pesquisador, um revisor e um testador trabalharem em paralelo e devolverem apenas o resumo limpo do resultado.
+            </p>
+          </div>
+        </details>
+
+        <div class="bridge-note">
+          <strong>Agora vamos descer para a prática!</strong> Com o mapa histórico na cabeça, chega a hora de colocar a mão nas ferramentas reais do Google — começando pelas mais fáceis e subindo um degrau por vez até o Antigravity.
+        </div>
+
+        <!-- Curated Resources Section 2 -->
+        <div class="resources-block">
+          <p class="resources-title">Para aprofundar — Fontes históricas e guias visuais</p>
+          <div class="resources-grid">
+            <a class="resource-card" href="https://research.google/pubs/attention-is-all-you-need/" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Artigo Original · 2017</span>
+                <span class="lang-tag">EN · Google Research</span>
+              </div>
+              <span class="resource-name">Attention Is All You Need — Google Research</span>
+              <span class="resource-note">O famoso paper do Google que deu origem à arquitetura Transformer (vale conhecer a fonte original!).</span>
+            </a>
+            <a class="resource-card" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Blog Clássico Ilustrado</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">The Illustrated Transformer — Jay Alammar</span>
+              <span class="resource-note">O artigo visual mais famoso da internet explicando como o Transformer funciona por diagramas.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Animação</span>
+                <span class="lang-tag">EN · legendas PT</span>
+              </div>
+              <span class="resource-name">Transformers, the tech behind LLMs — 3Blue1Brown</span>
+              <span class="resource-note">Animações impressionantes que tornam visível o que acontece dentro de um modelo moderno.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=H1JzUgUePBE" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Aula</span>
+                <span class="lang-tag">PT-BR</span>
+              </div>
+              <span class="resource-name">De prompts a agentes — Imersão Dev Agentes de IA (Alura &amp; Google)</span>
+              <span class="resource-note">Conversa prática em português sobre a transição de prompts isolados para agentes de IA.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SEÇÃO 03 — NÍVEL 1 NA PRÁTICA: ECOSSISTEMA GOOGLE
+           ================================================================== -->
+      <section class="guide-section" id="sec-google">
+        <div class="section-kicker">
+          <span class="section-number">03</span>
+          <span class="section-level">Nível 1 na Prática · Ferramentas Google</span>
+        </div>
+        <h2>Começando hoje no ecossistema Google (sem escrever uma linha de código)</h2>
+
+        <p>
+          O jeito mais rápido de aprender IA não é ler dez livros — é escolher a ferramenta certa para o problema que você já tem hoje. No ecossistema do Google, existe uma <strong>escada natural de quatro degraus</strong>. Os três primeiros você já pode usar gratuitamente no navegador com sua conta Google; o quarto degrau é onde entramos no mundo dos agentes construtores.
+        </p>
+
+        <h3>Degrau 1 — Google Gemini &amp; Gems (Conversa + Instruções Globais)</h3>
+        <p>
+          O <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Google Gemini</a> é seu ponto de partida para o dia a dia: escrever, resumir, traduzir, analisar fotos e trocar ideias. O segredo para subir de nível nele são os <strong>Gems</strong> — versões personalizadas do Gemini onde você salva <strong>Instruções Globais</strong> permanentes.
+        </p>
+        <p>
+          Por exemplo: em vez de escrever toda semana <em>"revise este e-mail em tom cordial, curto e direto em português brasileiro"</em>, você cria um Gem chamado <em>"Revisor de E-mails"</em> uma única vez e só cola o rascunho lá dentro.
+        </p>
+
+        <h3>Degrau 2 — NotebookLM / Gemini Notebook (RAG sem programar)</h3>
+        <p>
+          Lembra do risco de a IA inventar informações? O <a href="https://notebook.google/" target="_blank" rel="noopener noreferrer">NotebookLM</a> (também integrado como <em>Gemini Notebook</em>) resolve isso com elegância. Você cria um "caderno", sobe seus próprios PDFs, apostilas, links de sites ou vídeos do YouTube e faz perguntas <strong>restritas às suas fontes</strong>. Cada resposta vem com números clicáveis que mostram exatamente de qual parágrafo do seu documento a informação saiu — e você ainda pode gerar um resumo em áudio (estilo podcast) para ouvir no caminho do trabalho.
+        </p>
+
+        <h3>Degrau 3 — Google AI Studio (O Laboratório Gratuito)</h3>
+        <p>
+          O nome <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Google AI Studio</a> parece coisa só para programadores, mas qualquer pessoa curiosa pode entrar de graça. Ele funciona como o "painel de controle transparente" dos modelos Gemini: você escolhe a versão do modelo, vê uma caixa dedicada para <em>Instruções de Sistema (System Instructions)</em>, ajusta a <strong>temperatura</strong> (o controle de quão criativa ou direta será a resposta) e sobe vídeos longos ou planilhas para testar na hora.
+        </p>
+
+        <!-- Interactive Widget 3: Google Ecosystem Compass -->
+        <div class="interactive-stage" id="widget-compass">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 03</p>
+              <h3 class="stage-title">Bússola Google: qual ferramenta abrir para cada situação?</h3>
+              <p class="stage-hint">Escolha um objetivo do dia a dia abaixo para descobrir o degrau certo da escada Google.</p>
+            </div>
+          </div>
+
+          <div class="compass-goals" id="compass-goals" role="group" aria-label="Objetivos do dia a dia"></div>
+          <div class="compass-result" id="compass-result" aria-live="polite"></div>
+        </div>
+
+        <div class="bridge-note">
+          <strong>Onde o chat encontra o limite?</strong> Gemini, NotebookLM e AI Studio são excelentes para pensar, pesquisar e gerar texto com você. Mas você ainda precisa copiar o resultado, abrir sua planilha, salvar arquivos ou publicar seu site na mão. É exatamente aí que entram os <strong>Agentes</strong>.
+        </div>
+
+        <!-- Curated Resources Section 3 -->
+        <div class="resources-block">
+          <p class="resources-title">Para aprofundar — Guias oficiais e tutoriais em português</p>
+          <div class="resources-grid">
+            <a class="resource-card" href="https://blog.google/innovation-and-ai/products/gemini-app/notebooks-gemini-notebooklm/" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Blog Oficial · Google</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">Notebooks no Gemini e NotebookLM — Google Blog</span>
+              <span class="resource-note">Como o Google conecta o chat do Gemini com seus cadernos de pesquisa no NotebookLM.</span>
+            </a>
+            <a class="resource-card" href="https://learnprompting.org/blog/guide_ai_studio" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Guia Prático</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">A Complete Guide to Google AI Studio — Learn Prompting</span>
+              <span class="resource-note">Explica por que mesmo quem não programa aproveita muito o Google AI Studio de graça.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=3m6dzdlfgeM" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Masterclass</span>
+                <span class="lang-tag">PT-BR</span>
+              </div>
+              <span class="resource-name">Masterclass Google Gemini: Estratégias e Aplicações — Alura</span>
+              <span class="resource-note">Visão prática em português de como extrair resultados reais do Gemini no cotidiano.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=w3EsqZN_Blw" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Tutorial</span>
+                <span class="lang-tag">PT-BR</span>
+              </div>
+              <span class="resource-name">Como usar o NotebookLM na prática (Tutorial Completo)</span>
+              <span class="resource-note">Passo a passo em português subindo PDFs, criando guias de estudo e perguntas com citação.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SEÇÃO 04 — AGENTES, HARNESSES, SKILLS E MCP
+           ================================================================== -->
+      <section class="guide-section" id="sec-agentes">
+        <div class="section-kicker">
+          <span class="section-number">04</span>
+          <span class="section-level">Nível 2 · O Paradigma dos Agentes</span>
+        </div>
+        <h2>Da conversa à ação: Agentes, Harnesses, Skills e Plugins (MCP)</h2>
+
+        <p>
+          A grande mudança de mentalidade da IA atual é simples de descrever: num chat comum, você faz uma pergunta e recebe um texto. Com um <strong>Agente</strong>, você entrega um <strong>objetivo</strong> e ele trabalha em ciclo — <em>planeja, usa uma ferramenta, lê o resultado, corrige se deu erro e segue até concluir</em>.
+        </p>
+
+        <div class="contrast-strip">
+          <div class="contrast-item">
+            <p class="contrast-item-label" style="color:var(--accent-blue);">No Chat Comum</p>
+            <p>Você pergunta → a IA responde texto → <strong>você</strong> abre o Google Drive, lê os recibos um por um e digita tudo na planilha.</p>
+          </div>
+          <div class="contrast-item">
+            <p class="contrast-item-label" style="color:var(--accent-green);">Com um Agente</p>
+            <p>Você dá o objetivo → a IA acessa o Drive, lê os recibos, monta a planilha e pede sua confirmação → <strong>você</strong> só revisa e aprova.</p>
+          </div>
+        </div>
+
+        <div class="analogy-box">
+          <p class="analogy-label">A Anatomia do "Escritório do Agente"</p>
+          <p>
+            Um agente moderno não é só um modelo solto — é um <strong>escritório completo</strong>. O <strong>Modelo</strong> é o cérebro; o <strong>Harness</strong> é a mesa equipada onde o trabalho acontece; as <strong>Skills</strong> são os manuais de procedimento na estante; os <strong>Plugins (MCP)</strong> são as tomadas universais que conectam o escritório ao mundo externo; a <strong>Sandbox</strong> é a sala de testes segura; e o <strong>Sidecar</strong> é o guarda-chaves que protege suas senhas.
+          </p>
+        </div>
+
+        <!-- Interactive Widget 4: Agent X-Ray Anatomy & Task Loop -->
+        <div class="interactive-stage" id="widget-agent-xray">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 04</p>
+              <h3 class="stage-title">Raio-X de um Agente Moderno (clique nas peças ou simule uma tarefa)</h3>
+              <p class="stage-hint">Clique em qualquer bloco do diagrama para inspecionar seu papel — ou aperte "Iniciar simulação" abaixo para ver todas as peças trabalhando juntas.</p>
+            </div>
+          </div>
+
+          <div class="agent-xray-grid">
+            <div class="agent-svg-box" id="agent-xray-svg-wrap"></div>
+            <div class="agent-inspector" id="agent-inspector" aria-live="polite"></div>
+          </div>
+
+          <div class="loop-bar">
+            <div class="loop-status" id="agent-loop-status">
+              <strong>Simulador de tarefa:</strong> clique para assistir o agente ler recibos no Drive e preencher o Google Sheets passo a passo.
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="nav-step-btn" id="agent-loop-reset-btn" style="display:none;">Reiniciar</button>
+              <button type="button" class="primary-action-btn" id="agent-loop-step-btn">Iniciar simulação →</button>
+            </div>
+          </div>
+        </div>
+
+        <h3>Por que Skills e MCP viraram o coração dos agentes?</h3>
+        <p>
+          Se você tentar enfiar todos os manuais da empresa de uma vez no "quadro branco" do modelo, ele fica lento, caro e confuso. As <strong>Skills</strong> resolvem isso com carregamento sob demanda: o agente só vê um índice curto das habilidades disponíveis e só abre o manual completo (por exemplo, como formatar gráficos no Google Sheets) na hora exata em que precisa dele.
+        </p>
+        <p>
+          Já o <strong>MCP (Model Context Protocol)</strong> resolve o problema das conexões. Antes do MCP, cada ferramenta de IA precisava criar um cabo diferente para conversar com o Google Drive, outro para o GitHub, outro para bancos de dados. O MCP virou o <strong>"USB-C da IA"</strong>: qualquer serviço que ofereça um conector MCP passa a conversar automaticamente com qualquer agente compatível — incluindo o Google Antigravity.
+        </p>
+
+        <div class="bridge-note">
+          <strong>Agora você já sabe ler a arquitetura inteira.</strong> Chegou a hora do Degrau 4: juntar modelo, harness, skills e plugins dentro do <strong>Google Antigravity</strong> para criar suas próprias automações e sistemas.
+        </div>
+
+        <!-- Curated Resources Section 4 -->
+        <div class="resources-block">
+          <p class="resources-title">Para aprofundar — Agentes, arquitetura e MCP</p>
+          <div class="resources-grid">
+            <a class="resource-card" href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Artigo Referência</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">Building Effective AI Agents — Anthropic Research</span>
+              <span class="resource-note">O texto mais citado da indústria sobre a diferença entre fluxos simples e agentes autônomos.</span>
+            </a>
+            <a class="resource-card" href="https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Documentação Oficial</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">What is the Model Context Protocol (MCP)?</span>
+              <span class="resource-note">Introdução oficial e visual explicando o padrão aberto que conecta IAs a ferramentas externas.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=deprLB_y6Ho" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Explicação</span>
+                <span class="lang-tag">PT-BR</span>
+              </div>
+              <span class="resource-name">MCP — Model Context Protocol (O USB das IAs) — Código Fonte TV</span>
+              <span class="resource-note">Explicação super acessível em português sobre por que o MCP mudou o jogo das integrações.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=OaQDityTL1Y" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Conceitos</span>
+                <span class="lang-tag">PT-BR</span>
+              </div>
+              <span class="resource-name">Qual é a diferença entre Agentes de IA e LLMs?</span>
+              <span class="resource-note">Separa de forma clara o que é um chat personalizado do que é um agente integrado a sistemas.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SEÇÃO 05 — MÃO NA MASSA COM GOOGLE ANTIGRAVITY
+           ================================================================== -->
+      <section class="guide-section" id="sec-antigravity">
+        <div class="section-kicker">
+          <span class="section-number">05</span>
+          <span class="section-level">Nível 3 · Criando com Google Antigravity</span>
+        </div>
+        <h2>Mão na massa: criando automações e sistemas com o Google Antigravity</h2>
+
+        <p>
+          O <a href="https://antigravity.google.com/" target="_blank" rel="noopener noreferrer">Google Antigravity</a> é a plataforma agêntica do Google — na prática, o <strong>Harness completo</strong> onde você não precisa montar nada do zero. Ele já traz integrados o modelo (Gemini), uma cápsula isolada para testar código, suporte a Skills, Plugins oficiais (como Google Drive, Google Sheets e GitHub) e conectores MCP.
+        </p>
+
+        <div class="insight-box">
+          <p class="insight-label">A regra de ouro para dirigir um agente sem saber programar</p>
+          <p>
+            Pense em você como o <strong>arquiteto / cliente</strong> e no Antigravity como o <strong>engenheiro executando a obra</strong>. Para guiar como o agente trabalha, você pode começar a mensagem com <strong>comandos com barra</strong> (atalhos simples): <span class="inline-code">/plan</span> pede um plano passo a passo antes de ele mexer em qualquer coisa, e <span class="inline-code">/grill-me</span> faz o agente te entrevistar com perguntas fáceis uma de cada vez para alinhar a ideia. Combine isso com conectar apenas os plugins necessários e revisar em passos pequenos.
+          </p>
+        </div>
+
+        <h3>Dois roteiros prontos para copiar e testar hoje</h3>
+        <p>
+          Abaixo estão dois exemplos reais e universais — o primeiro automatiza tarefas do seu Google Drive e Google Sheets; o segundo cria a primeira versão interativa de um mini-sistema web para você testar na hora. Clique em <strong>Copiar prompt</strong> e adapte para a sua rotina.
+        </p>
+
+        <!-- Recipe 1: Automation -->
+        <article class="recipe-card">
+          <div class="recipe-header">
+            <div class="recipe-meta">
+              <span class="recipe-type">Roteiro 1 · Automação do Dia a Dia</span>
+              <h4 class="recipe-title">Organizador Automático de Gastos (Google Drive → Google Sheets)</h4>
+            </div>
+            <button type="button" class="copy-btn" data-copy-target="prompt-recipe-1">Copiar prompt</button>
+          </div>
+          <div class="recipe-body">
+            <pre class="recipe-prompt" id="prompt-recipe-1">/plan Conecte-se à minha pasta "Recibos-Mes" no Google Drive.
+Quero que você:
+1. Liste todos os arquivos (PDFs ou imagens de notas) que estão lá.
+2. Extraia data, estabelecimento, valor e sugira uma categoria simples (Mercado, Transporte, Lazer, Casa).
+3. Crie uma nova planilha no Google Sheets chamada "Controle de Gastos" com uma aba de lançamentos formatada em Reais (R$) e uma segunda aba "Resumo" com a soma por categoria.
+4. Antes de gravar a planilha final, me mostre uma prévia dos itens lidos para eu confirmar se algum valor precisa de ajuste.</pre>
+            <ol class="recipe-steps">
+              <li><strong>Pré-requisito:</strong> conectar os plugins de <em>Google Drive</em> e <em>Google Sheets</em> na tela de personalização do Antigravity.</li>
+              <li><strong>Por que funciona bem:</strong> começar com <span class="inline-code">/plan</span> e pedir confirmação antes de gravar evita surpresas e mantém você no controle.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- Recipe 2: Mini-System Prototype -->
+        <article class="recipe-card">
+          <div class="recipe-header">
+            <div class="recipe-meta">
+              <span class="recipe-type">Roteiro 2 · Seu Primeiro Mini-Sistema Web</span>
+              <h4 class="recipe-title">Catálogo Pessoal de Metas, Livros &amp; Filmes (Versão 1 Interativa)</h4>
+            </div>
+            <button type="button" class="copy-btn" data-copy-target="prompt-recipe-2">Copiar prompt</button>
+          </div>
+          <div class="recipe-body">
+            <pre class="recipe-prompt" id="prompt-recipe-2">/grill-me Quero criar uma página web interativa simples e bonita em português para organizar minha lista de livros, filmes e metas do ano.
+Quero poder adicionar itens novos, marcar como concluído, dar uma nota de 1 a 5 e filtrar por categoria.
+Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes de construir a primeira versão para eu testar.</pre>
+            <ol class="recipe-steps">
+              <li><strong>O poder do <span class="inline-code">/grill-me</span>:</strong> em vez de o agente adivinhar o que você quer, ele te conduz por escolhas simples uma por vez.</li>
+              <li><strong>Evolução sem pressa:</strong> depois de testar essa primeira versão no seu navegador, vamos ver na próxima seção como dar a ela memória permanente e um link profissional na internet.</li>
+            </ol>
+          </div>
+        </article>
+
+        <div class="bridge-note">
+          <strong>Atenção ao passo mais subestimado:</strong> o Antigravity torna incrivelmente fácil criar a versão 1 de um sistema em poucos minutos. Mas o que garante que esse sistema continue funcionando daqui a 3 meses, que os seus dados não sumam e que uma mudança nova não quebre o que já estava ótimo? É isso que vamos desmistificar na próxima seção.
+        </div>
+
+        <!-- Curated Resources Section 5 -->
+        <div class="resources-block">
+          <p class="resources-title">Para aprofundar — Google Antigravity oficial e tutoriais</p>
+          <div class="resources-grid">
+            <a class="resource-card" href="https://antigravity.google/docs/overview/" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Documentação Oficial</span>
+                <span class="lang-tag">EN · Google</span>
+              </div>
+              <span class="resource-name">Google Antigravity Docs — Overview</span>
+              <span class="resource-note">Ponto de entrada oficial para conhecer projetos, plugins, MCP e fluxo agêntico do Antigravity.</span>
+            </a>
+            <a class="resource-card" href="https://codelabs.developers.google.com/getting-started-google-antigravity" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Laboratório Guiado</span>
+                <span class="lang-tag">EN · Google Codelabs</span>
+              </div>
+              <span class="resource-name">Getting Started with Google Antigravity</span>
+              <span class="resource-note">Tutorial passo a passo oficial do Google para dar seus primeiros passos práticos.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=oBaT-wo9RTY" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Para Iniciantes</span>
+                <span class="lang-tag">EN · legendas PT</span>
+              </div>
+              <span class="resource-name">Google Antigravity Explained for Normal People (Full Tutorial)</span>
+              <span class="resource-note">Tutorial completo pensado para quem não é programador experiente.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=-0Irz8G0PEE" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Passo a Passo</span>
+                <span class="lang-tag">EN · legendas PT</span>
+              </div>
+              <span class="resource-name">Google Antigravity Tutorial for Beginners: Build Your First App</span>
+              <span class="resource-note">Mostra na tela como sair de uma ideia e criar o primeiro aplicativo sem programar do zero.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SEÇÃO 06 — SISTEMAS PROFISSIONAIS: DO PROMPT AO SERVIDOR
+           ================================================================== -->
+      <section class="guide-section" id="sec-sistemas">
+        <div class="section-kicker">
+          <span class="section-number">06</span>
+          <span class="section-level">Nível Profundo · Engenharia sem Mistério</span>
+        </div>
+        <h2>Do Protótipo ao Sistema Profissional: o caminho do Prompt ao Servidor</h2>
+
+        <p>
+          Criar um aplicativo que funciona uma vez na sua tela ficou surpreendentemente rápido com IA. O verdadeiro salto de maturidade é entender o que existe em volta dele para que <strong>outras pessoas consigam acessar, os dados fiquem salvos de verdade e você possa fazer melhorias sem medo de quebrar tudo</strong>.
+        </p>
+        <p>
+          A boa notícia: você não precisa pagar caro nem virar especialista em infraestrutura. Um sistema profissional moderno se apoia em <strong>três pilares gratuitos para começar</strong> e em um <strong>Escudo Anti-Quebra</strong> de três hábitos simples.
+        </p>
+
+        <h3>Os 3 Pilares de um Sistema Moderno (com cota gratuita)</h3>
+
+        <div class="stack-table-wrap">
+          <table class="stack-table">
+            <thead>
+              <tr>
+                <th>Pilar</th>
+                <th>Analogia</th>
+                <th>Exemplos com Plano Grátis</th>
+                <th>Por que você precisa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Versionamento</strong></td>
+                <td>A Máquina do Tempo do seu projeto</td>
+                <td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a> (usa o sistema <em>Git</em>)</td>
+                <td>Guarda cada versão do código, permite criar rascunhos paralelos (<em>branches</em>) e desfazer erros a qualquer momento.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Banco de Dados</strong></td>
+                <td>O Fichário Permanente na nuvem</td>
+                <td><a href="https://neon.com/pricing" target="_blank" rel="noopener noreferrer">Neon</a> (formato confiável <em>Postgres</em>), <a href="https://supabase.com/pricing" target="_blank" rel="noopener noreferrer">Supabase</a></td>
+                <td>Sem banco, seus dados somem quando você fecha o navegador ou troca de celular. O banco guarda tudo separado das telas.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Servidor / Hospedagem</strong></td>
+                <td>O Computador Ligado 24h com URL</td>
+                <td><a href="https://vercel.com/docs/git" target="_blank" rel="noopener noreferrer">Vercel</a>, <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>, <a href="https://www.cloudflare.com/developer-platform/use-cases/hosting/" target="_blank" rel="noopener noreferrer">Cloudflare Pages</a></td>
+                <td>Transforma os arquivos do GitHub em um link público rápido e faz o <em>deploy</em> (publicação) sozinho a cada mudança aprovada.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="font-size: 14.8px; color: var(--ink-secondary);">
+          <strong>Curiosidade real:</strong> esta página que você está lendo agora usa o pilar 1 e o pilar 3 — o código vive num repositório público no GitHub e é entregue gratuitamente pelo <strong>GitHub Pages</strong>. Quando o sistema precisa salvar dados dinâmicos de usuários (como o catálogo de metas da Seção 5), aí adicionamos o <strong>Neon</strong> (banco) + <strong>Vercel</strong> (servidor dinâmico).
+        </p>
+
+        <h3>O Escudo Anti-Quebra (3 hábitos que evitam dor de cabeça)</h3>
+        <ul>
+          <li><strong>Ambientes de Preview (testar antes de publicar):</strong> quando o agente propõe uma mudança num <em>Pull Request</em> (pedido de revisão) no GitHub, a Vercel gera um link temporário exclusivo para você testar antes de apertar <em>Merge</em> (aprovar para o site oficial).</li>
+          <li><strong>Testes Automatizados (o checklist do robô):</strong> peça sempre ao Antigravity: <em>"crie testes para as funções principais e rode antes de subir"</em>. Assim o próprio agente descobre se uma novidade quebrou um botão antigo.</li>
+          <li><strong>Variáveis de Ambiente (<span class="inline-code">.env</span> — o cofre de senhas):</strong> a senha do seu banco Neon ou <em>chaves de API</em> (senhas eletrônicas para falar com outros serviços) <strong>nunca</strong> devem ser escritas dentro do código no GitHub. Elas ficam guardadas num painel secreto do servidor (Vercel), invisíveis ao público.</li>
+        </ul>
+
+        <!-- Interactive Widget 5: Prompt-to-Server Pipeline & Rollback Simulator -->
+        <div class="interactive-stage" id="widget-pipeline">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 05 · Ciclo de Vida Completo</p>
+              <h3 class="stage-title">Do Prompt ao Servidor: clique em cada etapa (e teste o botão de emergência!)</h3>
+              <p class="stage-hint">Acompanhe o caminho completo de uma alteração até a tela do usuário — depois aperte "Simular bug em produção!" para ver como o Rollback (voltar atrás em 1 clique) protege o sistema.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-nodes" id="pipeline-nodes" role="group" aria-label="Etapas do ciclo de vida do prompt ao servidor"></div>
+
+          <div class="pipe-svg-wrap" id="pipe-visual-svg"></div>
+
+          <div class="pipe-detail-card" id="pipe-detail-card" aria-live="polite"></div>
+
+          <div class="pipe-controls">
+            <div class="pipe-nav-group">
+              <button type="button" class="nav-step-btn" id="pipe-prev-btn">← Etapa anterior</button>
+              <button type="button" class="nav-step-btn" id="pipe-next-btn">Próxima etapa →</button>
+            </div>
+            <button type="button" class="danger-action-btn" id="pipe-bug-btn">Simular bug em produção!</button>
+          </div>
+        </div>
+
+        <!-- Recipe 3: Graduating the Section 5 prototype to Production -->
+        <h3>Levando seu protótipo da Seção 5 para o nível profissional</h3>
+        <p>
+          Agora que você já entendeu cada peça acima (GitHub, Neon, Vercel, Preview e <span class="inline-code">.env</span>), veja como é natural pedir ao Antigravity para profissionalizar aquele catálogo de livros e metas:
+        </p>
+
+        <article class="recipe-card">
+          <div class="recipe-header">
+            <div class="recipe-meta">
+              <span class="recipe-type">Roteiro 3 · Do Protótipo ao Ar</span>
+              <h4 class="recipe-title">Publicando seu Catálogo com GitHub + Banco Neon + Vercel</h4>
+            </div>
+            <button type="button" class="copy-btn" data-copy-target="prompt-recipe-3">Copiar prompt</button>
+          </div>
+          <div class="recipe-body">
+            <pre class="recipe-prompt" id="prompt-recipe-3">/plan Quero evoluir meu catálogo de livros, filmes e metas para um sistema profissional na internet:
+1. Crie um repositório no meu GitHub e trabalhe sempre numa branch de rascunho com Pull Request.
+2. Prepare a conexão com um banco de dados gratuito (Neon Postgres) lendo o endereço apenas de uma variável de ambiente (.env) — nunca escreva senhas no código.
+3. Inclua testes automatizados básicos para adicionar, concluir e filtrar itens.
+4. Me passe o passo a passo curto de 3 cliques para conectar esse repositório à Vercel e ter links de Preview automáticos.</pre>
+            <ol class="recipe-steps">
+              <li><strong>Você não precisa decorar comandos de código:</strong> sabendo <em>o que pedir</em> (branch, banco em <span class="inline-code">.env</span>, testes e Preview), o Antigravity monta toda a estrutura seguindo boas práticas.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- Curated Resources Section 6 -->
+        <div class="resources-block">
+          <p class="resources-title">Para aprofundar — GitHub, Bancos de Dados e Servidores Grátis</p>
+          <div class="resources-grid">
+            <a class="resource-card" href="https://docs.github.com/en/pages/quickstart" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Documentação Oficial</span>
+                <span class="lang-tag">EN · GitHub</span>
+              </div>
+              <span class="resource-name">Quickstart for GitHub Pages</span>
+              <span class="resource-note">Como transformar qualquer pasta HTML no GitHub num site público gratuito em minutos.</span>
+            </a>
+            <a class="resource-card" href="https://neon.com/docs/guides/vercel-overview" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Guia Oficial · Banco + Deploy</span>
+                <span class="lang-tag">EN · Neon</span>
+              </div>
+              <span class="resource-name">Integrating Neon Postgres with Vercel</span>
+              <span class="resource-note">Mostra como o banco de dados Neon se conecta direto à Vercel, inclusive com bancos de preview.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=xEKo29OWILE" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Curso Clássico</span>
+                <span class="lang-tag">PT-BR</span>
+              </div>
+              <span class="resource-name">O que é Git? O que é versionamento? — Curso em Vídeo</span>
+              <span class="resource-note">Gustavo Guanabara explicando versionamento do absoluto zero com analogias perfeitas para iniciantes.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=kyphLGnSz6Q" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Prática</span>
+                <span class="lang-tag">EN · legendas PT</span>
+              </div>
+              <span class="resource-name">Supabase / Postgres para Iniciantes (Tabelas e Projetos)</span>
+              <span class="resource-note">Ótima introdução visual de como funcionam tabelas de banco de dados na nuvem com cota gratuita.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SEÇÃO 07 — PLANO PRÁTICO & GLOSSÁRIO DE BOLSO
+           ================================================================== -->
+      <section class="guide-section" id="sec-proximos-passos">
+        <div class="section-kicker">
+          <span class="section-number">07</span>
+          <span class="section-level">Sua Trilha Prática &amp; Consulta Rápida</span>
+        </div>
+        <h2>Seu plano de ação (e um glossário de bolso para consultar sempre)</h2>
+
+        <p>
+          Você chegou ao final da curva: agora entende por que a IA responde como responde, como evoluímos do paper do Google até agentes com Skills e MCP, qual ferramenta Google abrir em cada situação e o que mantém um sistema de pé no mundo real. Marque abaixo conforme for experimentando na prática:
+        </p>
+
+        <p style="font-size:13.5px; font-weight:600; color:var(--accent-green); margin-bottom:8px;" id="checklist-summary"></p>
+        <ul class="checklist-list" id="action-checklist"></ul>
+
+        <h3>Glossário de Bolso</h3>
+        <p>
+          Esqueceu o que significa <em>Harness</em>, <em>RAG</em>, <em>Sidecar</em> ou <em>Rollback</em>? Filtre por categoria ou digite qualquer termo abaixo:
+        </p>
+
+        <div class="glossary-controls">
+          <input
+            type="search"
+            id="glossary-search"
+            class="glossary-search"
+            placeholder="Buscar termo (ex: MCP, Neon, Sandbox, RAG...)"
+            aria-label="Buscar termo no glossário"
+          />
+          <div class="pill-tabs" id="glossary-tabs" style="margin-bottom:0;">
+            <button type="button" class="pill-tab is-active" data-cat="Todos">Todos</button>
+            <button type="button" class="pill-tab" data-cat="Fundamentos">Fundamentos</button>
+            <button type="button" class="pill-tab" data-cat="Agentes">Agentes</button>
+            <button type="button" class="pill-tab" data-cat="Sistemas">Sistemas</button>
+          </div>
+        </div>
+
+        <div class="glossary-grid" id="glossary-grid"></div>
+      </section>
+
+      <footer class="site-footer">
+        <span>Guia Vivo de Inteligência Artificial · Feito para compartilhar e evoluir</span>
+        <span>Código aberto no <a href="https://github.com/erykwho/learning-ai" target="_blank" rel="noopener noreferrer">GitHub (erykwho/learning-ai)</a></span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
