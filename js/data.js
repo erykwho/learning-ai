@@ -652,6 +652,11 @@ window.GUIDE_DATA = {
       def: "Manual de procedimento modular que o agente abre sob demanda para executar tarefas específicas com qualidade."
     },
     {
+      term: "AGENTS.md (Instruções de Agente)",
+      category: "Agentes",
+      def: "O 'README para agentes': arquivo de texto na raiz do projeto lido automaticamente em toda conversa para guardar objetivo, público, regras e checklist de verificação."
+    },
+    {
       term: "Comandos com barra (/plan, /grill-me)",
       category: "Agentes",
       def: "Atalhos digitados no início da mensagem no Antigravity para guiar como o agente deve atuar (planejar antes ou entrevistar você)."

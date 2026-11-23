@@ -6,6 +6,7 @@ Página interativa estilo blog post feita para leigos aprenderem Inteligência A
 
 ```text
 learning-ai/
+├── AGENTS.md           # Contrato de instruções para agentes de IA (objetivo do curso, público leigo, estilo e testes)
 ├── index.html          # Página principal editorial com índice lateral e 8 seções (inclui bônus opcional de ecossistemas)
 ├── css/
 │   └── style.css       # Sistema visual claro/escuro e estilos responsivos

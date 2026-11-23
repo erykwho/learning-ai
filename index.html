@@ -674,6 +674,56 @@
           Já o <strong>MCP (Model Context Protocol)</strong> resolve o problema das conexões. Antes do MCP, cada ferramenta de IA precisava criar um cabo diferente para conversar com o Google Drive, outro para o GitHub, outro para bancos de dados. O MCP virou o <strong>"USB-C da IA"</strong>: qualquer serviço que ofereça um conector MCP passa a conversar automaticamente com qualquer agente compatível — incluindo o Google Antigravity.
         </p>
 
+        <h3 id="sec-agents-md">Instruções para Agentes e o papel do arquivo <span class="inline-code">AGENTS.md</span></h3>
+        <p>
+          Uma das maiores frustrações de quem começa a usar agentes é sentir que, a cada conversa nova, o agente "esquece" o objetivo do seu projeto, o público-alvo ou as regras que você já combinou ontem. Para resolver isso, o ecossistema moderno consolidou as <strong>Instruções para Agentes</strong> — e o arquivo padrão aberto <span class="inline-code">AGENTS.md</span>, apelidado de <strong>"o README para agentes"</strong>.
+        </p>
+        <p>
+          Enquanto o <span class="inline-code">README.md</span> explica o projeto para <em>humanos</em>, o <span class="inline-code">AGENTS.md</span> fica na raiz da pasta do projeto para ser <strong>lido automaticamente pelo agente toda vez que uma conversa começa ali</strong>. Entender a diferença entre as 3 camadas de instruções evita bagunça:
+        </p>
+
+        <div class="instr-layers-grid">
+          <article class="instr-layer-card">
+            <span class="instr-layer-scope">Camada 1 · Sua Conta</span>
+            <h4>Instruções Globais</h4>
+            <p>
+              Preferências pessoais que te acompanham em <strong>qualquer projeto</strong> (ex.: responder sempre em português brasileiro claro e propor um plano antes de grandes mudanças).
+            </p>
+            <div class="instr-layer-when"><strong>Quando usar:</strong> estilo pessoal fixo.</div>
+          </article>
+
+          <article class="instr-layer-card is-highlight">
+            <span class="instr-layer-scope">Camada 2 · Projeto</span>
+            <h4>Arquivo <span class="inline-code">AGENTS.md</span></h4>
+            <p>
+              O <strong>contrato permanente daquele repositório</strong> (padrão aberto): guarda o objetivo do produto, público-alvo, regras visuais, comandos de teste e travas de segurança. Lido por Antigravity, Codex, Cursor, Copilot e outros.
+            </p>
+            <div class="instr-layer-when"><strong>Quando usar:</strong> regras que nunca podem se perder entre conversas.</div>
+          </article>
+
+          <article class="instr-layer-card">
+            <span class="instr-layer-scope">Camada 3 · Sob Demanda</span>
+            <h4>Skills (<span class="inline-code">SKILL.md</span>)</h4>
+            <p>
+              Receitas detalhadas para <strong>tarefas específicas</strong> (ex.: lançar recibos no Sheets). Só entram na memória do agente quando o seu pedido aciona o gatilho certo.
+            </p>
+            <div class="instr-layer-when"><strong>Quando usar:</strong> fluxos longos e repetitivos.</div>
+          </article>
+        </div>
+
+        <div class="gemini4-note-strip">
+          <p>
+            <strong>Regra de ouro para um bom <span class="inline-code">AGENTS.md</span>:</strong> mantenha-o <strong>curto, direto e concreto</strong> (objetivo do projeto, o que nunca quebrar e como verificar o resultado). Um arquivo gigante e genérico mais atrapalha do que ajuda — e <strong>nunca</strong> escreva senhas ou chaves nele!
+          </p>
+          <p>
+            <strong>Exemplo real vivo:</strong> este próprio guia tem um arquivo <span class="inline-code">AGENTS.md</span> salvo no GitHub com o objetivo pedagógico, o foco em iniciantes e a checagem visual obrigatória para que nada disso se perca nas próximas conversas.
+          </p>
+          <div class="gemini4-note-links">
+            <a class="era-ref-chip" href="https://github.com/erykwho/learning-ai/blob/master/AGENTS.md" target="_blank" rel="noopener noreferrer">Ver o AGENTS.md real deste guia no GitHub ↗</a>
+            <a class="era-ref-chip" href="https://agents.md/" target="_blank" rel="noopener noreferrer">Padrão aberto agents.md (Oficial) ↗</a>
+          </div>
+        </div>
+
         <h3>Quer abrir o capô? Como cada peça é configurada e acionada na prática (Opcional)</h3>
         <p>
           Não é obrigatório saber os detalhes técnicos abaixo para usar o Antigravity, mas se você quiser entender <strong>como uma Skill ou integração é montada de verdade</strong> — e o que acontece no segundo em que você manda uma mensagem — abra os blocos abaixo:
