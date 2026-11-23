@@ -143,7 +143,7 @@
         </p>
         <div class="hero-meta">
           <span>Leitura estimada: ~20 minutos</span>
-          <span>6 gráficos interativos</span>
+          <span>6 gráficos interativos · Tour visual com prints</span>
           <span>Foco prático · Sem pré-requisitos de código</span>
         </div>
 
@@ -948,6 +948,53 @@
           </p>
         </div>
 
+        <!-- Visual Tour Carousel: Antigravity Basic Functions -->
+        <div class="interactive-stage" id="widget-antigravity-tour" aria-label="Carrossel passo a passo visual do Google Antigravity">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Tour Visual · Telas ilustrativas das funções básicas</p>
+              <h3 class="stage-title">Passo a passo com prints: onde clicar no Google Antigravity</h3>
+              <p class="stage-hint">Passe pelos 5 passos abaixo (ou use as setas ← → do teclado) para não ter nenhuma dúvida de onde clicar. Clique na imagem para ampliar em tela cheia.</p>
+            </div>
+          </div>
+
+          <div class="tour-step-tabs" id="tour-step-tabs" role="tablist" aria-label="Passos do tour visual do Antigravity"></div>
+
+          <div class="tour-viewport">
+            <div class="tour-frame-bar">
+              <span class="tour-frame-meta" id="tour-frame-meta">Passo 1 de 5 · Tela ilustrativa</span>
+              <button type="button" class="tour-zoom-btn" id="tour-zoom-btn" aria-label="Ampliar print em tela cheia">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="15 3 21 3 21 9" />
+                  <polyline points="9 21 3 21 3 15" />
+                  <line x1="21" y1="3" x2="14" y2="10" />
+                  <line x1="3" y1="21" x2="10" y2="14" />
+                </svg>
+                <span>Ampliar print</span>
+              </button>
+            </div>
+            <button type="button" class="tour-img-trigger" id="tour-img-trigger" aria-label="Abrir print ampliado em tela cheia">
+              <img
+                id="tour-slide-img"
+                class="tour-slide-img"
+                src="assets/tour/01-projeto.png"
+                alt="Tela ilustrativa inicial do Google Antigravity"
+                width="1120"
+                height="680"
+                loading="lazy"
+              />
+            </button>
+          </div>
+
+          <div class="tour-nav-bar">
+            <button type="button" class="nav-step-btn" id="tour-prev-btn">← Passo anterior</button>
+            <div class="tour-dots" id="tour-dots" aria-label="Indicadores de slide"></div>
+            <button type="button" class="nav-step-btn" id="tour-next-btn">Próximo passo →</button>
+          </div>
+
+          <div class="tour-caption-box" id="tour-caption-box" aria-live="polite"></div>
+        </div>
+
         <h3>Dois roteiros prontos para copiar e testar hoje</h3>
         <p>
           Abaixo estão dois exemplos reais e universais — o primeiro automatiza tarefas do seu Google Drive e Google Sheets; o segundo cria a primeira versão interativa de um mini-sistema web para você testar na hora. Clique em <strong>Copiar prompt</strong> e adapte para a sua rotina.
@@ -1511,6 +1558,29 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
         <span>Código aberto no <a href="https://github.com/erykwho/learning-ai" target="_blank" rel="noopener noreferrer">GitHub (erykwho/learning-ai)</a></span>
       </footer>
     </main>
+  </div>
+
+  <!-- Fullscreen Lightbox Modal for Antigravity Tour Prints -->
+  <div class="lightbox-modal" id="tour-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+    <div class="lightbox-dialog">
+      <div class="lightbox-header">
+        <div class="lightbox-title-wrap">
+          <span class="lightbox-step-pill" id="lightbox-step-pill">Passo 1 de 5 · Tour Visual</span>
+          <h3 class="lightbox-title" id="lightbox-title">Passo 1 — Abrir um projeto e conhecer a tela inicial</h3>
+        </div>
+        <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Fechar ampliação">Fechar ✕</button>
+      </div>
+      <div class="lightbox-body">
+        <img id="lightbox-img" class="lightbox-img" src="assets/tour/01-projeto.png" alt="" />
+      </div>
+      <div class="lightbox-footer">
+        <div class="lightbox-pins-inline" id="lightbox-pins-inline"></div>
+        <div class="lightbox-nav-actions">
+          <button type="button" class="nav-step-btn" id="lightbox-prev-btn">← Anterior</button>
+          <button type="button" class="nav-step-btn" id="lightbox-next-btn">Próximo →</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="js/data.js"></script>

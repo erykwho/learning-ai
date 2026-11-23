@@ -790,6 +790,140 @@ window.GUIDE_DATA = {
     }
   ],
 
+  /* Antigravity Visual Tour Carousel (Section 05) */
+  antigravityTour: [
+    {
+      step: 1,
+      shortTab: "1. Projeto",
+      title: "Passo 1 — Abrir um projeto e conhecer a tela inicial",
+      img: "assets/tour/01-projeto.png",
+      alt: "Tela ilustrativa inicial do Google Antigravity destacando o botão Novo Projeto (1), a caixa de pedido com barra de anexos (2) e o atalho Customizations para Plugins na barra lateral (3).",
+      intro:
+        "Ao abrir o Google Antigravity, você já tem uma mesa equipada com Sandbox pronta — basta criar um projeto e descrever seu objetivo em português simples.",
+      pins: [
+        {
+          num: "1",
+          label: "Novo Projeto / Conversa",
+          text: "Separe seus assuntos em projetos (ex: Finanças ou Catálogo) para manter arquivos, histórico e permissões organizados."
+        },
+        {
+          num: "2",
+          label: "Caixa de pedido (Prompt)",
+          text: "Escreva em português normal, anexe prints da sua tela ou digite \"/\" para abrir os atalhos guiados."
+        },
+        {
+          num: "3",
+          label: "Customizations (Plugins e Skills)",
+          text: "Atalho no canto inferior esquerdo para conectar Google Drive, Sheets, GitHub e ver suas Skills salvas."
+        }
+      ]
+    },
+    {
+      step: 2,
+      shortTab: "2. Plugins",
+      title: "Passo 2 — Conectar Google Drive, Sheets e GitHub em 1 clique",
+      img: "assets/tour/02-plugins.png",
+      alt: "Tela ilustrativa de Customizations e Plugins no Google Antigravity destacando o menu Plugins e MCP (1), os cartões de conexão em 1 clique do Drive, Sheets e GitHub (2) e as abas Plugins Oficiais, Skills e Servidores MCP (3).",
+      intro:
+        "Antes de automatizar planilhas ou publicar sites, conecte só os serviços necessários. Suas senhas reais ficam protegidas no Sidecar, fora da cápsula.",
+      pins: [
+        {
+          num: "1",
+          label: "Menu Plugins & MCP",
+          text: "Dentro de Customizations, é o painel central onde você controla quais serviços externos o agente pode acessar."
+        },
+        {
+          num: "2",
+          label: "Conectar em 1 clique",
+          text: "Clique em \"Conectar\" para autorizar sua conta Google ou GitHub; assim que mudar para \"Conectado ✓\", já funciona."
+        },
+        {
+          num: "3",
+          label: "Plugins, Skills e MCP",
+          text: "Alterne entre Plugins oficiais prontos, suas Skills reutilizáveis e servidores MCP extras quando quiser expandir."
+        }
+      ]
+    },
+    {
+      step: 3,
+      shortTab: "3. Comandos /",
+      title: "Passo 3 — Usar comandos com barra (/) e anexar prints",
+      img: "assets/tour/03-comandos.png",
+      alt: "Tela ilustrativa mostrando o menu de Slash Commands aberto ao digitar barra no Antigravity destacando o menu de atalhos (1), a opção recomendada /plan (2) e um print de recibo anexado na mensagem (3).",
+      intro:
+        "Não precisa decorar fórmulas de prompt: digite a barra / para abrir modos guiados — e cole prints da tela sempre que quiser mostrar algo visual.",
+      pins: [
+        {
+          num: "1",
+          label: "Menu de Slash Commands",
+          text: "Digitar \"/\" abre modos prontos: /plan (planeja antes), /grill-me (faz perguntas simples) e /goal (tarefas longas)."
+        },
+        {
+          num: "2",
+          label: "Comece sempre com /plan",
+          text: "Modo ideal para iniciantes: o agente explica o passo a passo e espera sua confirmação antes de alterar qualquer coisa."
+        },
+        {
+          num: "3",
+          label: "Anexar print ou arquivo",
+          text: "Arraste ou cole (Ctrl+V) fotos de recibos, PDFs ou prints de erro direto na caixa de mensagem."
+        }
+      ]
+    },
+    {
+      step: 4,
+      shortTab: "4. Aprovação",
+      title: "Passo 4 — Revisar o plano e aprovar com segurança",
+      img: "assets/tour/04-aprovacao.png",
+      alt: "Tela ilustrativa dividida no Google Antigravity mostrando o painel lateral de Artifacts com o plano em etapas (1), o cartão amarelo de pausa de segurança para ação no Google Sheets (2) e os botões Aprovar e Executar ou Pedir ajuste (3).",
+      intro:
+        "Você segue no controle o tempo todo: o agente mostra o plano organizado ao lado e pausa para pedir autorização antes de gravar ou mudar dados reais.",
+      pins: [
+        {
+          num: "1",
+          label: "Painel lateral de Artifacts",
+          text: "Exibe o plano completo (plano.md), prévias e relatórios organizados lado a lado para você conferir sem se perder no chat."
+        },
+        {
+          num: "2",
+          label: "Pausa de segurança",
+          text: "Antes de gravar na sua planilha ou publicar alterações, surge um cartão explicando exatamente qual ação será executada."
+        },
+        {
+          num: "3",
+          label: "Aprovar ou pedir ajuste",
+          text: "Clique em \"✓ Aprovar e Executar\" se estiver tudo certo — ou em \"Pedir ajuste\" para corrigir qualquer detalhe antes."
+        }
+      ]
+    },
+    {
+      step: 5,
+      shortTab: "5. Resultado",
+      title: "Passo 5 — Testar o resultado ao vivo e pedir ajustes",
+      img: "assets/tour/05-resultado.png",
+      alt: "Tela ilustrativa do resultado pronto no Google Antigravity destacando o Preview ao vivo do catálogo de metas e livros no painel lateral (1), o cartão com o link público pronto para compartilhar (2) e a caixa de conversa para pedir novos ajustes (3).",
+      intro:
+        "Com a tarefa pronta, você testa tudo no preview ao vivo, recebe o link pronto para compartilhar e pode pedir ajustes conversando normalmente.",
+      pins: [
+        {
+          num: "1",
+          label: "Preview ao vivo",
+          text: "Clique nos botões e teste sua página ou aplicativo direto na tela dividida — sem instalar nada no seu computador."
+        },
+        {
+          num: "2",
+          label: "Link para compartilhar",
+          text: "Páginas publicadas no GitHub Pages ou planilhas criadas viram cartões clicáveis prontos para abrir ou enviar."
+        },
+        {
+          num: "3",
+          label: "Ajustes em português natural",
+          text: "Quer mudar uma cor, texto ou filtro? Basta pedir na conversa (ou mandar um print mostrando o que melhorar)."
+        }
+      ]
+    }
+  ],
+
   /* Final Action Checklist */
   checklist: [
     {

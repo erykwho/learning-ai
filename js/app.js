@@ -1101,4 +1101,259 @@
     });
     renderEcosystem(DATA.ecosystems[0].id);
   }
+
+  /* ------------------------------------------------------------------------
+     13. Section 05 — Antigravity Visual Tour Carousel & Fullscreen Lightbox
+     ------------------------------------------------------------------------ */
+  const tourWidgetEl = document.getElementById("widget-antigravity-tour");
+  const tourTabsEl = document.getElementById("tour-step-tabs");
+  const tourFrameMetaEl = document.getElementById("tour-frame-meta");
+  const tourImgEl = document.getElementById("tour-slide-img");
+  const tourImgTriggerEl = document.getElementById("tour-img-trigger");
+  const tourZoomBtn = document.getElementById("tour-zoom-btn");
+  const tourPrevBtn = document.getElementById("tour-prev-btn");
+  const tourNextBtn = document.getElementById("tour-next-btn");
+  const tourDotsEl = document.getElementById("tour-dots");
+  const tourCaptionEl = document.getElementById("tour-caption-box");
+
+  const lbModalEl = document.getElementById("tour-lightbox");
+  const lbStepEl = document.getElementById("lightbox-step-pill");
+  const lbTitleEl = document.getElementById("lightbox-title");
+  const lbImgEl = document.getElementById("lightbox-img");
+  const lbPinsEl = document.getElementById("lightbox-pins-inline");
+  const lbCloseBtn = document.getElementById("lightbox-close");
+  const lbPrevBtn = document.getElementById("lightbox-prev-btn");
+  const lbNextBtn = document.getElementById("lightbox-next-btn");
+
+  const tourSlides = Array.isArray(DATA.antigravityTour) ? DATA.antigravityTour : [];
+  let tourIdx = 0;
+  let lastTriggerBeforeLb = null;
+
+  function renderTourSlide(index) {
+    if (!tourSlides.length) return;
+    const total = tourSlides.length;
+    tourIdx = ((index % total) + total) % total;
+    const slide = tourSlides[tourIdx];
+
+    if (tourTabsEl) {
+      Array.from(tourTabsEl.querySelectorAll(".tour-tab-btn")).forEach((btn, idx) => {
+        const active = idx === tourIdx;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", String(active));
+      });
+    }
+
+    if (tourFrameMetaEl) {
+      tourFrameMetaEl.textContent = `Passo ${slide.step} de ${total} · Tela ilustrativa`;
+    }
+
+    if (tourImgEl) {
+      tourImgEl.src = slide.img;
+      tourImgEl.alt = slide.alt;
+    }
+
+    if (tourDotsEl) {
+      Array.from(tourDotsEl.querySelectorAll(".tour-dot")).forEach((dot, idx) => {
+        const active = idx === tourIdx;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-current", active ? "true" : "false");
+      });
+    }
+
+    if (tourPrevBtn) tourPrevBtn.disabled = tourIdx === 0;
+    if (tourNextBtn) tourNextBtn.disabled = tourIdx === total - 1;
+
+    if (tourCaptionEl) {
+      tourCaptionEl.innerHTML = `
+        <h4 class="tour-caption-title">${slide.title}</h4>
+        <p class="tour-caption-intro">${slide.intro}</p>
+        <div class="tour-pins-grid">
+          ${slide.pins
+            .map(
+              (pin) => `
+                <div class="tour-pin-item">
+                  <div class="tour-pin-head">
+                    <span class="tour-pin-badge" aria-hidden="true">${pin.num}</span>
+                    <span class="tour-pin-label">${pin.label}</span>
+                  </div>
+                  <p class="tour-pin-text">${pin.text}</p>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+      `;
+    }
+
+    // Keep lightbox synced if currently open
+    if (lbModalEl && !lbModalEl.hidden) {
+      syncLightbox(slide, total);
+    }
+  }
+
+  function syncLightbox(slide, total) {
+    if (lbStepEl) lbStepEl.textContent = `Passo ${slide.step} de ${total} · Tour Visual do Google Antigravity`;
+    if (lbTitleEl) lbTitleEl.textContent = slide.title;
+    if (lbImgEl) {
+      lbImgEl.src = slide.img;
+      lbImgEl.alt = slide.alt;
+    }
+    if (lbPinsEl) {
+      lbPinsEl.innerHTML = slide.pins
+        .map(
+          (pin) =>
+            `<span class="lightbox-pin-chip"><span class="tour-pin-badge">${pin.num}</span><strong>${pin.label}</strong></span>`
+        )
+        .join("");
+    }
+    if (lbPrevBtn) lbPrevBtn.disabled = tourIdx === 0;
+    if (lbNextBtn) lbNextBtn.disabled = tourIdx === total - 1;
+  }
+
+  function openTourLightbox(triggerEl) {
+    if (!lbModalEl || !tourSlides.length) return;
+    lastTriggerBeforeLb = triggerEl || document.activeElement;
+    syncLightbox(tourSlides[tourIdx], tourSlides.length);
+    lbModalEl.hidden = false;
+    document.body.style.overflow = "hidden";
+    if (lbCloseBtn) lbCloseBtn.focus();
+  }
+
+  function closeTourLightbox() {
+    if (!lbModalEl || lbModalEl.hidden) return;
+    lbModalEl.hidden = true;
+    document.body.style.overflow = "";
+    if (lastTriggerBeforeLb && typeof lastTriggerBeforeLb.focus === "function") {
+      lastTriggerBeforeLb.focus();
+    }
+  }
+
+  if (tourWidgetEl && tourSlides.length) {
+    if (tourTabsEl) {
+      tourTabsEl.innerHTML = tourSlides
+        .map(
+          (s, idx) =>
+            `<button type="button" class="tour-tab-btn${idx === 0 ? " is-active" : ""}" role="tab" aria-selected="${
+              idx === 0
+            }" data-tour-idx="${idx}">${s.shortTab}</button>`
+        )
+        .join("");
+
+      tourTabsEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tour-tab-btn");
+        if (btn && btn.dataset.tourIdx !== undefined) {
+          renderTourSlide(Number(btn.dataset.tourIdx));
+        }
+      });
+    }
+
+    if (tourDotsEl) {
+      tourDotsEl.innerHTML = tourSlides
+        .map(
+          (s, idx) =>
+            `<button type="button" class="tour-dot${idx === 0 ? " is-active" : ""}" data-tour-idx="${idx}" aria-label="Ir para o passo ${
+              s.step
+            }: ${s.shortTab}"></button>`
+        )
+        .join("");
+
+      tourDotsEl.addEventListener("click", (e) => {
+        const dot = e.target.closest(".tour-dot");
+        if (dot && dot.dataset.tourIdx !== undefined) {
+          renderTourSlide(Number(dot.dataset.tourIdx));
+        }
+      });
+    }
+
+    if (tourPrevBtn) {
+      tourPrevBtn.addEventListener("click", () => {
+        if (tourIdx > 0) renderTourSlide(tourIdx - 1);
+      });
+    }
+
+    if (tourNextBtn) {
+      tourNextBtn.addEventListener("click", () => {
+        if (tourIdx < tourSlides.length - 1) renderTourSlide(tourIdx + 1);
+      });
+    }
+
+    if (tourZoomBtn) {
+      tourZoomBtn.addEventListener("click", () => openTourLightbox(tourZoomBtn));
+    }
+
+    if (tourImgTriggerEl) {
+      tourImgTriggerEl.addEventListener("click", () => openTourLightbox(tourImgTriggerEl));
+
+      // Touch swipe navigation on mobile
+      let swipeStartX = 0;
+      tourImgTriggerEl.addEventListener(
+        "touchstart",
+        (e) => {
+          if (e.touches && e.touches.length === 1) {
+            swipeStartX = e.touches[0].clientX;
+          }
+        },
+        { passive: true }
+      );
+      tourImgTriggerEl.addEventListener(
+        "touchend",
+        (e) => {
+          if (!swipeStartX || !e.changedTouches || !e.changedTouches.length) return;
+          const deltaX = e.changedTouches[0].clientX - swipeStartX;
+          swipeStartX = 0;
+          if (Math.abs(deltaX) > 48) {
+            if (deltaX < 0 && tourIdx < tourSlides.length - 1) {
+              renderTourSlide(tourIdx + 1);
+            } else if (deltaX > 0 && tourIdx > 0) {
+              renderTourSlide(tourIdx - 1);
+            }
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    // Keyboard navigation when focused inside carousel
+    tourWidgetEl.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" && tourIdx < tourSlides.length - 1) {
+        e.preventDefault();
+        renderTourSlide(tourIdx + 1);
+      } else if (e.key === "ArrowLeft" && tourIdx > 0) {
+        e.preventDefault();
+        renderTourSlide(tourIdx - 1);
+      }
+    });
+
+    if (lbCloseBtn) lbCloseBtn.addEventListener("click", closeTourLightbox);
+    if (lbPrevBtn) {
+      lbPrevBtn.addEventListener("click", () => {
+        if (tourIdx > 0) renderTourSlide(tourIdx - 1);
+      });
+    }
+    if (lbNextBtn) {
+      lbNextBtn.addEventListener("click", () => {
+        if (tourIdx < tourSlides.length - 1) renderTourSlide(tourIdx + 1);
+      });
+    }
+    if (lbModalEl) {
+      lbModalEl.addEventListener("click", (e) => {
+        if (e.target === lbModalEl) closeTourLightbox();
+      });
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (!lbModalEl || lbModalEl.hidden) return;
+      if (e.key === "Escape") {
+        closeTourLightbox();
+      } else if (e.key === "ArrowRight" && tourIdx < tourSlides.length - 1) {
+        e.preventDefault();
+        renderTourSlide(tourIdx + 1);
+      } else if (e.key === "ArrowLeft" && tourIdx > 0) {
+        e.preventDefault();
+        renderTourSlide(tourIdx - 1);
+      }
+    });
+
+    renderTourSlide(0);
+  }
 })();

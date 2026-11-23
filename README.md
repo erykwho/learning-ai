@@ -10,10 +10,11 @@ learning-ai/
 ├── css/
 │   └── style.css       # Sistema visual claro/escuro e estilos responsivos
 ├── js/
-│   ├── data.js         # Conteúdo estruturado dos 6 gráficos interativos, biblioteca das 5 eras, glossário e checklist
-│   └── app.js          # Lógica de interatividade, ScrollSpy, simulações e cópia de prompts
+│   ├── data.js         # Conteúdo estruturado dos 6 gráficos interativos, tour visual, biblioteca das 5 eras, glossário e checklist
+│   └── app.js          # Lógica de interatividade, ScrollSpy, carrossel com zoom, simulações e cópia de prompts
 └── assets/
-    └── favicon.svg     # Ícone vetorial da página
+    ├── favicon.svg     # Ícone vetorial da página
+    └── tour/           # 5 telas ilustrativas em alta resolução do tour visual do Google Antigravity (Seção 05)
 ```
 
 ## Publicação
