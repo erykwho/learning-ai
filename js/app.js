@@ -65,6 +65,7 @@
     "Prática 2: entendendo agentes, skills e MCP",
     "Mão na massa: criando com o Google Antigravity",
     "Sistemas reais: do prompt ao servidor sem quebrar",
+    "Bônus opcional: panorama dos outros ecossistemas",
     "Próximos passos: seu plano e glossário de bolso"
   ];
 
@@ -293,6 +294,23 @@
 
     if (eraDetailsEl) {
       const badgeClass = era.scopeType === "agent" ? "tag-agent" : "tag-model";
+      const refsHtml =
+        era.refs && era.refs.length
+          ? `
+            <div class="era-inline-refs">
+              <p class="era-inline-refs-label">Referências desta era</p>
+              <div class="era-ref-chips">
+                ${era.refs
+                  .map(
+                    (r) =>
+                      `<a class="era-ref-chip" href="${r.url}" target="_blank" rel="noopener noreferrer">${r.label} ↗</a>`
+                  )
+                  .join("")}
+              </div>
+            </div>
+          `
+          : "";
+
       eraDetailsEl.innerHTML = `
         <div class="era-meta-row">
           <span class="era-badge ${badgeClass}">${era.scope}</span>
@@ -304,6 +322,7 @@
         <ul class="era-milestones">
           ${era.milestones.map((m) => `<li>${m}</li>`).join("")}
         </ul>
+        ${refsHtml}
       `;
     }
 
@@ -970,4 +989,116 @@
   }
 
   renderGlossary();
+
+  /* ------------------------------------------------------------------------
+     11. Section 02 — Filterable Complete Era Reference Library
+     ------------------------------------------------------------------------ */
+  const eraLibTabsEl = document.getElementById("era-library-tabs");
+  const eraLibGridEl = document.getElementById("era-library-grid");
+  let activeEraFilter = "5"; // Default to Era 5 (latest era focus), 1-click access to all eras
+
+  function renderEraLibrary(filterKey) {
+    if (!eraLibGridEl || !DATA.eraLibrary) return;
+    activeEraFilter = filterKey;
+
+    if (eraLibTabsEl) {
+      Array.from(eraLibTabsEl.querySelectorAll(".filter-mini-btn")).forEach((btn) => {
+        const active = btn.dataset.eraFilter === filterKey;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    const items =
+      filterKey === "all"
+        ? DATA.eraLibrary
+        : DATA.eraLibrary.filter((item) => item.eraGroup === filterKey);
+
+    eraLibGridEl.innerHTML = items
+      .map(
+        (item) => `
+          <a class="resource-card" href="${item.url}" target="_blank" rel="noopener noreferrer">
+            <div class="resource-top">
+              <span class="resource-kind${item.isVideo ? " is-video" : ""}">${item.kind}</span>
+              <span class="lang-tag">${item.lang}</span>
+            </div>
+            <span class="resource-name">${item.title}</span>
+            <span class="resource-note">${item.note}</span>
+          </a>
+        `
+      )
+      .join("");
+  }
+
+  if (eraLibTabsEl && eraLibGridEl) {
+    eraLibTabsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-mini-btn");
+      if (btn && btn.dataset.eraFilter) {
+        renderEraLibrary(btn.dataset.eraFilter);
+      }
+    });
+    renderEraLibrary(activeEraFilter);
+  }
+
+  /* ------------------------------------------------------------------------
+     12. Widget 6 — Other AI Ecosystems Explorer (Optional Section 07)
+     ------------------------------------------------------------------------ */
+  const ecoTabsEl = document.getElementById("eco-tabs");
+  const ecoPanelEl = document.getElementById("eco-panel");
+
+  function renderEcosystem(ecoId) {
+    if (!ecoPanelEl || !DATA.ecosystems) return;
+    const eco = DATA.ecosystems.find((e) => e.id === ecoId) || DATA.ecosystems[0];
+    if (!eco) return;
+
+    if (ecoTabsEl) {
+      Array.from(ecoTabsEl.querySelectorAll(".pill-tab")).forEach((btn) => {
+        const active = btn.dataset.eco === eco.id;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", String(active));
+      });
+    }
+
+    ecoPanelEl.innerHTML = `
+      <div class="eco-panel-head">
+        <h4 class="eco-panel-title">${eco.name}</h4>
+        <span class="eco-tagline">${eco.tagline}</span>
+      </div>
+      <p class="eco-summary">${eco.summary}</p>
+      <div class="eco-grid">
+        <div class="eco-box">
+          <p class="eco-box-label">Famílias de Modelos</p>
+          <ul>
+            ${eco.models.map((m) => `<li>${m}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="eco-box">
+          <p class="eco-box-label">O que usam na prática (Apps &amp; Harnesses)</p>
+          <ul>
+            ${eco.tools.map((t) => `<li>${t}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+      <p class="eco-strength">${eco.strength}</p>
+    `;
+  }
+
+  if (ecoTabsEl && ecoPanelEl && DATA.ecosystems) {
+    ecoTabsEl.innerHTML = DATA.ecosystems
+      .map(
+        (eco, idx) =>
+          `<button type="button" class="pill-tab${idx === 0 ? " is-active" : ""}" role="tab" aria-selected="${
+            idx === 0
+          }" data-eco="${eco.id}">${eco.tab}</button>`
+      )
+      .join("");
+
+    ecoTabsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".pill-tab");
+      if (btn && btn.dataset.eco) {
+        renderEcosystem(btn.dataset.eco);
+      }
+    });
+    renderEcosystem(DATA.ecosystems[0].id);
+  }
 })();

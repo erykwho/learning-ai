@@ -101,8 +101,15 @@
             </a>
           </li>
           <li class="toc-item">
-            <a href="#sec-proximos-passos" class="toc-link">
+            <a href="#sec-ecossistemas" class="toc-link">
               <span class="toc-num">07</span>
+              <span>Outros ecossistemas de IA</span>
+              <span class="optional-tag">Opcional</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#sec-proximos-passos" class="toc-link">
+              <span class="toc-num">08</span>
               <span>Plano prático &amp; Glossário</span>
             </a>
           </li>
@@ -113,6 +120,7 @@
         <div class="toc-curve-label">Curva de Aprendizado</div>
         <div class="curve-steps" aria-hidden="true">
           <span class="curve-bar is-done"></span>
+          <span class="curve-bar"></span>
           <span class="curve-bar"></span>
           <span class="curve-bar"></span>
           <span class="curve-bar"></span>
@@ -134,8 +142,8 @@
           Você não precisa estudar matemática avançada nem saber programar para entender o que existe hoje em IA — e usar isso de verdade. Este guia vai do mais simples ao prático: como modelos funcionam por cima, como evoluíram até agentes autônomos e como usar ferramentas do Google (até o <strong>Antigravity</strong>) para criar automações e colocar sistemas confiáveis no ar.
         </p>
         <div class="hero-meta">
-          <span>Leitura estimada: ~18 minutos</span>
-          <span>5 gráficos interativos</span>
+          <span>Leitura estimada: ~20 minutos</span>
+          <span>6 gráficos interativos</span>
           <span>Foco prático · Sem pré-requisitos de código</span>
         </div>
 
@@ -383,6 +391,12 @@
             <p>
               Imagine deixar um aprendiz testar uma receita nova na cozinha da sua casa vs. numa cozinha de testes separada. Uma <strong>Sandbox</strong> (ou cápsula/container) é um pequeno computador virtual descartável na nuvem onde o agente pode criar arquivos, rodar programas e testar sites sem risco de bagunçar seu computador pessoal.
             </p>
+            <div class="deep-dive-refs">
+              <span class="deep-dive-refs-title">Saiba mais:</span>
+              <a class="era-ref-chip" href="https://blog.cloudflare.com/dynamic-workers/" target="_blank" rel="noopener noreferrer">Cloudflare — Sandboxing AI Agents ↗</a>
+              <a class="era-ref-chip" href="https://www.firecrawl.dev/blog/ai-agent-sandbox" target="_blank" rel="noopener noreferrer">Firecrawl — AI Agent Sandbox Guide ↗</a>
+              <a class="era-ref-chip" href="https://modal.com/resources/best-code-execution-sandboxes-ai-agents" target="_blank" rel="noopener noreferrer">Modal — Code Execution Sandboxes ↗</a>
+            </div>
           </div>
         </details>
 
@@ -398,6 +412,11 @@
             <p>
               O nome vem do carrinho acoplado ao lado de uma motocicleta. Em sistemas de agentes, um <strong>Sidecar</strong> é um programinha silencioso que roda ao lado da cápsula do agente para cuidar de tarefas críticas — como guardar suas credenciais do GitHub ou Google Drive e só assinar a requisição na saída, sem que o código rodando dentro da cápsula jamais veja sua senha real.
             </p>
+            <div class="deep-dive-refs">
+              <span class="deep-dive-refs-title">Saiba mais:</span>
+              <a class="era-ref-chip" href="https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar" target="_blank" rel="noopener noreferrer">Microsoft Learn — Sidecar Pattern ↗</a>
+              <a class="era-ref-chip" href="https://organicprogrammer.com/2026/11/09/entra-agent-id-sidecar-a-practical-guide-to-building-secure-ai-agents/" target="_blank" rel="noopener noreferrer">Sidecars para Agentes Seguros ↗</a>
+            </div>
           </div>
         </details>
 
@@ -413,6 +432,12 @@
             <p>
               Quando uma tarefa é grande demais para um único "quadro branco" de contexto, o agente principal pode chamar <strong>Subagentes</strong> — como um maestro delegando para um pesquisador, um revisor e um testador trabalharem em paralelo e devolverem apenas o resumo limpo do resultado.
             </p>
+            <div class="deep-dive-refs">
+              <span class="deep-dive-refs-title">Saiba mais:</span>
+              <a class="era-ref-chip" href="https://www.anthropic.com/research/multi-agent-research-system" target="_blank" rel="noopener noreferrer">Anthropic — Multi-Agent Research System ↗</a>
+              <a class="era-ref-chip" href="https://claude.com/resources/articles/building-multi-agent-systems-when-and-how-to-use-them" target="_blank" rel="noopener noreferrer">Quando usar Multi-Agentes ↗</a>
+              <a class="era-ref-chip" href="https://www.youtube.com/watch?v=Zqno_vux6d8" target="_blank" rel="noopener noreferrer">Google ADK Multi-Agent (YouTube) ↗</a>
+            </div>
           </div>
         </details>
 
@@ -420,43 +445,19 @@
           <strong>Agora vamos descer para a prática!</strong> Com o mapa histórico na cabeça, chega a hora de colocar a mão nas ferramentas reais do Google — começando pelas mais fáceis e subindo um degrau por vez até o Antigravity.
         </div>
 
-        <!-- Curated Resources Section 2 -->
-        <div class="resources-block">
-          <p class="resources-title">Para aprofundar — Fontes históricas e guias visuais</p>
-          <div class="resources-grid">
-            <a class="resource-card" href="https://research.google/pubs/attention-is-all-you-need/" target="_blank" rel="noopener noreferrer">
-              <div class="resource-top">
-                <span class="resource-kind">Artigo Original · 2017</span>
-                <span class="lang-tag">EN · Google Research</span>
-              </div>
-              <span class="resource-name">Attention Is All You Need — Google Research</span>
-              <span class="resource-note">O famoso paper do Google que deu origem à arquitetura Transformer (vale conhecer a fonte original!).</span>
-            </a>
-            <a class="resource-card" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener noreferrer">
-              <div class="resource-top">
-                <span class="resource-kind">Blog Clássico Ilustrado</span>
-                <span class="lang-tag">EN</span>
-              </div>
-              <span class="resource-name">The Illustrated Transformer — Jay Alammar</span>
-              <span class="resource-note">O artigo visual mais famoso da internet explicando como o Transformer funciona por diagramas.</span>
-            </a>
-            <a class="resource-card" href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank" rel="noopener noreferrer">
-              <div class="resource-top">
-                <span class="resource-kind is-video">YouTube · Animação</span>
-                <span class="lang-tag">EN · legendas PT</span>
-              </div>
-              <span class="resource-name">Transformers, the tech behind LLMs — 3Blue1Brown</span>
-              <span class="resource-note">Animações impressionantes que tornam visível o que acontece dentro de um modelo moderno.</span>
-            </a>
-            <a class="resource-card" href="https://www.youtube.com/watch?v=H1JzUgUePBE" target="_blank" rel="noopener noreferrer">
-              <div class="resource-top">
-                <span class="resource-kind is-video">YouTube · Aula</span>
-                <span class="lang-tag">PT-BR</span>
-              </div>
-              <span class="resource-name">De prompts a agentes — Imersão Dev Agentes de IA (Alura &amp; Google)</span>
-              <span class="resource-note">Conversa prática em português sobre a transição de prompts isolados para agentes de IA.</span>
-            </a>
+        <!-- Curated Resources Section 2: Complete Filterable 5-Era Library -->
+        <div class="resources-block" id="era-library-block">
+          <div class="resources-header-row">
+            <p class="resources-title">Biblioteca das 5 Eras — Referências externas por conceito</p>
+            <div class="resources-filter-tabs" id="era-library-tabs" role="group" aria-label="Filtrar referências por era">
+              <button type="button" class="filter-mini-btn is-active" data-era-filter="5" aria-pressed="true">Era 5 · Atual (8)</button>
+              <button type="button" class="filter-mini-btn" data-era-filter="4" aria-pressed="false">Era 4 · Agentes (5)</button>
+              <button type="button" class="filter-mini-btn" data-era-filter="3" aria-pressed="false">Era 3 · RAG/Raciocínio (3)</button>
+              <button type="button" class="filter-mini-btn" data-era-filter="1-2" aria-pressed="false">Eras 1–2 · Base (4)</button>
+              <button type="button" class="filter-mini-btn" data-era-filter="all" aria-pressed="false">Ver todas (20)</button>
+            </div>
           </div>
+          <div class="resources-grid" id="era-library-grid" aria-live="polite"></div>
         </div>
       </section>
 
@@ -928,11 +929,154 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
       </section>
 
       <!-- ==================================================================
-           SEÇÃO 07 — PLANO PRÁTICO & GLOSSÁRIO DE BOLSO
+           SEÇÃO 07 (OPCIONAL) — MAPA DOS OUTROS ECOSSISTEMAS DE IA
+           ================================================================== -->
+      <section class="guide-section" id="sec-ecossistemas">
+        <div class="section-kicker">
+          <span class="section-number">07</span>
+          <span class="section-level">Bônus Opcional · Panorama do Mercado</span>
+        </div>
+        <h2>Além do Google: o mapa dos outros ecossistemas de IA</h2>
+
+        <div class="optional-banner">
+          <span><strong>Seção opcional:</strong> ótima para reconhecer os nomes que você ouve nas notícias. Se quiser focar só no Google agora, pode pular sem prejuízo.</span>
+          <a href="#sec-proximos-passos" class="optional-skip-link">Ir para o Plano Prático ↓</a>
+        </div>
+
+        <p>
+          Ao longo deste guia seguimos a trilha do <strong>Google</strong> (Gemini → NotebookLM → AI Studio → Antigravity), mas a mesma arquitetura em camadas que você acabou de aprender existe nas outras grandes empresas de IA — apenas com nomes de marca diferentes.
+        </p>
+
+        <div class="analogy-box">
+          <p class="analogy-label">Analogia do Mundo Real</p>
+          <p>
+            Pense nos ecossistemas de IA como <strong>sistemas de celular</strong> (Android, iPhone) ou <strong>montadoras de carro</strong>: o volante, os pedais e as regras de trânsito são os mesmos (prompts, instruções globais, agentes, Skills e MCP), mas cada empresa constrói sua própria família de motores (modelos) e seus aplicativos em volta.
+          </p>
+        </div>
+
+        <!-- Interactive Widget 6: Ecosystem Explorer -->
+        <div class="interactive-stage" id="widget-ecosystems">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 06</p>
+              <h3 class="stage-title">Explorador de Ecossistemas: famílias de modelos e o que cada empresa usa</h3>
+              <p class="stage-hint">Clique em cada aba abaixo para comparar as famílias de modelos, aplicativos de chat, harnesses de agentes e pontos fortes.</p>
+            </div>
+          </div>
+
+          <div class="pill-tabs" id="eco-tabs" role="tablist" aria-label="Ecossistemas de IA"></div>
+          <div class="eco-panel" id="eco-panel" aria-live="polite"></div>
+        </div>
+
+        <h3>Tabela-Tradução: mesmo conceito, nomes diferentes</h3>
+        <p>
+          Sempre que alguém mencionar <em>Custom GPTs</em>, <em>Claude Code</em>, <em>Codex</em>, <em>Cursor</em> ou <em>Ollama</em>, você pode traduzir imediatamente para o conceito que já domina:
+        </p>
+
+        <div class="stack-table-wrap">
+          <table class="stack-table">
+            <thead>
+              <tr>
+                <th>Conceito que você aprendeu</th>
+                <th>Google</th>
+                <th>OpenAI</th>
+                <th>Anthropic</th>
+                <th>Mundo Aberto (Open-Weights)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Família de Modelos (Cérebro)</strong></td>
+                <td>Gemini (e <em>Gemma</em> aberto)</td>
+                <td>GPT (e <em>gpt-oss</em> aberto)</td>
+                <td>Claude (Haiku, Sonnet, Opus, Fable)</td>
+                <td>Llama (Meta), DeepSeek, Qwen, Mistral</td>
+              </tr>
+              <tr>
+                <td><strong>Chat do Dia a Dia</strong></td>
+                <td>Google Gemini</td>
+                <td>ChatGPT</td>
+                <td>Claude (com Artifacts)</td>
+                <td>Ollama (no PC) / HuggingChat</td>
+              </tr>
+              <tr>
+                <td><strong>Regras Globais Fixas</strong></td>
+                <td>Gems</td>
+                <td>Custom GPTs &amp; Projects</td>
+                <td>Projects &amp; Styles</td>
+                <td>System Prompt / Modelfile</td>
+              </tr>
+              <tr>
+                <td><strong>Harness de Agentes</strong></td>
+                <td>Google Antigravity</td>
+                <td>Codex (Web e Editor)</td>
+                <td>Claude Code</td>
+                <td>Cursor, VS Code Copilot, OpenHands</td>
+              </tr>
+              <tr>
+                <td><strong>Conexões &amp; Manuais</strong></td>
+                <td>Plugins + MCP + Skills</td>
+                <td>MCP + AGENTS.md + Skills</td>
+                <td>MCP + Agent Skills (criadora)</td>
+                <td>MCP + Agent Skills (padrões abertos)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="insight-box">
+          <p class="insight-label">A melhor notícia sobre escolher um ecossistema</p>
+          <p>
+            Você <strong>não fica preso</strong>. Graças a padrões abertos como <strong>MCP</strong> (para conectar ferramentas) e <strong>Agent Skills</strong> (para ensinar procedimentos), tudo o que você aprender montando automações e sistemas no Google Antigravity funciona com a mesma lógica se um dia você quiser testar Claude, ChatGPT, Cursor ou rodar um modelo aberto no seu próprio computador.
+          </p>
+        </div>
+
+        <!-- Curated Resources Section 7 (Optional Ecosystems) -->
+        <div class="resources-block">
+          <p class="resources-title">Para aprofundar — Outros ecossistemas e modelos abertos</p>
+          <div class="resources-grid">
+            <a class="resource-card" href="https://developers.openai.com/api/docs/models" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Documentação Oficial · OpenAI</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">OpenAI Models &amp; Codex Overview</span>
+              <span class="resource-note">Catálogo oficial das famílias GPT e como a OpenAI organiza modelos rápidos, de raciocínio e agentes.</span>
+            </a>
+            <a class="resource-card" href="https://platform.claude.com/docs/en/models/overview" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Documentação Oficial · Anthropic</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">Família Claude (Haiku, Sonnet, Opus, Fable) &amp; Claude Code</span>
+              <span class="resource-note">Explica a diferença prática entre cada tamanho de modelo da Anthropic e o uso com agentes.</span>
+            </a>
+            <a class="resource-card" href="https://ai-tldr.dev/learn/local-open-models/open-model-ecosystem/open-model-families/" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind">Guia Didático · Mundo Aberto</span>
+                <span class="lang-tag">EN</span>
+              </div>
+              <span class="resource-name">Llama, Qwen, Gemma, Mistral e DeepSeek explicados</span>
+              <span class="resource-note">Panorama claro das principais famílias de pesos abertos e para que cada uma se destaca.</span>
+            </a>
+            <a class="resource-card" href="https://www.youtube.com/watch?v=wco_8l_zh7s" target="_blank" rel="noopener noreferrer">
+              <div class="resource-top">
+                <span class="resource-kind is-video">YouTube · Prática Local</span>
+                <span class="lang-tag">EN · legendas PT</span>
+              </div>
+              <span class="resource-name">Rodando Llama localmente com Ollama &amp; Hugging Face</span>
+              <span class="resource-note">Demonstração prática de como baixar e conversar com um modelo aberto no próprio computador.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SEÇÃO 08 — PLANO PRÁTICO & GLOSSÁRIO DE BOLSO
            ================================================================== -->
       <section class="guide-section" id="sec-proximos-passos">
         <div class="section-kicker">
-          <span class="section-number">07</span>
+          <span class="section-number">08</span>
           <span class="section-level">Sua Trilha Prática &amp; Consulta Rápida</span>
         </div>
         <h2>Seu plano de ação (e um glossário de bolso para consultar sempre)</h2>

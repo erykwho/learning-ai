@@ -81,6 +81,11 @@ window.GUIDE_DATA = {
         "Artigo 'Attention Is All You Need' (Google Brain / Research, 2017).",
         "O mecanismo de 'Atenção' relaciona palavras distantes no mesmo texto de forma paralela.",
         "Essa mesma arquitetura é o motor base do Gemini, ChatGPT, Claude e Llama até hoje."
+      ],
+      refs: [
+        { label: "Paper original (Google, 2017)", url: "https://research.google/pubs/attention-is-all-you-need/" },
+        { label: "The Illustrated Transformer", url: "https://jalammar.github.io/illustrated-transformer/" },
+        { label: "3Blue1Brown (YouTube)", url: "https://www.youtube.com/watch?v=wjZofJX0v4M" }
       ]
     },
     {
@@ -98,6 +103,10 @@ window.GUIDE_DATA = {
         "OpenAI lança GPT-1, GPT-2, GPT-3 e o ChatGPT (novembro de 2022).",
         "Explosão de concorrentes: Google Gemini, Anthropic Claude e modelos abertos (Llama).",
         "Limitação da era: o modelo só respondia texto preso na janela de chat — não acessava seus arquivos nem agia sozinho."
+      ],
+      refs: [
+        { label: "Deep Dive into LLMs (Karpathy)", url: "https://www.youtube.com/watch?v=7xTGNNLPyMI" },
+        { label: "Intro to LLMs — 1h (YouTube)", url: "https://www.youtube.com/watch?v=zjkBMFhNj_g" }
       ]
     },
     {
@@ -115,6 +124,11 @@ window.GUIDE_DATA = {
         "Instruções Globais (System Prompts / Gems): regras permanentes de tom e estilo — nasceu aqui, para modelos!",
         "RAG (ex: NotebookLM): consultar suas fontes reais para responder com citações e menos invenções.",
         "Multimodalidade + janelas de contexto enormes (destaque da família Gemini) + modelos de raciocínio."
+      ],
+      refs: [
+        { label: "O que é RAG (Google Cloud)", url: "https://cloud.google.com/use-cases/retrieval-augmented-generation" },
+        { label: "RAG em PT-BR (Código Fonte TV)", url: "https://www.youtube.com/watch?v=CuPKOGdA46Q" },
+        { label: "Modelos de Raciocínio (IBM)", url: "https://www.ibm.com/think/topics/reasoning-model" }
       ]
     },
     {
@@ -132,6 +146,11 @@ window.GUIDE_DATA = {
         "Uso de ferramentas (Tool Calling): o modelo consegue pesquisar, ler pastas, editar arquivos e executar comandos.",
         "Harness (ex: Google Antigravity): a interface que organiza arquivos, aprovações, permissões e memória do agente.",
         "Skills: instruções modulares abertas sob demanda — nasceu aqui, no mundo dos agentes!"
+      ],
+      refs: [
+        { label: "Building Effective Agents", url: "https://www.anthropic.com/research/building-effective-agents" },
+        { label: "Harness Engineering (M. Fowler)", url: "https://martinfowler.com/articles/harness-engineering.html" },
+        { label: "Agent Skills Standard", url: "https://agentskills.io/home" }
       ]
     },
     {
@@ -149,7 +168,197 @@ window.GUIDE_DATA = {
         "Plugins & MCP (Model Context Protocol): conexão padronizada com Google Drive, Sheets, GitHub, bancos de dados etc.",
         "Sandboxes / Cápsulas: computadores virtuais descartáveis onde o agente testa projetos sem risco à sua máquina.",
         "Sidecars & Subagentes: processos auxiliares invisíveis (segurança) e agentes especialistas trabalhando em paralelo."
+      ],
+      refs: [
+        { label: "MCP Docs Oficiais", url: "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro" },
+        { label: "Sandboxing AI Agents (Cloudflare)", url: "https://blog.cloudflare.com/dynamic-workers/" },
+        { label: "Sidecar Pattern (Microsoft)", url: "https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar" },
+        { label: "Multi-Agent Systems (Anthropic)", url: "https://www.anthropic.com/research/multi-agent-research-system" }
       ]
+    }
+  ],
+
+  /* Section 2 Filterable Complete Era Reference Library */
+  eraLibrary: [
+    {
+      eraGroup: "1-2",
+      kind: "Artigo Original · Era 1",
+      isVideo: false,
+      lang: "EN · Google",
+      title: "Attention Is All You Need (Paper de 2017)",
+      url: "https://research.google/pubs/attention-is-all-you-need/",
+      note: "A fonte histórica do Google que apresentou o Transformer — a base de todos os LLMs modernos."
+    },
+    {
+      eraGroup: "1-2",
+      kind: "Blog Ilustrado · Era 1",
+      isVideo: false,
+      lang: "EN",
+      title: "The Illustrated Transformer — Jay Alammar",
+      url: "https://jalammar.github.io/illustrated-transformer/",
+      note: "Explicação visual clássica mostrando em diagramas como o mecanismo de Atenção funciona."
+    },
+    {
+      eraGroup: "1-2",
+      kind: "YouTube · Era 1–2",
+      isVideo: true,
+      lang: "EN · legendas PT",
+      title: "Transformers, the tech behind LLMs — 3Blue1Brown",
+      url: "https://www.youtube.com/watch?v=wjZofJX0v4M",
+      note: "Animações impecáveis para visualizar o funcionamento interno de um modelo de linguagem."
+    },
+    {
+      eraGroup: "1-2",
+      kind: "YouTube · Era 2",
+      isVideo: true,
+      lang: "EN · legendas PT",
+      title: "Deep Dive into LLMs like ChatGPT — Andrej Karpathy",
+      url: "https://www.youtube.com/watch?v=7xTGNNLPyMI",
+      note: "Aula panorâmica sobre como LLMs são treinados, afinados e transformados em assistentes."
+    },
+    {
+      eraGroup: "3",
+      kind: "Guia Oficial · RAG",
+      isVideo: false,
+      lang: "EN · Google Cloud",
+      title: "What is Retrieval-Augmented Generation (RAG)?",
+      url: "https://cloud.google.com/use-cases/retrieval-augmented-generation",
+      note: "Explica claramente como conectar LLMs às suas próprias fontes de dados para evitar alucinações."
+    },
+    {
+      eraGroup: "3",
+      kind: "YouTube · RAG",
+      isVideo: true,
+      lang: "PT-BR",
+      title: "RAG (Retrieval-Augmented Generation) — Código Fonte TV",
+      url: "https://www.youtube.com/watch?v=CuPKOGdA46Q",
+      note: "Episódio didático em português desmistificando RAG e busca em documentos próprios."
+    },
+    {
+      eraGroup: "3",
+      kind: "Artigo · Raciocínio",
+      isVideo: false,
+      lang: "EN · IBM Think",
+      title: "What Is a Reasoning Model? (Modelos de Raciocínio)",
+      url: "https://www.ibm.com/think/topics/reasoning-model",
+      note: "O que muda nos modelos que 'pensam passo a passo' antes de entregar a resposta final."
+    },
+    {
+      eraGroup: "4",
+      kind: "Artigo Referência · Agentes",
+      isVideo: false,
+      lang: "EN · Anthropic",
+      title: "Building Effective AI Agents",
+      url: "https://www.anthropic.com/research/building-effective-agents",
+      note: "Guia indispensável separando fluxos guiados de agentes autônomos em loop."
+    },
+    {
+      eraGroup: "4",
+      kind: "Blog · Harnesses",
+      isVideo: false,
+      lang: "EN · Martin Fowler",
+      title: "Harness Engineering for Coding Agent Users",
+      url: "https://martinfowler.com/articles/harness-engineering.html",
+      note: "Explica por que o 'chassi' em volta do modelo (o Harness) é tão importante quanto o próprio modelo."
+    },
+    {
+      eraGroup: "4",
+      kind: "Blog · Harnesses",
+      isVideo: false,
+      lang: "EN · Addy Osmani",
+      title: "Agent Harness Engineering (Modelo + Ambiente)",
+      url: "https://addyosmani.com/blog/agent-harness-engineering/",
+      note: "Visão prática de como memória, ferramentas, aprovações e contexto formam um harness moderno."
+    },
+    {
+      eraGroup: "4",
+      kind: "Padrão Aberto · Skills",
+      isVideo: false,
+      lang: "EN · Oficial",
+      title: "Agent Skills — Padrão Aberto (agentskills.io)",
+      url: "https://agentskills.io/home",
+      note: "Documentação oficial explicando como funcionam as Skills modulares carregadas sob demanda."
+    },
+    {
+      eraGroup: "4",
+      kind: "YouTube · Harnesses & Skills",
+      isVideo: true,
+      lang: "EN · legendas PT",
+      title: "Harness Engineering Explained for AI Agents",
+      url: "https://www.youtube.com/watch?v=zYerCzIexCg",
+      note: "Resumo direto em vídeo sobre o que compõe um Harness e como ele guia agentes reais."
+    },
+    {
+      eraGroup: "5",
+      kind: "Padrão Aberto · MCP",
+      isVideo: false,
+      lang: "EN · Oficial",
+      title: "Model Context Protocol (MCP) — Introdução Oficial",
+      url: "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro",
+      note: "Tudo sobre o protocolo 'USB-C da IA' que conecta agentes a Drive, GitHub, bancos e APIs."
+    },
+    {
+      eraGroup: "5",
+      kind: "YouTube · MCP",
+      isVideo: true,
+      lang: "PT-BR",
+      title: "MCP: O 'USB-C' da IA para integrar LLMs e ferramentas",
+      url: "https://www.youtube.com/watch?v=hsO63OTyeTc",
+      note: "Explicação objetiva em português sobre servidores MCP e integrações padronizadas."
+    },
+    {
+      eraGroup: "5",
+      kind: "Blog · Sandboxes / Cápsulas",
+      isVideo: false,
+      lang: "EN · Cloudflare",
+      title: "Sandboxing AI Agents, 100x Faster — Cloudflare Blog",
+      url: "https://blog.cloudflare.com/dynamic-workers/",
+      note: "Por que agentes precisam de cápsulas isoladas para executar código com segurança e rapidez."
+    },
+    {
+      eraGroup: "5",
+      kind: "Guia · Sandboxes / Cápsulas",
+      isVideo: false,
+      lang: "EN · Firecrawl",
+      title: "AI Agent Sandbox: How to Safely Run Autonomous Agents",
+      url: "https://www.firecrawl.dev/blog/ai-agent-sandbox",
+      note: "Panorama didático dos tipos de sandboxes (código, navegador e ambientes completos de dev)."
+    },
+    {
+      eraGroup: "5",
+      kind: "Arquitetura · Sidecars",
+      isVideo: false,
+      lang: "EN · Microsoft Learn",
+      title: "Sidecar Pattern — Azure Architecture Center",
+      url: "https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar",
+      note: "A referência clássica sobre o padrão Sidecar (processos auxiliares de segurança, proxy e logs)."
+    },
+    {
+      eraGroup: "5",
+      kind: "Blog · Sidecars em Agentes",
+      isVideo: false,
+      lang: "EN",
+      title: "Building Secure AI Agents with the Sidecar Pattern",
+      url: "https://organicprogrammer.com/2026/11/09/entra-agent-id-sidecar-a-practical-guide-to-building-secure-ai-agents/",
+      note: "Exemplo moderno de como Sidecars protegem identidade e credenciais ao lado de um agente."
+    },
+    {
+      eraGroup: "5",
+      kind: "Engenharia · Subagentes",
+      isVideo: false,
+      lang: "EN · Anthropic",
+      title: "How We Built Our Multi-Agent Research System",
+      url: "https://www.anthropic.com/research/multi-agent-research-system",
+      note: "Relato real de como um agente coordenador delega trabalho em paralelo para subagentes."
+    },
+    {
+      eraGroup: "5",
+      kind: "YouTube · Multi-Agentes Google",
+      isVideo: true,
+      lang: "EN · legendas PT",
+      title: "AI Agents & Multi-Agent Explained (com Google ADK)",
+      url: "https://www.youtube.com/watch?v=Zqno_vux6d8",
+      note: "Introdução visual à teoria de agentes modernos e sistemas multi-agentes usando o kit do Google."
     }
   ],
 
@@ -443,6 +652,16 @@ window.GUIDE_DATA = {
       def: "Processo auxiliar invisível ao lado da cápsula do agente — muito usado como guarda-chaves de senhas e credenciais."
     },
     {
+      term: "Multi-Agentes / Subagentes",
+      category: "Agentes",
+      def: "Arquitetura em que um agente principal divide uma tarefa grande entre especialistas auxiliares rodando em paralelo."
+    },
+    {
+      term: "Modelos de Pesos Abertos (Open-Weights)",
+      category: "Fundamentos",
+      def: "Modelos como Llama, DeepSeek, Qwen, Mistral e Gemma cujos arquivos são liberados para baixar e rodar no próprio computador ou nuvem privada."
+    },
+    {
       term: "Git & GitHub",
       category: "Sistemas",
       def: "Sistema de versionamento ('máquina do tempo' do código) e plataforma na nuvem onde o projeto fica guardado, revisado e compartilhado."
@@ -466,6 +685,108 @@ window.GUIDE_DATA = {
       term: "Variáveis de Ambiente (.env) & Chave de API",
       category: "Sistemas",
       def: "Chave de API é a 'senha eletrônica' para falar com um serviço; Variáveis de Ambiente são o cofre no servidor onde ela fica escondida fora do código."
+    }
+  ],
+
+  /* Widget 6: Other AI Ecosystems Explorer (Optional Section 07) */
+  ecosystems: [
+    {
+      id: "openai",
+      tab: "OpenAI",
+      name: "OpenAI (ChatGPT & Codex)",
+      tagline: "Popularizou a IA moderna",
+      summary:
+        "A empresa que desencadeou a explosão da Era 2 com o ChatGPT. Hoje organiza seus modelos na família principal GPT (que unificou conversa rápida e raciocínio profundo) e também oferece modelos abertos (gpt-oss) e seu próprio harness de agentes.",
+      models: [
+        "<strong>Família GPT (ex: GPT-5 / GPT-6):</strong> carros-chefe multimodais que alternam automaticamente entre respostas rápidas e raciocínio profundo.",
+        "<strong>Linha de raciocínio (série o3 / thinking):</strong> pioneira em modelos que 'pensam antes de responder' para lógica e código.",
+        "<strong>gpt-oss:</strong> linha de modelos de pesos abertos para quem quer rodar fora da nuvem da OpenAI."
+      ],
+      tools: [
+        "<strong>ChatGPT:</strong> chat popular com voz em tempo real, busca, geração de imagens e memória.",
+        "<strong>Custom GPTs & Projects:</strong> o equivalente aos Gems do Google (assistentes com regras fixas e arquivos).",
+        "<strong>Codex (Web, linha de comando e editor):</strong> o harness agêntico da OpenAI para construir software, compatível com arquivos de regras (<span class='inline-code'>AGENTS.md</span>), Skills e MCP."
+      ],
+      strength:
+        "Ponto forte: interface muito polida para o público geral (especialmente voz/multimodal) e um ecossistema gigantesco de integrações e automações com o Codex."
+    },
+    {
+      id: "anthropic",
+      tab: "Anthropic",
+      name: "Anthropic (Família Claude)",
+      tagline: "Criadora do MCP e Agent Skills",
+      summary:
+        "Fundada por ex-pesquisadores da OpenAI com foco forte em segurança e confiabilidade. Além de modelos muito queridos para escrita natural e programação, a Anthropic criou e abriu para toda a indústria dois padrões da Era 4 e 5: o <strong>MCP</strong> e o <strong>Agent Skills</strong>.",
+      models: [
+        "<strong>Claude Haiku:</strong> o mais rápido e econômico — ótimo para tarefas simples em grande volume.",
+        "<strong>Claude Sonnet:</strong> o equilíbrio do dia a dia (escrita, análise e desenvolvimento).",
+        "<strong>Claude Opus &amp; Fable:</strong> modelos topo de linha para raciocínio exigente, pesquisa longa e agentes autônomos."
+      ],
+      tools: [
+        "<strong>Claude (Web &amp; Desktop):</strong> traz <em>Projects</em> (pastas de contexto), <em>Artifacts</em> (páginas e gráficos interativos ao lado do chat) e conectores MCP.",
+        "<strong>Claude Code:</strong> o harness agêntico da Anthropic que opera direto em projetos, comandos do sistema e GitHub.",
+        "<strong>Padrões abertos:</strong> MCP (<span class='inline-code'>modelcontextprotocol.io</span>) e Agent Skills (<span class='inline-code'>agentskills.io</span>), adotados por quase todo o mercado."
+      ],
+      strength:
+        "Ponto forte: texto muito claro e natural, raciocínio cuidadoso em tarefas longas e liderança nos padrões abertos que conectam agentes."
+    },
+    {
+      id: "open-weights",
+      tab: "Meta & Mundo Aberto",
+      name: "Meta & Ecossistema Aberto (Open-Weights)",
+      tagline: "Privacidade, controle e custo baixo",
+      summary:
+        "Nem toda IA vive trancada nos servidores de uma única empresa. Nos <strong>modelos de pesos abertos</strong> (<em>open-weights</em>), o laboratório publica o 'cérebro treinado' para qualquer pessoa ou empresa baixar e rodar no próprio computador (até sem internet!) ou em servidores privados.",
+      models: [
+        "<strong>Llama (Meta):</strong> a família que abriu as portas do movimento aberto no mundo ocidental.",
+        "<strong>DeepSeek:</strong> famosa por modelos abertos de raciocínio muito fortes com custo computacional bem menor.",
+        "<strong>Qwen (Alibaba), Mistral (França) &amp; Gemma (Google):</strong> opções excelentes em vários idiomas, código e tamanhos compactos para notebooks."
+      ],
+      tools: [
+        "<strong>Hugging Face:</strong> o 'GitHub da IA' — a maior biblioteca gratuita onde esses modelos abertos são publicados e testados.",
+        "<strong>Ollama:</strong> aplicativo gratuito que permite baixar e conversar com Llama, Gemma, DeepSeek ou Qwen rodando direto no seu computador.",
+        "<strong>Nuvens especializadas:</strong> empresas rodam esses modelos abertos por frações de centavo com privacidade contratual."
+      ],
+      strength:
+        "Ponto forte: independência total de fornecedor, privacidade máxima (seus dados nunca saem da sua máquina/empresa) e personalização profunda."
+    },
+    {
+      id: "multi-model",
+      tab: "Harnesses Multi-Modelo",
+      name: "Harnesses & Automação Independentes",
+      tagline: "Você escolhe qual cérebro plugar",
+      summary:
+        "Uma categoria que explodiu na Era 4 e 5 são ferramentas que <strong>não criam o próprio modelo</strong> — em vez disso, constroem o melhor ambiente de trabalho (Harness) e deixam você trocar o cérebro (Gemini, Claude, GPT ou modelos abertos) com um clique.",
+      models: [
+        "<strong>Escolha livre por tarefa:</strong> usar um modelo rápido/barato para ajustes simples e um modelo de raciocínio pesado para decisões difíceis.",
+        "<strong>Compatibilidade universal:</strong> quase todos leem o mesmo padrão de regras (<span class='inline-code'>AGENTS.md</span>), Skills e servidores MCP."
+      ],
+      tools: [
+        "<strong>Cursor &amp; Windsurf:</strong> editores de código nativos de IA muito populares entre quem cria software com múltiplos modelos.",
+        "<strong>VS Code + GitHub Copilot:</strong> o editor mais usado do mundo com modo agêntico multi-modelo integrado ao GitHub.",
+        "<strong>n8n / Make / Zapier:</strong> plataformas visuais (arrastar e soltar caixinhas) para ligar modelos de IA a e-mail, WhatsApp, CRM e planilhas sem código."
+      ],
+      strength:
+        "Ponto forte: flexibilidade máxima para combinar o melhor modelo de cada empresa sem refazer seu fluxo de trabalho."
+    },
+    {
+      id: "google-ref",
+      tab: "Google (Resumo)",
+      name: "Google (Nossa Trilha neste Guia)",
+      tagline: "Do básico ao sistema no mesmo ecossistema",
+      summary:
+        "Para comparar lado a lado com os demais: o diferencial do Google é oferecer a escada completa integrada à conta que você provavelmente já usa todos os dias (Gmail, Drive, Docs, Sheets) — com janelas de contexto gigantes e forte multimodalidade nativa.",
+      models: [
+        "<strong>Família Gemini (Flash / Pro / Deep Think):</strong> multimodal nativa (texto, imagem, áudio e vídeo longos) com enormes janelas de contexto.",
+        "<strong>Gemma:</strong> linha aberta (open-weights) do Google para rodar localmente ou em servidores próprios."
+      ],
+      tools: [
+        "<strong>Gemini + Gems &amp; NotebookLM:</strong> uso diário, assistentes fixos e pesquisa sem alucinação nos seus PDFs.",
+        "<strong>Google AI Studio:</strong> laboratório gratuito no navegador para testar prompts, vídeos e modelos novos.",
+        "<strong>Google Antigravity:</strong> harness agêntico completo com Sandbox, Skills, Plugins (Drive, Sheets, GitHub) e MCP."
+      ],
+      strength:
+        "Ponto forte: menor atrito para começar hoje (integração direta com Drive/Sheets/Workspace) e trilha completa gratuita até o Antigravity."
     }
   ],
 
