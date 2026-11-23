@@ -507,6 +507,10 @@
           <div class="compass-result" id="compass-result" aria-live="polite"></div>
         </div>
 
+        <p class="shortcut-note">
+          <strong>Travou numa resposta ou não sabe nem o que perguntar?</strong> Confira o nosso <a href="#sec-truques">Kit de 8 Truques para Desbloquear (Seção 05)</a> — funciona tanto no Gemini quanto no Antigravity.
+        </p>
+
         <div class="bridge-note">
           <strong>Onde o chat encontra o limite?</strong> Gemini, NotebookLM e AI Studio são excelentes para pensar, pesquisar e gerar texto com você. Mas você ainda precisa copiar o resultado, abrir sua planilha, salvar arquivos ou publicar seu site na mão. É exatamente aí que entram os <strong>Agentes</strong>.
         </div>
@@ -617,8 +621,270 @@
           Já o <strong>MCP (Model Context Protocol)</strong> resolve o problema das conexões. Antes do MCP, cada ferramenta de IA precisava criar um cabo diferente para conversar com o Google Drive, outro para o GitHub, outro para bancos de dados. O MCP virou o <strong>"USB-C da IA"</strong>: qualquer serviço que ofereça um conector MCP passa a conversar automaticamente com qualquer agente compatível — incluindo o Google Antigravity.
         </p>
 
+        <h3>Quer abrir o capô? Como cada peça é configurada e acionada na prática (Opcional)</h3>
+        <p>
+          Não é obrigatório saber os detalhes técnicos abaixo para usar o Antigravity, mas se você quiser entender <strong>como uma Skill ou integração é montada de verdade</strong> — e o que acontece no segundo em que você manda uma mensagem — abra os blocos abaixo:
+        </p>
+
+        <!-- Deep-dive 1: Skills -->
+        <details class="deep-dive" id="deepdive-skill">
+          <summary>
+            <span><strong>1. Skill:</strong> como é configurada e o que faz o agente abri-la?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Ver por dentro</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Na prática, uma <strong>Skill</strong> é apenas uma pastinha com um arquivo de texto chamado <span class="inline-code">SKILL.md</span> (e, se quiser, modelos ou scripts auxiliares junto). O segredo está em dividir o arquivo em duas partes: um <strong>cartão de visita curto no topo</strong> e o <strong>manual detalhado embaixo</strong>.
+            </p>
+            <div class="config-example-box">
+              <div class="config-file-header">
+                <span>📁 skills/organizar-gastos/SKILL.md</span>
+                <span class="config-file-hint">Exemplo real simplificado</span>
+              </div>
+              <pre class="config-snippet">---
+<span class="code-key">name:</span> organizar-gastos        <span class="code-comment">← Nome curto no índice do agente</span>
+<span class="code-key">description:</span> Use quando o usuário pedir para lançar recibos
+  ou organizar gastos mensais no Google Sheets.  <span class="code-comment">← O "GATILHO" de ativação!</span>
+---
+
+# Passo a passo (só carregado quando a Skill é ativada)
+1. Liste os arquivos da pasta indicada no Google Drive.
+2. Extraia data, loja, valor em R$ e categoria.
+3. Mostre uma prévia em tabela e aguarde o "ok" do usuário.
+4. Só depois escreva na planilha oficial e crie a aba Resumo.</pre>
+            </div>
+            <p class="trigger-flow-label">O que acontece de fato para ela ser usada</p>
+            <div class="trigger-flow">
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 1</span>
+                <strong>Índice leve na mesa</strong>
+                <span>Ao abrir o chat, o agente só enxerga <span class="inline-code">name</span> + <span class="inline-code">description</span> de cada Skill (economiza memória).</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 2</span>
+                <strong>Seu pedido bate no gatilho</strong>
+                <span>Você escreve <em>"lance os recibos deste mês"</em> — o modelo percebe que a descrição combina.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 3</span>
+                <strong>Leitura sob demanda</strong>
+                <span>O agente chama a ferramenta interna de consulta e carrega o corpo inteiro do <span class="inline-code">SKILL.md</span> naquele instante.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 4</span>
+                <strong>Execução no seu padrão</strong>
+                <span>Ele segue as 4 regras exatamente na ordem combinada — toda semana, sem você precisar repetir tudo.</span>
+              </div>
+            </div>
+            <div class="deep-dive-tip">
+              <strong>Atalho sem código:</strong> no Antigravity você nem precisa criar essa pasta na mão. Depois de fazer uma tarefa que ficou ótima, basta dizer: <em>"Salve esse passo a passo que usamos hoje como uma Skill reutilizável"</em>.
+            </div>
+          </div>
+        </details>
+
+        <!-- Deep-dive 2: Plugins / MCP -->
+        <details class="deep-dive" id="deepdive-mcp">
+          <summary>
+            <span><strong>2. Plugins &amp; MCP:</strong> como uma conexão externa é configurada e chamada?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Ver por dentro</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Para o usuário do dia a dia, conectar um plugin oficial no Antigravity (como Google Drive, Sheets ou GitHub) é só <strong>clicar em Conectar e autorizar sua conta</strong>. Por baixo dos panos, o Harness registra um conector <strong>MCP</strong> parecido com este bloquinho de configuração:
+            </p>
+            <div class="config-example-box">
+              <div class="config-file-header">
+                <span>⚙️ mcp.json (bastidores de uma conexão MCP)</span>
+                <span class="config-file-hint">Exemplo simplificado</span>
+              </div>
+              <pre class="config-snippet">{
+  <span class="code-key">"google-sheets"</span>: {               <span class="code-comment">← Apelido da integração</span>
+    <span class="code-key">"servidor"</span>: "conector-sheets", <span class="code-comment">← Programa que sabe falar com o Google Sheets</span>
+    <span class="code-key">"permissoes"</span>: ["ler", "escrever"] <span class="code-comment">← O que esse plugue está autorizado a fazer</span>
+  }
+}</pre>
+            </div>
+            <p class="trigger-flow-label">O que acontece quando você pede uma ação</p>
+            <div class="trigger-flow">
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 1</span>
+                <strong>Cardápio de ferramentas</strong>
+                <span>O servidor MCP informa ao agente quais ações existem (ex: <em>ler_aba</em>, <em>adicionar_linha</em>).</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 2</span>
+                <strong>Modelo preenche o pedido</strong>
+                <span>Em vez de texto solto, o cérebro gera uma chamada estruturada: <em>"adicionar_linha(valor: 84,50)"</em>.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 3</span>
+                <strong>Conector executa fora</strong>
+                <span>O MCP recebe a chamada, grava na planilha real no Google e verifica se deu tudo certo.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 4</span>
+                <strong>Resposta volta ao agente</strong>
+                <span>O MCP devolve <em>"Linha 14 salva com sucesso"</em> e o agente prossegue para o próximo passo.</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Deep-dive 3: Harness & Project Rules -->
+        <details class="deep-dive" id="deepdive-harness">
+          <summary>
+            <span><strong>3. Harness &amp; Regras do Projeto:</strong> o que comanda o loop e pede sua aprovação?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Ver por dentro</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Um <strong>Harness</strong> (como o Antigravity) não é só uma caixa de chat: ele combina um <strong>arquivo de regras fixas do projeto</strong> (muitas vezes chamado <span class="inline-code">AGENTS.md</span> ou instruções do projeto) com um motor de loop e controles de permissão humana.
+            </p>
+            <div class="config-example-box">
+              <div class="config-file-header">
+                <span>📄 AGENTS.md (regras permanentes daquele projeto)</span>
+                <span class="config-file-hint">Lido sempre que uma conversa abre nesse projeto</span>
+              </div>
+              <pre class="config-snippet"><span class="code-key"># Regras deste projeto</span>
+- Responda sempre em português claro, sem jargão desnecessário. <span class="code-comment">← Estilo fixo</span>
+- Antes de publicar mudanças no site, rode os testes visuais.   <span class="code-comment">← Checklist automático</span>
+- Nunca apague arquivos nem altere a planilha oficial sem        <span class="code-comment">← Trava de segurança</span>
+  mostrar um resumo e pedir minha confirmação primeiro.</pre>
+            </div>
+            <p class="trigger-flow-label">Como o Harness coordena o trabalho</p>
+            <div class="trigger-flow">
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 1</span>
+                <strong>Prepara o contexto</strong>
+                <span>Junta suas regras (<span class="inline-code">AGENTS.md</span>), a pasta do projeto e o índice de Skills antes de chamar o modelo.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 2</span>
+                <strong>Orquestra o loop</strong>
+                <span>Cada vez que o modelo pede "leia tal arquivo" ou "edite tal linha", o Harness executa e devolve o resultado.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 3</span>
+                <strong>Pausa para aprovação</strong>
+                <span>Em ações sensíveis (ex: enviar dados externos ou publicar), o Harness freia e pede seu clique de aprovação.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 4</span>
+                <strong>Encerra com clareza</strong>
+                <span>Quando o modelo sinaliza que terminou, o Harness entrega o resumo final e os links/arquivos prontos.</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Deep-dive 4: Sandbox / Cápsula -->
+        <details class="deep-dive" id="deepdive-sandbox">
+          <summary>
+            <span><strong>4. Sandbox / Cápsula:</strong> como o agente testa tudo sem mexer no seu computador?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Ver por dentro</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Em plataformas modernas como o Antigravity, você <strong>não precisa configurar nada</strong> para ter uma Sandbox — cada projeto recebe automaticamente um mini computador virtual isolado na nuvem, já equipado com ferramentas prontas (Python, Node.js, Git e navegador de testes).
+            </p>
+            <div class="config-example-box">
+              <div class="config-file-header">
+                <span>📦 O que existe dentro da cápsula (e o que fica fora)</span>
+                <span class="config-file-hint">Isolamento automático</span>
+              </div>
+              <pre class="config-snippet"><span class="code-key">DENTRO DA CÁPSULA:</span>  pasta do seu projeto + ferramentas de teste + servidor local
+<span class="code-key">FORA DO ALCANCE:</span>    suas fotos pessoais, arquivos do seu PC e senhas do navegador <span class="code-comment">← 100% isolado!</span></pre>
+            </div>
+            <p class="trigger-flow-label">O ciclo de vida durante uma tarefa</p>
+            <div class="trigger-flow">
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 1</span>
+                <strong>Sala limpa criada</strong>
+                <span>O sistema sobe uma cápsula dedicada exclusivamente à sua conversa, sem acesso à sua máquina pessoal.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 2</span>
+                <strong>Construção livre</strong>
+                <span>O agente cria arquivos, instala dependências e gera o site ou automação dentro desse espaço fechado.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 3</span>
+                <strong>Teste de verdade</strong>
+                <span>Ele executa o projeto ali dentro, confere se houve algum erro e já corrige antes de te entregar.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 4</span>
+                <strong>Risco zero</strong>
+                <span>Mesmo que um experimento quebre tudo lá dentro, basta descartar a cápsula — seu PC segue intacto.</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Deep-dive 5: Sidecar -->
+        <details class="deep-dive" id="deepdive-sidecar">
+          <summary>
+            <span><strong>5. Sidecar:</strong> como o agente acessa seu GitHub ou Drive sem ver sua senha?</span>
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span class="deep-dive-badge">Ver por dentro</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Você também não configura o Sidecar manualmente — ele nasce junto com a segurança da plataforma quando você conecta uma conta (Google Drive, Sheets ou GitHub). Ele funciona como o truque do <strong>"envelope selado na portaria"</strong>:
+            </p>
+            <div class="config-example-box">
+              <div class="config-file-header">
+                <span>🔐 Fluxo do Sidecar (Guarda-Chaves de Rede)</span>
+                <span class="config-file-hint">Por que sua senha real nunca vaza</span>
+              </div>
+              <pre class="config-snippet">[Dentro da Sandbox] envia pedido para github.com usando: <span class="code-key">CRACHA_TEMPORARIO_FALSO</span>
+        ↓  (passa pelo Sidecar na saída da rede)
+[Sidecar Seguro]    confere: "Destino é github.com oficial? SIM!"
+                    troca pelo seu token real e envia ➔ <span class="code-comment">GitHub aceita! ✓</span>
+                    (Se algum código tentar mandar para site suspeito ➔ <span class="code-comment">BLOQUEADO! ✕</span>)</pre>
+            </div>
+            <p class="trigger-flow-label">O que acontece a cada acesso autorizado</p>
+            <div class="trigger-flow">
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 1</span>
+                <strong>Autorização única</strong>
+                <span>Você conecta sua conta na tela de Plugins; a chave real fica no cofre do Sidecar, fora da cápsula.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 2</span>
+                <strong>Crachá substituto</strong>
+                <span>A cápsula só enxerga um identificador temporário sem valor fora dali — nunca a sua senha verdadeira.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 3</span>
+                <strong>Troca só na saída</strong>
+                <span>Quando o pedido vai para o serviço oficial (ex: Google Drive), o Sidecar assina a requisição na passagem.</span>
+              </div>
+              <div class="trigger-step">
+                <span class="trigger-step-num">PASSO 4</span>
+                <strong>Blindagem real</strong>
+                <span>Se um código tentar imprimir senhas na tela ou enviar dados para outro endereço, nada verdadeiro escapa.</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
         <div class="bridge-note">
-          <strong>Agora você já sabe ler a arquitetura inteira.</strong> Chegou a hora do Degrau 4: juntar modelo, harness, skills e plugins dentro do <strong>Google Antigravity</strong> para criar suas próprias automações e sistemas.
+          <strong>Agora você já sabe ler a arquitetura inteira — inclusive por baixo do capô.</strong> Chegou a hora do Degrau 4: colocar tudo isso para trabalhar junto dentro do <strong>Google Antigravity</strong>.
         </div>
 
         <!-- Curated Resources Section 4 -->
@@ -729,6 +995,134 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             </ol>
           </div>
         </article>
+
+        <!-- Unblocking Tricks Cheat-Sheet (Section 05) -->
+        <h3 id="sec-truques">Travou? 8 truques práticos para se desbloquear (no Chat ou no Antigravity)</h3>
+        <p>
+          Mesmo quem usa IA todos os dias trava no meio de uma tarefa. Em vez de insistir no mesmo pedido, use estes <strong>8 atalhos mentais</strong> — todos funcionam tanto no Gemini quanto no Antigravity:
+        </p>
+
+        <div class="tricks-grid">
+          <!-- Trick 1: Screenshot -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">Erro ou tela confusa</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p1">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">1. Mande um print para investigar</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Não tente descrever um erro ou botão em palavras. Modelos modernos enxergam imagens: tire um print (ou foto) da tela e cole direto na conversa.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p1">Mandei o print da minha tela. O que exatamente está errado ou faltando aqui, e qual é o próximo clique que devo fazer?</pre>
+          </article>
+
+          <!-- Trick 2: Open Questions -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">Não sei por onde começar</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p2">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">2. Faça perguntas abertas</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Quando você sabe o destino mas não conhece o caminho, peça à IA para revelar seus pontos cegos antes de sair executando.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p2">Quero resolver [meu objetivo]. Antes de começarmos, o que eu deveria estar considerando que provavelmente ainda não pensei?</pre>
+          </article>
+
+          <!-- Trick 3: Explicit Help / Root Cause -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">Algo parou de funcionar</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p3">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">3. Peça ajuda explícita na causa raiz</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Dizer só "conserte" faz o agente tentar remendos rápidos. Pedir explicitamente para <em>investigar primeiro</em> gera soluções muito melhores.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p3">Preciso de ajuda para investigar este problema. Antes de alterar qualquer arquivo, descubra a causa raiz, me explique em português simples e proponha como resolver.</pre>
+          </article>
+
+          <!-- Trick 4: Reset Context -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">IA repetindo o mesmo erro</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p4">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">4. Limpe o "quadro branco"</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Conversas muito longas ficam poluídas de tentativas falhas. Peça um resumo limpo do ponto atual e abra um chat novo colando só esse resumo.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p4">Resuma em 5 tópicos objetivos o que já funciona, o que ainda falta e o problema atual, para eu continuar numa conversa limpa.</pre>
+          </article>
+
+          <!-- Trick 5: Ask for 3 Options -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">Travado numa decisão</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p5">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">5. Peça 3 caminhos + recomendação</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Em vez de aceitar a primeira ideia da IA ou travar sem saber o que escolher, force uma comparação rápida entre alternativas.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p5">Me dê 3 opções (uma bem simples, uma equilibrada e uma mais completa), com prós e contras curtos de cada uma, e diga qual você recomenda para um iniciante.</pre>
+          </article>
+
+          <!-- Trick 6: Reverse Prompt -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">Não sei escrever o pedido</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p6">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">6. Use o "Prompt Reverso"</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Falta vocabulário para pedir do jeito certo? Peça para a própria IA redigir o pedido ideal para você revisar e aprovar.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p6">Meu objetivo final é [descreva do seu jeito]. Escreva o melhor prompt possível para eu te enviar, deixando espaços entre colchetes para eu preencher o que faltar.</pre>
+          </article>
+
+          <!-- Trick 7: Plain Portuguese -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">Resposta técnica demais</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p7">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">7. Corte o jargão na hora</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Não finja que entendeu quando a resposta vier cheia de siglas. Você pode interromper e calibrar o nível de explicação a qualquer segundo.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p7">Ficou técnico demais. Reescreva sem siglas de programação, usando uma analogia simples e me dizendo exatamente o que eu preciso fazer agora.</pre>
+          </article>
+
+          <!-- Trick 8: Show an Example -->
+          <article class="trick-card">
+            <div>
+              <div class="trick-top">
+                <span class="trick-symptom">Resultado fora do estilo</span>
+                <button type="button" class="copy-btn trick-copy-mini" data-copy-target="trick-p8">Copiar</button>
+              </div>
+              <h4 style="margin-top:8px;">8. Mostre 1 exemplo ("Quero assim")</h4>
+              <p class="trick-why" style="margin-top:4px;">
+                Um único print de um site bonito, um texto que você admira ou uma linha de tabela pronta ensina mais à IA do que três parágrafos de regras.
+              </p>
+            </div>
+            <pre class="trick-quote" id="trick-p8">Quero que o resultado siga o mesmo estilo e nível de simplicidade deste exemplo que colei abaixo, mas adaptado para o meu assunto:</pre>
+          </article>
+        </div>
 
         <div class="bridge-note">
           <strong>Atenção ao passo mais subestimado:</strong> o Antigravity torna incrivelmente fácil criar a versão 1 de um sistema em poucos minutos. Mas o que garante que esse sistema continue funcionando daqui a 3 meses, que os seus dados não sumam e que uma mudança nova não quebre o que já estava ótimo? É isso que vamos desmistificar na próxima seção.

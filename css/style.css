@@ -2225,6 +2225,195 @@ input {
   margin: 0;
 }
 
+/* Section 04 Deep-Dive: Annotated Real Config & Trigger Flow */
+.config-example-box {
+  margin: 14px 0 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-code);
+  overflow: hidden;
+}
+
+.config-file-header {
+  padding: 8px 12px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.config-file-hint {
+  font-weight: 500;
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.config-snippet {
+  margin: 0;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 12.2px;
+  line-height: 1.62;
+  color: var(--ink-primary);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-comment {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.code-key {
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+.trigger-flow-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent-blue);
+  margin: 14px 0 10px;
+}
+
+.trigger-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.trigger-step {
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trigger-step-num {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+
+.trigger-step strong {
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--ink-primary);
+}
+
+.trigger-step span {
+  font-size: 12.2px;
+  line-height: 1.45;
+  color: var(--ink-secondary);
+}
+
+.deep-dive-tip {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-green-soft);
+  font-size: 13.5px;
+  color: var(--ink-primary);
+}
+
+/* Section 03 Shortcut Link Note */
+.shortcut-note {
+  margin: 18px 0 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-strong);
+  font-size: 14px;
+  color: var(--ink-secondary);
+}
+
+/* Section 05: Unblocking Tricks 2-Column Cheat-Sheet Grid */
+.tricks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 20px 0 30px;
+}
+
+.trick-card {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.trick-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.trick-symptom {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: var(--accent-amber-soft);
+  color: var(--accent-amber);
+}
+
+.trick-copy-mini {
+  padding: 4px 9px;
+  font-size: 11.5px;
+}
+
+.trick-card h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.32;
+  color: var(--ink-primary);
+}
+
+.trick-why {
+  margin: 0;
+  font-size: 13.8px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
+.trick-quote {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.52;
+  color: var(--ink-primary);
+  white-space: pre-wrap;
+}
+
 /* Footer */
 .site-footer {
   margin-top: 64px;
@@ -2337,6 +2526,8 @@ input {
   .compass-goals,
   .agent-xray-grid,
   .eco-grid,
+  .tricks-grid,
+  .trigger-flow,
   .resources-grid,
   .glossary-grid {
     grid-template-columns: 1fr;
