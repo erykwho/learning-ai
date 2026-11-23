@@ -911,41 +911,41 @@ window.GUIDE_DATA = {
     }
   ],
 
-  /* Antigravity Visual Tour Carousel (Section 05 — Real Anonymized UI + Interactive Hotspots) */
+  /* Antigravity Visual Tour Carousel (Section 05 — Real Anonymized High-Clarity UI + Interactive Hotspots) */
   antigravityTour: [
     {
       step: 1,
       shortTab: "1. Início & /",
       frameTag: "Print real · Pinos interativos",
-      title: "Passo 1 — Tela inicial, barra lateral e comandos com barra (/)",
+      title: "Passo 1 — Tela principal, barra lateral e comandos com barra (/)",
       img: "assets/tour/01-inicio-comandos.png",
-      alt: "Tela inicial real do Google Antigravity mostrando a barra lateral com New Conversation, Customizations e Projects (1), o menu de comandos com barra aberto com /plan, /grill-me, /gdrive e /goal (2), e a caixa de mensagem com seletor de projeto e modelo Gemini 4 Neon (3).",
+      alt: "Tela real do Google Antigravity mostrando a barra lateral com New Conversation, Customizations e Projects (1), o menu de comandos com barra aberto com /plan, /grill-me, /gdrive e /generative_ui (2), e a caixa de mensagem com seletor de modelo Gemini 4 Neon e permissões (3).",
       intro:
-        "Esta é a interface real do Google Antigravity: à esquerda ficam seus Projetos e o menu Customizations; no centro você digita seu objetivo — ou digita a barra / para abrir atalhos guiados.",
+        "Esta é a interface real do Google Antigravity: à esquerda ficam seus Projetos e o menu Customizations; no centro você acompanha o agente e digita a barra / para abrir modos guiados.",
       pins: [
         {
           num: "1",
-          x: 11.4,
-          y: 17.5,
-          box: { x: 0.3, y: 3.3, w: 10.3, h: 33.2 },
+          x: 16.2,
+          y: 26.0,
+          box: { x: 0.4, y: 4.5, w: 15.2, h: 49.4 },
           label: "Barra lateral: Projects e Customizations",
           text: "Aqui você inicia uma nova conversa, abre Customizations (para conectar plugins) e organiza seus assuntos em Projetos separados."
         },
         {
           num: "2",
-          x: 37.3,
-          y: 75.5,
-          box: { x: 37.7, y: 75.3, w: 33.5, h: 11.7 },
+          x: 32.2,
+          y: 72.5,
+          box: { x: 32.6, y: 72.5, w: 50.0, h: 13.4 },
           label: "Menu de comandos com barra (/)",
           text: "Digite \"/\" para escolher modos prontos como /plan (planeja antes de agir), /grill-me (faz perguntas simples) ou skills conectadas como /gdrive."
         },
         {
           num: "3",
-          x: 71.9,
-          y: 92.2,
-          box: { x: 37.7, y: 87.4, w: 33.5, h: 10.4 },
-          label: "Projeto ativo, Modelo e Permissões",
-          text: "Acima da caixa você vê em qual Projeto está (ex.: meu-site); embaixo escolhe o motor (ex.: Gemini 4 Neon) e o modo de aprovação."
+          x: 83.2,
+          y: 92.0,
+          box: { x: 32.6, y: 86.6, w: 50.0, h: 10.8 },
+          label: "Caixa de prompt, Modelo e Permissões",
+          text: "Escreva em português normal, anexe arquivos/prints pelo botão \"+\", escolha o modelo (ex.: Gemini 4 Neon) e ajuste o nível de aprovação à direita."
         }
       ]
     },
@@ -961,25 +961,25 @@ window.GUIDE_DATA = {
       pins: [
         {
           num: "1",
-          x: 11.4,
-          y: 7.5,
-          box: { x: 0.3, y: 5.8, w: 10.3, h: 3.4 },
+          x: 16.2,
+          y: 9.0,
+          box: { x: 0.4, y: 8.9, w: 15.4, h: 4.8 },
           label: "Menu Customizations (Marketplace / Installed)",
           text: "Na barra lateral, clique em Customizations. No topo da tela você alterna entre Marketplace (descobrir novos plugins) e Installed (gerenciar os conectados)."
         },
         {
           num: "2",
-          x: 72.2,
-          y: 20.5,
-          box: { x: 36.3, y: 20.1, w: 35.6, h: 19.3 },
+          x: 84.6,
+          y: 31.0,
+          box: { x: 31.3, y: 30.7, w: 52.7, h: 28.8 },
           label: "Plugins do Google Workspace (Sheets & Drive)",
           text: "Clique em \"+\" para conectar Google Docs, Slides, Calendar ou Gmail — e em \"⋮\" nos já conectados (como Google Sheets e Google Drive) para configurar ou desconectar."
         },
         {
           num: "3",
-          x: 55.4,
-          y: 49.6,
-          box: { x: 36.3, y: 46.1, w: 18.2, h: 7.2 },
+          x: 58.2,
+          y: 74.9,
+          box: { x: 31.3, y: 69.9, w: 26.2, h: 10.0 },
           label: "Plugin do GitHub (More Plugins)",
           text: "Autorize o GitHub aqui para permitir que o agente clone repositórios, crie branches e publique atualizações — sempre restrito aos repositórios que você vincular ao Projeto. Em Installed você também gerencia suas Regras e Skills."
         }
@@ -997,25 +997,25 @@ window.GUIDE_DATA = {
       pins: [
         {
           num: "1",
-          x: 11.3,
-          y: 32.5,
-          box: { x: 0.3, y: 15.8, w: 10.2, h: 20.0 },
+          x: 15.8,
+          y: 49.8,
+          box: { x: 0.4, y: 23.8, w: 15.0, h: 30.1 },
           label: "Projetos isolados na barra lateral",
           text: "Cada projeto (ex.: meu-site, financas-pessoais, estudos-pdf) funciona como uma sala fechada com suas próprias conversas e permissões."
         },
         {
           num: "2",
-          x: 18.4,
-          y: 22.8,
-          box: { x: 7.9, y: 18.2, w: 9.7, h: 10.5 },
+          x: 27.3,
+          y: 34.2,
+          box: { x: 12.1, y: 27.9, w: 14.6, h: 15.2 },
           label: "Menu ⋮ → Project Settings",
           text: "Passe o mouse sobre o nome do projeto, clique nos três pontinhos (⋮) e escolha \"Project Settings\" para gerenciar os recursos autorizados."
         },
         {
           num: "3",
-          x: 26.0,
-          y: 2.6,
-          box: { x: 10.9, y: 0.4, w: 14.3, h: 3.1 },
+          x: 34.4,
+          y: 3.0,
+          box: { x: 16.4, y: 0.4, w: 17.3, h: 4.5 },
           label: "Projeto e conversa ativos",
           text: "O caminho no topo confirma exatamente em qual Projeto (meu-site) e conversa o agente está trabalhando agora."
         }
@@ -1033,25 +1033,25 @@ window.GUIDE_DATA = {
       pins: [
         {
           num: "1",
-          x: 26.8,
-          y: 26.8,
-          box: { x: 27.7, y: 22.3, w: 8.6, h: 10.8 },
+          x: 16.4,
+          y: 36.8,
+          box: { x: 17.2, y: 29.4, w: 12.3, h: 15.2 },
           label: "Configuração separada por Projeto",
           text: "Na coluna esquerda do modal Settings, cada projeto (meu-site, financas-pessoais, estudos-pdf) guarda sua própria lista independente de recursos."
         },
         {
           num: "2",
-          x: 54.0,
-          y: 18.6,
-          box: { x: 40.5, y: 19.8, w: 26.8, h: 3.8 },
+          x: 55.7,
+          y: 24.9,
+          box: { x: 35.5, y: 25.3, w: 40.8, h: 5.6 },
           label: "Recurso anexado (ex.: repositório GitHub)",
           text: "Aqui o repositório seu-usuario/meu-site foi liberado para este projeto — seus outros repositórios privados do GitHub seguem fora do alcance do agente."
         },
         {
           num: "3",
-          x: 68.2,
-          y: 25.8,
-          box: { x: 40.5, y: 23.8, w: 26.8, h: 3.5 },
+          x: 77.3,
+          y: 33.8,
+          box: { x: 35.5, y: 31.2, w: 40.8, h: 5.2 },
           label: "Botão + Add Resource (GitHub, Drive/Sheets, arquivos)",
           text: "Clique aqui para vincular outro repositório do GitHub, selecionar planilhas/pastas do Google Drive e Sheets ou subir arquivos de referência do seu computador."
         }
@@ -1059,37 +1059,37 @@ window.GUIDE_DATA = {
     },
     {
       step: 5,
-      shortTab: "5. Plano & Aprovação",
+      shortTab: "5. Revisão & Entrega",
       frameTag: "Print real · Pinos interativos",
-      title: "Passo 5 — Revisar o Implementation Plan e acompanhar a execução",
-      img: "assets/tour/05-plano-execucao.png",
-      alt: "Tela real de conversa no Google Antigravity mostrando o cartão do artefato Implementation Plan gerado pelo agente (1), a confirmação Proceeded with Implementation Plan após revisão humana (2) e os ícones de abertura do Side Panel e Overview no canto superior direito (3).",
+      title: "Passo 5 — Conferir o resultado, revisar mudanças e abrir o painel lateral",
+      img: "assets/tour/05-resultado-revisao.png",
+      alt: "Tela real de entrega concluída no Google Antigravity destacando o resumo estruturado com link publicado (1), a barra de arquivos alterados com o botão Review (2) e os ícones de Overview e Side Panel no canto superior direito (3).",
       intro:
-        "Quando você começa com /plan, o agente primeiro cria um plano organizado (Implementation Plan) e só começa a mexer nos arquivos depois do seu clique de aprovação.",
+        "Ao finalizar uma tarefa, o agente entrega um resumo claro em português com os testes feitos, mostra quantos arquivos mudaram para você revisar e deixa a conversa aberta para novos ajustes.",
       pins: [
         {
           num: "1",
-          x: 72.9,
-          y: 15.8,
-          box: { x: 38.5, y: 11.5, w: 33.7, h: 8.8 },
-          label: "Artefato Implementation Plan",
-          text: "Clique neste cartão para abrir o plano completo no painel lateral, ler cada etapa em português e comentar se quiser mudar alguma decisão."
+          x: 83.4,
+          y: 18.6,
+          box: { x: 32.8, y: 13.4, w: 50.0, h: 55.0 },
+          label: "Resumo da entrega e link publicado",
+          text: "Você lê em linguagem simples o que foi criado ou alterado, vê a confirmação dos testes na Sandbox e já recebe o link pronto para abrir ou compartilhar."
         },
         {
           num: "2",
-          x: 37.5,
-          y: 27.8,
-          box: { x: 38.5, y: 25.7, w: 33.7, h: 4.1 },
-          label: "Aprovação registrada (Proceeded with...)",
-          text: "O agente só sai do planejamento para a execução após você clicar em Proceed — mantendo você sempre no comando antes de alterar arquivos ou planilhas."
+          x: 83.4,
+          y: 73.2,
+          box: { x: 32.8, y: 69.9, w: 50.0, h: 6.7 },
+          label: "Arquivos alterados + botão Review",
+          text: "Clique em \"Review\" para ver lado a lado tudo o que foi adicionado (verde) ou removido (vermelho) antes de aprovar ou pedir ajustes."
         },
         {
           num: "3",
-          x: 94.2,
-          y: 5.5,
-          box: { x: 91.0, y: 0.4, w: 6.4, h: 3.3 },
-          label: "Overview & Side Panel (Arquivos e Prévias)",
-          text: "Use os ícones no canto superior direito para abrir o painel lateral com seus Artefatos, arquivos modificados, links salvos e prévias ao vivo."
+          x: 92.0,
+          y: 6.3,
+          box: { x: 87.3, y: 0.4, w: 9.4, h: 4.5 },
+          label: "Overview & Side Panel (Artefatos e Prévias)",
+          text: "Use os ícones no canto superior direito para abrir o painel lateral com seus Artefatos, planos, arquivos, links salvos e prévias interativas."
         }
       ]
     }
