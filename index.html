@@ -920,7 +920,7 @@
           </summary>
           <div class="deep-dive-body">
             <p>
-              Em plataformas modernas como o Antigravity, você <strong>não precisa configurar nada</strong> para ter uma Sandbox — cada projeto recebe automaticamente um mini computador virtual isolado na nuvem, já equipado com ferramentas prontas (Python, Node.js, Git e navegador de testes).
+              No Antigravity você pode escolher rodar <strong>100% na nuvem gerenciada</strong> (via <em>Remote Agents</em>, onde cada conversa ganha um computador virtual isolado do Google, sem salvar nada no seu PC) ou no <strong>modo local</strong> (com uma <em>Terminal Sandbox</em> protegendo os arquivos fora do projeto). Nos dois casos, o agente testa código com segurança e sem risco ao seu computador pessoal.
             </p>
             <div class="config-example-box">
               <div class="config-file-header">
@@ -1141,9 +1141,44 @@
           </article>
         </div>
 
+        <h3 id="sec-antigravity-nuvem">Onde ficam seus arquivos? Você escolhe: Nuvem Gerenciada ou Computador Local</h3>
+        <p>
+          Uma dúvida muito comum ao começar: <em>"os arquivos dos meus projetos vão ficar salvos no meu computador?"</em> No Google Antigravity, <strong>isso é configurável por projeto</strong> — você pode trabalhar <strong>100% na nuvem gerenciada pelo Antigravity</strong> (sem salvar nada na sua máquina) ou escolher pastas locais no seu computador:
+        </p>
+
+        <div class="gemini-hub-grid">
+          <article class="gemini-hub-card">
+            <div class="gemini-hub-top">
+              <span class="gemini-hub-kicker">01 · Modo Nuvem</span>
+              <span class="gemini-hub-tier is-pro">Pro / Ultra · Sem instalar</span>
+            </div>
+            <h4>Nuvem Gerenciada (Remote Agents) — nada salvo no seu PC</h4>
+            <p>
+              Você acessa direto pelo navegador em <a href="https://antigravity.google.com/" target="_blank" rel="noopener noreferrer">antigravity.google.com</a> (no PC ou até no celular) — ou cria um <strong>New Remote Project</strong> no app. Toda a execução roda numa <strong>cápsula isolada gerenciada pelo Google</strong>, conectada apenas aos seus <strong>Resources</strong> na nuvem (repositórios do <strong>GitHub</strong>, arquivos do <strong>Google Drive</strong> ou arquivos enviados por upload ao projeto). O agente continua trabalhando mesmo se você fechar a aba ou suspender o notebook!
+            </p>
+            <div class="gemini-hub-example">
+              <strong>Ideal se você não quer salvar nada no PC:</strong> suas conversas, arquivos enviados e Skills ficam guardados na nuvem gerenciada — e o código salvo no GitHub fica versionado fora da sua máquina. <em>(Disponível em contas pessoais nos planos Google AI Pro e Ultra, em liberação gradual.)</em>
+            </div>
+          </article>
+
+          <article class="gemini-hub-card">
+            <div class="gemini-hub-top">
+              <span class="gemini-hub-kicker">02 · Modo Local</span>
+              <span class="gemini-hub-tier is-free">Plano Grátis + Pagos</span>
+            </div>
+            <h4>No seu Computador (App Desktop, CLI ou Extensão de Editor)</h4>
+            <p>
+              Você instala o Antigravity na sua máquina e aponta o projeto para <strong>pastas locais</strong> (<em>Folders</em>), com permissões por projeto e uma <em>Terminal Sandbox</em> protegendo o restante do computador. Mesmo trabalhando localmente, dá para acompanhar ou dar instruções de longe pelo navegador ou celular usando <strong>Remote Control</strong> (enquanto seu PC estiver ligado).
+            </p>
+            <div class="gemini-hub-example">
+              <strong>Ideal para começar de graça</strong> no plano individual ou quando você já tem arquivos e pastas no seu computador — e depois pode sincronizar tudo no GitHub como backup na nuvem.
+            </div>
+          </article>
+        </div>
+
         <div class="gemini4-note-strip">
           <p>
-            <strong>Nuvem vs. Computador (sem complicar):</strong> usando o Antigravity na web (<span class="inline-code">antigravity.google.com</span>) ou em <em>Remote Projects</em>, você anexa itens em <strong>Resources</strong> (GitHub, Google Drive/Sheets e arquivos enviados). No <strong>Antigravity App</strong> instalado no computador, um Projeto também pode trabalhar direto em <strong>pastas locais</strong> (<em>Folders</em>).
+            <strong>Dá para misturar os dois na mesma conta:</strong> você pode ter projetos 100% na nuvem (<em>Remote Agents</em>) ao lado de projetos locais — e, ao conectar o <strong>GitHub</strong> (<a href="#sec-sistemas">Seção 06</a>), guarda e publica seus sistemas para sempre sem depender de nenhum computador ligado.
           </p>
           <p>
             <strong>Controle de autonomia por Projeto:</strong> cada projeto permite escolher o nível de aprovação — <strong>Request Review</strong> (pede seu clique antes de cada comando), <strong>Default</strong> (testa livremente na Sandbox e pede aprovação fora dela) ou <strong>Auto</strong> (só pausa em ações arriscadas ou irreversíveis).
@@ -1153,7 +1188,7 @@
           </p>
           <div class="gemini4-note-links">
             <a class="era-ref-chip" href="https://antigravity.google/docs/projects/" target="_blank" rel="noopener noreferrer">Documentação: Projects no Antigravity ↗</a>
-            <a class="era-ref-chip" href="https://antigravity.google/docs/remote-agents/" target="_blank" rel="noopener noreferrer">Remote Projects &amp; Resources (GitHub / Drive) ↗</a>
+            <a class="era-ref-chip" href="https://antigravity.google/docs/remote-agents/" target="_blank" rel="noopener noreferrer">Remote Agents &amp; Resources (Nuvem Gerenciada) ↗</a>
             <a class="era-ref-chip" href="https://antigravity.google/blog/antigravity-for-knowledge-work/" target="_blank" rel="noopener noreferrer">Layout Knowledge Work (para não-programadores) ↗</a>
           </div>
         </div>

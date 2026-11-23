@@ -640,7 +640,7 @@ window.GUIDE_DATA = {
     {
       term: "Instruções Globais (System Prompt)",
       category: "Fundamentos",
-      def: "Regras permanentes sobre seu estilo e preferências que valem em qualquer conversa — como Personal Intelligence / Instruções para o Gemini no chat ou ~/.gemini/AGENTS.md (e regras globais) no Antigravity."
+      def: "Regras permanentes sobre seu estilo e preferências que valem em qualquer conversa — como Personal Intelligence / Instruções para o Gemini no chat ou regras globais na conta / ~/.gemini/AGENTS.md no Antigravity."
     },
     {
       term: "RAG (Geração com Busca)",
@@ -1122,12 +1122,12 @@ window.GUIDE_DATA = {
         {
           title: "No Antigravity — jeito mais fácil (conversando ou com /learn)",
           body:
-            "Você não precisa caçar pastas escondidas: cole o <strong>prompt pronto abaixo</strong> em qualquer conversa para o Antigravity criar suas instruções pessoais (e pedir seu \"ok\" antes de salvar). Outra opção mágica: corrigiu o agente numa conversa? Digite <span class=\"inline-code\">/learn</span> — ele propõe transformar a lição em regra global ou do projeto."
+            "Você não precisa caçar pastas escondidas: cole o <strong>prompt pronto abaixo</strong> em qualquer conversa para o Antigravity criar suas instruções pessoais (e pedir seu \"ok\" antes de salvar). Outra opção prática: corrigiu o agente numa conversa? Digite <span class=\"inline-code\">/learn</span> — ele propõe transformar a lição em regra global ou do projeto."
         },
         {
-          title: "Onde conferir ou editar no Antigravity (e onde o arquivo mora)",
+          title: "Nuvem gerenciada vs. modo local (onde suas regras ficam)",
           body:
-            "Clique em <strong>Customizations → Installed</strong> na barra lateral esquerda e filtre por <strong>Rules</strong> (os itens com selo <strong>Global</strong> valem em todos os projetos; na extensão/IDE, abra o menu <span class=\"inline-code\">…</span> → <em>Customizations → Rules → + Global</em>). Por baixo dos panos, o Antigravity lê o arquivo de texto <span class=\"inline-code\">~/.gemini/AGENTS.md</span> (ou <span class=\"inline-code\">~/.gemini/GEMINI.md</span>), sempre ativo sem precisar de cabeçalho especial."
+            "Em <strong>Customizations → Installed</strong> (filtro <strong>Rules</strong>), você confere as regras ativas com selo <strong>Global</strong> (na extensão/IDE, menu <span class=\"inline-code\">…</span> → <em>Customizations → Rules → + Global</em>). No <strong>modo local</strong>, o Antigravity salva em <span class=\"inline-code\">~/.gemini/AGENTS.md</span> (ou <span class=\"inline-code\">~/.gemini/GEMINI.md</span>) na sua máquina; já nos <strong>projetos na nuvem (Remote Agents)</strong>, suas configurações pessoais e recursos vivem na nuvem gerenciada sem precisar salvar arquivos no seu PC."
         },
         {
           title: "No app Google Gemini (Degrau 1 — para chats do dia a dia)",
@@ -1135,8 +1135,8 @@ window.GUIDE_DATA = {
             "Abra <a href=\"https://gemini.google.com/\" target=\"_blank\" rel=\"noopener noreferrer\">gemini.google.com</a>, clique em <strong>Configurações → Personal Intelligence / Instruções para o Gemini</strong> (antigo <em>Informações salvas</em>) e adicione frases curtas sobre seu perfil e estilo de resposta — elas passam a valer automaticamente nos seus chats."
         }
       ],
-      fileLabel: "📄 ~/.gemini/AGENTS.md",
-      fileHint: "Instruções globais no Antigravity · Sempre ativo",
+      fileLabel: "📄 Instruções Globais (ex.: ~/.gemini/AGENTS.md)",
+      fileHint: "Vale em todos os projetos · Sempre ativo",
       templateHtml: `<span class="code-key"># Minhas Preferências Globais</span>
 - Responda sempre em português brasileiro claro e acolhedor.         <span class="code-comment">← Idioma e tom</span>
 - Ao introduzir um termo técnico, explique antes com uma analogia.   <span class="code-comment">← Sem jargão órfão</span>
@@ -1149,9 +1149,9 @@ window.GUIDE_DATA = {
 - Nunca apague arquivos nem publique mudanças sem minha confirmação.`,
       promptTitle: "Atalho sem código — peça ao Antigravity (Instruções Globais)",
       promptText:
-        "Crie (ou atualize) meu arquivo global pessoal ~/.gemini/AGENTS.md com estas 4 preferências: responder sempre em português brasileiro claro, explicar termos técnicos com analogias simples, propor um plano curto antes de grandes mudanças e pedir minha confirmação antes de apagar arquivos ou publicar. Me mostre o rascunho para aprovação antes de salvar.",
+        "Configure minhas instruções globais pessoais (em ~/.gemini/AGENTS.md no modo local ou nas regras da conta) com estas 4 preferências: responder sempre em português brasileiro claro, explicar termos técnicos com analogias simples, propor um plano curto antes de grandes mudanças e pedir minha confirmação antes de apagar arquivos ou publicar. Me mostre o rascunho para aprovação antes de salvar.",
       noteHtml:
-        "<strong>Bônus opcional (regras modulares):</strong> se um dia quiser várias regras globais separadas por tema, o Antigravity também lê arquivos em <span class=\"inline-code\">~/.gemini/config/rules/*.md</span> com ativação configurável (sempre ligada, sob decisão do modelo, por tipo de arquivo ou manual com <span class=\"inline-code\">@</span>). Para começar, um único <span class=\"inline-code\">~/.gemini/AGENTS.md</span> curto (5 a 15 linhas) já resolve muito!",
+        "<strong>Bônus opcional (regras modulares):</strong> no modo local, se um dia quiser várias regras globais separadas por tema, o Antigravity também lê arquivos em <span class=\"inline-code\">~/.gemini/config/rules/*.md</span> com ativação configurável (sempre ligada, sob decisão do modelo, por tipo de arquivo ou manual com <span class=\"inline-code\">@</span>). Para começar, 5 a 15 linhas objetivas já resolvem muito!",
       links: [
         { label: "Documentação: Rules no Google Antigravity ↗", url: "https://antigravity.google/docs/rules/" },
         { label: "Comando /learn (salvar lições em regras) ↗", url: "https://antigravity.google/docs/commands/learn/" },
@@ -1168,7 +1168,7 @@ window.GUIDE_DATA = {
       panelTitle: "Camada 2 — Como configurar o AGENTS.md do seu Projeto",
       analogy: "O quadro de regras na parede da sala",
       lead:
-        "Um arquivo de texto comum salvo na <strong>raiz da pasta do projeto</strong>. Toda vez que você abre uma conversa nova ali, o agente lê esse arquivo sozinho — e, ao salvar no GitHub (Seção 06), essas regras viajam junto com o código e funcionam em <strong>Antigravity, Codex, Cursor, Copilot</strong> e outros.",
+        "Um arquivo de texto comum salvo na <strong>raiz do projeto</strong>. Toda vez que você abre uma conversa nova ali, o agente lê esse arquivo sozinho — e, ao salvar no <strong>GitHub</strong> (Seção 06), essas regras vivem na nuvem junto com o projeto (sem precisar existir nada no seu PC) e funcionam em <strong>Antigravity, Codex, Cursor, Copilot</strong> e outros.",
       putHere: [
         "Objetivo do projeto e quem vai usar (público-alvo e idioma dos textos).",
         "Regras de visual ou conteúdo que nunca podem quebrar (ex.: legível no celular de 390px).",
@@ -1182,12 +1182,12 @@ window.GUIDE_DATA = {
         {
           title: "Jeito mais fácil — pedir ao Antigravity para redigir por você",
           body:
-            "Assim que alinhar a primeira versão de um projeto, cole o <strong>prompt pronto abaixo</strong>. O agente lê os arquivos da pasta e propõe um <span class=\"inline-code\">AGENTS.md</span> enxuto para você revisar e aprovar."
+            "Assim que alinhar a primeira versão de um projeto, cole o <strong>prompt pronto abaixo</strong>. O agente lê os arquivos do projeto e propõe um <span class=\"inline-code\">AGENTS.md</span> enxuto para você revisar e aprovar."
         },
         {
-          title: "Onde o arquivo fica salvo (e como é descoberto sozinho)",
+          title: "Onde fica salvo (na nuvem ou no seu PC)",
           body:
-            "Basta existir um arquivo chamado <span class=\"inline-code\">AGENTS.md</span> (ou <span class=\"inline-code\">GEMINI.md</span>) direto na pasta principal do projeto. Você não precisa anexar nem citar o arquivo nas próximas conversas — o Harness carrega o conteúdo automaticamente."
+            "Basta existir um arquivo chamado <span class=\"inline-code\">AGENTS.md</span> (ou <span class=\"inline-code\">GEMINI.md</span>) na raiz do projeto. No <strong>modo nuvem (Remote Agents)</strong>, ele fica salvo direto no seu repositório do GitHub (ou nos arquivos do projeto na nuvem); no <strong>modo local</strong>, na pasta principal do seu computador. Em ambos os casos o agente carrega sozinho!"
         },
         {
           title: "Evolua aos poucos com /learn",
@@ -1196,7 +1196,7 @@ window.GUIDE_DATA = {
         }
       ],
       fileLabel: "📄 AGENTS.md",
-      fileHint: "Na raiz do projeto · Lido em toda nova conversa",
+      fileHint: "Na raiz do projeto (GitHub / pasta) · Lido automaticamente",
       templateHtml: `<span class="code-key"># Regras deste projeto</span>
 - Objetivo: catálogo pessoal de livros e filmes para celular e PC.    <span class="code-comment">← Missão clara</span>
 - Idioma: interface e mensagens sempre em português brasileiro.       <span class="code-comment">← Padrão fixo</span>
@@ -1214,7 +1214,7 @@ window.GUIDE_DATA = {
       promptText:
         "Crie um arquivo AGENTS.md curto (entre 10 e 25 linhas) na raiz deste projeto resumindo o objetivo, o público-alvo, as regras visuais, o checklist de testes e as travas de segurança que combinamos hoje. Nunca inclua senhas e me mostre o rascunho antes de salvar.",
       noteHtml:
-        "<strong>Exemplo real vivo:</strong> este próprio guia tem um <span class=\"inline-code\">AGENTS.md</span> público na raiz do repositório guardando o foco em iniciantes, o tom em português claro e a revisão visual obrigatória — assim nada se perde nas próximas conversas.",
+        "<strong>Exemplo real vivo:</strong> este próprio guia tem um <span class=\"inline-code\">AGENTS.md</span> público na raiz do repositório no GitHub guardando o foco em iniciantes, o tom em português claro e a revisão visual obrigatória — assim nada se perde nas próximas conversas.",
       links: [
         { label: "Ver o AGENTS.md real deste guia no GitHub ↗", url: "https://github.com/erykwho/learning-ai/blob/master/AGENTS.md" },
         { label: "Padrão aberto agents.md (Oficial) ↗", url: "https://agents.md/" },
@@ -1245,12 +1245,12 @@ window.GUIDE_DATA = {
         {
           title: "Jeito mais fácil — transformar uma tarefa que deu certo em Skill",
           body:
-            "Faça uma tarefa uma vez junto com o Antigravity até ficar do jeito ideal. Depois diga: <em>\"Salve esse passo a passo que usamos hoje como uma Skill reutilizável\"</em> (ou digite <span class=\"inline-code\">/learn</span>). O agente cria a pasta e o <span class=\"inline-code\">SKILL.md</span> no formato certo e pede sua aprovação!"
+            "Faça uma tarefa uma vez junto com o Antigravity até ficar do jeito ideal. Depois diga: <em>\"Salve esse passo a passo que usamos hoje como uma Skill reutilizável\"</em> (ou digite <span class=\"inline-code\">/learn</span>). O agente cria e registra a Skill no formato certo (na nuvem da sua conta ou na pasta certa) e pede sua aprovação!"
         },
         {
-          title: "Escolher o alcance (Global, só do Projeto ou no app Gemini)",
+          title: "Onde fica salva (Nuvem da conta, Projeto no GitHub, Local ou App Gemini)",
           body:
-            "<strong>Global no Antigravity (vale em todos os projetos):</strong> salva em <span class=\"inline-code\">~/.gemini/config/skills/&lt;nome&gt;/SKILL.md</span> (visível em <strong>Customizations → Installed → Skills</strong>). <strong>Só neste projeto:</strong> salva em <span class=\"inline-code\">.agents/skills/&lt;nome&gt;/SKILL.md</span> (compartilhável no GitHub). <strong>No app Google Gemini:</strong> abra <strong>Personalizar → Skills → Criar</strong> (onde você também pode criar Skills manualmente ou migrar seus Gems)."
+            "<strong>Na nuvem gerenciada (Remote Agents):</strong> suas Skills pessoais ficam salvas direto na sua conta do Antigravity (sem ocupar nada no seu PC) e Skills do projeto ficam em <span class=\"inline-code\">.agents/skills/&lt;nome&gt;/SKILL.md</span> no GitHub. <strong>No modo local:</strong> ficam em <span class=\"inline-code\">~/.gemini/config/skills/&lt;nome&gt;/SKILL.md</span> (Global, visível em <strong>Customizations → Installed → Skills</strong>) ou <span class=\"inline-code\">.agents/skills/</span> (Projeto). <strong>No app Google Gemini:</strong> abra <strong>Personalizar → Skills → Criar</strong>."
         },
         {
           title: "Como acionar depois (automático ou chamando com barra /)",
@@ -1258,8 +1258,8 @@ window.GUIDE_DATA = {
             "Basta fazer seu pedido em português normal: o agente lê o campo <span class=\"inline-code\">description</span> e abre a Skill sozinho. Quer garantir que ela rode na hora? Digite <span class=\"inline-code\">/&lt;nome-da-skill&gt;</span> (ex.: <span class=\"inline-code\">/revisar-texto-claro</span>) direto na caixa de mensagem!"
         }
       ],
-      fileLabel: "📁 ~/.gemini/config/skills/revisar-texto-claro/SKILL.md",
-      fileHint: "Cabeçalho (gatilho) + receita sob demanda",
+      fileLabel: "📁 skills/revisar-texto-claro/SKILL.md",
+      fileHint: "Cabeçalho (gatilho) + receita sob demanda (nuvem ou local)",
       templateHtml: `---
 <span class="code-key">name:</span> revisar-texto-claro                         <span class="code-comment">← Vira o atalho /revisar-texto-claro</span>
 <span class="code-key">description:</span> Revisa textos e e-mails deixando a leitura clara e sem jargão.
@@ -1283,7 +1283,7 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
 4. Pergunte se o usuário quer também uma versão bem curta para WhatsApp.`,
       promptTitle: "Atalho sem código — peça ao Antigravity (sua 1ª Skill)",
       promptText:
-        "Crie uma Skill pessoal global chamada revisar-texto-claro em ~/.gemini/config/skills/revisar-texto-claro/SKILL.md. O gatilho (description) deve ativar quando eu pedir para revisar ou simplificar textos e e-mails para leigos. Inclua um passo a passo curto (cortar jargão, manter o sentido, resumir 3 melhorias e oferecer versão curta) e me mostre para aprovação antes de salvar.",
+        "Crie e salve uma Skill pessoal reutilizável chamada revisar-texto-claro na minha conta (ou como Skill global). O gatilho (description) deve ativar quando eu pedir para revisar ou simplificar textos e e-mails para leigos. Inclua um passo a passo curto (cortar jargão, manter o sentido, resumir 3 melhorias e oferecer versão curta) e me mostre para aprovação antes de salvar.",
       noteHtml:
         "<strong>Padrão aberto + bastidores:</strong> o formato <span class=\"inline-code\">SKILL.md</span> é aberto (funciona no Antigravity, Claude Code, Codex e VS Code). Quer ver o que acontece passo a passo quando o agente detecta o gatilho? <a href=\"#deepdive-skill\" data-open-details=\"deepdive-skill\">Abra o raio-x de Skills na Seção 04 ↑</a>.",
       links: [
