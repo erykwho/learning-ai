@@ -13,12 +13,24 @@
      ------------------------------------------------------------------------ */
   const themeToggleBtn = document.getElementById("theme-toggle");
   const themeLabel = document.getElementById("theme-label");
+  const themeIcon = document.getElementById("theme-icon");
   const root = document.documentElement;
+
+  const SUN_ICON_SVG =
+    '<circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />';
+  const MOON_ICON_SVG =
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />';
 
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
     if (themeLabel) {
       themeLabel.textContent = theme === "dark" ? "Claro" : "Escuro";
+    }
+    if (themeIcon) {
+      themeIcon.innerHTML = theme === "dark" ? SUN_ICON_SVG : MOON_ICON_SVG;
+    }
+    if (themeToggleBtn) {
+      themeToggleBtn.setAttribute("aria-pressed", String(theme === "dark"));
     }
     try {
       localStorage.setItem("ia-guia-theme", theme);
@@ -42,6 +54,40 @@
       const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       applyTheme(next);
     });
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  async function copyTextWithFeedback(text, btn) {
+    if (!btn || !text) return;
+    const original = btn.dataset.originalLabel || btn.textContent;
+    btn.dataset.originalLabel = original;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (_) {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      document.body.removeChild(area);
+    }
+    btn.textContent = "Copiado!";
+    btn.classList.add("is-copied");
+    clearTimeout(btn._copyTimer);
+    btn._copyTimer = setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove("is-copied");
+    }, 1800);
   }
 
   /* ------------------------------------------------------------------------
@@ -79,6 +125,13 @@
   if (tocOpenBtn) tocOpenBtn.addEventListener("click", () => toggleDrawer(true));
   if (tocCloseBtn) tocCloseBtn.addEventListener("click", () => toggleDrawer(false));
   if (tocBackdrop) tocBackdrop.addEventListener("click", () => toggleDrawer(false));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && tocSidebar && tocSidebar.classList.contains("is-open")) {
+      toggleDrawer(false);
+      if (tocOpenBtn) tocOpenBtn.focus();
+    }
+  });
 
   tocLinks.forEach((link) => {
     link.addEventListener("click", () => toggleDrawer(false));
@@ -124,6 +177,7 @@
      ------------------------------------------------------------------------ */
   const promptTabsEl = document.getElementById("prompt-sim-tabs");
   const promptTextEl = document.getElementById("sim-prompt-text");
+  const promptCopyBtn = document.getElementById("sim-copy-btn");
   const promptOutputEl = document.getElementById("sim-output-text");
   const promptMetricsEl = document.getElementById("sim-metrics");
   const promptTakeawayEl = document.getElementById("sim-takeaway");
@@ -158,6 +212,12 @@
         .map((m) => `<span class="metric-chip metric-${m.tone}">${m.text}</span>`)
         .join("");
     }
+  }
+
+  if (promptCopyBtn && promptTextEl) {
+    promptCopyBtn.addEventListener("click", () => {
+      copyTextWithFeedback(promptTextEl.textContent.trim(), promptCopyBtn);
+    });
   }
 
   if (promptTabsEl) {
@@ -259,9 +319,9 @@
             <text x="26" y="${l.y + 20}" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">${l.title}</text>
             <text x="26" y="${l.y + 36}" fill="var(--ink-secondary)" font-size="10.2" font-family="Plus Jakarta Sans, sans-serif">${l.sub}</text>
             <rect x="382" y="${l.y + 8}" width="54" height="17" rx="8.5"
-              fill="${isCurrent ? l.stroke : "var(--bg-surface)"}" opacity="${isCurrent ? 0.92 : 0.85}" />
+              fill="${isCurrent ? l.stroke : "var(--bg-surface)"}" opacity="${isCurrent ? 0.96 : 0.85}" />
             <text x="409" y="${l.y + 19.5}" text-anchor="middle"
-              fill="${isCurrent ? "#ffffff" : "var(--ink-muted)"}"
+              fill="${isCurrent ? "var(--ink-inverse)" : "var(--ink-muted)"}"
               font-size="8.2" font-weight="700" font-family="JetBrains Mono, monospace">${badgeText}</text>
           </g>
         `;
@@ -504,18 +564,23 @@
             stroke-width="${widthFor("sidecar")}" />
           <text x="270" y="210" fill="var(--accent-amber)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">BASTIDORES SEGUROS</text>
           <text x="270" y="230" fill="var(--ink-primary)" font-size="13.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Sidecar</text>
-          <text x="270" y="248" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">Guarda-chaves &amp; proxy</text>
-          <text x="270" y="262" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">de senhas invisível</text>
+          <text x="270" y="248" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">Guarda-chaves invisível</text>
+          <text x="270" y="262" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">que protege suas senhas</text>
         </g>
       </svg>
     `;
   }
 
-  function selectAgentPart(partKey) {
+  function selectAgentPart(partKey, restoreFocus) {
     const info = DATA.agentParts[partKey];
     if (!info) return;
     activeAgentPart = partKey;
     renderAgentSvg(partKey);
+
+    if (restoreFocus && agentSvgWrap) {
+      const activeNode = agentSvgWrap.querySelector(`.xray-node[data-part="${partKey}"]`);
+      if (activeNode) activeNode.focus();
+    }
 
     if (agentInspectorEl) {
       agentInspectorEl.innerHTML = `
@@ -540,7 +605,7 @@
         const node = e.target.closest(".xray-node");
         if (node && node.dataset.part) {
           e.preventDefault();
-          selectAgentPart(node.dataset.part);
+          selectAgentPart(node.dataset.part, true);
         }
       }
     });
@@ -585,42 +650,19 @@
   }
 
   /* ------------------------------------------------------------------------
-     7. Copy Prompt Buttons (Antigravity Recipes)
+     7. Copy Prompt Buttons (Antigravity Recipes & Tricks)
      ------------------------------------------------------------------------ */
   document.querySelectorAll(".copy-btn[data-copy-target]").forEach((btn) => {
-    btn.addEventListener("click", async () => {
+    btn.addEventListener("click", () => {
       const targetId = btn.getAttribute("data-copy-target");
       const targetEl = targetId ? document.getElementById(targetId) : null;
       if (!targetEl) return;
-
-      const text = targetEl.textContent.trim();
-      const original = btn.textContent;
-      try {
-        await navigator.clipboard.writeText(text);
-        btn.textContent = "Copiado!";
-        btn.classList.add("is-copied");
-      } catch (_) {
-        // Fallback selection copy
-        const area = document.createElement("textarea");
-        area.value = text;
-        area.style.position = "fixed";
-        area.style.opacity = "0";
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand("copy");
-        document.body.removeChild(area);
-        btn.textContent = "Copiado!";
-        btn.classList.add("is-copied");
-      }
-      setTimeout(() => {
-        btn.textContent = original;
-        btn.classList.remove("is-copied");
-      }, 1800);
+      copyTextWithFeedback(targetEl.textContent.trim(), btn);
     });
   });
 
   /* ------------------------------------------------------------------------
-     8. Widget 5 — Prompt-to-Server Interactive Lifecycle & Rollback Simulator
+     8. Widget 6 — Prompt-to-Server Interactive Lifecycle & Rollback Simulator
      ------------------------------------------------------------------------ */
   const pipeNodesEl = document.getElementById("pipeline-nodes");
   const pipeSvgWrapEl = document.getElementById("pipe-visual-svg");
@@ -721,8 +763,8 @@
         ? `
           <path d="M 246 92 C 246 132, 546 132, 546 94" fill="none" stroke="var(--accent-green)" stroke-width="2.4" stroke-dasharray="6 4" />
           <polygon points="541,98 546,91 551,98" fill="var(--accent-green)" />
-          <rect x="318" y="108" width="156" height="20" rx="10" fill="var(--accent-green)" />
-          <text x="396" y="121.5" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">ROLLBACK v1 EM 1 CLIQUE ↺</text>
+          <rect x="308" y="108" width="176" height="20" rx="10" fill="var(--accent-green)" />
+          <text x="396" y="121.5" text-anchor="middle" fill="var(--ink-inverse)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">ROLLBACK v1 EM 1 CLIQUE ↺</text>
         `
         : pipeMode === "bug"
         ? `
@@ -935,6 +977,21 @@
   let glossaryCat = "Todos";
   let glossaryQuery = "";
 
+  function hydrateGlossaryTabCounts() {
+    if (!glossaryTabsEl || !DATA.glossary) return;
+    const counts = { Todos: DATA.glossary.length };
+    DATA.glossary.forEach((item) => {
+      counts[item.category] = (counts[item.category] || 0) + 1;
+    });
+    Array.from(glossaryTabsEl.querySelectorAll(".pill-tab")).forEach((btn) => {
+      const cat = btn.dataset.cat;
+      if (cat && counts[cat] !== undefined) {
+        btn.textContent = `${cat} (${counts[cat]})`;
+      }
+      btn.setAttribute("aria-pressed", String(cat === glossaryCat));
+    });
+  }
+
   function renderGlossary() {
     if (!glossaryGridEl) return;
     const q = glossaryQuery.trim().toLowerCase();
@@ -950,7 +1007,7 @@
     });
 
     if (filtered.length === 0) {
-      glossaryGridEl.innerHTML = `<p style="color:var(--ink-muted); font-size:14.5px; margin:8px 0;">Nenhum termo encontrado para "${glossaryQuery}".</p>`;
+      glossaryGridEl.innerHTML = `<p style="color:var(--ink-muted); font-size:14.5px; margin:8px 0;">Nenhum termo encontrado para "${escapeHtml(glossaryQuery)}".</p>`;
       return;
     }
 
@@ -977,12 +1034,15 @@
   }
 
   if (glossaryTabsEl) {
+    hydrateGlossaryTabCounts();
     glossaryTabsEl.addEventListener("click", (e) => {
       const btn = e.target.closest(".pill-tab");
       if (!btn || !btn.dataset.cat) return;
       glossaryCat = btn.dataset.cat;
       Array.from(glossaryTabsEl.querySelectorAll(".pill-tab")).forEach((b) => {
-        b.classList.toggle("is-active", b.dataset.cat === glossaryCat);
+        const active = b.dataset.cat === glossaryCat;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-pressed", String(active));
       });
       renderGlossary();
     });
@@ -1041,7 +1101,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     12. Widget 6 — Other AI Ecosystems Explorer (Optional Section 07)
+     12. Widget 8 — Other AI Ecosystems Explorer (Optional Section 07)
      ------------------------------------------------------------------------ */
   const ecoTabsEl = document.getElementById("eco-tabs");
   const ecoPanelEl = document.getElementById("eco-panel");
@@ -1358,7 +1418,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     14. Section 06 — Interactive 3 Pillars Deep Explorer (with SVG Diagrams)
+     14. Section 06 — Widget 5: Interactive 3 Pillars Deep Explorer (with SVG Diagrams)
      ------------------------------------------------------------------------ */
   const pillarTabsEl = document.getElementById("pillar-tabs");
   const pillarPanelEl = document.getElementById("pillar-panel");
@@ -1367,7 +1427,7 @@
     if (pillarId === "versionamento") {
       return `
         <svg viewBox="0 0 680 212" role="img" aria-label="Esquema visual do versionamento Git e GitHub com linha principal, branch de rascunho, Pull Request e Merge">
-          <text x="20" y="22" fill="var(--accent-blue)" font-size="10.5" font-weight="700" font-family="JetBrains Mono, monospace">LINHA PRINCIPAL (main — versão oficial no ar)</text>
+          <text x="20" y="22" fill="var(--accent-blue)" font-size="10.5" font-weight="700" font-family="JetBrains Mono, monospace">LINHA PRINCIPAL (main / master — versão oficial no ar)</text>
 
           <!-- Main branch line -->
           <line x1="108" y1="68" x2="212" y2="68" stroke="var(--accent-blue)" stroke-width="3" stroke-linecap="round" />
@@ -1552,7 +1612,7 @@
         <!-- Static path -->
         <rect x="484" y="58" width="182" height="60" rx="10" fill="var(--bg-surface)" stroke="var(--accent-green)" stroke-width="1.6" />
         <text x="496" y="76" fill="var(--accent-green)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">ESTÁTICO · GH PAGES</text>
-        <text x="496" y="94" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">HTML/CSS pronto da borda</text>
+        <text x="496" y="94" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Páginas prontas via CDN</text>
         <text x="496" y="109" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">Guias, blogs e portfólios</text>
 
         <!-- Dynamic path -->
@@ -1588,6 +1648,7 @@
         <span class="pillar-analogy-tag">${pillar.analogy}</span>
       </div>
       <p class="pillar-how">${pillar.howItWorks}</p>
+      <p class="svg-scroll-hint" aria-hidden="true">← Deslize o diagrama para o lado para ver tudo →</p>
       <div class="pillar-svg-box">${buildPillarSvg(pillar.id)}</div>
       <p class="pillar-sublabel">Conceitos básicos que você vai ouvir</p>
       <div class="pillar-concepts-grid">
@@ -1645,8 +1706,19 @@
   const archStoryEl = document.getElementById("arch-scenario-story");
   const archInspectorEl = document.getElementById("arch-inspector");
 
-  let activeArchPart = "queues";
+  let activeArchPart = "core";
   let activeArchScenario = null;
+
+  function clearArchScenarioState() {
+    activeArchScenario = null;
+    if (archStoryEl) archStoryEl.hidden = true;
+    if (archScenariosEl) {
+      Array.from(archScenariosEl.querySelectorAll(".arch-scenario-btn")).forEach((b) => {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-pressed", "false");
+      });
+    }
+  }
 
   function renderArchSvg() {
     if (!archSvgWrapEl) return;
@@ -1760,7 +1832,7 @@
             stroke="${strokeC("cache", "var(--accent-amber)")}"
             stroke-width="${strokeW("cache")}" />
           <text x="338" y="81" text-anchor="middle" fill="var(--accent-amber)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">MEMÓRIA ULTRARRÁPIDA</text>
-          <text x="338" y="99" text-anchor="middle" fill="var(--ink-primary)" font-size="12.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Cache (Redis / Borda)</text>
+          <text x="338" y="99" text-anchor="middle" fill="var(--ink-primary)" font-size="12.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Cache (Redis / CDN)</text>
           <text x="338" y="115" text-anchor="middle" fill="var(--ink-secondary)" font-size="9.8" font-family="Plus Jakarta Sans, sans-serif">Post-it em milissegundos antes do banco</text>
         </g>
 
@@ -1833,7 +1905,7 @@
     `;
   }
 
-  function renderArchInspector(partKey) {
+  function renderArchInspector(partKey, restoreFocus) {
     if (!archInspectorEl || !DATA.archParts) return;
     const part = DATA.archParts.find((p) => p.id === partKey) || DATA.archParts[0];
     if (!part) return;
@@ -1872,6 +1944,10 @@
       </div>
     `;
     renderArchSvg();
+    if (restoreFocus && archSvgWrapEl) {
+      const target = archSvgWrapEl.querySelector(`.arch-node[data-arch="${part.id}"]`);
+      if (target) target.focus();
+    }
   }
 
   function selectArchScenario(scenarioId) {
@@ -1919,14 +1995,7 @@
       archPillsEl.addEventListener("click", (e) => {
         const btn = e.target.closest(".arch-pill-btn");
         if (btn && btn.dataset.arch) {
-          activeArchScenario = null;
-          if (archStoryEl) archStoryEl.hidden = true;
-          if (archScenariosEl) {
-            Array.from(archScenariosEl.querySelectorAll(".arch-scenario-btn")).forEach((b) => {
-              b.classList.remove("is-active");
-              b.setAttribute("aria-pressed", "false");
-            });
-          }
+          clearArchScenarioState();
           renderArchInspector(btn.dataset.arch);
         }
       });
@@ -1953,14 +2022,7 @@
     archSvgWrapEl.addEventListener("click", (e) => {
       const node = e.target.closest(".arch-node");
       if (node && node.dataset.arch) {
-        activeArchScenario = null;
-        if (archStoryEl) archStoryEl.hidden = true;
-        if (archScenariosEl) {
-          Array.from(archScenariosEl.querySelectorAll(".arch-scenario-btn")).forEach((b) => {
-            b.classList.remove("is-active");
-            b.setAttribute("aria-pressed", "false");
-          });
-        }
+        clearArchScenarioState();
         renderArchInspector(node.dataset.arch);
       }
     });
@@ -1970,9 +2032,8 @@
         const node = e.target.closest(".arch-node");
         if (node && node.dataset.arch) {
           e.preventDefault();
-          activeArchScenario = null;
-          if (archStoryEl) archStoryEl.hidden = true;
-          renderArchInspector(node.dataset.arch);
+          clearArchScenarioState();
+          renderArchInspector(node.dataset.arch, true);
         }
       }
     });

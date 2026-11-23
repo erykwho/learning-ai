@@ -422,7 +422,7 @@ window.GUIDE_DATA = {
       goal: "Automatizar tarefas reais no meu Google Drive e Google Sheets",
       tool: "Google Antigravity (com Plugins)",
       rung: 4,
-      url: "https://antigravity.google.com/",
+      url: "https://antigravity.google/",
       urlLabel: "Conhecer o Antigravity",
       description:
         "Aqui a IA deixa de só dar conselhos e faz o trabalho com você. Conectando os plugins de Google Drive e Google Sheets no Antigravity, o agente lê seus arquivos, extrai informações, organiza abas e cria fórmulas automaticamente.",
@@ -482,7 +482,7 @@ window.GUIDE_DATA = {
       role: "O Guarda-Chaves nos Bastidores",
       name: "Sidecar (Processo Auxiliar de Segurança)",
       description:
-        "Um serviço discreto que roda 'ao lado' da cápsula do agente. Ele funciona como um intermediário de segurança (proxy): assina o acesso ao Google Drive ou GitHub sem nunca entregar sua senha ou chave de acesso (token) ao código.",
+        "Um serviço discreto que roda 'ao lado' da cápsula do agente. Ele funciona como um intermediário invisível de segurança: assina o acesso ao Google Drive ou GitHub na saída sem nunca entregar sua senha ou chave de acesso ao código dentro da cápsula.",
       example: "Na prática: mesmo quando o agente executa testes na Sandbox, sua senha real permanece trancada no Sidecar fora do alcance do código."
     }
   },
@@ -520,7 +520,7 @@ window.GUIDE_DATA = {
     }
   ],
 
-  /* Widget 5: Prompt-to-Server Interactive Pipeline */
+  /* Widget 6: Prompt-to-Server Interactive Pipeline */
   pipelineSteps: [
     {
       id: 1,
@@ -612,9 +612,14 @@ window.GUIDE_DATA = {
       def: "O pedido ou instrução que você escreve para a IA. Quanto mais claro o contexto e o formato, melhor a resposta."
     },
     {
+      term: "Token",
+      category: "Fundamentos",
+      def: "Pequeno pedaço de palavra (cerca de 3 a 4 letras) que a IA usa para contar texto. Uma janela de 1 milhão de tokens equivale a cerca de 7 livros inteiros abertos de uma vez."
+    },
+    {
       term: "Janela de Contexto",
       category: "Fundamentos",
-      def: "A 'memória de curto prazo' (o quadro branco) da conversa — tudo que o modelo consegue enxergar de uma vez."
+      def: "A 'memória de curto prazo' (o quadro branco) da conversa — tudo que o modelo consegue enxergar de uma vez, medida em tokens."
     },
     {
       term: "Alucinação",
@@ -637,6 +642,16 @@ window.GUIDE_DATA = {
       def: "Ajuste disponível em ferramentas como o Google AI Studio que controla se o modelo será mais criativo/variado ou mais direto e previsível."
     },
     {
+      term: "Gemini 4 Neon vs. Neon Postgres",
+      category: "Fundamentos",
+      def: "Nomes parecidos, coisas totalmente diferentes: Gemini 4 Neon é o modelo rápido de IA do Google (Seção 03); Neon Postgres é um serviço independente de banco de dados gratuito (Seção 06)."
+    },
+    {
+      term: "Modelos de Pesos Abertos (Open-Weights)",
+      category: "Fundamentos",
+      def: "Modelos como Llama, DeepSeek, Qwen, Mistral e Gemma cujos arquivos são liberados para baixar e rodar no próprio computador ou nuvem privada."
+    },
+    {
       term: "Agente de IA",
       category: "Agentes",
       def: "Sistema em que o modelo não só responde texto, mas trabalha em etapas usando ferramentas: planeja, age, observa o resultado e corrige."
@@ -654,7 +669,12 @@ window.GUIDE_DATA = {
     {
       term: "AGENTS.md (Instruções de Agente)",
       category: "Agentes",
-      def: "O 'README para agentes': arquivo de texto na raiz do projeto lido automaticamente em toda conversa para guardar objetivo, público, regras e checklist de verificação."
+      def: "O 'README para agentes': arquivo de texto na raiz da pasta do projeto lido automaticamente em toda conversa para guardar objetivo, público, regras e checklist de verificação."
+    },
+    {
+      term: "Artifacts (Painel de Artefatos)",
+      category: "Agentes",
+      def: "Painel lateral usado em ferramentas como Antigravity e Claude para exibir planos, documentos, tabelas e prévias interativas separados da conversa."
     },
     {
       term: "Comandos com barra (/plan, /grill-me)",
@@ -682,9 +702,14 @@ window.GUIDE_DATA = {
       def: "Arquitetura em que um agente principal divide uma tarefa grande entre especialistas auxiliares rodando em paralelo."
     },
     {
-      term: "Modelos de Pesos Abertos (Open-Weights)",
-      category: "Fundamentos",
-      def: "Modelos como Llama, DeepSeek, Qwen, Mistral e Gemma cujos arquivos são liberados para baixar e rodar no próprio computador ou nuvem privada."
+      term: "Prompt Injection (Injeção de Prompt)",
+      category: "Agentes",
+      def: "Ataque em que um texto escondido num site ou PDF tenta dar ordens secretas ao agente. Por isso agentes modernos pausam e pedem sua aprovação antes de agir."
+    },
+    {
+      term: "Frontend, Backend & API",
+      category: "Sistemas",
+      def: "Na analogia do restaurante: Frontend é o salão/telas que o usuário vê; Backend é a cozinha que processa regras e acessa o banco; API é o garçom que leva pedidos e traz respostas entre sistemas."
     },
     {
       term: "Git & GitHub",
@@ -694,7 +719,7 @@ window.GUIDE_DATA = {
     {
       term: "Branch, Pull Request e Merge",
       category: "Sistemas",
-      def: "Branch é o rascunho paralelo; Pull Request é o pedido de revisão; Merge é o clique que aprova e junta o rascunho na versão oficial."
+      def: "Branch é o rascunho paralelo; Pull Request é o pedido de revisão; Merge é o clique que aprova e junta o rascunho na versão oficial (main ou master)."
     },
     {
       term: "Banco de Dados (Neon / Supabase)",
@@ -722,6 +747,16 @@ window.GUIDE_DATA = {
       def: "Domínio é o endereço bonito; DNS traduz o nome para o servidor; HTTPS é o cadeado de criptografia; CDN guarda cópias perto do visitante para abrir rápido."
     },
     {
+      term: "Autenticação (Auth) & Autorização",
+      category: "Sistemas",
+      def: "Autenticação confirma quem é a pessoa (ex: login com Google); Autorização define o que ela pode ver ou editar dentro do sistema."
+    },
+    {
+      term: "Object Storage & Bucket",
+      category: "Sistemas",
+      def: "Depósito na nuvem (como Cloudflare R2, GCS ou S3) feito para guardar arquivos pesados como fotos, PDFs e vídeos em 'baldes' (Buckets) separados do banco de dados."
+    },
+    {
       term: "Cache (Redis / Memória Rápida)",
       category: "Sistemas",
       def: "Cópia temporária na memória ultrarrápida ('post-it na mesa') para responder em milissegundos sem precisar consultar o banco de dados toda vez."
@@ -732,14 +767,19 @@ window.GUIDE_DATA = {
       def: "Mecanismos assíncronos: Filas enfileiram tarefas lentas (gerar PDF, enviar e-mails) para Workers nos bastidores; Pub/Sub avisa vários serviços ao mesmo tempo quando um evento acontece."
     },
     {
-      term: "Nuvem (GCP / AWS / Azure)",
-      category: "Sistemas",
-      def: "Plataformas gigantes de infraestrutura sob demanda que reúnem servidores, bancos, armazenamento, filas, IA e segurança — pagando apenas pelo uso."
-    },
-    {
       term: "Webhook & Cron Job",
       category: "Sistemas",
       def: "Cron Job é o despertador que roda uma tarefa em horários fixos; Webhook é a 'campainha automática' que um serviço toca no seu servidor quando algo acontece (ex: pagamento aprovado)."
+    },
+    {
+      term: "Observabilidade (Logs, Métricas & Alertas)",
+      category: "Sistemas",
+      def: "O painel de instrumentos e a caixa-preta do sistema: Logs registram o que aconteceu, Métricas medem velocidade e erros, e Alertas avisam se algo quebrar."
+    },
+    {
+      term: "Nuvem (GCP / AWS / Azure)",
+      category: "Sistemas",
+      def: "Plataformas gigantes de infraestrutura sob demanda que reúnem servidores, bancos, armazenamento, filas, IA e segurança — pagando apenas pelo uso."
     }
   ],
 
@@ -838,7 +878,7 @@ window.GUIDE_DATA = {
       tools: [
         "<strong>Gemini + Gems &amp; NotebookLM:</strong> uso diário, assistentes fixos e pesquisa sem alucinação nos seus PDFs.",
         "<strong>Google AI Studio:</strong> laboratório gratuito no navegador para testar prompts, vídeos e modelos novos.",
-        "<strong>Google Antigravity:</strong> harness agêntico com plano individual gratuito, Sandbox, Skills, Plugins (Drive, Sheets, GitHub), MCP e modo Orchestrator (Neon)."
+        "<strong>Google Antigravity:</strong> harness agêntico com plano individual gratuito, Sandbox, Skills, Plugins (Drive, Sheets, GitHub), MCP e modo coordenador Orchestrator (Neon)."
       ],
       strength:
         "Ponto forte: menor atrito para começar de graça hoje (integração direta com Drive/Sheets/Workspace) e evolução rápida com Gemini 4 Neon no Antigravity."
@@ -936,8 +976,8 @@ window.GUIDE_DATA = {
       pins: [
         {
           num: "1",
-          label: "Painel lateral de Artifacts",
-          text: "Exibe o plano completo (plano.md), prévias e relatórios organizados lado a lado para você conferir sem se perder no chat."
+          label: "Painel lateral de Artifacts (Artefatos)",
+          text: "Área ao lado do chat onde o agente exibe planos completos (plano.md), prévias interativas e relatórios organizados sem se perder no meio das mensagens."
         },
         {
           num: "2",
@@ -1002,7 +1042,7 @@ window.GUIDE_DATA = {
         {
           term: "Branch (Ramo)",
           tag: "Rascunho isolado",
-          desc: "Uma cópia paralela da linha oficial (main). Você (ou o Antigravity) testa ideias novas na branch sem risco nenhum para o site que já está no ar."
+          desc: "Uma cópia paralela da linha oficial (chamada main ou master). Você (ou o Antigravity) testa ideias novas na branch sem risco nenhum para o site que já está no ar."
         },
         {
           term: "Pull Request (PR) & Merge",
@@ -1013,7 +1053,7 @@ window.GUIDE_DATA = {
       choiceNote:
         "Git é a tecnologia; <strong>GitHub</strong> é o serviço gratuito líder (onde o Antigravity já se conecta em 1 clique). Alternativas como GitLab e Bitbucket funcionam com a mesma lógica.",
       promptTip:
-        "Crie uma branch nova para testar essa melhoria e abra um Pull Request no GitHub para eu revisar antes de fazer o merge na main."
+        "Crie uma branch nova para testar essa melhoria e abra um Pull Request no GitHub para eu revisar antes de fazer o merge na linha principal."
     },
     {
       id: "banco",
@@ -1060,7 +1100,7 @@ window.GUIDE_DATA = {
         {
           term: "Estático vs. Dinâmico (Backend/API)",
           tag: "Cartaz vs. Balcão",
-          desc: "Estático (GitHub Pages) entrega o mesmo HTML/CSS pronto para todo mundo. Dinâmico (Vercel) roda um Backend/API com .env para conversar com o banco e responder sob medida."
+          desc: "Estático (GitHub Pages) entrega os mesmos arquivos prontos da página (HTML/CSS) para todo mundo. Dinâmico (Vercel) roda um Backend/API com .env para conversar com o banco e responder sob medida."
         },
         {
           term: "Build & Deploy Automático",
@@ -1088,25 +1128,25 @@ window.GUIDE_DATA = {
   /* Widget 7: Section 06 — Software Engineering Architecture Map */
   archParts: [
     {
-      id: "queues",
-      shortLabel: "Filas & Pub/Sub",
-      name: "Filas (Queues), Pub/Sub & Workers",
-      analogy: "Senha da Padaria + Quadro de Avisos",
-      desc: "<strong>Fila (Queue):</strong> quando uma tarefa demora (gerar PDF, mandar 500 e-mails ou processar IA), o servidor responde 'Recebido!' na hora e joga o pedido numa fila para um <strong>Worker</strong> (robô nos bastidores) resolver sem travar a tela do usuário. Já o <strong>Pub/Sub (Publicar/Assinar)</strong> funciona como um quadro de avisos: quando um evento acontece ('Compra aprovada!'), vários serviços assinantes reagem ao mesmo tempo (nota fiscal, estoque, e-mail) sem dependerem um do outro.",
+      id: "core",
+      shortLabel: "Servidor + Banco",
+      name: "Coração do Sistema (Servidor / Backend + Banco SQL)",
+      analogy: "Os Pilares 2 e 3 trabalhando no centro",
+      desc: "É o núcleo que você já conhece dos 3 pilares: o <strong>Servidor / Backend (a cozinha do sistema)</strong> recebe os pedidos do visitante, consulta as chaves secretas do <span class='inline-code'>.env</span> e coordena tudo — lendo e gravando os dados permanentes no <strong>Banco de Dados (Neon / Postgres)</strong> e acionando Cache, Storage, Filas ou APIs Externas só quando o projeto crescer.",
       whenNeeded:
-        "Quando alguma ação leva mais de 2–3 segundos ou quando um único evento precisa disparar várias ações independentes com garantia de reintentativa se algo falhar.",
+        "É o ponto de partida de quase todo sistema interativo real — você começa por aqui (com GitHub + Neon + Vercel) e vai plugando os blocos ao redor apenas quando sentir necessidade.",
       examples:
-        "<strong>Google Cloud Pub/Sub</strong>, <strong>Upstash QStash</strong>, <strong>Cloudflare Queues</strong>, <strong>RabbitMQ</strong> e <strong>Kafka</strong>.",
-      agentMode: "Conecta via CLI/API e cria código de fila + worker",
+        "<strong>Vercel + Neon Postgres</strong>, <strong>Cloudflare Workers + D1</strong>, <strong>Google Cloud Run + Cloud SQL</strong>.",
+      agentMode: "Constrói, testa na Sandbox e versiona no GitHub",
       agentTip:
-        "O agente configura a fila ou tópico Pub/Sub, escreve o código do Worker com tentativas automáticas em caso de erro e te guia passo a passo para colar o endereço da fila no .env."
+        "Com o Antigravity conectado ao GitHub (e a MCPs como Neon ou Postgres), o agente cria as páginas e endereços internos (rotas), testa consultas e abre Pull Requests completos para sua revisão."
     },
     {
       id: "cache",
       shortLabel: "Cache (Redis)",
       name: "Cache (Memória Rápida)",
       analogy: "O Post-it na Mesa",
-      desc: "Ir ao banco de dados toda vez que alguém abre a mesma página consome tempo e dinheiro. O <strong>Cache</strong> guarda uma cópia temporária das respostas mais pedidas (ex: catálogo do dia, ranking ou sessão do usuário) na memória RAM ultrarrápida. Se a resposta já está no post-it, o site responde em poucos milissegundos — e só consulta o banco quando o post-it vence ou muda.",
+      desc: "Ir ao banco de dados toda vez que alguém abre a mesma página consome tempo e dinheiro. O <strong>Cache</strong> guarda uma cópia temporária das respostas mais pedidas (ex: catálogo do dia, ranking ou sessão do usuário) na memória ultrarrápida. Se a resposta já está no post-it, o site responde em poucos milissegundos — e só consulta o banco quando o post-it vence ou muda.",
       whenNeeded:
         "Quando muitas pessoas acessam os mesmos dados ao mesmo tempo ou quando uma consulta no banco começa a ficar lenta e repetitiva.",
       examples:
@@ -1116,18 +1156,18 @@ window.GUIDE_DATA = {
         "Basta dizer: \"Adicione cache Redis (Upstash) de 5 minutos nessa lista para não sobrecarregar o Neon\" — o agente escreve a lógica e te orienta onde copiar a chave no painel."
     },
     {
-      id: "cloud",
-      shortLabel: "Nuvem (Cloud)",
-      name: "Nuvem & Serviços de Nuvem (Cloud Providers)",
-      analogy: "O Condomínio Completo de Infraestrutura",
-      desc: "Em vez de comprar servidores físicos, empresas alugam computação sob demanda em grandes plataformas de <strong>Nuvem</strong> — verdadeiros 'supermercados' com dezenas de serviços integrados sob o mesmo teto (servidores, bancos, Pub/Sub, arquivos, IA, rede e segurança), cobrando apenas pelo que você usa (<em>pay-as-you-go</em>).",
+      id: "queues",
+      shortLabel: "Filas & Pub/Sub",
+      name: "Filas (Queues), Pub/Sub & Workers",
+      analogy: "Senha da Padaria + Quadro de Avisos",
+      desc: "<strong>Fila (Queue):</strong> quando uma tarefa demora (gerar PDF, mandar 500 e-mails ou processar IA), o servidor responde 'Recebido!' na hora e joga o pedido numa fila para um <strong>Worker</strong> (robô nos bastidores) resolver sem travar a tela do usuário. Já o <strong>Pub/Sub (Publicar/Assinar)</strong> funciona como um quadro de avisos: quando um evento acontece ('Compra aprovada!'), vários serviços assinantes reagem ao mesmo tempo (nota fiscal, estoque, e-mail) sem dependerem um do outro.",
       whenNeeded:
-        "Você <strong>não precisa começar aqui</strong>! Comece leve (GitHub + Neon + Vercel) e migre ou combine serviços da Nuvem grande quando precisar de escala alta, compliance corporativo ou recursos específicos (como Google Cloud Pub/Sub e Cloud Run).",
+        "Quando alguma ação leva mais de 2–3 segundos ou quando um único evento precisa disparar várias ações independentes com nova tentativa automática se algo falhar.",
       examples:
-        "<strong>Google Cloud (GCP)</strong>, <strong>AWS (Amazon)</strong> e <strong>Microsoft Azure</strong> — além de nuvens mais simples como <strong>Vercel</strong>, <strong>Cloudflare</strong> e <strong>Render</strong>.",
-      agentMode: "Opera CLIs oficiais (gcloud, aws) ou guia clique a clique",
+        "<strong>Google Cloud Pub/Sub</strong>, <strong>Upstash QStash</strong>, <strong>Cloudflare Queues</strong>, <strong>RabbitMQ</strong> e <strong>Kafka</strong>.",
+      agentMode: "Conecta via terminal (CLI) ou API e cria fila + worker",
       agentTip:
-        "Agentes como o Antigravity podem gerar scripts de infraestrutura, usar CLIs da nuvem ou — se você preferir fazer pelo navegador — te guiar clique a clique lendo prints do painel."
+        "O agente configura a fila ou tópico Pub/Sub, escreve o código do Worker com tentativas automáticas em caso de erro e te guia passo a passo para colar o endereço da fila no .env."
     },
     {
       id: "auth",
@@ -1139,9 +1179,9 @@ window.GUIDE_DATA = {
         "Assim que seu sistema deixar de ser só seu e passar a ter contas individuais ou áreas restritas para equipe/clientes.",
       examples:
         "<strong>Clerk</strong>, <strong>Supabase Auth</strong>, <strong>Firebase Auth (Google)</strong> e <strong>Auth.js</strong> — todos com generosos planos gratuitos.",
-      agentMode: "Integra login pronto em minutos e protege rotas",
+      agentMode: "Integra login pronto em minutos e protege áreas restritas",
       agentTip:
-        "Peça: \"Coloque login com Google usando Clerk ou Supabase Auth e proteja as rotas para cada usuário ver só os próprios itens\". O agente gera o código e indica os 3 campos do painel."
+        "Peça: \"Coloque login com Google usando Clerk ou Supabase Auth e proteja as páginas para cada usuário ver só os próprios itens\". O agente gera o código e indica os 3 campos do painel."
     },
     {
       id: "storage",
@@ -1153,7 +1193,7 @@ window.GUIDE_DATA = {
         "Sempre que os usuários precisarem fazer upload de imagens, currículos em PDF, recibos ou vídeos.",
       examples:
         "<strong>Cloudflare R2</strong>, <strong>Google Cloud Storage</strong>, <strong>Supabase Storage</strong> e <strong>Amazon S3</strong>.",
-      agentMode: "Cria upload seguro (links assinados) e conecta ao banco",
+      agentMode: "Cria upload seguro (links temporários) e conecta ao banco",
       agentTip:
         "O agente monta o botão de upload, configura permissões para ninguém acessar arquivos privados de outros usuários e te guia na criação do Bucket."
     },
@@ -1167,7 +1207,7 @@ window.GUIDE_DATA = {
         "Para rotinas periódicas (relatórios, lembretes, limpeza de dados) ou para reagir em tempo real a pagamentos, formulários e mensagens de WhatsApp/Slack.",
       examples:
         "<strong>Vercel Cron</strong>, <strong>GitHub Actions</strong>, <strong>Google Cloud Scheduler</strong> e webhooks de <strong>Stripe / Mercado Pago / GitHub</strong>.",
-      agentMode: "Cria os endpoints de Webhook e arquivos de agendamento",
+      agentMode: "Cria os endereços de recebimento (endpoints) e agendamentos",
       agentTip:
         "O agente escreve o código de verificação de segurança do Webhook, cria o arquivo de agendamento Cron e mostra exatamente qual URL colar no painel do Stripe ou da Vercel."
     },
@@ -1176,12 +1216,12 @@ window.GUIDE_DATA = {
       shortLabel: "APIs Externas",
       name: "APIs Externas & Integrações",
       analogy: "Os Especialistas Terceirizados",
-      desc: "Quase nenhum software moderno constrói tudo dentro de casa. Para cobrar cartão/Pix, enviar e-mails que não caem no spam, consultar CEP, enviar WhatsApp ou chamar inteligência artificial, seu servidor envia um pedido autenticado para a <strong>API</strong> de um serviço especialista e recebe a resposta pronta em formato estruturado (JSON).",
+      desc: "Quase nenhum software moderno constrói tudo dentro de casa. Para cobrar cartão/Pix, enviar e-mails que não caem no spam, consultar CEP, enviar WhatsApp ou chamar inteligência artificial, seu servidor envia um pedido autenticado para a <strong>API</strong> (o 'garçom' digital) de um serviço especialista e recebe a resposta pronta num formato de texto organizado (chamado <em>JSON</em>).",
       whenNeeded:
         "Sempre que existir um especialista confiável para aquela função — economiza meses de trabalho e evita dores de cabeça legais (como lidar com dados de cartão de crédito).",
       examples:
         "<strong>Stripe / Mercado Pago</strong> (pagamentos), <strong>Resend</strong> (e-mails), <strong>Gemini API</strong> (IA) e <strong>Google Maps / Drive</strong>.",
-      agentMode: "Lê documentações, integra SDKs e testa via MCP/Sandbox",
+      agentMode: "Lê documentações, instala bibliotecas oficiais (SDKs) e testa",
       agentTip:
         "Basta dizer qual serviço quer integrar (ex: \"envie e-mail de boas-vindas com o Resend\"): o agente instala a biblioteca oficial, lê a chave no .env e cria testes na Sandbox."
     },
@@ -1200,18 +1240,18 @@ window.GUIDE_DATA = {
         "O melhor truque de manutenção: quando surgir um erro nos Logs ou no Sentry, cole o trecho (ou print) no Antigravity — ele cruza o log com o código e propõe o conserto exato."
     },
     {
-      id: "core",
-      shortLabel: "Servidor + Banco",
-      name: "Coração do Sistema (Servidor / Backend + Banco SQL)",
-      analogy: "Os Pilares 2 e 3 trabalhando no centro",
-      desc: "É o núcleo que você já dominou acima: o <strong>Servidor / Backend (API)</strong> recebe os pedidos do visitante, consulta as chaves secretas do <span class='inline-code'>.env</span> e orquestra tudo — lendo e gravando os dados permanentes no <strong>Banco de Dados (Neon / Postgres)</strong> e acionando Cache, Storage, Filas ou APIs Externas conforme a necessidade.",
+      id: "cloud",
+      shortLabel: "Nuvem (Cloud)",
+      name: "Nuvem & Serviços de Nuvem (Cloud Providers)",
+      analogy: "O Condomínio Completo de Infraestrutura",
+      desc: "Em vez de comprar servidores físicos, empresas alugam computação sob demanda em grandes plataformas de <strong>Nuvem</strong> — verdadeiros 'supermercados' com dezenas de serviços integrados sob o mesmo teto (servidores, bancos, Pub/Sub, arquivos, IA, rede e segurança), cobrando apenas pelo que você usa (<em>pay-as-you-go</em>).",
       whenNeeded:
-        "É a base de quase todo sistema interativo real — você começa por aqui (com GitHub + Neon + Vercel) e vai plugando os blocos ao redor só quando o projeto pedir.",
+        "Você <strong>não precisa começar aqui</strong>! Comece leve (GitHub + Neon + Vercel) e migre ou combine serviços da Nuvem grande quando precisar de escala alta, regras rígidas de empresas (compliance) ou recursos específicos (como Google Cloud Pub/Sub e Cloud Run).",
       examples:
-        "<strong>Vercel + Neon Postgres</strong>, <strong>Cloudflare Workers + D1</strong>, <strong>Google Cloud Run + Cloud SQL</strong>.",
-      agentMode: "Constrói, testa na Sandbox e versiona no GitHub",
+        "<strong>Google Cloud (GCP)</strong>, <strong>AWS (Amazon)</strong> e <strong>Microsoft Azure</strong> — além de nuvens mais simples como <strong>Vercel</strong>, <strong>Cloudflare</strong> e <strong>Render</strong>.",
+      agentMode: "Usa comandos oficiais no terminal (CLI) ou guia clique a clique",
       agentTip:
-        "Com o Antigravity conectado ao GitHub (e a MCPs como Neon ou Postgres), o agente cria as rotas, testa consultas e abre Pull Requests completos para sua revisão."
+        "Agentes como o Antigravity podem gerar scripts de infraestrutura, operar comandos oficiais da nuvem (gcloud, aws) ou — se você preferir fazer pelo navegador — te guiar clique a clique lendo prints do painel."
     }
   ],
 
@@ -1263,6 +1303,11 @@ window.GUIDE_DATA = {
       id: "step-antigravity",
       title: "Rodar uma automação guiada no Google Antigravity",
       desc: "Conecte o plugin do Google Drive ou Google Sheets e teste o Roteiro 1 da Seção 5 começando com /plan."
+    },
+    {
+      id: "step-agents-md",
+      title: "Criar um arquivo AGENTS.md curto (5 linhas) no seu primeiro projeto",
+      desc: "Anote o objetivo do projeto, o público-alvo e o que o agente nunca deve fazer sem perguntar — assim ele lembra das suas regras em todas as conversas."
     },
     {
       id: "step-publish",

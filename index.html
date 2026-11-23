@@ -8,6 +8,22 @@
     name="description"
     content="Guia interativo em português para leigos aprenderem Inteligência Artificial na prática: da evolução dos modelos até agentes, Google Antigravity, GitHub, Neon e Vercel."
   />
+  <meta name="theme-color" content="#faf8f4" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://erykwho.github.io/learning-ai/" />
+  <meta property="og:title" content="IA na Prática: do Zero aos Agentes" />
+  <meta
+    property="og:description"
+    content="Guia interativo e gratuito em português para entender IA do zero até agentes, Google Antigravity e engenharia de sistemas sem precisar saber programar."
+  />
+  <meta property="og:image" content="https://erykwho.github.io/learning-ai/assets/tour/01-projeto.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="IA na Prática: do Zero aos Agentes" />
+  <meta
+    name="twitter:description"
+    content="Do primeiro prompt ao seu próprio sistema no ar: 8 gráficos interativos, tour visual do Google Antigravity e glossário de bolso."
+  />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,10 +58,9 @@
           </svg>
           <span>Índice</span>
         </button>
-        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Alternar modo claro ou escuro">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Alternar modo claro ou escuro" aria-pressed="false">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
           </svg>
           <span id="theme-label">Escuro</span>
         </button>
@@ -142,7 +157,7 @@
           Você não precisa estudar matemática avançada nem saber programar para entender o que existe hoje em IA — e usar isso de verdade. Este guia vai do mais simples ao prático: como modelos funcionam por cima, como evoluíram até agentes autônomos e como usar ferramentas do Google (até o <strong>Antigravity</strong>) para criar automações e colocar sistemas confiáveis no ar.
         </p>
         <div class="hero-meta">
-          <span>Leitura estimada: ~20 minutos</span>
+          <span>Trilha essencial: ~15–20 min · Completo: ~35–40 min</span>
           <span>8 gráficos interativos · Tour visual com prints</span>
           <span>Foco prático · Sem pré-requisitos de código</span>
         </div>
@@ -163,7 +178,7 @@
             <a href="#sec-agentes" class="journey-node">
               <span class="journey-node-tag">Fase 3</span>
               <span class="journey-node-name">Delegar</span>
-              <span class="journey-node-sub">Agentes que executam tarefas com você</span>
+              <span class="journey-node-sub">Agentes e Google Antigravity em ação</span>
             </a>
             <a href="#sec-sistemas" class="journey-node">
               <span class="journey-node-tag">Fase 4</span>
@@ -172,7 +187,7 @@
             </a>
           </div>
           <p class="hero-reassurance">
-            <strong>Promessa deste guia:</strong> nenhum termo técnico aparece aqui sem antes ganhar uma analogia simples do cotidiano — e você pode testar cada ideia nos gráficos interativos.
+            <strong>Como ler sem se cansar:</strong> nenhum termo técnico aparece aqui sem antes ganhar uma analogia simples do cotidiano. Tudo o que estiver marcado como <strong>Opcional</strong>, <strong>Bastidores</strong> ou <strong>Ver por dentro</strong> pode ser pulado na primeira leitura e consultado só quando despertar curiosidade.
           </p>
         </div>
       </header>
@@ -200,17 +215,18 @@
             Pense em um LLM como um <strong>estagiário brilhante que leu quase toda a biblioteca da humanidade</strong>, mas chegou hoje no seu escritório sem saber nada sobre a sua vida ou o seu projeto.
           </p>
           <p>
-            Tudo o que ele consegue enxergar agora está num <strong>quadro branco</strong> na frente dele — isso é a <strong>Janela de Contexto</strong> (a memória de curto prazo da conversa). Se o quadro branco estiver vazio, ele vai chutar. E, como ele adora tentar ser útil, às vezes <strong>inventa um dado com cara de certeza</strong> — o que chamamos de <strong>alucinação</strong>.
+            Tudo o que ele consegue enxergar agora está num <strong>quadro branco</strong> na frente dele — isso é a <strong>Janela de Contexto</strong> (a memória de curto prazo da conversa). O tamanho desse quadro é medido em <strong>tokens</strong> (pedaços de palavras, com cerca de 3 a 4 letras cada): os modelos mais novos cabem <em>1 milhão de tokens</em>, o equivalente a cerca de 7 livros inteiros abertos de uma vez! Se o quadro estiver vazio, ele vai chutar — e às vezes <strong>inventa um dado com cara de certeza</strong>, o que chamamos de <strong>alucinação</strong>.
           </p>
         </div>
 
         <p>
-          Você só precisa guardar <strong>três ideias</strong> desta seção para usar qualquer IA muito melhor do que a maioria das pessoas:
+          Você só precisa guardar <strong>quatro ideias</strong> desta seção para usar qualquer IA muito melhor do que a maioria das pessoas:
         </p>
         <ul>
           <li><strong>Prompt é direção, não magia:</strong> quanto mais claro o contexto, o papel e o formato desejado, menos o modelo precisa adivinhar.</li>
           <li><strong>Contexto é memória temporária:</strong> o modelo não "lê sua mente" entre conversas novas; o que importa é o que você coloca na mesa naquela conversa.</li>
           <li><strong>Confiante não significa certo:</strong> se você precisa de fatos exatos (um contrato, um preço, um estudo), forneça o documento ou peça para a IA avisar quando não souber.</li>
+          <li><strong>A primeira resposta é um rascunho (itere!):</strong> quase ninguém acerta tudo em um único pedido. O jeito normal de trabalhar com IA é conversar em 2 ou 3 rodadas curtas — <em>gerar → apontar o que ajustar → refinar</em>.</li>
         </ul>
 
         <!-- Interactive Widget 1 -->
@@ -229,7 +245,7 @@
             <div class="sim-panel">
               <div class="sim-panel-label">
                 <span>O que você digita (Prompt)</span>
-                <span>Entrada</span>
+                <button type="button" class="copy-btn trick-copy-mini" id="sim-copy-btn">Copiar exemplo</button>
               </div>
               <p class="sim-prompt-text" id="sim-prompt-text"></p>
 
@@ -261,10 +277,26 @@
               <p style="font-size:13.2px; color:var(--ink-secondary); margin:12px 0 0;" id="sim-takeaway"></p>
             </div>
           </div>
+
+          <div class="sim-formula-strip">
+            <strong>Fórmula de bolso para testar já no Gemini:</strong> <em>Papel</em> ("Atue como...") + <em>Contexto</em> (para quem, prazo, limites) + <em>Formato</em> (tabela, tópicos, e-mail curto) + <em>Regra</em> ("se não souber, avise").
+          </div>
+        </div>
+
+        <div class="safety-box">
+          <p class="safety-label">Segurança &amp; Privacidade no Dia a Dia (3 regras simples)</p>
+          <p>
+            Antes de sair colando documentos em qualquer ferramenta de IA, vale guardar três hábitos que protegem você e seu trabalho:
+          </p>
+          <ul>
+            <li><strong>Nunca cole segredos num chat:</strong> evite colocar senhas, CPF, dados bancários, prontuários médicos de terceiros ou informações confidenciais da sua empresa. Se precisar de ajuda num texto real, troque nomes e valores por exemplos fictícios.</li>
+            <li><strong>Conta pessoal vs. conta de trabalho:</strong> em contas pessoais gratuitas, suas conversas podem ser usadas para melhorar modelos (você pode desligar o histórico/treinamento nas configurações). Contas corporativas (como Google Workspace empresarial) normalmente já isolam seus dados por contrato.</li>
+            <li><strong>Atenção a instruções escondidas (<em>Prompt Injection</em>):</strong> quando um agente lê um site ou PDF desconhecido, alguém mal-intencionado pode esconder uma ordem falsa dentro do texto tentando enganar a IA. É exatamente por isso que ferramentas modernas como o Antigravity <strong>pausam e pedem sua aprovação</strong> antes de alterar arquivos ou enviar dados para fora!</li>
+          </ul>
         </div>
 
         <div class="bridge-note">
-          <strong>Por que isso importa para o próximo passo?</strong> Agora você entende o "cérebro" básico. Mas o mundo de IA não parou no chat de texto: em menos de uma década, passamos de um artigo científico do Google para agentes que operam sistemas inteiros. Vamos ver como cada peça foi encaixada nessa história.
+          <strong>Por que isso importa para o próximo passo?</strong> Agora você entende o "cérebro" básico e como conversar com segurança. Mas o mundo de IA não parou no chat de texto: em menos de uma década, passamos de um artigo científico do Google para agentes que operam sistemas inteiros. Vamos ver como cada peça foi encaixada nessa história.
         </div>
 
         <!-- Curated Resources Section 1 -->
@@ -297,11 +329,11 @@
             </a>
             <a class="resource-card" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener noreferrer">
               <div class="resource-top">
-                <span class="resource-kind is-video">YouTube · Palestra Clássica</span>
+                <span class="resource-kind is-video">YouTube · Palestra (1h)</span>
                 <span class="lang-tag">EN · legendas PT</span>
               </div>
-              <span class="resource-name">Intro to Large Language Models (1h) — Andrej Karpathy</span>
-              <span class="resource-note">Uma das melhores explicações para público geral feitas por um dos criadores da área, sem matemática pesada.</span>
+              <span class="resource-name">Intro to Large Language Models — Andrej Karpathy</span>
+              <span class="resource-note">Explicação clássica para público geral sem matemática pesada (ótima para assistir em partes de 15 min).</span>
             </a>
           </div>
         </div>
@@ -373,57 +405,16 @@
           </div>
         </div>
 
-        <!-- Expandable "Bastidores" Accordions for Advanced Terms -->
-        <h3>Quer ver os bastidores da Era 5? (Opcional — clique para abrir)</h3>
+        <!-- Expandable "Bastidores" Accordion for Subagents (Sandbox & Sidecar covered in Section 04 X-Ray) -->
+        <h3>Um bastidor extra da Era 5: trabalho em equipe com Subagentes (Opcional)</h3>
         <p>
-          Você <em>não precisa</em> decorar estes três nomes para começar a usar IA, mas saber o que significam faz você entender por que ferramentas modernas conseguem operar seu código e suas pastas com segurança:
+          Na <a href="#sec-agentes">Seção 04</a> vamos abrir um raio-x clicável de <strong>Sandboxes</strong> (cápsulas de teste) e <strong>Sidecars</strong> (guarda-chaves de senhas). Já o terceiro nome famoso da Era 5 — <strong>Subagentes</strong> — merece um clique rápido aqui se você tiver curiosidade:
         </p>
 
         <details class="deep-dive">
           <summary>
-            <span>O que são <strong>Cápsulas / Sandboxes</strong>?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
-              <span class="deep-dive-badge">Bastidores</span>
-              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </span>
-          </summary>
-          <div class="deep-dive-body">
-            <p>
-              Imagine deixar um aprendiz testar uma receita nova na cozinha da sua casa vs. numa cozinha de testes separada. Uma <strong>Sandbox</strong> (ou cápsula/container) é um pequeno computador virtual descartável na nuvem onde o agente pode criar arquivos, rodar programas e testar sites sem risco de bagunçar seu computador pessoal.
-            </p>
-            <div class="deep-dive-refs">
-              <span class="deep-dive-refs-title">Saiba mais:</span>
-              <a class="era-ref-chip" href="https://blog.cloudflare.com/dynamic-workers/" target="_blank" rel="noopener noreferrer">Cloudflare — Sandboxing AI Agents ↗</a>
-              <a class="era-ref-chip" href="https://www.firecrawl.dev/blog/ai-agent-sandbox" target="_blank" rel="noopener noreferrer">Firecrawl — AI Agent Sandbox Guide ↗</a>
-              <a class="era-ref-chip" href="https://modal.com/resources/best-code-execution-sandboxes-ai-agents" target="_blank" rel="noopener noreferrer">Modal — Code Execution Sandboxes ↗</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="deep-dive">
-          <summary>
-            <span>O que são <strong>Sidecars</strong> (processos auxiliares)?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
-              <span class="deep-dive-badge">Bastidores</span>
-              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </span>
-          </summary>
-          <div class="deep-dive-body">
-            <p>
-              O nome vem do carrinho acoplado ao lado de uma motocicleta. Em sistemas de agentes, um <strong>Sidecar</strong> é um programinha silencioso que roda ao lado da cápsula do agente para cuidar de tarefas críticas — como guardar suas credenciais do GitHub ou Google Drive e só assinar a requisição na saída, sem que o código rodando dentro da cápsula jamais veja sua senha real.
-            </p>
-            <div class="deep-dive-refs">
-              <span class="deep-dive-refs-title">Saiba mais:</span>
-              <a class="era-ref-chip" href="https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar" target="_blank" rel="noopener noreferrer">Microsoft Learn — Sidecar Pattern ↗</a>
-              <a class="era-ref-chip" href="https://organicprogrammer.com/2026/11/09/entra-agent-id-sidecar-a-practical-guide-to-building-secure-ai-agents/" target="_blank" rel="noopener noreferrer">Sidecars para Agentes Seguros ↗</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="deep-dive">
-          <summary>
-            <span>O que são <strong>Subagentes</strong> (orquestração)?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
+            <span>O que são <strong>Subagentes</strong> (orquestração em paralelo)?</span>
+            <span>
               <span class="deep-dive-badge">Bastidores</span>
               <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
@@ -493,9 +484,23 @@
           O nome <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Google AI Studio</a> parece coisa só para programadores, mas qualquer pessoa curiosa pode entrar de graça. Ele funciona como o "painel de controle transparente" dos modelos Gemini: você escolhe a versão do modelo, vê uma caixa dedicada para <em>Instruções de Sistema (System Instructions)</em>, ajusta a <strong>temperatura</strong> (o controle de quão criativa ou direta será a resposta) e sobe vídeos longos ou planilhas para testar na hora.
         </p>
 
-        <h3 id="sec-gemini4">A era dos modelos Gemini 4 — e por que o novo Neon muda o jogo</h3>
+        <!-- Interactive Widget 3: Google Ecosystem Compass -->
+        <div class="interactive-stage" id="widget-compass">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 03</p>
+              <h3 class="stage-title">Bússola Google: qual ferramenta abrir para cada situação?</h3>
+              <p class="stage-hint">Escolha um objetivo do dia a dia abaixo para descobrir o degrau certo da escada Google.</p>
+            </div>
+          </div>
+
+          <div class="compass-goals" id="compass-goals" role="group" aria-label="Objetivos do dia a dia"></div>
+          <div class="compass-result" id="compass-result" aria-live="polite"></div>
+        </div>
+
+        <h3 id="sec-gemini4">Por baixo dessas ferramentas: a geração Gemini 4 e o novo Neon</h3>
         <p>
-          Na geração mais recente, o Google trocou os números tradicionais por <strong>nomes de elementos químicos</strong> para deixar claro o perfil de cada modelo. Todos os modelos da família <strong>Gemini 4</strong> compartilham uma janela de contexto de <strong>1 milhão de tokens</strong> e níveis ajustáveis de raciocínio — mas o recém-lançado <strong>Gemini 4 Neon</strong> virou a peça-chave para construir sistemas rápidos com confiança:
+          Dentro do Gemini, do AI Studio e do Antigravity, você pode escolher qual "motor" (modelo) vai responder. Na geração mais recente, o Google trocou os números tradicionais por <strong>nomes de elementos químicos</strong> para deixar claro o perfil de cada motor. Todos da família <strong>Gemini 4</strong> compartilham uma janela de contexto de <strong>1 milhão de tokens</strong> (cerca de 7 livros de uma vez) e raciocínio ajustável — com destaque para o recém-lançado <strong>Gemini 4 Neon</strong>:
         </p>
 
         <div class="gemini4-grid">
@@ -528,14 +533,17 @@
             </div>
             <h4>Gemini 4 Carbon</h4>
             <p>
-              O peso-pesado da linha (ao lado do <em>Argon</em>) para pesquisas muito longas, auditorias profundas e verificações que podem pensar por mais tempo em segundo plano.
+              O peso-pesado da linha (ao lado do irmão <em>Argon</em>) para pesquisas muito longas, auditorias profundas e verificações que podem pensar por mais tempo em segundo plano.
             </p>
           </article>
         </div>
 
         <div class="gemini4-note-strip">
           <p>
-            <strong>Na prática (grátis vs. planos Pro/Ultra):</strong> você pode começar nos 4 degraus — incluindo o <strong>Google Antigravity</strong> — sem pagar nada usando modelos ágeis da cota gratuita (como <em>Gemini 3.8 Flash</em> e <em>Hydrogen</em>). Já o <strong>Gemini 4 Neon</strong> está disponível para assinantes <strong>Google AI Pro e Ultra</strong> (no app Gemini, AI Studio e Antigravity, onde também pode planejar tarefas no modo <em>Orchestrator</em>).
+            <strong>Na prática (grátis vs. planos Pro/Ultra):</strong> você pode começar nos 4 degraus — incluindo o <strong>Google Antigravity</strong> — sem pagar nada usando modelos ágeis da cota gratuita (como <em>Gemini 3.8 Flash</em> e <em>Hydrogen</em>). Já o <strong>Gemini 4 Neon</strong> está disponível para assinantes <strong>Google AI Pro e Ultra</strong> (no app Gemini, AI Studio e Antigravity, onde também atua no modo coordenador <em>Orchestrator</em> para planejar e dividir tarefas maiores).
+          </p>
+          <p>
+            <strong>Sem surpresa na fatura:</strong> nos planos gratuitos do Google (e também nos serviços gratuitos da Seção 06), atingir o limite apenas pausa temporariamente ou troca para um modelo mais leve — nada é cobrado automaticamente sem você escolher um plano pago.
           </p>
           <p>
             <strong>Dica para não confundir nomes:</strong> <strong>Gemini 4 Neon</strong> é o modelo de IA do Google; na <a href="#sec-sistemas">Seção 06</a> vamos conhecer o <strong>Neon Postgres</strong>, que é um serviço independente de banco de dados gratuito!
@@ -544,20 +552,6 @@
             <a class="era-ref-chip" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/" target="_blank" rel="noopener noreferrer">Anúncio Oficial: Introducing Gemini 4 Neon ↗</a>
             <a class="era-ref-chip" href="https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/" target="_blank" rel="noopener noreferrer">Gemini 4 Neon no Google Antigravity ↗</a>
           </div>
-        </div>
-
-        <!-- Interactive Widget 3: Google Ecosystem Compass -->
-        <div class="interactive-stage" id="widget-compass">
-          <div class="stage-header">
-            <div class="stage-title-group">
-              <p class="stage-eyebrow">Gráfico Interativo 03</p>
-              <h3 class="stage-title">Bússola Google: qual ferramenta abrir para cada situação?</h3>
-              <p class="stage-hint">Escolha um objetivo do dia a dia abaixo para descobrir o degrau certo da escada Google.</p>
-            </div>
-          </div>
-
-          <div class="compass-goals" id="compass-goals" role="group" aria-label="Objetivos do dia a dia"></div>
-          <div class="compass-result" id="compass-result" aria-live="polite"></div>
         </div>
 
         <p class="shortcut-note">
@@ -674,56 +668,6 @@
           Já o <strong>MCP (Model Context Protocol)</strong> resolve o problema das conexões. Antes do MCP, cada ferramenta de IA precisava criar um cabo diferente para conversar com o Google Drive, outro para o GitHub, outro para bancos de dados. O MCP virou o <strong>"USB-C da IA"</strong>: qualquer serviço que ofereça um conector MCP passa a conversar automaticamente com qualquer agente compatível — incluindo o Google Antigravity.
         </p>
 
-        <h3 id="sec-agents-md">Instruções para Agentes e o papel do arquivo <span class="inline-code">AGENTS.md</span></h3>
-        <p>
-          Uma das maiores frustrações de quem começa a usar agentes é sentir que, a cada conversa nova, o agente "esquece" o objetivo do seu projeto, o público-alvo ou as regras que você já combinou ontem. Para resolver isso, o ecossistema moderno consolidou as <strong>Instruções para Agentes</strong> — e o arquivo padrão aberto <span class="inline-code">AGENTS.md</span>, apelidado de <strong>"o README para agentes"</strong>.
-        </p>
-        <p>
-          Enquanto o <span class="inline-code">README.md</span> explica o projeto para <em>humanos</em>, o <span class="inline-code">AGENTS.md</span> fica na raiz da pasta do projeto para ser <strong>lido automaticamente pelo agente toda vez que uma conversa começa ali</strong>. Entender a diferença entre as 3 camadas de instruções evita bagunça:
-        </p>
-
-        <div class="instr-layers-grid">
-          <article class="instr-layer-card">
-            <span class="instr-layer-scope">Camada 1 · Sua Conta</span>
-            <h4>Instruções Globais</h4>
-            <p>
-              Preferências pessoais que te acompanham em <strong>qualquer projeto</strong> (ex.: responder sempre em português brasileiro claro e propor um plano antes de grandes mudanças).
-            </p>
-            <div class="instr-layer-when"><strong>Quando usar:</strong> estilo pessoal fixo.</div>
-          </article>
-
-          <article class="instr-layer-card is-highlight">
-            <span class="instr-layer-scope">Camada 2 · Projeto</span>
-            <h4>Arquivo <span class="inline-code">AGENTS.md</span></h4>
-            <p>
-              O <strong>contrato permanente daquele repositório</strong> (padrão aberto): guarda o objetivo do produto, público-alvo, regras visuais, comandos de teste e travas de segurança. Lido por Antigravity, Codex, Cursor, Copilot e outros.
-            </p>
-            <div class="instr-layer-when"><strong>Quando usar:</strong> regras que nunca podem se perder entre conversas.</div>
-          </article>
-
-          <article class="instr-layer-card">
-            <span class="instr-layer-scope">Camada 3 · Sob Demanda</span>
-            <h4>Skills (<span class="inline-code">SKILL.md</span>)</h4>
-            <p>
-              Receitas detalhadas para <strong>tarefas específicas</strong> (ex.: lançar recibos no Sheets). Só entram na memória do agente quando o seu pedido aciona o gatilho certo.
-            </p>
-            <div class="instr-layer-when"><strong>Quando usar:</strong> fluxos longos e repetitivos.</div>
-          </article>
-        </div>
-
-        <div class="gemini4-note-strip">
-          <p>
-            <strong>Regra de ouro para um bom <span class="inline-code">AGENTS.md</span>:</strong> mantenha-o <strong>curto, direto e concreto</strong> (objetivo do projeto, o que nunca quebrar e como verificar o resultado). Um arquivo gigante e genérico mais atrapalha do que ajuda — e <strong>nunca</strong> escreva senhas ou chaves nele!
-          </p>
-          <p>
-            <strong>Exemplo real vivo:</strong> este próprio guia tem um arquivo <span class="inline-code">AGENTS.md</span> salvo no GitHub com o objetivo pedagógico, o foco em iniciantes e a checagem visual obrigatória para que nada disso se perca nas próximas conversas.
-          </p>
-          <div class="gemini4-note-links">
-            <a class="era-ref-chip" href="https://github.com/erykwho/learning-ai/blob/master/AGENTS.md" target="_blank" rel="noopener noreferrer">Ver o AGENTS.md real deste guia no GitHub ↗</a>
-            <a class="era-ref-chip" href="https://agents.md/" target="_blank" rel="noopener noreferrer">Padrão aberto agents.md (Oficial) ↗</a>
-          </div>
-        </div>
-
         <h3>Quer abrir o capô? Como cada peça é configurada e acionada na prática (Opcional)</h3>
         <p>
           Não é obrigatório saber os detalhes técnicos abaixo para usar o Antigravity, mas se você quiser entender <strong>como uma Skill ou integração é montada de verdade</strong> — e o que acontece no segundo em que você manda uma mensagem — abra os blocos abaixo:
@@ -733,14 +677,14 @@
         <details class="deep-dive" id="deepdive-skill">
           <summary>
             <span><strong>1. Skill:</strong> como é configurada e o que faz o agente abri-la?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
+            <span>
               <span class="deep-dive-badge">Ver por dentro</span>
               <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
           </summary>
           <div class="deep-dive-body">
             <p>
-              Na prática, uma <strong>Skill</strong> é apenas uma pastinha com um arquivo de texto chamado <span class="inline-code">SKILL.md</span> (e, se quiser, modelos ou scripts auxiliares junto). O segredo está em dividir o arquivo em duas partes: um <strong>cartão de visita curto no topo</strong> e o <strong>manual detalhado embaixo</strong>.
+              Na prática, uma <strong>Skill</strong> é apenas uma pastinha com um arquivo de texto chamado <span class="inline-code">SKILL.md</span> (e, se quiser, modelos ou <em>scripts</em> — pequenos programas automáticos — auxiliares junto). O segredo está em dividir o arquivo em duas partes: um <strong>cartão de visita curto no topo</strong> e o <strong>manual detalhado embaixo</strong>.
             </p>
             <div class="config-example-box">
               <div class="config-file-header">
@@ -792,7 +736,7 @@
         <details class="deep-dive" id="deepdive-mcp">
           <summary>
             <span><strong>2. Plugins &amp; MCP:</strong> como uma conexão externa é configurada e chamada?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
+            <span>
               <span class="deep-dive-badge">Ver por dentro</span>
               <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
@@ -839,29 +783,28 @@
           </div>
         </details>
 
-        <!-- Deep-dive 3: Harness & Project Rules -->
+        <!-- Deep-dive 3: Harness & Approval Loop -->
         <details class="deep-dive" id="deepdive-harness">
           <summary>
-            <span><strong>3. Harness &amp; Regras do Projeto:</strong> o que comanda o loop e pede sua aprovação?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
+            <span><strong>3. Harness:</strong> o que comanda o loop de trabalho e pede sua aprovação?</span>
+            <span>
               <span class="deep-dive-badge">Ver por dentro</span>
               <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
           </summary>
           <div class="deep-dive-body">
             <p>
-              Um <strong>Harness</strong> (como o Antigravity) não é só uma caixa de chat: ele combina um <strong>arquivo de regras fixas do projeto</strong> (muitas vezes chamado <span class="inline-code">AGENTS.md</span> ou instruções do projeto) com um motor de loop e controles de permissão humana.
+              Um <strong>Harness</strong> (como o Antigravity) não é só uma caixa de chat: ele funciona como o <strong>gerente da mesa de trabalho</strong>. Antes de enviar seu pedido ao modelo, ele reúne as regras do projeto (veremos como criar seu arquivo <a href="#sec-agents-md"><span class="inline-code">AGENTS.md</span> na Seção 05</a>), coordena cada ferramenta e freia antes de qualquer ação sensível.
             </p>
             <div class="config-example-box">
               <div class="config-file-header">
-                <span>📄 AGENTS.md (regras permanentes daquele projeto)</span>
-                <span class="config-file-hint">Lido sempre que uma conversa abre nesse projeto</span>
+                <span>🔄 O loop do Harness a cada pedido seu</span>
+                <span class="config-file-hint">Ciclo automático com freio humano</span>
               </div>
-              <pre class="config-snippet"><span class="code-key"># Regras deste projeto</span>
-- Responda sempre em português claro, sem jargão desnecessário. <span class="code-comment">← Estilo fixo</span>
-- Antes de publicar mudanças no site, rode os testes visuais.   <span class="code-comment">← Checklist automático</span>
-- Nunca apague arquivos nem altere a planilha oficial sem        <span class="code-comment">← Trava de segurança</span>
-  mostrar um resumo e pedir minha confirmação primeiro.</pre>
+              <pre class="config-snippet"><span class="code-key">1. CONTEXTO:</span>   junta seu pedido + regras fixas (<span class="code-key">AGENTS.md</span>) + índice de Skills
+<span class="code-key">2. AÇÃO:</span>       modelo pede ferramenta (ex: ler arquivo ou gravar planilha)
+<span class="code-key">3. FREIO:</span>      se a ação altera dados reais ➔ <span class="code-comment">PAUSA e pede seu clique ✓</span>
+<span class="code-key">4. RESULTADO:</span>  devolve a saída ao modelo até a tarefa ficar 100% pronta</pre>
             </div>
             <p class="trigger-flow-label">Como o Harness coordena o trabalho</p>
             <div class="trigger-flow">
@@ -893,7 +836,7 @@
         <details class="deep-dive" id="deepdive-sandbox">
           <summary>
             <span><strong>4. Sandbox / Cápsula:</strong> como o agente testa tudo sem mexer no seu computador?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
+            <span>
               <span class="deep-dive-badge">Ver por dentro</span>
               <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
@@ -940,7 +883,7 @@
         <details class="deep-dive" id="deepdive-sidecar">
           <summary>
             <span><strong>5. Sidecar:</strong> como o agente acessa seu GitHub ou Drive sem ver sua senha?</span>
-            <span style="display:flex; align-items:center; gap:8px;">
+            <span>
               <span class="deep-dive-badge">Ver por dentro</span>
               <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
@@ -1146,6 +1089,69 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           </div>
         </article>
 
+        <!-- Agent Instructions & AGENTS.md (Moved here right after seeing Antigravity in action!) -->
+        <h3 id="sec-agents-md">Como fazer o agente lembrar das suas regras: Instruções Globais e <span class="inline-code">AGENTS.md</span></h3>
+        <p>
+          Depois de criar seus primeiros projetos no Antigravity, surge uma dúvida natural: <em>"preciso repetir o objetivo do projeto e minhas regras toda vez que abrir uma conversa nova?"</em> Não! O ecossistema moderno resolve isso com <strong>Instruções para Agentes</strong> — e o arquivo padrão aberto <span class="inline-code">AGENTS.md</span>, apelidado de <strong>"o manual permanente do projeto para agentes"</strong>.
+        </p>
+        <p>
+          Ele é apenas um arquivo de texto comum salvo na raiz da pasta do seu projeto (que na próxima seção veremos como versionar no GitHub) para ser <strong>lido automaticamente toda vez que uma conversa começa ali</strong>. Entender as 3 camadas evita bagunça:
+        </p>
+
+        <div class="instr-layers-grid">
+          <article class="instr-layer-card">
+            <span class="instr-layer-scope">Camada 1 · Sua Conta</span>
+            <h4>Instruções Globais</h4>
+            <p>
+              Preferências pessoais que te acompanham em <strong>qualquer projeto</strong> (ex.: responder sempre em português brasileiro claro e propor um plano antes de grandes mudanças).
+            </p>
+            <div class="instr-layer-when"><strong>Quando usar:</strong> estilo pessoal fixo.</div>
+          </article>
+
+          <article class="instr-layer-card is-highlight">
+            <span class="instr-layer-scope">Camada 2 · Projeto</span>
+            <h4>Arquivo <span class="inline-code">AGENTS.md</span></h4>
+            <p>
+              O <strong>contrato permanente daquela pasta de projeto</strong> (padrão aberto): guarda o objetivo do produto, público-alvo, regras visuais, como testar e travas de segurança. Lido por Antigravity, Codex, Cursor, Copilot e outros.
+            </p>
+            <div class="instr-layer-when"><strong>Quando usar:</strong> regras que nunca podem se perder entre conversas.</div>
+          </article>
+
+          <article class="instr-layer-card">
+            <span class="instr-layer-scope">Camada 3 · Sob Demanda</span>
+            <h4>Skills (<span class="inline-code">SKILL.md</span>)</h4>
+            <p>
+              Receitas detalhadas para <strong>tarefas específicas</strong> (ex.: lançar recibos no Sheets). Só entram na memória do agente quando o seu pedido aciona o gatilho certo.
+            </p>
+            <div class="instr-layer-when"><strong>Quando usar:</strong> fluxos longos e repetitivos.</div>
+          </article>
+        </div>
+
+        <div class="config-example-box">
+          <div class="config-file-header">
+            <span>📄 AGENTS.md (exemplo simples que você pode pedir ao agente para criar)</span>
+            <span class="config-file-hint">Lido automaticamente em toda conversa nova</span>
+          </div>
+          <pre class="config-snippet"><span class="code-key"># Regras deste projeto</span>
+- Responda sempre em português claro, sem jargão desnecessário. <span class="code-comment">← Estilo fixo</span>
+- Antes de publicar mudanças no site, rode os testes visuais.   <span class="code-comment">← Checklist automático</span>
+- Nunca apague arquivos nem altere a planilha oficial sem        <span class="code-comment">← Trava de segurança</span>
+  mostrar um resumo e pedir minha confirmação primeiro.</pre>
+        </div>
+
+        <div class="gemini4-note-strip">
+          <p>
+            <strong>Regra de ouro:</strong> mantenha o <span class="inline-code">AGENTS.md</span> <strong>curto, direto e concreto</strong> (5 a 30 linhas bem objetivas valem mais que um texto gigante) — e <strong>nunca</strong> escreva senhas ou chaves nele! Você nem precisa criar na mão: basta pedir ao Antigravity <em>"Crie um AGENTS.md curto resumindo o objetivo e as regras que combinamos hoje"</em>.
+          </p>
+          <p>
+            <strong>Exemplo real vivo:</strong> este próprio guia tem um <span class="inline-code">AGENTS.md</span> público guardando o objetivo pedagógico, o foco em iniciantes e a checagem visual obrigatória para que nada disso se perca nas próximas conversas.
+          </p>
+          <div class="gemini4-note-links">
+            <a class="era-ref-chip" href="https://github.com/erykwho/learning-ai/blob/master/AGENTS.md" target="_blank" rel="noopener noreferrer">Ver o AGENTS.md real deste guia no GitHub ↗</a>
+            <a class="era-ref-chip" href="https://agents.md/" target="_blank" rel="noopener noreferrer">Padrão aberto agents.md (Oficial) ↗</a>
+          </div>
+        </div>
+
         <!-- Unblocking Tricks Cheat-Sheet (Section 05) -->
         <h3 id="sec-truques">Travou? 8 truques práticos para se desbloquear (no Chat ou no Antigravity)</h3>
         <p>
@@ -1335,6 +1341,13 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           A boa notícia: você não precisa pagar caro nem virar especialista em infraestrutura. Um sistema profissional moderno se apoia em <strong>três pilares gratuitos para começar</strong> e em um <strong>Escudo Anti-Quebra</strong> de três hábitos simples.
         </p>
 
+        <div class="analogy-box">
+          <p class="analogy-label">Analogia Rápida: Frontend, Backend e API</p>
+          <p>
+            Antes de abrir os 3 pilares, imagine um sistema web como um <strong>restaurante</strong>: o <strong>Frontend</strong> é o salão bonito e o cardápio (as telas que você vê no celular ou navegador); o <strong>Backend</strong> é a cozinha nos bastidores (onde as regras rodam e os dados são buscados no banco); e a <strong>API</strong> é o <strong>garçom</strong> que leva o pedido do salão até a cozinha — ou até outros serviços externos — e volta com a resposta pronta.
+          </p>
+        </div>
+
         <h3>Os 3 Pilares de um Sistema Moderno (com cota gratuita)</h3>
 
         <div class="stack-table-wrap">
@@ -1407,6 +1420,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
 
           <div class="pipeline-nodes" id="pipeline-nodes" role="group" aria-label="Etapas do ciclo de vida do prompt ao servidor"></div>
 
+          <p class="svg-scroll-hint" aria-hidden="true">← Deslize o diagrama para o lado para ver as 7 etapas →</p>
           <div class="pipe-svg-wrap" id="pipe-visual-svg"></div>
 
           <div class="pipe-detail-card" id="pipe-detail-card" aria-live="polite"></div>
@@ -1420,40 +1434,10 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           </div>
         </div>
 
-        <!-- Additional Software Engineering Components Subsection -->
-        <h3 id="sec-engenharia">Além dos 3 pilares: outros blocos da engenharia de software (quando o sistema cresce)</h3>
-        <p>
-          Os 3 pilares (GitHub + Banco + Servidor) já bastam para lançar 90% dos projetos pessoais e primeiras versões reais. Mas à medida que um sistema ganha usuários, envia arquivos pesados, cobra pagamentos ou precisa responder em milissegundos, entram em cena <strong>outros componentes clássicos da engenharia de software</strong> — como <strong>Cache</strong>, <strong>Filas &amp; Pub/Sub</strong>, <strong>Autenticação</strong>, <strong>Storage de arquivos</strong>, <strong>Cron/Webhooks</strong>, <strong>Observabilidade</strong> e as grandes plataformas de <strong>Nuvem</strong> (Google Cloud, AWS e Azure).
-        </p>
-
-        <div class="insight-box">
-          <p class="insight-label">Você não precisa montar essa engrenagem sozinho</p>
-          <p>
-            A melhor parte de trabalhar com agentes modernos (como o <strong>Google Antigravity</strong>) é que você só precisa entender <em>para que serve cada peça</em>. Na hora de colocar em prática, o agente consegue <strong>se conectar diretamente à maioria desses serviços</strong> (via Plugins, servidores MCP, APIs ou CLIs oficiais da nuvem) — ou, quando uma tela externa exige seu clique humano (como criar uma conta ou copiar uma chave), ele <strong>te guia passo a passo no setup</strong> e ainda confere prints da sua tela se você travar.
-          </p>
-        </div>
-
-        <!-- Interactive Widget 7: Software Engineering Architecture Map -->
-        <div class="interactive-stage" id="widget-architecture">
-          <div class="stage-header">
-            <div class="stage-title-group">
-              <p class="stage-eyebrow">Gráfico Interativo 07 · Mapa da Engenharia de Software</p>
-              <h3 class="stage-title">Como todas as peças se conectam na Nuvem (clique em qualquer bloco ou simule um fluxo)</h3>
-              <p class="stage-hint">Clique em qualquer componente no diagrama (ou nos atalhos abaixo) para entender o papel dele e como o agente ajuda no setup — depois teste os 3 fluxos reais trabalhando juntos.</p>
-            </div>
-          </div>
-
-          <div class="arch-pills" id="arch-pills" role="group" aria-label="Selecionar componente de engenharia de software"></div>
-          <div class="arch-svg-box" id="arch-svg-box"></div>
-          <div class="arch-scenarios-bar" id="arch-scenarios-bar" role="group" aria-label="Simular fluxos reais entre os componentes"></div>
-          <div class="arch-scenario-story" id="arch-scenario-story" aria-live="polite" hidden></div>
-          <div class="arch-inspector" id="arch-inspector" aria-live="polite"></div>
-        </div>
-
-        <!-- Recipe 3: Graduating the Section 5 prototype to Production -->
+        <!-- Recipe 3: Graduating the Section 5 prototype to Production (completes the core 3-pillars journey) -->
         <h3>Levando seu protótipo da Seção 5 para o nível profissional</h3>
         <p>
-          Agora que você já entendeu cada peça acima (GitHub, Neon, Vercel, Preview e <span class="inline-code">.env</span>), veja como é natural pedir ao Antigravity para profissionalizar aquele catálogo de livros e metas:
+          Agora que você já entendeu os 3 pilares e o Escudo Anti-Quebra (GitHub, Neon, Vercel, Preview e <span class="inline-code">.env</span>), veja como é natural pedir ao Antigravity para colocar aquele catálogo de livros e metas no ar:
         </p>
 
         <article class="recipe-card">
@@ -1475,6 +1459,42 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             </ol>
           </div>
         </article>
+
+        <!-- Additional Software Engineering Components Subsection (Optional / As-needed map) -->
+        <h3 id="sec-engenharia">Além dos 3 pilares: outros blocos da engenharia de software (Opcional — quando o sistema crescer)</h3>
+        <div class="optional-banner">
+          <span><strong>Mapa de consulta (opcional):</strong> os 3 pilares acima já bastam para lançar 90% dos projetos iniciais. Explore este mapa quando quiser entender o que grandes sistemas usam ao ganhar escala.</span>
+          <a href="#sec-proximos-passos" class="optional-skip-link">Pular para o Plano Prático ↓</a>
+        </div>
+
+        <p>
+          À medida que um sistema ganha muitos usuários, recebe arquivos pesados, cobra pagamentos ou precisa responder em milissegundos, entram em cena <strong>outros blocos clássicos da engenharia de software</strong> — como <strong>Cache</strong>, <strong>Filas &amp; Pub/Sub</strong>, <strong>Autenticação</strong>, <strong>Storage de arquivos</strong>, <strong>Cron/Webhooks</strong>, <strong>Observabilidade</strong> e as grandes plataformas de <strong>Nuvem</strong> (Google Cloud, AWS e Azure).
+        </p>
+
+        <div class="insight-box">
+          <p class="insight-label">Você não precisa montar essa engrenagem sozinho</p>
+          <p>
+            A melhor parte de trabalhar com agentes modernos (como o <strong>Google Antigravity</strong>) é que você só precisa entender <em>para que serve cada peça</em>. Na hora de colocar em prática, o agente consegue <strong>se conectar diretamente à maioria desses serviços</strong> (via Plugins, servidores MCP, APIs ou CLIs — comandos de texto no terminal — oficiais da nuvem) — ou, quando uma tela externa exige seu clique humano (como criar uma conta ou copiar uma chave), ele <strong>te guia passo a passo no setup</strong> e ainda confere prints da sua tela se você travar.
+          </p>
+        </div>
+
+        <!-- Interactive Widget 7: Software Engineering Architecture Map -->
+        <div class="interactive-stage" id="widget-architecture">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Gráfico Interativo 07 · Mapa da Engenharia de Software</p>
+              <h3 class="stage-title">Como todas as peças se conectam na Nuvem (clique em qualquer bloco ou simule um fluxo)</h3>
+              <p class="stage-hint">Começamos pelo centro que você já conhece (Servidor + Banco). Clique nos blocos ao redor para explorar ou teste os 3 fluxos reais trabalhando juntos.</p>
+            </div>
+          </div>
+
+          <div class="arch-pills" id="arch-pills" role="group" aria-label="Selecionar componente de engenharia de software"></div>
+          <p class="svg-scroll-hint" aria-hidden="true">← Deslize o diagrama para o lado ou use os botões acima →</p>
+          <div class="arch-svg-box" id="arch-svg-box"></div>
+          <div class="arch-scenarios-bar" id="arch-scenarios-bar" role="group" aria-label="Simular fluxos reais entre os componentes"></div>
+          <div class="arch-scenario-story" id="arch-scenario-story" aria-live="polite" hidden></div>
+          <div class="arch-inspector" id="arch-inspector" aria-live="polite"></div>
+        </div>
 
         <!-- Curated Resources Section 6 -->
         <div class="resources-block">
@@ -1678,7 +1698,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
 
         <h3 id="sec-cursos">Quer absorver com mais calma? Cursos rápidos e playlists de vídeos curtos</h3>
         <p>
-          Ler um guia inteiro de uma vez te dá o mapa mental completo, mas é totalmente normal esquecer nomes e detalhes depois de alguns dias. Selecionamos apenas <strong>cursos rápidos pensados para leigos</strong> e <strong>playlists consolidadas com vídeos curtos (4 a 15 minutos)</strong> — fugindo de maratonas técnicas longas — para você absorver aos poucos:
+          Ler um guia inteiro de uma vez te dá o mapa mental completo, mas é totalmente normal esquecer nomes e detalhes depois de alguns dias. Selecionamos apenas <strong>cursos rápidos pensados para leigos</strong> e <strong>playlists consolidadas com vídeos curtos (4 a 18 minutos)</strong> — fugindo de maratonas técnicas longas — para você absorver aos poucos:
         </p>
 
         <div class="study-pacing-tip">
@@ -1700,7 +1720,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
 
         <h3>Glossário de Bolso</h3>
         <p>
-          Esqueceu o que significa <em>Harness</em>, <em>RAG</em>, <em>Sidecar</em> ou <em>Rollback</em>? Filtre por categoria ou digite qualquer termo abaixo:
+          Esqueceu o que significa <em>Token</em>, <em>Harness</em>, <em>RAG</em>, <em>API</em> ou <em>Rollback</em>? Filtre por categoria ou digite qualquer termo abaixo:
         </p>
 
         <div class="glossary-controls">
@@ -1708,18 +1728,18 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             type="search"
             id="glossary-search"
             class="glossary-search"
-            placeholder="Buscar termo (ex: MCP, Neon, Sandbox, RAG...)"
+            placeholder="Buscar termo (ex: MCP, Neon, Token, API, RAG...)"
             aria-label="Buscar termo no glossário"
           />
-          <div class="pill-tabs" id="glossary-tabs" style="margin-bottom:0;">
-            <button type="button" class="pill-tab is-active" data-cat="Todos">Todos</button>
-            <button type="button" class="pill-tab" data-cat="Fundamentos">Fundamentos</button>
-            <button type="button" class="pill-tab" data-cat="Agentes">Agentes</button>
-            <button type="button" class="pill-tab" data-cat="Sistemas">Sistemas</button>
+          <div class="pill-tabs" id="glossary-tabs" role="group" aria-label="Filtrar termos do glossário por categoria" style="margin-bottom:0;">
+            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (37)</button>
+            <button type="button" class="pill-tab" data-cat="Fundamentos" aria-pressed="false">Fundamentos (11)</button>
+            <button type="button" class="pill-tab" data-cat="Agentes" aria-pressed="false">Agentes (11)</button>
+            <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (15)</button>
           </div>
         </div>
 
-        <div class="glossary-grid" id="glossary-grid"></div>
+        <div class="glossary-grid" id="glossary-grid" aria-live="polite"></div>
       </section>
 
       <footer class="site-footer">

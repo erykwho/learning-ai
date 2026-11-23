@@ -23,6 +23,7 @@ Este arquivo define o contrato permanente deste repositório para agentes de IA 
 - **Curadoria rigorosa de links:** inclua apenas links reais e verificados. Em cursos e playlists recomendados para iniciantes, **evite vídeos excessivamente longos ou técnicos demais**; priorize módulos curtos (4 a 18 min) e fontes consolidadas.
 - **Precisão sobre preços/planos:** verifique fatos antes de afirmar se algo é pago ou grátis (ex.: os 4 degraus do Google, incluindo o plano individual do Google Antigravity, oferecem cota gratuita para começar; modelos específicos como Gemini 4 Neon exigem planos Pro/Ultra).
 - **Evitar confusão de nomes:** deixe claro quando dois nomes coincidem (ex.: **Gemini 4 Neon** = modelo de IA do Google vs. **Neon Postgres** = banco de dados gratuito).
+- **Segurança prática para leigos:** reforce hábitos simples de privacidade (não colar senhas/dados sensíveis em chats públicos) e explique por que aprovações humanas protegem contra *Prompt Injection*.
 
 ## 3. Arquitetura e Sistema Visual
 
@@ -34,9 +35,9 @@ Este arquivo define o contrato permanente deste repositório para agentes de IA 
   - `css/style.css` — tema claro papel editorial quente (`#faf8f4`) e tema escuro grafite nítido (`#111418`), tipografia `Newsreader` + `Plus Jakarta Sans` + `JetBrains Mono`.
   - `assets/tour/` — prints ilustrativos 2x Retina do carrossel do Google Antigravity (Seção 05).
 - **Regras visuais:**
-  - Todo gráfico SVG novo deve usar variáveis CSS (`var(--ink-primary)`, `var(--bg-surface)`, `var(--accent-*)`) para funcionar igualmente bem em modo claro e modo escuro.
+  - Todo gráfico SVG novo deve usar variáveis CSS (`var(--ink-primary)`, `var(--bg-surface)`, `var(--accent-*)`, e `var(--ink-inverse)` para texto sobre fundos sólidos de destaque) para funcionar com alto contraste tanto em modo claro quanto em modo escuro.
   - Mantenha estética editorial limpa; evite clichês visuais (gradientes neon/roxo sobre fundo escuro, texto com gradiente, bordas brilhantes artificiais).
-  - Garanta layout responsivo sem nenhum estouro horizontal em telas de `390px`.
+  - Garanta layout responsivo sem nenhum estouro horizontal em telas de `390px` (e rolagem horizontal legível em diagramas SVG largos).
 
 ## 4. Critérios de Conclusão e Verificação
 
@@ -45,7 +46,7 @@ Antes de concluir qualquer alteração ou dar `git push`:
 1. **Sintaxe JS:** rodar `node --check js/data.js && node --check js/app.js`.
 2. **Consistência de contadores e referências:** atualizar contagens visíveis quando adicionar widgets, cards ou itens filtráveis (Hero `N gráficos interativos`, rótulos de abas com `(N)`, `Glossário de Bolso` e `README.md`).
 3. **Verificação no navegador real (Playwright):** abrir a página via servidor local HTTP e confirmar `0` console errors, `0` page errors e `scrollWidth <= clientWidth` em mobile (`390px`).
-4. **Inspeção visual obrigatória:** tirar e revisar capturas de tela de qualquer seção, diagrama SVG ou widget alterado em **modo claro**, **modo escuro** e **mobile (`390px`)** para garantir ausência de texto cortado, sobreposição ou contraste baixo.
+4. **Inspeção visual obrigatória:** tirar e revisar capturas de tela de qualquer seção, diagrama SVG ou widget alterado em **modo claro**, **modo escuro** (conferindo contraste de texto dentro de badges SVG) e **mobile (`390px`)** para garantir ausência de texto cortado, sobreposição ou contraste baixo.
 5. **Deploy no GitHub Pages:** após `git push origin master`, acompanhar o workflow `pages-build-deployment` e confirmar que o status do Pages retornou `"built"`.
 
 ## 5. Segurança e Limites
