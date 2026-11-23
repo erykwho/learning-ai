@@ -1264,5 +1264,119 @@ window.GUIDE_DATA = {
       title: "Publicar sua primeira página no ar via GitHub Pages ou Vercel",
       desc: "Experimente o ciclo completo Prompt → GitHub → URL compartilhável (exatamente como esta página que você está lendo!)."
     }
+  ],
+
+  /* Section 08: Curated Short Courses & Consolidated Short-Video Playlists */
+  studyResources: [
+    {
+      type: "course",
+      isPt: false,
+      kind: "Curso Rápido · Google",
+      isVideo: false,
+      duration: "~45 min",
+      badge: "Grátis · EN (leg. PT)",
+      title: "Introduction to Generative AI — Google Skills",
+      url: "https://www.skills.google/course_templates/536",
+      note: "Microcurso oficial do Google Cloud para iniciantes absolutos: 1 vídeo curto + revisão leve explicando o que é IA Generativa e como LLMs funcionam."
+    },
+    {
+      type: "course",
+      isPt: true,
+      kind: "Curso Interativo · Univ. Helsinque",
+      isVideo: false,
+      duration: "Capítulos curtos",
+      badge: "Grátis · PT",
+      title: "Elementos de IA (Elements of AI) — Em Português",
+      url: "https://course.elementsofai.com/pt/",
+      note: "Mais de 1 milhão de alunos no mundo: curso gratuito em português criado para leigos (zero código e zero matemática pesada), com exercícios curtos por capítulo."
+    },
+    {
+      type: "course",
+      isPt: false,
+      kind: "Curso Rápido · DeepLearning.AI",
+      isVideo: false,
+      duration: "~5–6h (aulas 5 min)",
+      badge: "Grátis p/ assistir · EN (leg. PT)",
+      title: "Generative AI for Everyone — Andrew Ng (Coursera)",
+      url: "https://www.coursera.org/learn/generative-ai-for-everyone",
+      note: "Referência mundial para não-técnicos: vídeos curtinhos explicando o que a IA faz bem, onde erra e como aplicar em projetos reais sem programar."
+    },
+    {
+      type: "course",
+      isPt: false,
+      kind: "Curso Prático · Grow with Google",
+      isVideo: false,
+      duration: "~4–9h (módulos curtos)",
+      badge: "Teste grátis / Coursera · EN (leg. PT)",
+      title: "Google AI Essentials & Prompting Essentials",
+      url: "https://grow.google/ai-essentials/",
+      note: "Feito pelo próprio Google para o dia a dia no trabalho: método em 5 passos para escrever bons prompts, ganhar produtividade e usar IA com segurança."
+    },
+    {
+      type: "course",
+      isPt: false,
+      kind: "Trilha Modular · Microsoft Learn",
+      isVideo: false,
+      duration: "Aulas de ~10 min",
+      badge: "Grátis · EN (leg. PT)",
+      title: "AI Agents for Beginners — Conceitos de Agentes",
+      url: "https://learn.microsoft.com/en-us/shows/ai-agents-for-beginners/",
+      note: "Lições curtas e independentes cobrindo ferramentas, planejamento, memória e multi-agentes — ótimo para revisar a Seção 04 no seu tempo."
+    },
+    {
+      type: "course",
+      isPt: true,
+      kind: "Curso Brasileiro · Curso em Vídeo",
+      isVideo: false,
+      duration: "Blocos curtos",
+      badge: "Grátis · PT-BR",
+      title: "Curso Grátis de Inteligência Artificial — Gustavo Guanabara",
+      url: "https://www.cursoemvideo.com/curso/curso-gratis-de-inteligencia-artificial/",
+      note: "Em português brasileiro com didática leve e prática — você assiste no seu ritmo por módulos, focando em uso cotidiano e estratégico."
+    },
+    {
+      type: "playlist",
+      isPt: false,
+      kind: "Playlist YouTube · Quadro Branco",
+      isVideo: true,
+      duration: "~6–12 min/vídeo",
+      badge: "Grátis · EN (leg. PT)",
+      title: "AI Fundamentals — IBM Technology",
+      url: "https://www.youtube.com/playlist?list=PLOspHqNVtKADfxkuDuHduUkDExBpEt3DF",
+      note: "Explicações super claras no quadro branco sobre RAG, Agentes, MCP e termos atuais — sempre vídeos curtos e diretos ao ponto."
+    },
+    {
+      type: "playlist",
+      isPt: false,
+      kind: "Playlist YouTube · 21 Episódios",
+      isVideo: true,
+      duration: "~10 min/vídeo",
+      badge: "Grátis · EN (leg. PT)",
+      title: "CrashCourse — Artificial Intelligence (Série Clássica)",
+      url: "https://www.youtube.com/playlist?list=PL8dPuuaLjXtO65LeD2p4_Sb5XQ51par_b",
+      note: "Série consolidada da PBS com animações dinâmicas e zero enrolação — perfeita para assistir 1 episódio no café e fixar a base de IA."
+    },
+    {
+      type: "playlist",
+      isPt: false,
+      kind: "Playlist YouTube · Animações",
+      isVideo: true,
+      duration: "~4–8 min/vídeo",
+      badge: "Grátis · EN (leg. PT)",
+      title: "ByteByteGo — Engenharia de Software & Nuvem Visual",
+      url: "https://www.youtube.com/playlist?list=UUZgt6AzoyjslHTC9dz0UoTw",
+      note: "Vídeos curtíssimos e animados explicando Cache, Filas, Pub/Sub, DNS, HTTPS, APIs e Nuvem — o par perfeito para fixar a Seção 06 sem código."
+    },
+    {
+      type: "playlist",
+      isPt: true,
+      kind: "Playlist YouTube · Sem Terminal",
+      isVideo: true,
+      duration: "~12–18 min/vídeo",
+      badge: "Grátis · PT-BR",
+      title: "Git e GitHub para Iniciantes — Curso em Vídeo",
+      url: "https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA",
+      note: "A playlist mais famosa do Brasil sobre o Pilar 1: ensina repositórios, commits, branches e GitHub Pages visualmente, sem assustar com tela preta."
+    }
   ]
 };

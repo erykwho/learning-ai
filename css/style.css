@@ -3266,6 +3266,38 @@ input {
   color: #0b1220;
 }
 
+.study-pacing-tip {
+  margin: 14px 0 18px;
+  padding: 12px 15px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-amber-soft);
+  border-left: 3.5px solid var(--accent-amber);
+  font-size: 13.8px;
+  line-height: 1.55;
+  color: var(--ink-primary);
+}
+
+.study-card-foot {
+  margin-top: auto;
+  padding-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.duration-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* Footer */
 .site-footer {
   margin-top: 64px;

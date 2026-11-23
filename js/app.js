@@ -1979,4 +1979,59 @@
 
     renderArchInspector(activeArchPart);
   }
+
+  /* ------------------------------------------------------------------------
+     16. Section 08 — Filterable Short Courses & Consolidated Playlists Shelf
+     ------------------------------------------------------------------------ */
+  const studyTabsEl = document.getElementById("study-shelf-tabs");
+  const studyGridEl = document.getElementById("study-shelf-grid");
+  let activeStudyFilter = "all";
+
+  function renderStudyShelf(filterKey) {
+    if (!studyGridEl || !DATA.studyResources) return;
+    activeStudyFilter = filterKey;
+
+    if (studyTabsEl) {
+      Array.from(studyTabsEl.querySelectorAll(".filter-mini-btn")).forEach((btn) => {
+        const active = btn.dataset.studyFilter === filterKey;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    const items = DATA.studyResources.filter((item) => {
+      if (filterKey === "all") return true;
+      if (filterKey === "pt") return item.isPt;
+      return item.type === filterKey;
+    });
+
+    studyGridEl.innerHTML = items
+      .map(
+        (item) => `
+          <a class="resource-card" href="${item.url}" target="_blank" rel="noopener noreferrer">
+            <div class="resource-top">
+              <span class="resource-kind${item.isVideo ? " is-video" : ""}">${item.kind}</span>
+              <span class="duration-tag">${item.duration}</span>
+            </div>
+            <span class="resource-name">${item.title}</span>
+            <span class="resource-note">${item.note}</span>
+            <div class="study-card-foot">
+              <span class="lang-tag">${item.badge}</span>
+              <span style="font-size:11.5px; font-weight:600; color:var(--accent-blue);">Abrir ↗</span>
+            </div>
+          </a>
+        `
+      )
+      .join("");
+  }
+
+  if (studyTabsEl && studyGridEl) {
+    studyTabsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-mini-btn");
+      if (btn && btn.dataset.studyFilter) {
+        renderStudyShelf(btn.dataset.studyFilter);
+      }
+    });
+    renderStudyShelf(activeStudyFilter);
+  }
 })();
