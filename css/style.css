@@ -3033,6 +3033,239 @@ input {
   color: var(--ink-primary);
 }
 
+/* ==========================================================================
+   Section 06: Software Engineering Architecture Map & Scenario Simulator
+   ========================================================================== */
+
+.arch-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.arch-pill-btn {
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-subtle);
+  color: var(--ink-secondary);
+  font-size: 12.4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.arch-pill-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--ink-primary);
+}
+
+.arch-pill-btn.is-active {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .arch-pill-btn.is-active {
+  color: #0b1220;
+}
+
+.arch-svg-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+.arch-svg-box svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.arch-node {
+  cursor: pointer;
+  transition: opacity 0.18s ease;
+}
+
+.arch-node:hover rect {
+  stroke-width: 2.3px;
+}
+
+.arch-scenarios-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 14px;
+}
+
+.arch-scenarios-label {
+  font-family: var(--font-mono);
+  font-size: 10.8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin-right: 4px;
+}
+
+.arch-scenario-btn {
+  padding: 6px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  color: var(--ink-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.arch-scenario-btn:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.arch-scenario-btn.is-active {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .arch-scenario-btn.is-active {
+  color: #0b1220;
+}
+
+.arch-scenario-story {
+  margin-bottom: 14px;
+  padding: 12px 15px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-green-soft);
+  border-left: 3.5px solid var(--accent-green);
+  font-size: 14px;
+  line-height: 1.56;
+  color: var(--ink-primary);
+}
+
+.arch-scenario-story[hidden] {
+  display: none;
+}
+
+.arch-inspector {
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.arch-inspector-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.arch-inspector-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+
+.arch-inspector-analogy {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--accent-amber-soft);
+  color: var(--accent-amber);
+}
+
+.arch-inspector-desc {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+}
+
+.arch-inspector-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.arch-meta-card {
+  padding: 11px 13px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: 13.2px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
+.arch-meta-label {
+  display: block;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-primary);
+  margin-bottom: 4px;
+}
+
+.arch-meta-card strong {
+  color: var(--ink-primary);
+}
+
+.arch-agent-help {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-blue-soft);
+  border: 1px solid var(--accent-blue-mid);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-primary);
+}
+
+.arch-agent-help-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.arch-agent-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--accent-blue);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .arch-agent-badge {
+  color: #0b1220;
+}
+
 /* Footer */
 .site-footer {
   margin-top: 64px;
@@ -3147,6 +3380,7 @@ input {
   .gemini4-grid,
   .pillar-concepts-grid,
   .pillar-bottom-notes,
+  .arch-inspector-meta,
   .eco-grid,
   .tricks-grid,
   .tour-pins-grid,

@@ -1635,4 +1635,348 @@
 
     renderPillar(DATA.pillars[0].id);
   }
+
+  /* ------------------------------------------------------------------------
+     15. Section 06 — Widget 7: Software Engineering Architecture Map
+     ------------------------------------------------------------------------ */
+  const archPillsEl = document.getElementById("arch-pills");
+  const archSvgWrapEl = document.getElementById("arch-svg-box");
+  const archScenariosEl = document.getElementById("arch-scenarios-bar");
+  const archStoryEl = document.getElementById("arch-scenario-story");
+  const archInspectorEl = document.getElementById("arch-inspector");
+
+  let activeArchPart = "queues";
+  let activeArchScenario = null;
+
+  function renderArchSvg() {
+    if (!archSvgWrapEl) return;
+    const scenario = activeArchScenario
+      ? (DATA.archScenarios || []).find((s) => s.id === activeArchScenario)
+      : null;
+    const highlightSet = scenario ? new Set(scenario.nodes) : new Set([activeArchPart]);
+
+    const isLit = (key) => highlightSet.has(key);
+    const nodeOpacity = (key) => {
+      if (!scenario) return 1;
+      return isLit(key) ? 1 : 0.34;
+    };
+    const strokeW = (key) => (isLit(key) ? 2.5 : 1.4);
+    const strokeC = (key, baseColor) => (isLit(key) ? baseColor : "var(--border-strong)");
+    const fillC = (key, softColor) => (isLit(key) ? softColor : "var(--bg-surface)");
+
+    const lineColor = (a, b, accent) =>
+      scenario ? (isLit(a) && isLit(b) ? accent : "var(--border-subtle)") : "var(--border-strong)";
+    const lineW = (a, b) => (scenario && isLit(a) && isLit(b) ? 2.6 : 1.5);
+
+    const cloudActive = activeArchPart === "cloud" && !scenario;
+
+    archSvgWrapEl.innerHTML = `
+      <svg viewBox="0 0 680 396" role="img" aria-label="Mapa interativo dos componentes de engenharia de software dentro da Nuvem: Autenticação, Cache, Servidor, Banco de Dados, Storage, Filas e Pub/Sub, Workers, Cron e Webhooks, APIs Externas e Observabilidade">
+        <!-- Outer Cloud Wrapper -->
+        <g class="arch-node" data-arch="cloud" tabindex="0" role="button" aria-label="Inspecionar Nuvem e Serviços de Nuvem">
+          <rect x="8" y="8" width="664" height="380" rx="16"
+            fill="${cloudActive ? "var(--accent-blue-soft)" : "var(--bg-page)"}"
+            stroke="${cloudActive ? "var(--accent-blue)" : "var(--border-strong)"}"
+            stroke-width="${cloudActive ? 2.2 : 1.5}"
+            stroke-dasharray="7 5" />
+          <rect x="20" y="16" width="640" height="28" rx="8"
+            fill="${cloudActive ? "var(--accent-blue)" : "var(--bg-surface)"}"
+            stroke="${cloudActive ? "var(--accent-blue)" : "var(--border-subtle)"}" />
+          <text x="340" y="34" text-anchor="middle"
+            fill="${cloudActive ? "var(--ink-inverse)" : "var(--ink-primary)"}"
+            font-size="10.2" font-weight="700" font-family="JetBrains Mono, monospace">
+            NUVEM &amp; SERVIÇOS DE NUVEM (Google Cloud · Vercel · Cloudflare · AWS · Azure) — clique aqui
+          </text>
+        </g>
+
+        <!-- Clean Orthogonal Connectors (zero overlaps) -->
+        <!-- auth -> backend -->
+        <path d="M 182 98 L 202 98 L 202 168 L 222 168" fill="none"
+          stroke="${lineColor("auth", "core", "var(--accent-blue)")}" stroke-width="${lineW("auth", "core")}" />
+        <!-- cron -> backend -->
+        <line x1="182" y1="190" x2="222" y2="190"
+          stroke="${lineColor("cron", "core", "var(--accent-amber)")}" stroke-width="${lineW("cron", "core")}" />
+        <!-- apis <-> backend -->
+        <path d="M 182 282 L 202 282 L 202 208 L 222 208" fill="none"
+          stroke="${lineColor("apis", "core", "var(--accent-blue)")}" stroke-width="${lineW("apis", "core")}" />
+        <!-- cache <-> backend -->
+        <line x1="338" y1="126" x2="338" y2="150"
+          stroke="${lineColor("cache", "core", "var(--accent-amber)")}" stroke-width="${lineW("cache", "core")}" />
+        <!-- backend <-> db -->
+        <line x1="277" y1="226" x2="277" y2="248"
+          stroke="${lineColor("core", "core", "var(--accent-green)")}" stroke-width="${lineW("core", "core")}" />
+        <!-- backend <-> storage -->
+        <line x1="399" y1="226" x2="399" y2="248"
+          stroke="${lineColor("core", "storage", "var(--accent-green)")}" stroke-width="${lineW("core", "storage")}" />
+        <!-- backend -> queues (async dashed) -->
+        <path d="M 454 172 L 474 172 L 474 134 L 494 134" fill="none" stroke-dasharray="5 3"
+          stroke="${lineColor("core", "queues", "var(--accent-amber)")}" stroke-width="${lineW("core", "queues")}" />
+        <!-- queues -> workers -->
+        <line x1="574" y1="180" x2="574" y2="212"
+          stroke="${lineColor("queues", "queues", "var(--accent-amber)")}" stroke-width="${lineW("queues", "queues")}" />
+        <!-- workers -> backend/db return (async dashed) -->
+        <path d="M 494 250 L 474 250 L 474 206 L 454 206" fill="none" stroke-dasharray="5 3"
+          stroke="${lineColor("queues", "core", "var(--accent-green)")}" stroke-width="${lineW("queues", "core")}" />
+
+        <!-- LEFT COLUMN: Entry & Triggers -->
+        <!-- Auth -->
+        <g class="arch-node" data-arch="auth" opacity="${nodeOpacity("auth")}" tabindex="0" role="button" aria-label="Inspecionar Autenticação">
+          <rect x="24" y="62" width="158" height="72" rx="10"
+            fill="${fillC("auth", "var(--accent-blue-soft)")}"
+            stroke="${strokeC("auth", "var(--accent-blue)")}"
+            stroke-width="${strokeW("auth")}" />
+          <text x="36" y="82" fill="var(--accent-blue)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">PORTARIA</text>
+          <text x="36" y="101" fill="var(--ink-primary)" font-size="12.2" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Autenticação (Auth)</text>
+          <text x="36" y="119" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">Login Google &amp; papéis</text>
+        </g>
+
+        <!-- Cron & Webhooks -->
+        <g class="arch-node" data-arch="cron" opacity="${nodeOpacity("cron")}" tabindex="0" role="button" aria-label="Inspecionar Cron e Webhooks">
+          <rect x="24" y="154" width="158" height="72" rx="10"
+            fill="${fillC("cron", "var(--accent-amber-soft)")}"
+            stroke="${strokeC("cron", "var(--accent-amber)")}"
+            stroke-width="${strokeW("cron")}" />
+          <text x="36" y="174" fill="var(--accent-amber)" font-size="9" font-weight="700" font-family="JetBrains Mono, monospace">DESPERTADOR / CAMPAINHA</text>
+          <text x="36" y="193" fill="var(--ink-primary)" font-size="12.2" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Cron &amp; Webhooks</text>
+          <text x="36" y="211" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">Horários fixos &amp; eventos</text>
+        </g>
+
+        <!-- External APIs -->
+        <g class="arch-node" data-arch="apis" opacity="${nodeOpacity("apis")}" tabindex="0" role="button" aria-label="Inspecionar APIs Externas">
+          <rect x="24" y="246" width="158" height="72" rx="10"
+            fill="${fillC("apis", "var(--accent-blue-soft)")}"
+            stroke="${strokeC("apis", "var(--accent-blue)")}"
+            stroke-width="${strokeW("apis")}" />
+          <text x="36" y="266" fill="var(--accent-blue)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">TERCEIRIZADOS</text>
+          <text x="36" y="285" fill="var(--ink-primary)" font-size="12.2" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">APIs Externas</text>
+          <text x="36" y="303" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">Stripe, E-mail, Gemini</text>
+        </g>
+
+        <!-- CENTER COLUMN: Cache + Core Hub + DB/Storage -->
+        <!-- Cache -->
+        <g class="arch-node" data-arch="cache" opacity="${nodeOpacity("cache")}" tabindex="0" role="button" aria-label="Inspecionar Cache">
+          <rect x="222" y="62" width="232" height="64" rx="10"
+            fill="${fillC("cache", "var(--accent-amber-soft)")}"
+            stroke="${strokeC("cache", "var(--accent-amber)")}"
+            stroke-width="${strokeW("cache")}" />
+          <text x="338" y="81" text-anchor="middle" fill="var(--accent-amber)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">MEMÓRIA ULTRARRÁPIDA</text>
+          <text x="338" y="99" text-anchor="middle" fill="var(--ink-primary)" font-size="12.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Cache (Redis / Borda)</text>
+          <text x="338" y="115" text-anchor="middle" fill="var(--ink-secondary)" font-size="9.8" font-family="Plus Jakarta Sans, sans-serif">Post-it em milissegundos antes do banco</text>
+        </g>
+
+        <!-- Core Backend Hub -->
+        <g class="arch-node" data-arch="core" opacity="${nodeOpacity("core")}" tabindex="0" role="button" aria-label="Inspecionar Servidor e Banco">
+          <rect x="222" y="150" width="232" height="76" rx="12"
+            fill="${fillC("core", "var(--accent-blue-soft)")}"
+            stroke="${strokeC("core", "var(--accent-blue)")}"
+            stroke-width="${strokeW("core")}" />
+          <text x="338" y="170" text-anchor="middle" fill="var(--accent-blue)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">CORAÇÃO (PILARES 2 &amp; 3)</text>
+          <text x="338" y="190" text-anchor="middle" fill="var(--ink-primary)" font-size="13.2" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Servidor / Backend (API)</text>
+          <text x="338" y="209" text-anchor="middle" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">Recebe pedidos, lê .env e coordena tudo</text>
+        </g>
+
+        <!-- Database -->
+        <g class="arch-node" data-arch="core" opacity="${nodeOpacity("core")}" tabindex="0" role="button" aria-label="Inspecionar Banco de Dados">
+          <rect x="222" y="248" width="110" height="70" rx="10"
+            fill="${fillC("core", "var(--accent-green-soft)")}"
+            stroke="${strokeC("core", "var(--accent-green)")}"
+            stroke-width="${strokeW("core")}" />
+          <text x="277" y="268" text-anchor="middle" fill="var(--accent-green)" font-size="9" font-weight="700" font-family="JetBrains Mono, monospace">DADOS SQL</text>
+          <text x="277" y="287" text-anchor="middle" fill="var(--ink-primary)" font-size="11.8" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Banco</text>
+          <text x="277" y="304" text-anchor="middle" fill="var(--ink-secondary)" font-size="9.5" font-family="Plus Jakarta Sans, sans-serif">Neon / Postgres</text>
+        </g>
+
+        <!-- Object Storage -->
+        <g class="arch-node" data-arch="storage" opacity="${nodeOpacity("storage")}" tabindex="0" role="button" aria-label="Inspecionar Storage de Arquivos">
+          <rect x="344" y="248" width="110" height="70" rx="10"
+            fill="${fillC("storage", "var(--accent-green-soft)")}"
+            stroke="${strokeC("storage", "var(--accent-green)")}"
+            stroke-width="${strokeW("storage")}" />
+          <text x="399" y="268" text-anchor="middle" fill="var(--accent-green)" font-size="9" font-weight="700" font-family="JetBrains Mono, monospace">ARQUIVOS</text>
+          <text x="399" y="287" text-anchor="middle" fill="var(--ink-primary)" font-size="11.8" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Storage</text>
+          <text x="399" y="304" text-anchor="middle" fill="var(--ink-secondary)" font-size="9.4" font-family="Plus Jakarta Sans, sans-serif">Fotos/PDF (R2/S3)</text>
+        </g>
+
+        <!-- RIGHT COLUMN: Async Queues / PubSub + Workers -->
+        <g class="arch-node" data-arch="queues" opacity="${nodeOpacity("queues")}" tabindex="0" role="button" aria-label="Inspecionar Filas e Pub/Sub">
+          <rect x="494" y="88" width="162" height="92" rx="10"
+            fill="${fillC("queues", "var(--accent-amber-soft)")}"
+            stroke="${strokeC("queues", "var(--accent-amber)")}"
+            stroke-width="${strokeW("queues")}" />
+          <text x="506" y="108" fill="var(--accent-amber)" font-size="9" font-weight="700" font-family="JetBrains Mono, monospace">SEM TRAVAR A TELA</text>
+          <text x="506" y="128" fill="var(--ink-primary)" font-size="12.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Filas &amp; Pub/Sub</text>
+          <text x="506" y="146" fill="var(--ink-secondary)" font-size="9.8" font-family="Plus Jakarta Sans, sans-serif">Enfileira tarefas lentas</text>
+          <text x="506" y="161" fill="var(--ink-secondary)" font-size="9.8" font-family="Plus Jakarta Sans, sans-serif">e avisa vários assinantes</text>
+        </g>
+
+        <g class="arch-node" data-arch="queues" opacity="${nodeOpacity("queues")}" tabindex="0" role="button" aria-label="Inspecionar Workers de Bastidores">
+          <rect x="494" y="212" width="162" height="76" rx="10"
+            fill="${fillC("queues", "var(--accent-amber-soft)")}"
+            stroke="${strokeC("queues", "var(--accent-amber)")}"
+            stroke-width="${strokeW("queues")}" />
+          <text x="506" y="232" fill="var(--accent-amber)" font-size="9" font-weight="700" font-family="JetBrains Mono, monospace">BASTIDORES</text>
+          <text x="506" y="251" fill="var(--ink-primary)" font-size="12.2" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Workers (Robôs)</text>
+          <text x="506" y="269" fill="var(--ink-secondary)" font-size="9.8" font-family="Plus Jakarta Sans, sans-serif">Gera PDF, e-mail e IA</text>
+        </g>
+
+        <!-- BOTTOM FULL-WIDTH BAR: Observability -->
+        <g class="arch-node" data-arch="observability" opacity="${nodeOpacity("observability")}" tabindex="0" role="button" aria-label="Inspecionar Observabilidade">
+          <rect x="24" y="336" width="632" height="38" rx="9"
+            fill="${fillC("observability", "var(--accent-green-soft)")}"
+            stroke="${strokeC("observability", "var(--accent-green)")}"
+            stroke-width="${strokeW("observability")}" />
+          <text x="340" y="359" text-anchor="middle" fill="var(--ink-primary)" font-size="10.8" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">
+            OBSERVABILIDADE (Logs, Métricas &amp; Alertas · Sentry / Cloud Logging) — vigia tudo 24h e avisa se algo quebrar
+          </text>
+        </g>
+      </svg>
+    `;
+  }
+
+  function renderArchInspector(partKey) {
+    if (!archInspectorEl || !DATA.archParts) return;
+    const part = DATA.archParts.find((p) => p.id === partKey) || DATA.archParts[0];
+    if (!part) return;
+    activeArchPart = part.id;
+
+    if (archPillsEl) {
+      Array.from(archPillsEl.querySelectorAll(".arch-pill-btn")).forEach((btn) => {
+        const active = !activeArchScenario && btn.dataset.arch === part.id;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    archInspectorEl.innerHTML = `
+      <div class="arch-inspector-head">
+        <h4 class="arch-inspector-title">${part.name}</h4>
+        <span class="arch-inspector-analogy">${part.analogy}</span>
+      </div>
+      <p class="arch-inspector-desc">${part.desc}</p>
+      <div class="arch-inspector-meta">
+        <div class="arch-meta-card">
+          <span class="arch-meta-label">Quando você precisa disso?</span>
+          ${part.whenNeeded}
+        </div>
+        <div class="arch-meta-card">
+          <span class="arch-meta-label">Exemplos (com plano grátis)</span>
+          ${part.examples}
+        </div>
+      </div>
+      <div class="arch-agent-help">
+        <div class="arch-agent-help-top">
+          <span class="arch-agent-badge">Como o agente ajuda</span>
+          <strong>${part.agentMode}</strong>
+        </div>
+        <span>${part.agentTip}</span>
+      </div>
+    `;
+    renderArchSvg();
+  }
+
+  function selectArchScenario(scenarioId) {
+    if (!DATA.archScenarios) return;
+    activeArchScenario = activeArchScenario === scenarioId ? null : scenarioId;
+
+    if (archScenariosEl) {
+      Array.from(archScenariosEl.querySelectorAll(".arch-scenario-btn")).forEach((btn) => {
+        const active = btn.dataset.scenario === activeArchScenario;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    if (archStoryEl) {
+      const sc = DATA.archScenarios.find((s) => s.id === activeArchScenario);
+      if (sc) {
+        archStoryEl.innerHTML = `<strong>${sc.title}:</strong> ${sc.story}`;
+        archStoryEl.hidden = false;
+      } else {
+        archStoryEl.hidden = true;
+      }
+    }
+
+    if (archPillsEl) {
+      Array.from(archPillsEl.querySelectorAll(".arch-pill-btn")).forEach((btn) => {
+        const active = !activeArchScenario && btn.dataset.arch === activeArchPart;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    renderArchSvg();
+  }
+
+  if (archSvgWrapEl && DATA.archParts) {
+    if (archPillsEl) {
+      archPillsEl.innerHTML = DATA.archParts
+        .map(
+          (p) =>
+            `<button type="button" class="arch-pill-btn" data-arch="${p.id}" aria-pressed="false">${p.shortLabel}</button>`
+        )
+        .join("");
+
+      archPillsEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".arch-pill-btn");
+        if (btn && btn.dataset.arch) {
+          activeArchScenario = null;
+          if (archStoryEl) archStoryEl.hidden = true;
+          if (archScenariosEl) {
+            Array.from(archScenariosEl.querySelectorAll(".arch-scenario-btn")).forEach((b) => {
+              b.classList.remove("is-active");
+              b.setAttribute("aria-pressed", "false");
+            });
+          }
+          renderArchInspector(btn.dataset.arch);
+        }
+      });
+    }
+
+    if (archScenariosEl && DATA.archScenarios) {
+      archScenariosEl.innerHTML =
+        `<span class="arch-scenarios-label">Ver trabalhando juntos:</span>` +
+        DATA.archScenarios
+          .map(
+            (s) =>
+              `<button type="button" class="arch-scenario-btn" data-scenario="${s.id}" aria-pressed="false">${s.label}</button>`
+          )
+          .join("");
+
+      archScenariosEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".arch-scenario-btn");
+        if (btn && btn.dataset.scenario) {
+          selectArchScenario(btn.dataset.scenario);
+        }
+      });
+    }
+
+    archSvgWrapEl.addEventListener("click", (e) => {
+      const node = e.target.closest(".arch-node");
+      if (node && node.dataset.arch) {
+        activeArchScenario = null;
+        if (archStoryEl) archStoryEl.hidden = true;
+        if (archScenariosEl) {
+          Array.from(archScenariosEl.querySelectorAll(".arch-scenario-btn")).forEach((b) => {
+            b.classList.remove("is-active");
+            b.setAttribute("aria-pressed", "false");
+          });
+        }
+        renderArchInspector(node.dataset.arch);
+      }
+    });
+
+    archSvgWrapEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        const node = e.target.closest(".arch-node");
+        if (node && node.dataset.arch) {
+          e.preventDefault();
+          activeArchScenario = null;
+          if (archStoryEl) archStoryEl.hidden = true;
+          renderArchInspector(node.dataset.arch);
+        }
+      }
+    });
+
+    renderArchInspector(activeArchPart);
+  }
 })();

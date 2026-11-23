@@ -715,10 +715,30 @@ window.GUIDE_DATA = {
       term: "Domínio, DNS, HTTPS & CDN",
       category: "Sistemas",
       def: "Domínio é o endereço bonito; DNS traduz o nome para o servidor; HTTPS é o cadeado de criptografia; CDN guarda cópias perto do visitante para abrir rápido."
+    },
+    {
+      term: "Cache (Redis / Memória Rápida)",
+      category: "Sistemas",
+      def: "Cópia temporária na memória ultrarrápida ('post-it na mesa') para responder em milissegundos sem precisar consultar o banco de dados toda vez."
+    },
+    {
+      term: "Filas (Queues) & Pub/Sub",
+      category: "Sistemas",
+      def: "Mecanismos assíncronos: Filas enfileiram tarefas lentas (gerar PDF, enviar e-mails) para Workers nos bastidores; Pub/Sub avisa vários serviços ao mesmo tempo quando um evento acontece."
+    },
+    {
+      term: "Nuvem (GCP / AWS / Azure)",
+      category: "Sistemas",
+      def: "Plataformas gigantes de infraestrutura sob demanda que reúnem servidores, bancos, armazenamento, filas, IA e segurança — pagando apenas pelo uso."
+    },
+    {
+      term: "Webhook & Cron Job",
+      category: "Sistemas",
+      def: "Cron Job é o despertador que roda uma tarefa em horários fixos; Webhook é a 'campainha automática' que um serviço toca no seu servidor quando algo acontece (ex: pagamento aprovado)."
     }
   ],
 
-  /* Widget 7: Other AI Ecosystems Explorer (Optional Section 07) */
+  /* Widget 8: Other AI Ecosystems Explorer (Optional Section 07) */
   ecosystems: [
     {
       id: "openai",
@@ -1057,6 +1077,163 @@ window.GUIDE_DATA = {
         "Para páginas sem banco de dados (guias, portfólios, catálogos simples), <strong>GitHub Pages</strong> resolve em 2 cliques. Quando houver banco (Neon) ou senhas no .env, use <strong>Vercel</strong> ou <strong>Cloudflare Pages</strong>.",
       promptTip:
         "Prepare meu projeto para deploy gratuito na Vercel, me diga quais variáveis de ambiente colar no painel e confirme que o build passa sem erros."
+    }
+  ],
+
+  /* Widget 7: Section 06 — Software Engineering Architecture Map */
+  archParts: [
+    {
+      id: "queues",
+      shortLabel: "Filas & Pub/Sub",
+      name: "Filas (Queues), Pub/Sub & Workers",
+      analogy: "Senha da Padaria + Quadro de Avisos",
+      desc: "<strong>Fila (Queue):</strong> quando uma tarefa demora (gerar PDF, mandar 500 e-mails ou processar IA), o servidor responde 'Recebido!' na hora e joga o pedido numa fila para um <strong>Worker</strong> (robô nos bastidores) resolver sem travar a tela do usuário. Já o <strong>Pub/Sub (Publicar/Assinar)</strong> funciona como um quadro de avisos: quando um evento acontece ('Compra aprovada!'), vários serviços assinantes reagem ao mesmo tempo (nota fiscal, estoque, e-mail) sem dependerem um do outro.",
+      whenNeeded:
+        "Quando alguma ação leva mais de 2–3 segundos ou quando um único evento precisa disparar várias ações independentes com garantia de reintentativa se algo falhar.",
+      examples:
+        "<strong>Google Cloud Pub/Sub</strong>, <strong>Upstash QStash</strong>, <strong>Cloudflare Queues</strong>, <strong>RabbitMQ</strong> e <strong>Kafka</strong>.",
+      agentMode: "Conecta via CLI/API e cria código de fila + worker",
+      agentTip:
+        "O agente configura a fila ou tópico Pub/Sub, escreve o código do Worker com tentativas automáticas em caso de erro e te guia passo a passo para colar o endereço da fila no .env."
+    },
+    {
+      id: "cache",
+      shortLabel: "Cache (Redis)",
+      name: "Cache (Memória Rápida)",
+      analogy: "O Post-it na Mesa",
+      desc: "Ir ao banco de dados toda vez que alguém abre a mesma página consome tempo e dinheiro. O <strong>Cache</strong> guarda uma cópia temporária das respostas mais pedidas (ex: catálogo do dia, ranking ou sessão do usuário) na memória RAM ultrarrápida. Se a resposta já está no post-it, o site responde em poucos milissegundos — e só consulta o banco quando o post-it vence ou muda.",
+      whenNeeded:
+        "Quando muitas pessoas acessam os mesmos dados ao mesmo tempo ou quando uma consulta no banco começa a ficar lenta e repetitiva.",
+      examples:
+        "<strong>Redis</strong> (com plano grátis na <strong>Upstash</strong>), cache automático da <strong>Cloudflare</strong> e da <strong>Vercel</strong>.",
+      agentMode: "Configura o código de cache e regras de expiração",
+      agentTip:
+        "Basta dizer: \"Adicione cache Redis (Upstash) de 5 minutos nessa lista para não sobrecarregar o Neon\" — o agente escreve a lógica e te orienta onde copiar a chave no painel."
+    },
+    {
+      id: "cloud",
+      shortLabel: "Nuvem (Cloud)",
+      name: "Nuvem & Serviços de Nuvem (Cloud Providers)",
+      analogy: "O Condomínio Completo de Infraestrutura",
+      desc: "Em vez de comprar servidores físicos, empresas alugam computação sob demanda em grandes plataformas de <strong>Nuvem</strong> — verdadeiros 'supermercados' com dezenas de serviços integrados sob o mesmo teto (servidores, bancos, Pub/Sub, arquivos, IA, rede e segurança), cobrando apenas pelo que você usa (<em>pay-as-you-go</em>).",
+      whenNeeded:
+        "Você <strong>não precisa começar aqui</strong>! Comece leve (GitHub + Neon + Vercel) e migre ou combine serviços da Nuvem grande quando precisar de escala alta, compliance corporativo ou recursos específicos (como Google Cloud Pub/Sub e Cloud Run).",
+      examples:
+        "<strong>Google Cloud (GCP)</strong>, <strong>AWS (Amazon)</strong> e <strong>Microsoft Azure</strong> — além de nuvens mais simples como <strong>Vercel</strong>, <strong>Cloudflare</strong> e <strong>Render</strong>.",
+      agentMode: "Opera CLIs oficiais (gcloud, aws) ou guia clique a clique",
+      agentTip:
+        "Agentes como o Antigravity podem gerar scripts de infraestrutura, usar CLIs da nuvem ou — se você preferir fazer pelo navegador — te guiar clique a clique lendo prints do painel."
+    },
+    {
+      id: "auth",
+      shortLabel: "Autenticação (Auth)",
+      name: "Autenticação & Permissões (Auth)",
+      analogy: "A Portaria e os Crachás",
+      desc: "<strong>Autenticação</strong> responde 'quem é você?' (login com Google, senha ou link por e-mail). <strong>Autorização / Permissões</strong> responde 'o que você pode fazer?' (ex: cada pessoa só edita sua própria lista; apenas administradores veem o painel financeiro). Nunca tente inventar criptografia de senhas do zero: use serviços prontos testados por milhões de usuários.",
+      whenNeeded:
+        "Assim que seu sistema deixar de ser só seu e passar a ter contas individuais ou áreas restritas para equipe/clientes.",
+      examples:
+        "<strong>Clerk</strong>, <strong>Supabase Auth</strong>, <strong>Firebase Auth (Google)</strong> e <strong>Auth.js</strong> — todos com generosos planos gratuitos.",
+      agentMode: "Integra login pronto em minutos e protege rotas",
+      agentTip:
+        "Peça: \"Coloque login com Google usando Clerk ou Supabase Auth e proteja as rotas para cada usuário ver só os próprios itens\". O agente gera o código e indica os 3 campos do painel."
+    },
+    {
+      id: "storage",
+      shortLabel: "Storage (Arquivos)",
+      name: "Armazenamento de Arquivos (Object Storage)",
+      analogy: "O Depósito de Fotos, PDFs e Vídeos",
+      desc: "Bancos de dados relacionais (como o Neon Postgres) são excelentes para textos, números e datas, mas <strong>não</strong> foram feitos para guardar arquivos pesados (fotos, PDFs de notas fiscais, áudios, vídeos). Esses arquivos vão para um 'depósito' chamado <strong>Bucket</strong> no Object Storage — e o banco de dados guarda apenas o link curto apontando para lá.",
+      whenNeeded:
+        "Sempre que os usuários precisarem fazer upload de imagens, currículos em PDF, recibos ou vídeos.",
+      examples:
+        "<strong>Cloudflare R2</strong>, <strong>Google Cloud Storage</strong>, <strong>Supabase Storage</strong> e <strong>Amazon S3</strong>.",
+      agentMode: "Cria upload seguro (links assinados) e conecta ao banco",
+      agentTip:
+        "O agente monta o botão de upload, configura permissões para ninguém acessar arquivos privados de outros usuários e te guia na criação do Bucket."
+    },
+    {
+      id: "cron",
+      shortLabel: "Cron & Webhooks",
+      name: "Agendador (Cron Jobs) & Webhooks",
+      analogy: "O Despertador e a Campainha",
+      desc: "<strong>Cron Job</strong> é o despertador automático do sistema: executa uma tarefa em horários programados sem ninguém clicar em nada (ex: todo domingo às 20h, enviar resumo semanal). <strong>Webhook</strong> é a campainha entre sistemas: em vez de seu app ficar perguntando a cada segundo 'o cliente já pagou?', o Stripe ou GitHub toca a campainha do seu servidor no instante exato em que o evento acontece.",
+      whenNeeded:
+        "Para rotinas periódicas (relatórios, lembretes, limpeza de dados) ou para reagir em tempo real a pagamentos, formulários e mensagens de WhatsApp/Slack.",
+      examples:
+        "<strong>Vercel Cron</strong>, <strong>GitHub Actions</strong>, <strong>Google Cloud Scheduler</strong> e webhooks de <strong>Stripe / Mercado Pago / GitHub</strong>.",
+      agentMode: "Cria os endpoints de Webhook e arquivos de agendamento",
+      agentTip:
+        "O agente escreve o código de verificação de segurança do Webhook, cria o arquivo de agendamento Cron e mostra exatamente qual URL colar no painel do Stripe ou da Vercel."
+    },
+    {
+      id: "apis",
+      shortLabel: "APIs Externas",
+      name: "APIs Externas & Integrações",
+      analogy: "Os Especialistas Terceirizados",
+      desc: "Quase nenhum software moderno constrói tudo dentro de casa. Para cobrar cartão/Pix, enviar e-mails que não caem no spam, consultar CEP, enviar WhatsApp ou chamar inteligência artificial, seu servidor envia um pedido autenticado para a <strong>API</strong> de um serviço especialista e recebe a resposta pronta em formato estruturado (JSON).",
+      whenNeeded:
+        "Sempre que existir um especialista confiável para aquela função — economiza meses de trabalho e evita dores de cabeça legais (como lidar com dados de cartão de crédito).",
+      examples:
+        "<strong>Stripe / Mercado Pago</strong> (pagamentos), <strong>Resend</strong> (e-mails), <strong>Gemini API</strong> (IA) e <strong>Google Maps / Drive</strong>.",
+      agentMode: "Lê documentações, integra SDKs e testa via MCP/Sandbox",
+      agentTip:
+        "Basta dizer qual serviço quer integrar (ex: \"envie e-mail de boas-vindas com o Resend\"): o agente instala a biblioteca oficial, lê a chave no .env e cria testes na Sandbox."
+    },
+    {
+      id: "observability",
+      shortLabel: "Observabilidade",
+      name: "Observabilidade (Logs, Métricas & Alertas)",
+      analogy: "O Painel do Carro e a Caixa-Preta",
+      desc: "Quando um usuário diz 'não carregou', como você descobre o que houve? A <strong>Observabilidade</strong> junta três lentes: <strong>Logs</strong> (o diário detalhado do que o servidor fez), <strong>Métricas</strong> (tempo de resposta, quantos erros por minuto) e <strong>Alertas</strong> (aviso automático no seu e-mail ou Slack se algo começar a falhar antes de os clientes perceberem).",
+      whenNeeded:
+        "Desde o primeiro dia em produção (os logs básicos da Vercel já vêm prontos); ao ganhar usuários reais, vale plugar um rastreador de erros automático como o Sentry.",
+      examples:
+        "<strong>Sentry</strong> (rastreia bugs com cota grátis), <strong>Vercel Logs</strong>, <strong>Google Cloud Logging</strong> e <strong>Better Stack</strong>.",
+      agentMode: "Instala o monitoramento e lê os logs para achar a causa raiz",
+      agentTip:
+        "O melhor truque de manutenção: quando surgir um erro nos Logs ou no Sentry, cole o trecho (ou print) no Antigravity — ele cruza o log com o código e propõe o conserto exato."
+    },
+    {
+      id: "core",
+      shortLabel: "Servidor + Banco",
+      name: "Coração do Sistema (Servidor / Backend + Banco SQL)",
+      analogy: "Os Pilares 2 e 3 trabalhando no centro",
+      desc: "É o núcleo que você já dominou acima: o <strong>Servidor / Backend (API)</strong> recebe os pedidos do visitante, consulta as chaves secretas do <span class='inline-code'>.env</span> e orquestra tudo — lendo e gravando os dados permanentes no <strong>Banco de Dados (Neon / Postgres)</strong> e acionando Cache, Storage, Filas ou APIs Externas conforme a necessidade.",
+      whenNeeded:
+        "É a base de quase todo sistema interativo real — você começa por aqui (com GitHub + Neon + Vercel) e vai plugando os blocos ao redor só quando o projeto pedir.",
+      examples:
+        "<strong>Vercel + Neon Postgres</strong>, <strong>Cloudflare Workers + D1</strong>, <strong>Google Cloud Run + Cloud SQL</strong>.",
+      agentMode: "Constrói, testa na Sandbox e versiona no GitHub",
+      agentTip:
+        "Com o Antigravity conectado ao GitHub (e a MCPs como Neon ou Postgres), o agente cria as rotas, testa consultas e abre Pull Requests completos para sua revisão."
+    }
+  ],
+
+  archScenarios: [
+    {
+      id: "fast-read",
+      label: "⚡ Página ultrarrápida (Cache)",
+      title: "Fluxo 1 · Leitura em milissegundos usando Cache",
+      nodes: ["auth", "core", "cache", "observability"],
+      story:
+        "O visitante abre o app → a <strong>Portaria (Auth)</strong> confirma o login → o <strong>Servidor</strong> olha primeiro no <strong>Cache (Redis)</strong> e encontra o catálogo já pronto em 5 milissegundos, sem precisar acordar o Banco! A <strong>Observabilidade</strong> registra que tudo respondeu em tempo recorde."
+    },
+    {
+      id: "async-purchase",
+      label: "🛒 Compra aprovada (Webhook + Pub/Sub)",
+      title: "Fluxo 2 · Evento assíncrono sem travar ninguém",
+      nodes: ["cron", "core", "queues", "apis", "observability"],
+      story:
+        "O cliente paga no cartão → um <strong>Webhook</strong> toca a campainha do <strong>Servidor</strong> → o pedido é salvo como pago no <strong>Banco</strong> e um aviso entra no <strong>Pub/Sub</strong> → <strong>Workers</strong> nos bastidores chamam a <strong>API de E-mail</strong> e emitem a nota fiscal em paralelo, enquanto a <strong>Observabilidade</strong> acompanha tudo."
+    },
+    {
+      id: "pdf-ai",
+      label: "📄 Upload de PDF + IA (Storage + Fila)",
+      title: "Fluxo 3 · Arquivo pesado + resumo com IA nos bastidores",
+      nodes: ["auth", "core", "storage", "queues", "apis"],
+      story:
+        "O usuário logado (<strong>Auth</strong>) envia um PDF de 50 páginas → o <strong>Servidor</strong> guarda o arquivo no <strong>Storage (R2/GCS)</strong> e responde 'Recebido!' na hora → uma <strong>Fila</strong> passa o link ao <strong>Worker</strong>, que chama a <strong>API do Gemini</strong> para gerar o resumo e grava o resultado limpo no <strong>Banco</strong>."
     }
   ],
 

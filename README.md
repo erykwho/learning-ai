@@ -10,7 +10,7 @@ learning-ai/
 ├── css/
 │   └── style.css       # Sistema visual claro/escuro e estilos responsivos
 ├── js/
-│   ├── data.js         # Conteúdo estruturado dos 7 gráficos interativos, tour visual, biblioteca das 5 eras, glossário e checklist
+│   ├── data.js         # Conteúdo estruturado dos 8 gráficos interativos, tour visual, biblioteca das 5 eras, glossário e checklist
 │   └── app.js          # Lógica de interatividade, ScrollSpy, carrossel com zoom, simulações e cópia de prompts
 └── assets/
     ├── favicon.svg     # Ícone vetorial da página
