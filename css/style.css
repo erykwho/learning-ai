@@ -2773,6 +2773,266 @@ input {
   flex-shrink: 0;
 }
 
+/* ==========================================================================
+   Section 03: Gemini 4 Family & Neon Spotlight Cards
+   ========================================================================== */
+
+.gemini4-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0 16px;
+}
+
+.gemini4-card {
+  padding: 16px 17px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gemini4-card.is-featured {
+  border: 1.5px solid var(--accent-blue);
+  background: var(--accent-blue-soft);
+}
+
+.gemini4-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.gemini4-symbol {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gemini4-card.is-featured .gemini4-symbol {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .gemini4-card.is-featured .gemini4-symbol {
+  color: #0b1220;
+}
+
+.gemini4-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: var(--bg-subtle);
+  color: var(--ink-secondary);
+}
+
+.gemini4-card.is-featured .gemini4-badge {
+  background: var(--bg-surface);
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue-mid);
+}
+
+.gemini4-card h4 {
+  margin: 2px 0 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.gemini4-card p {
+  margin: 0;
+  font-size: 13.6px;
+  line-height: 1.52;
+  color: var(--ink-secondary);
+}
+
+.gemini4-note-strip {
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  font-size: 13.8px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin-bottom: 24px;
+}
+
+.gemini4-note-strip p {
+  margin: 0 0 8px;
+  font-size: 13.8px;
+}
+
+.gemini4-note-strip p:last-child {
+  margin-bottom: 0;
+}
+
+.gemini4-note-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   Section 06: Interactive 3 Pillars Deep Explorer
+   ========================================================================== */
+
+.pillar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pillar-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 14px;
+}
+
+.pillar-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.32rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+  line-height: 1.25;
+}
+
+.pillar-analogy-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--accent-amber-soft);
+  color: var(--accent-amber);
+}
+
+.pillar-how {
+  margin: 0;
+  font-size: 14.8px;
+  line-height: 1.62;
+  color: var(--ink-secondary);
+}
+
+.pillar-svg-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+.pillar-svg-box svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pillar-sublabel {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.pillar-concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pillar-concept-card {
+  padding: 14px 15px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pillar-concept-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pillar-concept-term {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.pillar-concept-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--accent-blue);
+}
+
+.pillar-concept-desc {
+  margin: 0;
+  font-size: 13.4px;
+  line-height: 1.52;
+  color: var(--ink-secondary);
+}
+
+.pillar-bottom-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pillar-note-box {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: 13.4px;
+  line-height: 1.52;
+  color: var(--ink-secondary);
+}
+
+.pillar-note-box.is-prompt {
+  background: var(--accent-green-soft);
+  border-color: transparent;
+  color: var(--ink-primary);
+}
+
+.pillar-note-box strong {
+  color: var(--ink-primary);
+}
+
 /* Footer */
 .site-footer {
   margin-top: 64px;
@@ -2884,6 +3144,9 @@ input {
   .era-body-grid,
   .compass-goals,
   .agent-xray-grid,
+  .gemini4-grid,
+  .pillar-concepts-grid,
+  .pillar-bottom-notes,
   .eco-grid,
   .tricks-grid,
   .tour-pins-grid,

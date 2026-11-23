@@ -1356,4 +1356,283 @@
 
     renderTourSlide(0);
   }
+
+  /* ------------------------------------------------------------------------
+     14. Section 06 — Interactive 3 Pillars Deep Explorer (with SVG Diagrams)
+     ------------------------------------------------------------------------ */
+  const pillarTabsEl = document.getElementById("pillar-tabs");
+  const pillarPanelEl = document.getElementById("pillar-panel");
+
+  function buildPillarSvg(pillarId) {
+    if (pillarId === "versionamento") {
+      return `
+        <svg viewBox="0 0 680 212" role="img" aria-label="Esquema visual do versionamento Git e GitHub com linha principal, branch de rascunho, Pull Request e Merge">
+          <text x="20" y="22" fill="var(--accent-blue)" font-size="10.5" font-weight="700" font-family="JetBrains Mono, monospace">LINHA PRINCIPAL (main — versão oficial no ar)</text>
+
+          <!-- Main branch line -->
+          <line x1="108" y1="68" x2="212" y2="68" stroke="var(--accent-blue)" stroke-width="3" stroke-linecap="round" />
+          <line x1="248" y1="68" x2="555" y2="68" stroke="var(--accent-blue)" stroke-width="3" stroke-linecap="round" />
+
+          <!-- Parallel feature branch path -->
+          <path d="M 230 86 C 230 138, 255 144, 282 144" fill="none" stroke="var(--accent-amber)" stroke-width="2.6" stroke-linecap="round" />
+          <line x1="402" y1="144" x2="424" y2="144" stroke="var(--accent-amber)" stroke-width="2.6" />
+          <polygon points="420,139 428,144 420,149" fill="var(--accent-amber)" />
+          <path d="M 544 144 C 570 144, 575 130, 575 90" fill="none" stroke="var(--accent-green)" stroke-width="2.6" stroke-linecap="round" />
+          <polygon points="570,94 575,85 580,94" fill="var(--accent-green)" />
+
+          <!-- v1 Commit -->
+          <circle cx="90" cy="68" r="18" fill="var(--bg-surface)" stroke="var(--accent-blue)" stroke-width="2.2" />
+          <text x="90" y="72" text-anchor="middle" fill="var(--ink-primary)" font-size="12" font-weight="700" font-family="JetBrains Mono, monospace">v1</text>
+          <text x="90" y="102" text-anchor="middle" fill="var(--ink-muted)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">Commit inicial</text>
+
+          <!-- v2 Commit (Live) -->
+          <circle cx="230" cy="68" r="18" fill="var(--accent-blue-soft)" stroke="var(--accent-blue)" stroke-width="2.4" />
+          <text x="230" y="72" text-anchor="middle" fill="var(--accent-blue)" font-size="12" font-weight="700" font-family="JetBrains Mono, monospace">v2</text>
+          <text x="230" y="42" text-anchor="middle" fill="var(--ink-secondary)" font-size="10.5" font-weight="600" font-family="Plus Jakarta Sans, sans-serif">Site no ar ✓</text>
+
+          <!-- v3 Merge -->
+          <circle cx="575" cy="68" r="20" fill="var(--accent-green-soft)" stroke="var(--accent-green)" stroke-width="2.6" />
+          <text x="575" y="72" text-anchor="middle" fill="var(--accent-green)" font-size="12" font-weight="700" font-family="JetBrains Mono, monospace">v3</text>
+          <text x="575" y="40" text-anchor="middle" fill="var(--accent-green)" font-size="10.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Merge aprovado ✓</text>
+
+          <!-- Branch label -->
+          <text x="20" y="140" fill="var(--accent-amber)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">BRANCH (RASCUNHO)</text>
+          <text x="20" y="156" fill="var(--ink-muted)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">cópia isolada para testar</text>
+
+          <!-- Branch step 1: Commit -->
+          <rect x="282" y="122" width="120" height="44" rx="9" fill="var(--bg-surface)" stroke="var(--accent-amber)" stroke-width="1.8" />
+          <text x="342" y="141" text-anchor="middle" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Commit de teste</text>
+          <text x="342" y="156" text-anchor="middle" fill="var(--ink-muted)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">novo filtro criado</text>
+
+          <!-- Branch step 2: PR -->
+          <rect x="428" y="122" width="116" height="44" rx="9" fill="var(--accent-amber-soft)" stroke="var(--accent-amber)" stroke-width="1.8" />
+          <text x="486" y="141" text-anchor="middle" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Pull Request</text>
+          <text x="486" y="156" text-anchor="middle" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">revisão lado a lado</text>
+
+          <!-- Footer note -->
+          <rect x="20" y="180" width="640" height="24" rx="6" fill="var(--bg-surface)" stroke="var(--border-subtle)" />
+          <text x="340" y="196" text-anchor="middle" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">
+            Máquina do Tempo: cada commit fica guardado — se algo der errado na v3, você volta para a v2 em segundos.
+          </text>
+        </svg>
+      `;
+    }
+
+    if (pillarId === "banco") {
+      return `
+        <svg viewBox="0 0 680 222" role="img" aria-label="Esquema visual de banco de dados relacional mostrando duas tabelas ligadas por ID e operações CRUD">
+          <!-- App box -->
+          <rect x="14" y="34" width="136" height="122" rx="11" fill="var(--accent-blue-soft)" stroke="var(--accent-blue)" stroke-width="1.8" />
+          <text x="82" y="58" text-anchor="middle" fill="var(--accent-blue)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">SEU SISTEMA</text>
+          <text x="82" y="80" text-anchor="middle" fill="var(--ink-primary)" font-size="13" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Tela Web / App</text>
+          <text x="82" y="102" text-anchor="middle" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">Pede e envia dados</text>
+          <text x="82" y="117" text-anchor="middle" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">sem guardar nada fixo</text>
+          <rect x="28" y="128" width="108" height="18" rx="5" fill="var(--bg-surface)" stroke="var(--accent-blue-mid)" />
+          <text x="82" y="140" text-anchor="middle" fill="var(--accent-blue)" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">via .env secreto</text>
+
+          <!-- Arrows App <-> DB -->
+          <line x1="154" y1="78" x2="212" y2="78" stroke="var(--accent-blue)" stroke-width="2.2" />
+          <polygon points="208,73 218,78 208,83" fill="var(--accent-blue)" />
+          <text x="184" y="69" text-anchor="middle" fill="var(--accent-blue)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">SQL (CRUD)</text>
+
+          <line x1="218" y1="112" x2="160" y2="112" stroke="var(--accent-green)" stroke-width="2.2" />
+          <polygon points="164,107 154,112 164,117" fill="var(--accent-green)" />
+          <text x="184" y="128" text-anchor="middle" fill="var(--accent-green)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">Registros</text>
+
+          <!-- Table 1: itens -->
+          <rect x="222" y="18" width="238" height="148" rx="10" fill="var(--bg-surface)" stroke="var(--accent-green)" stroke-width="1.8" />
+          <rect x="222" y="18" width="238" height="28" rx="10" fill="var(--accent-green-soft)" />
+          <text x="234" y="36" fill="var(--accent-green)" font-size="10.2" font-weight="700" font-family="JetBrains Mono, monospace">TABELA: itens (Neon / Postgres)</text>
+          <!-- Columns -->
+          <line x1="222" y1="68" x2="460" y2="68" stroke="var(--border-subtle)" />
+          <text x="234" y="61" fill="var(--ink-muted)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">ID</text>
+          <text x="262" y="61" fill="var(--ink-muted)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">título</text>
+          <text x="364" y="61" fill="var(--ink-muted)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">nota</text>
+          <text x="412" y="61" fill="var(--accent-amber)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">cat_id</text>
+
+          <!-- Row 1 (highlighted relation) -->
+          <rect x="228" y="74" width="226" height="24" rx="5" fill="var(--accent-amber-soft)" />
+          <text x="234" y="90" fill="var(--ink-primary)" font-size="11" font-weight="700" font-family="JetBrains Mono, monospace">1</text>
+          <text x="262" y="90" fill="var(--ink-primary)" font-size="11" font-weight="600" font-family="Plus Jakarta Sans, sans-serif">Interestelar</text>
+          <text x="364" y="90" fill="var(--accent-amber)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">★★★★★</text>
+          <text x="426" y="90" fill="var(--accent-amber)" font-size="11" font-weight="700" font-family="JetBrains Mono, monospace">2</text>
+
+          <!-- Row 2 -->
+          <text x="234" y="118" fill="var(--ink-secondary)" font-size="11" font-family="JetBrains Mono, monospace">2</text>
+          <text x="262" y="118" fill="var(--ink-secondary)" font-size="11" font-family="Plus Jakarta Sans, sans-serif">Correr 5 km</text>
+          <text x="364" y="118" fill="var(--accent-green)" font-size="10.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Feito ✓</text>
+          <text x="426" y="118" fill="var(--ink-muted)" font-size="11" font-family="JetBrains Mono, monospace">3</text>
+
+          <!-- Row 3 -->
+          <text x="234" y="144" fill="var(--ink-secondary)" font-size="11" font-family="JetBrains Mono, monospace">3</text>
+          <text x="262" y="144" fill="var(--ink-secondary)" font-size="11" font-family="Plus Jakarta Sans, sans-serif">Design do Dia</text>
+          <text x="364" y="144" fill="var(--accent-amber)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">★★★★★</text>
+          <text x="426" y="144" fill="var(--ink-muted)" font-size="11" font-family="JetBrains Mono, monospace">1</text>
+
+          <!-- Relation Connector (generous gutter 460..526) -->
+          <path d="M 460 86 C 492 86, 492 116, 520 116" fill="none" stroke="var(--accent-amber)" stroke-width="2.2" stroke-dasharray="4 3" />
+          <polygon points="516,111 524,116 516,121" fill="var(--accent-amber)" />
+          <text x="493" y="75" text-anchor="middle" fill="var(--accent-amber)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">liga ID</text>
+
+          <!-- Table 2: categorias -->
+          <rect x="526" y="34" width="140" height="122" rx="10" fill="var(--bg-surface)" stroke="var(--accent-amber)" stroke-width="1.8" />
+          <rect x="526" y="34" width="140" height="26" rx="10" fill="var(--accent-amber-soft)" />
+          <text x="536" y="51" fill="var(--accent-amber)" font-size="9.8" font-weight="700" font-family="JetBrains Mono, monospace">TABELA: categorias</text>
+          <text x="538" y="74" fill="var(--ink-muted)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">ID</text>
+          <text x="572" y="74" fill="var(--ink-muted)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">nome</text>
+          <line x1="526" y1="80" x2="666" y2="80" stroke="var(--border-subtle)" />
+          <text x="538" y="98" fill="var(--ink-secondary)" font-size="11" font-family="JetBrains Mono, monospace">1</text>
+          <text x="572" y="98" fill="var(--ink-secondary)" font-size="11" font-family="Plus Jakarta Sans, sans-serif">Livro</text>
+          <rect x="532" y="105" width="128" height="22" rx="5" fill="var(--accent-amber-soft)" />
+          <text x="538" y="120" fill="var(--accent-amber)" font-size="11" font-weight="700" font-family="JetBrains Mono, monospace">2</text>
+          <text x="572" y="120" fill="var(--ink-primary)" font-size="11" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Filme</text>
+          <text x="538" y="144" fill="var(--ink-secondary)" font-size="11" font-family="JetBrains Mono, monospace">3</text>
+          <text x="572" y="144" fill="var(--ink-secondary)" font-size="11" font-family="Plus Jakarta Sans, sans-serif">Meta</text>
+
+          <!-- Bottom CRUD bar -->
+          <rect x="14" y="182" width="152" height="28" rx="7" fill="var(--bg-surface)" stroke="var(--border-subtle)" />
+          <text x="90" y="200" text-anchor="middle" fill="var(--ink-primary)" font-size="10.5" font-weight="600" font-family="JetBrains Mono, monospace">C · Criar (INSERT)</text>
+
+          <rect x="178" y="182" width="152" height="28" rx="7" fill="var(--bg-surface)" stroke="var(--border-subtle)" />
+          <text x="254" y="200" text-anchor="middle" fill="var(--ink-primary)" font-size="10.5" font-weight="600" font-family="JetBrains Mono, monospace">R · Ler (SELECT)</text>
+
+          <rect x="342" y="182" width="156" height="28" rx="7" fill="var(--bg-surface)" stroke="var(--border-subtle)" />
+          <text x="420" y="200" text-anchor="middle" fill="var(--ink-primary)" font-size="10.5" font-weight="600" font-family="JetBrains Mono, monospace">U · Editar (UPDATE)</text>
+
+          <rect x="510" y="182" width="156" height="28" rx="7" fill="var(--bg-surface)" stroke="var(--border-subtle)" />
+          <text x="588" y="200" text-anchor="middle" fill="var(--ink-primary)" font-size="10.5" font-weight="600" font-family="JetBrains Mono, monospace">D · Apagar (DELETE)</text>
+        </svg>
+      `;
+    }
+
+    return `
+      <svg viewBox="0 0 680 226" role="img" aria-label="Esquema visual do servidor e hospedagem mostrando Deploy automático do GitHub, DNS com HTTPS, CDN e diferença entre site estático e dinâmico">
+        <!-- Top Auto Deploy Banner -->
+        <rect x="176" y="10" width="368" height="28" rx="14" fill="var(--accent-green-soft)" stroke="var(--accent-green)" stroke-width="1.4" />
+        <text x="360" y="28" text-anchor="middle" fill="var(--accent-green)" font-size="10.5" font-weight="700" font-family="JetBrains Mono, monospace">GitHub (Merge) ➔ Build &amp; Deploy Automático</text>
+        <line x1="360" y1="38" x2="360" y2="58" stroke="var(--accent-green)" stroke-width="2" />
+        <polygon points="355,54 360,62 365,54" fill="var(--accent-green)" />
+
+        <!-- Visitor -->
+        <rect x="14" y="80" width="114" height="92" rx="11" fill="var(--bg-surface)" stroke="var(--border-strong)" stroke-width="1.6" />
+        <text x="71" y="102" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">VISITANTE</text>
+        <text x="71" y="122" text-anchor="middle" fill="var(--ink-primary)" font-size="12.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Celular / PC</text>
+        <text x="71" y="140" text-anchor="middle" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">abre a URL:</text>
+        <text x="71" y="156" text-anchor="middle" fill="var(--accent-blue)" font-size="9.8" font-weight="700" font-family="JetBrains Mono, monospace">seusite.com</text>
+
+        <!-- Arrow Visitor -> DNS -->
+        <line x1="128" y1="126" x2="146" y2="126" stroke="var(--accent-amber)" stroke-width="2" />
+        <polygon points="143,121 151,126 143,131" fill="var(--accent-amber)" />
+
+        <!-- DNS + HTTPS -->
+        <rect x="152" y="94" width="96" height="64" rx="9" fill="var(--accent-amber-soft)" stroke="var(--accent-amber)" stroke-width="1.6" />
+        <text x="200" y="114" text-anchor="middle" fill="var(--accent-amber)" font-size="9.8" font-weight="700" font-family="JetBrains Mono, monospace">DNS + HTTPS</text>
+        <text x="200" y="132" text-anchor="middle" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">🔒 Cadeado</text>
+        <text x="200" y="148" text-anchor="middle" fill="var(--ink-secondary)" font-size="9.5" font-family="Plus Jakarta Sans, sans-serif">acha o servidor</text>
+
+        <!-- Arrow DNS -> Server -->
+        <line x1="248" y1="126" x2="266" y2="126" stroke="var(--accent-blue)" stroke-width="2" />
+        <polygon points="263,121 271,126 263,131" fill="var(--accent-blue)" />
+
+        <!-- Server / CDN Center -->
+        <rect x="272" y="64" width="176" height="122" rx="12" fill="var(--accent-blue-soft)" stroke="var(--accent-blue)" stroke-width="2" />
+        <text x="360" y="86" text-anchor="middle" fill="var(--accent-blue)" font-size="10" font-weight="700" font-family="JetBrains Mono, monospace">SERVIDOR 24H + CDN</text>
+        <text x="360" y="108" text-anchor="middle" fill="var(--ink-primary)" font-size="13.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Vercel / Pages / CF</text>
+        <text x="360" y="128" text-anchor="middle" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">Entrega rápida global</text>
+        <text x="360" y="143" text-anchor="middle" fill="var(--ink-secondary)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">e registra Logs de erro</text>
+        <rect x="292" y="155" width="136" height="20" rx="6" fill="var(--bg-surface)" stroke="var(--accent-blue-mid)" />
+        <text x="360" y="168" text-anchor="middle" fill="var(--ink-primary)" font-size="9.4" font-weight="700" font-family="JetBrains Mono, monospace">Cofre .env (senhas)</text>
+
+        <!-- Branch arrows to Static vs Dynamic -->
+        <path d="M 448 108 L 478 90" fill="none" stroke="var(--accent-green)" stroke-width="2" />
+        <polygon points="473,87 482,88 477,95" fill="var(--accent-green)" />
+        <path d="M 448 144 L 478 162" fill="none" stroke="var(--accent-blue)" stroke-width="2" />
+        <polygon points="477,157 482,164 473,165" fill="var(--accent-blue)" />
+
+        <!-- Static path -->
+        <rect x="484" y="58" width="182" height="60" rx="10" fill="var(--bg-surface)" stroke="var(--accent-green)" stroke-width="1.6" />
+        <text x="496" y="76" fill="var(--accent-green)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">ESTÁTICO · GH PAGES</text>
+        <text x="496" y="94" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">HTML/CSS pronto da borda</text>
+        <text x="496" y="109" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">Guias, blogs e portfólios</text>
+
+        <!-- Dynamic path -->
+        <rect x="484" y="130" width="182" height="64" rx="10" fill="var(--bg-surface)" stroke="var(--accent-blue)" stroke-width="1.6" />
+        <text x="496" y="148" fill="var(--accent-blue)" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">DINÂMICO / API · VERCEL</text>
+        <text x="496" y="166" fill="var(--ink-primary)" font-size="11.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Lê .env + Banco Neon</text>
+        <text x="496" y="182" fill="var(--ink-secondary)" font-size="10" font-family="Plus Jakarta Sans, sans-serif">Apps com cadastro e dados</text>
+
+        <!-- Footer note -->
+        <text x="340" y="216" text-anchor="middle" fill="var(--ink-muted)" font-size="10.5" font-family="Plus Jakarta Sans, sans-serif">
+          Segurança no deploy: se o Build novo falhar, a versão antiga continua no ar sem ninguém perceber.
+        </text>
+      </svg>
+    `;
+  }
+
+  function renderPillar(pillarId) {
+    if (!pillarPanelEl || !DATA.pillars) return;
+    const pillar = DATA.pillars.find((p) => p.id === pillarId) || DATA.pillars[0];
+    if (!pillar) return;
+
+    if (pillarTabsEl) {
+      Array.from(pillarTabsEl.querySelectorAll(".pill-tab")).forEach((btn) => {
+        const active = btn.dataset.pillar === pillar.id;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", String(active));
+      });
+    }
+
+    pillarPanelEl.innerHTML = `
+      <div class="pillar-head">
+        <h4 class="pillar-title">${pillar.title}</h4>
+        <span class="pillar-analogy-tag">${pillar.analogy}</span>
+      </div>
+      <p class="pillar-how">${pillar.howItWorks}</p>
+      <div class="pillar-svg-box">${buildPillarSvg(pillar.id)}</div>
+      <p class="pillar-sublabel">Conceitos básicos que você vai ouvir</p>
+      <div class="pillar-concepts-grid">
+        ${pillar.concepts
+          .map(
+            (c) => `
+              <div class="pillar-concept-card">
+                <div class="pillar-concept-top">
+                  <span class="pillar-concept-term">${c.term}</span>
+                  <span class="pillar-concept-tag">${c.tag}</span>
+                </div>
+                <p class="pillar-concept-desc">${c.desc}</p>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+      <div class="pillar-bottom-notes">
+        <div class="pillar-note-box">
+          <strong>Na hora de escolher:</strong> ${pillar.choiceNote}
+        </div>
+        <div class="pillar-note-box is-prompt">
+          <strong>O que pedir no Antigravity:</strong> <em>"${pillar.promptTip}"</em>
+        </div>
+      </div>
+    `;
+  }
+
+  if (pillarTabsEl && pillarPanelEl && DATA.pillars) {
+    pillarTabsEl.innerHTML = DATA.pillars
+      .map(
+        (p, idx) =>
+          `<button type="button" class="pill-tab${idx === 0 ? " is-active" : ""}" role="tab" aria-selected="${
+            idx === 0
+          }" data-pillar="${p.id}">${p.tab}</button>`
+      )
+      .join("");
+
+    pillarTabsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".pill-tab");
+      if (btn && btn.dataset.pillar) {
+        renderPillar(btn.dataset.pillar);
+      }
+    });
+
+    renderPillar(DATA.pillars[0].id);
+  }
 })();

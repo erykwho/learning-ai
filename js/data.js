@@ -167,13 +167,15 @@ window.GUIDE_DATA = {
       milestones: [
         "Plugins & MCP (Model Context Protocol): conexão padronizada com Google Drive, Sheets, GitHub, bancos de dados etc.",
         "Sandboxes / Cápsulas: computadores virtuais descartáveis onde o agente testa projetos sem risco à sua máquina.",
-        "Sidecars & Subagentes: processos auxiliares invisíveis (segurança) e agentes especialistas trabalhando em paralelo."
+        "Sidecars & Subagentes: processos auxiliares invisíveis (segurança) e agentes especialistas trabalhando em paralelo.",
+        "Modelos agênticos velozes (era Gemini 4): destaque para o recém-lançado Gemini 4 Neon, que une velocidade alta, raciocínio elevado e baixíssima taxa de invenção."
       ],
       refs: [
         { label: "MCP Docs Oficiais", url: "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro" },
         { label: "Sandboxing AI Agents (Cloudflare)", url: "https://blog.cloudflare.com/dynamic-workers/" },
         { label: "Sidecar Pattern (Microsoft)", url: "https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar" },
-        { label: "Multi-Agent Systems (Anthropic)", url: "https://www.anthropic.com/research/multi-agent-research-system" }
+        { label: "Multi-Agent Systems (Anthropic)", url: "https://www.anthropic.com/research/multi-agent-research-system" },
+        { label: "Gemini 4 Neon (Google Blog)", url: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/" }
       ]
     }
   ],
@@ -359,6 +361,24 @@ window.GUIDE_DATA = {
       title: "AI Agents & Multi-Agent Explained (com Google ADK)",
       url: "https://www.youtube.com/watch?v=Zqno_vux6d8",
       note: "Introdução visual à teoria de agentes modernos e sistemas multi-agentes usando o kit do Google."
+    },
+    {
+      eraGroup: "5",
+      kind: "Lançamento Oficial · Gemini 4",
+      isVideo: false,
+      lang: "EN · Google Blog",
+      title: "Introducing Gemini 4 Neon — Inteligência de Fronteira Veloz",
+      url: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+      note: "Anúncio oficial do Gemini 4 Neon: raciocínio elevado, alta velocidade e menor taxa de invenção em tarefas complexas."
+    },
+    {
+      eraGroup: "5",
+      kind: "Blog Oficial · Antigravity",
+      isVideo: false,
+      lang: "EN · Google Antigravity",
+      title: "Gemini 4 Neon in Google Antigravity",
+      url: "https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/",
+      note: "Como o Gemini 4 Neon acelera e traz mais confiança à construção de sistemas dentro do Antigravity."
     }
   ],
 
@@ -685,10 +705,20 @@ window.GUIDE_DATA = {
       term: "Variáveis de Ambiente (.env) & Chave de API",
       category: "Sistemas",
       def: "Chave de API é a 'senha eletrônica' para falar com um serviço; Variáveis de Ambiente são o cofre no servidor onde ela fica escondida fora do código."
+    },
+    {
+      term: "CRUD & SQL",
+      category: "Sistemas",
+      def: "CRUD resume as 4 operações de qualquer banco de dados (Criar, Ler, Atualizar e Apagar); SQL é a linguagem padrão que o sistema usa para pedir isso ao banco."
+    },
+    {
+      term: "Domínio, DNS, HTTPS & CDN",
+      category: "Sistemas",
+      def: "Domínio é o endereço bonito; DNS traduz o nome para o servidor; HTTPS é o cadeado de criptografia; CDN guarda cópias perto do visitante para abrir rápido."
     }
   ],
 
-  /* Widget 6: Other AI Ecosystems Explorer (Optional Section 07) */
+  /* Widget 7: Other AI Ecosystems Explorer (Optional Section 07) */
   ecosystems: [
     {
       id: "openai",
@@ -775,18 +805,18 @@ window.GUIDE_DATA = {
       name: "Google (Nossa Trilha neste Guia)",
       tagline: "Do básico ao sistema no mesmo ecossistema",
       summary:
-        "Para comparar lado a lado com os demais: o diferencial do Google é oferecer a escada completa integrada à conta que você provavelmente já usa todos os dias (Gmail, Drive, Docs, Sheets) — com janelas de contexto gigantes e forte multimodalidade nativa.",
+        "Para comparar lado a lado com os demais: o diferencial do Google é oferecer a escada completa (com plano gratuito nos 4 degraus) integrada à conta que você já usa todos os dias — agora impulsionada pela geração <strong>Gemini 4</strong>.",
       models: [
-        "<strong>Família Gemini (Flash / Pro / Deep Think):</strong> multimodal nativa (texto, imagem, áudio e vídeo longos) com enormes janelas de contexto.",
+        "<strong>Geração Gemini 4 (Hydrogen, Neon e Carbon):</strong> janela de 1 milhão de tokens e raciocínio ajustável — com destaque para o novo <strong>Gemini 4 Neon</strong> (rápido, raciocínio de fronteira e baixíssima taxa de invenção).",
         "<strong>Gemma:</strong> linha aberta (open-weights) do Google para rodar localmente ou em servidores próprios."
       ],
       tools: [
         "<strong>Gemini + Gems &amp; NotebookLM:</strong> uso diário, assistentes fixos e pesquisa sem alucinação nos seus PDFs.",
         "<strong>Google AI Studio:</strong> laboratório gratuito no navegador para testar prompts, vídeos e modelos novos.",
-        "<strong>Google Antigravity:</strong> harness agêntico completo com Sandbox, Skills, Plugins (Drive, Sheets, GitHub) e MCP."
+        "<strong>Google Antigravity:</strong> harness agêntico com plano individual gratuito, Sandbox, Skills, Plugins (Drive, Sheets, GitHub), MCP e modo Orchestrator (Neon)."
       ],
       strength:
-        "Ponto forte: menor atrito para começar hoje (integração direta com Drive/Sheets/Workspace) e trilha completa gratuita até o Antigravity."
+        "Ponto forte: menor atrito para começar de graça hoje (integração direta com Drive/Sheets/Workspace) e evolução rápida com Gemini 4 Neon no Antigravity."
     }
   ],
 
@@ -921,6 +951,112 @@ window.GUIDE_DATA = {
           text: "Quer mudar uma cor, texto ou filtro? Basta pedir na conversa (ou mandar um print mostrando o que melhorar)."
         }
       ]
+    }
+  ],
+
+  /* Widget 5: Section 06 — 3 Pillars Deep Explorer */
+  pillars: [
+    {
+      id: "versionamento",
+      tab: "1. Versionamento (GitHub)",
+      title: "Pilar 1 — Versionamento (Git & GitHub)",
+      analogy: "A Máquina do Tempo do projeto",
+      howItWorks:
+        "O <strong>Git</strong> é o motor que registra cada alteração feita nos arquivos do seu projeto; o <strong>GitHub</strong> é o cofre na nuvem onde esse histórico fica salvo e organizado. Em vez de criar pastas como <em>projeto_final_v3_agora_vai</em>, você trabalha com uma linha oficial protegida e rascunhos paralelos que podem ser revisados ou desfeitos em segundos.",
+      concepts: [
+        {
+          term: "Repositório (Repo)",
+          tag: "Pasta na nuvem",
+          desc: "O lar oficial do seu projeto: guarda todos os arquivos (telas, textos, imagens) junto com o histórico completo desde o primeiro dia. Pode ser Público ou Privado."
+        },
+        {
+          term: "Commit",
+          tag: "Ponto de salvamento",
+          desc: "Cada conjunto de mudanças vira uma 'foto' marcada com data, autor e uma frase curta explicando o que mudou (ex: \"Adiciona filtro de 5 estrelas\")."
+        },
+        {
+          term: "Branch (Ramo)",
+          tag: "Rascunho isolado",
+          desc: "Uma cópia paralela da linha oficial (main). Você (ou o Antigravity) testa ideias novas na branch sem risco nenhum para o site que já está no ar."
+        },
+        {
+          term: "Pull Request (PR) & Merge",
+          tag: "Revisão → Aprovação",
+          desc: "O PR mostra lado a lado o que entra (verde) e o que sai (vermelho). Só quando você aprova acontece o Merge, juntando a novidade na versão oficial."
+        }
+      ],
+      choiceNote:
+        "Git é a tecnologia; <strong>GitHub</strong> é o serviço gratuito líder (onde o Antigravity já se conecta em 1 clique). Alternativas como GitLab e Bitbucket funcionam com a mesma lógica.",
+      promptTip:
+        "Crie uma branch nova para testar essa melhoria e abra um Pull Request no GitHub para eu revisar antes de fazer o merge na main."
+    },
+    {
+      id: "banco",
+      tab: "2. Banco de Dados (Neon)",
+      title: "Pilar 2 — Banco de Dados (Neon, Supabase & Postgres)",
+      analogy: "O Fichário Permanente na nuvem",
+      howItWorks:
+        "Uma página web sozinha tem 'memória curta': se você limpar o navegador ou abrir em outro celular, tudo some. O <strong>Banco de Dados</strong> guarda suas informações (cadastros, livros, gastos) num serviço separado das telas. Assim, você pode redesenhar o visual do app dez vezes sem nunca perder os dados reais.",
+      concepts: [
+        {
+          term: "Tabela, Coluna & Linha",
+          tag: "Planilha disciplinada",
+          desc: "Bancos relacionais (como o Postgres, usado no Neon e Supabase) guardam dados em tabelas: colunas definem o tipo (texto, número, data) e cada linha é um item real."
+        },
+        {
+          term: "Chave Primária (ID) & Relações",
+          tag: "CPF único do item",
+          desc: "Cada linha recebe um número único (ID). Isso permite conectar tabelas sem repetir texto à toa — ex: ligar cada item à sua categoria apenas pelo ID."
+        },
+        {
+          term: "CRUD & SQL",
+          tag: "As 4 ações universais",
+          desc: "Todo sistema faz 4 operações no banco: Criar, Ler, Atualizar e Apagar (CRUD). A linguagem padrão que executa isso é o SQL — e o Antigravity escreve por você."
+        },
+        {
+          term: "String de Conexão & Migração",
+          tag: "Chave secreta + reforma",
+          desc: "A String de Conexão liga seu app ao banco e fica protegida no .env (nunca no GitHub). Migração é o roteiro seguro para criar colunas novas sem apagar dados antigos."
+        }
+      ],
+      choiceNote:
+        "O <strong>Neon Postgres</strong> (não confundir com o modelo Gemini 4 Neon!) brilha pela leveza e bancos temporários de preview; o <strong>Supabase</strong> já inclui login pronto e upload de arquivos.",
+      promptTip:
+        "Antes de criar o código, me explique em português simples quais tabelas e colunas vamos criar no Neon Postgres e leia a conexão apenas do .env."
+    },
+    {
+      id: "servidor",
+      tab: "3. Servidor (Vercel / Pages)",
+      title: "Pilar 3 — Servidor & Hospedagem (Vercel, GitHub Pages & Cloudflare)",
+      analogy: "O Computador Ligado 24h com URL",
+      howItWorks:
+        "O GitHub guarda seus arquivos de código, mas quem entrega a página pronta quando alguém abre o link no celular é o <strong>Servidor</strong>. Serviços modernos vigiam seu GitHub automaticamente: cada vez que você aprova um Merge, eles montam o site (<em>Build</em>) e colocam a versão nova no ar (<em>Deploy</em>) sem derrubar o sistema.",
+      concepts: [
+        {
+          term: "Estático vs. Dinâmico (Backend/API)",
+          tag: "Cartaz vs. Balcão",
+          desc: "Estático (GitHub Pages) entrega o mesmo HTML/CSS pronto para todo mundo. Dinâmico (Vercel) roda um Backend/API com .env para conversar com o banco e responder sob medida."
+        },
+        {
+          term: "Build & Deploy Automático",
+          tag: "Publicação sem atrito",
+          desc: "Ao aprovar uma mudança no GitHub, o servidor empacota o site (Build) e publica (Deploy) sozinho. Se o Build detectar um erro, a versão antiga segue no ar protegida."
+        },
+        {
+          term: "Domínio, DNS & HTTPS 🔒",
+          tag: "Endereço + Cadeado",
+          desc: "Domínio é o endereço bonito (seusite.com); DNS é a 'agenda' que aponta para o servidor; HTTPS é o cadeado de segurança criptografado (grátis e automático hoje)."
+        },
+        {
+          term: "CDN & Logs",
+          tag: "Velocidade + Caixa-preta",
+          desc: "A CDN guarda cópias perto do visitante (inclusive no Brasil) para carregar rápido. Os Logs registram qualquer falha — basta copiar o log e mandar ao Antigravity!"
+        }
+      ],
+      choiceNote:
+        "Para páginas sem banco de dados (guias, portfólios, catálogos simples), <strong>GitHub Pages</strong> resolve em 2 cliques. Quando houver banco (Neon) ou senhas no .env, use <strong>Vercel</strong> ou <strong>Cloudflare Pages</strong>.",
+      promptTip:
+        "Prepare meu projeto para deploy gratuito na Vercel, me diga quais variáveis de ambiente colar no painel e confirme que o build passa sem erros."
     }
   ],
 
