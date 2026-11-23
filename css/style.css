@@ -5145,6 +5145,272 @@ button.lightbox-pin-chip.is-highlighted {
   margin-bottom: 30px;
 }
 
+/* ==========================================================================
+   Section 06 — Domain, DNS & HTTPS Interactive Simulator + Record Cards
+   ========================================================================== */
+.dns-rule-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 24px;
+  padding: 15px 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.dns-rule-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dns-rule-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-blue);
+}
+
+.dns-rule-col strong {
+  font-size: 14px;
+  color: var(--ink-primary);
+}
+
+.dns-rule-col > span:last-child {
+  font-size: 13px;
+  line-height: 1.48;
+  color: var(--ink-secondary);
+}
+
+.dns-rule-sep {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-amber-soft);
+  color: var(--accent-amber);
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dns-steps-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.dns-step-tab {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  color: var(--ink-secondary);
+  font-size: 12.6px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.dns-step-tab:hover {
+  border-color: var(--accent-blue);
+  color: var(--ink-primary);
+}
+
+.dns-step-tab.is-active {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--ink-inverse);
+}
+
+.dns-svg-wrap {
+  padding: 12px 10px 8px;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 14px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dns-svg-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dns-svg-node {
+  cursor: pointer;
+}
+
+.dns-svg-node:hover rect {
+  stroke-width: 2.3px;
+}
+
+.dns-detail-box {
+  padding: 15px 17px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 14px;
+}
+
+.dns-detail-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.dns-detail-badge {
+  font-family: var(--font-mono);
+  font-size: 10.8px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
+}
+
+.dns-detail-badge.is-https {
+  background: var(--accent-green-soft);
+  color: var(--accent-green);
+}
+
+.dns-detail-title {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.35;
+  color: var(--ink-primary);
+}
+
+.dns-detail-desc {
+  margin: 0 0 10px;
+  font-size: 13.8px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+}
+
+.dns-detail-example {
+  margin: 0 0 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.48;
+  color: var(--ink-primary);
+  overflow-wrap: anywhere;
+}
+
+.dns-detail-tip {
+  margin: 0;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-amber-soft);
+  font-size: 13px;
+  line-height: 1.48;
+  color: var(--ink-primary);
+}
+
+.dns-records-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0 18px;
+}
+
+.dns-record-card {
+  padding: 15px 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.dns-record-card.is-a {
+  border-top: 3px solid var(--accent-blue);
+}
+
+.dns-record-card.is-cname {
+  border-top: 3px solid var(--accent-green);
+}
+
+.dns-record-card.is-txt {
+  border-top: 3px solid var(--accent-amber);
+}
+
+.dns-record-tag {
+  font-family: var(--font-mono);
+  font-size: 10.4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.dns-record-card.is-a .dns-record-tag {
+  color: var(--accent-blue);
+}
+
+.dns-record-card.is-cname .dns-record-tag {
+  color: var(--accent-green);
+}
+
+.dns-record-card.is-txt .dns-record-tag {
+  color: var(--accent-amber);
+}
+
+.dns-record-card h5 {
+  margin: 0 0 6px;
+  font-size: 14.5px;
+  line-height: 1.35;
+  color: var(--ink-primary);
+}
+
+.dns-record-card p {
+  margin: 0 0 12px;
+  font-size: 13.2px;
+  line-height: 1.48;
+  color: var(--ink-secondary);
+}
+
+.dns-record-sample {
+  margin-top: auto;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 11.4px;
+  line-height: 1.5;
+  color: var(--ink-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-wrap: anywhere;
+}
+
+.dns-record-sample strong {
+  color: var(--ink-muted);
+  font-weight: 700;
+}
+
 /* Footer */
 .site-footer {
   margin-top: 64px;
@@ -5265,7 +5531,8 @@ button.lightbox-pin-chip.is-highlighted {
   }
 
   .pillar-svg-box svg,
-  .arch-svg-box svg {
+  .arch-svg-box svg,
+  .dns-svg-wrap svg {
     min-width: 560px;
   }
 
@@ -5282,6 +5549,8 @@ button.lightbox-pin-chip.is-highlighted {
   .web-need-strip,
   .weblab-stage,
   .frameworks-compare-grid,
+  .dns-rule-banner,
+  .dns-records-grid,
   .cost-calm-grid,
   .instr-layers-grid,
   .instr-dodont-grid,
@@ -5299,6 +5568,11 @@ button.lightbox-pin-chip.is-highlighted {
     grid-template-columns: 1fr;
   }
 
+  .dns-rule-sep {
+    margin: 0 auto;
+  }
+
+  .dns-steps-bar,
   .weblab-toggles {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

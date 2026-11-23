@@ -1704,7 +1704,16 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           <strong>Ponte rápida com a Seção 05:</strong> agora que você já viu como o agente monta o <strong>Frontend</strong> (HTML, CSS, JS ou frameworks) e, quando necessário, o <strong>Backend + API</strong> (<a href="#sec-frontend-backend">relembrar o Laboratório Web ↑</a>), falta apenas entender onde esses arquivos vivem, onde os dados ficam guardados e como publicar tudo com segurança.
         </p>
 
-        <h3>Os 3 Pilares de um Sistema Moderno (com cota gratuita)</h3>
+        <nav class="section-jump-nav" aria-label="Atalhos dentro da Seção 06">
+          <span class="section-jump-label">Nesta seção:</span>
+          <a href="#sec-pilares">1. 3 Pilares</a>
+          <a href="#sec-escudo">2. Escudo &amp; Fluxo</a>
+          <a href="#sec-roteiro3">3. Roteiro 3</a>
+          <a href="#sec-dns">4. Domínio &amp; DNS</a>
+          <a href="#sec-engenharia">5. Escala (Opcional)</a>
+        </nav>
+
+        <h3 id="sec-pilares">Os 3 Pilares de um Sistema Moderno (com cota gratuita)</h3>
 
         <div class="stack-table-wrap">
           <table class="stack-table">
@@ -1757,7 +1766,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           <div class="pillar-panel" id="pillar-panel" aria-live="polite"></div>
         </div>
 
-        <h3>O Escudo Anti-Quebra (3 hábitos que evitam dor de cabeça)</h3>
+        <h3 id="sec-escudo">O Escudo Anti-Quebra (3 hábitos que evitam dor de cabeça)</h3>
         <ul>
           <li><strong>Ambientes de Preview (testar antes de publicar):</strong> quando o agente propõe uma mudança num <em>Pull Request</em> (pedido de revisão) no GitHub, a Vercel gera um link temporário exclusivo para você testar antes de apertar <em>Merge</em> (aprovar para o site oficial).</li>
           <li><strong>Testes Automatizados (o checklist do robô):</strong> peça sempre ao Antigravity: <em>"crie testes para as funções principais e rode antes de subir"</em>. Assim o próprio agente descobre se uma novidade quebrou um botão antigo.</li>
@@ -1791,7 +1800,7 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
         </div>
 
         <!-- Recipe 3: Graduating the Section 05 prototype to Production (completes the core 3-pillars journey) -->
-        <h3>Levando seu protótipo da Seção 05 para o nível profissional</h3>
+        <h3 id="sec-roteiro3">Levando seu protótipo da Seção 05 para o nível profissional</h3>
         <p>
           Agora que você já entendeu os 3 pilares e o Escudo Anti-Quebra (GitHub, Neon, Vercel, Preview e <span class="inline-code">.env</span>), veja como é natural pedir ao Antigravity para colocar aquele catálogo de livros e metas no ar:
         </p>
@@ -1836,6 +1845,102 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           <p class="cost-calm-ownership">
             <strong>Posse real do seu trabalho:</strong> suas planilhas continuam no seu <strong>Google Drive</strong>, seu código fica no seu <strong>GitHub</strong> e seus dados vivem no seu banco — nada fica "preso" dentro de um chat de IA.
           </p>
+        </div>
+
+        <!-- Domain, DNS & HTTPS in Practice (Section 06) -->
+        <h3 id="sec-dns">Do link gratuito ao seu endereço próprio: Domínio, DNS e HTTPS sem mistério</h3>
+        <p>
+          Depois que o seu projeto já está no ar num link gratuito (como <span class="inline-code">meu-catalogo.vercel.app</span> ou <span class="inline-code">seu-usuario.github.io</span>), é muito comum querer um endereço bonito com a sua cara — tipo <span class="inline-code">meusite.com.br</span>. Para conectar os dois sem pagar nada além do registro anual do nome, você só precisa entender como funciona o <strong>DNS</strong> (<em>Domain Name System</em>): a <strong>agenda telefônica mundial da internet</strong>.
+        </p>
+
+        <div class="dns-rule-banner">
+          <div class="dns-rule-col">
+            <span class="dns-rule-tag">1. Onde você compra o nome (Registrador)</span>
+            <strong>Registro.br (<span class="inline-code">.com.br</span>) ou Cloudflare (<span class="inline-code">.com</span>)</strong>
+            <span>Guarda apenas o direito de uso do seu nome e a "agenda" de endereços (o painel de DNS). Custa cerca de R$ 40/ano no <span class="inline-code">.com.br</span>.</span>
+          </div>
+          <div class="dns-rule-sep" aria-hidden="true">≠</div>
+          <div class="dns-rule-col">
+            <span class="dns-rule-tag">2. Onde o site realmente roda (Hospedagem)</span>
+            <strong>Vercel, GitHub Pages ou Cloudflare Pages</strong>
+            <span>Você <strong>não precisa</strong> contratar hospedagem paga onde comprou o domínio! Basta apontar o DNS para a Vercel ou GitHub Pages e continuar grátis.</span>
+          </div>
+        </div>
+
+        <!-- Interactive DNS 100ms Journey Simulator -->
+        <div class="interactive-stage" id="widget-dns-journey" aria-label="Simulador passo a passo da viagem de 100ms do DNS">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Simulador Rápido · A Viagem de 100ms do DNS</p>
+              <h4 class="stage-title">O que acontece quando alguém digita <span class="inline-code">meusite.com.br</span> no celular?</h4>
+              <p class="stage-hint">Clique em cada etapa abaixo (ou nos blocos do diagrama) para acompanhar o caminho do nome bonito até a tela segura com cadeado HTTPS.</p>
+            </div>
+          </div>
+
+          <div class="dns-steps-bar" id="dns-steps-bar" role="tablist" aria-label="Etapas da consulta DNS"></div>
+          <p class="svg-scroll-hint" aria-hidden="true">← Deslize o diagrama para o lado para ver as 4 etapas →</p>
+          <div class="dns-svg-wrap" id="dns-svg-wrap"></div>
+          <div class="dns-detail-box" id="dns-detail-box" aria-live="polite"></div>
+
+          <div class="era-nav-row">
+            <button type="button" class="nav-step-btn" id="dns-prev-btn">← Passo anterior</button>
+            <span class="era-counter" id="dns-counter">Passo 1 de 4</span>
+            <button type="button" class="nav-step-btn" id="dns-next-btn">Próximo passo →</button>
+          </div>
+        </div>
+
+        <h4>Os únicos 3 tipos de "bilhete" (registros DNS) que você vai encontrar</h4>
+        <p>
+          Ao conectar seu domínio na Vercel ou no GitHub Pages, o painel pede para você criar 1 ou 2 linhas simples no seu registrador (como o Registro.br). Veja o que cada sigla significa:
+        </p>
+
+        <div class="dns-records-grid">
+          <article class="dns-record-card is-a">
+            <span class="dns-record-tag">Registro A · Endereço direto (IP)</span>
+            <h5>Liga a raiz do domínio ao servidor</h5>
+            <p>
+              Usado para o endereço principal sem "www" (<span class="inline-code">meusite.com.br</span>) apontar direto para o número <strong>IP</strong> da Vercel ou do GitHub.
+            </p>
+            <div class="dns-record-sample">
+              <span><strong>Tipo:</strong> A</span>
+              <span><strong>Nome:</strong> @ (raiz)</span>
+              <span><strong>Valor:</strong> 76.76.21.21</span>
+            </div>
+          </article>
+
+          <article class="dns-record-card is-cname">
+            <span class="dns-record-tag">Registro CNAME · Apelido</span>
+            <h5>Aponta um subdomínio para outro nome</h5>
+            <p>
+              Usado para endereços com prefixo como <span class="inline-code">www.</span> ou <span class="inline-code">app.</span> redirecionarem para o servidor da hospedagem.
+            </p>
+            <div class="dns-record-sample">
+              <span><strong>Tipo:</strong> CNAME</span>
+              <span><strong>Nome:</strong> www</span>
+              <span><strong>Valor:</strong> cname.vercel-dns.com</span>
+            </div>
+          </article>
+
+          <article class="dns-record-card is-txt">
+            <span class="dns-record-tag">Registro TXT (e MX) · Crachá &amp; E-mail</span>
+            <h5>Comprova posse e direciona e-mails</h5>
+            <p>
+              O <strong>TXT</strong> é um código curto para provar que o domínio é realmente seu (usado por Vercel e Google). Já o <strong>MX</strong> indica qual servidor recebe e-mails <span class="inline-code">@meusite.com.br</span>.
+            </p>
+            <div class="dns-record-sample">
+              <span><strong>Tipo:</strong> TXT</span>
+              <span><strong>Nome:</strong> _vercel</span>
+              <span><strong>Valor:</strong> vc-domain-verify=...</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="weblab-prompt-box">
+          <div class="weblab-prompt-top">
+            <span class="weblab-prompt-label">Travou no painel do Registro.br ou Cloudflare? Mande um print ao Antigravity:</span>
+            <button type="button" class="copy-btn trick-copy-mini" data-copy-target="prompt-dns-help">Copiar frase</button>
+          </div>
+          <pre class="weblab-prompt-quote" id="prompt-dns-help">Quero ligar meu domínio próprio ao meu site na Vercel (ou GitHub Pages). Mandei dois prints: o que a hospedagem pediu e a tela de DNS do meu registrador. Me diga exatamente o que preencher nos campos Tipo, Nome e Valor — e me avise quanto tempo esperar pela propagação.</pre>
         </div>
 
         <!-- Additional Software Engineering Components Subsection (Optional / As-needed map) -->
@@ -2110,10 +2215,10 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             aria-label="Buscar termo no glossário"
           />
           <div class="pill-tabs glossary-tabs-inline" id="glossary-tabs" role="group" aria-label="Filtrar termos do glossário por categoria">
-            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (51)</button>
+            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (52)</button>
             <button type="button" class="pill-tab" data-cat="Fundamentos" aria-pressed="false">Fundamentos (16)</button>
             <button type="button" class="pill-tab" data-cat="Agentes" aria-pressed="false">Agentes (16)</button>
-            <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (19)</button>
+            <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (20)</button>
           </div>
         </div>
 

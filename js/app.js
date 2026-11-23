@@ -3069,6 +3069,199 @@
     renderWebLab();
   }
 
+  /* ------------------------------------------------------------------------
+     19. Section 06 — Interactive DNS 100ms Journey Simulator
+     ------------------------------------------------------------------------ */
+  const dnsWidgetEl = document.getElementById("widget-dns-journey");
+  const dnsStepsBarEl = document.getElementById("dns-steps-bar");
+  const dnsSvgWrapEl = document.getElementById("dns-svg-wrap");
+  const dnsDetailEl = document.getElementById("dns-detail-box");
+  const dnsPrevBtn = document.getElementById("dns-prev-btn");
+  const dnsNextBtn = document.getElementById("dns-next-btn");
+  const dnsCounterEl = document.getElementById("dns-counter");
+
+  if (dnsWidgetEl && Array.isArray(DATA.dnsJourney) && DATA.dnsJourney.length) {
+    const dnsSteps = DATA.dnsJourney;
+    let activeDnsIdx = 0;
+
+    function renderDnsSvg() {
+      if (!dnsSvgWrapEl) return;
+      const xs = [12, 184, 356, 528];
+      const boxW = 140;
+      const boxH = 74;
+      const boxY = 24;
+
+      const arrows = [0, 1, 2]
+        .map((i) => {
+          const x1 = xs[i] + boxW + 4;
+          const x2 = xs[i + 1] - 4;
+          const reached = i < activeDnsIdx;
+          const stroke = reached
+            ? activeDnsIdx === 3 && i === 2
+              ? "var(--accent-green)"
+              : "var(--accent-blue)"
+            : "var(--border-strong)";
+          return `
+            <line x1="${x1}" y1="${boxY + boxH / 2}" x2="${x2}" y2="${boxY + boxH / 2}"
+              stroke="${stroke}" stroke-width="${reached ? "2.2" : "1.5"}"
+              stroke-dasharray="${reached ? "none" : "4 3"}"
+              marker-end="url(#dns-arr-${reached ? (activeDnsIdx === 3 && i === 2 ? "green" : "blue") : "muted"})" />
+          `;
+        })
+        .join("");
+
+      const nodes = dnsSteps
+        .map((s, idx) => {
+          const x = xs[idx];
+          const cx = x + boxW / 2;
+          const isActive = idx === activeDnsIdx;
+          const isPast = idx < activeDnsIdx;
+          const isHttps = idx === 3;
+
+          const fill = isActive
+            ? isHttps
+              ? "var(--accent-green-soft)"
+              : "var(--accent-blue-soft)"
+            : "var(--bg-surface)";
+          const stroke = isActive
+            ? isHttps
+              ? "var(--accent-green)"
+              : "var(--accent-blue)"
+            : isPast
+            ? "var(--accent-blue)"
+            : "var(--border-strong)";
+          const strokeW = isActive ? "2.2" : isPast ? "1.5" : "1.2";
+          const kickerColor = isActive
+            ? isHttps
+              ? "var(--accent-green)"
+              : "var(--accent-blue)"
+            : isPast
+            ? "var(--accent-blue)"
+            : "var(--ink-muted)";
+
+          return `
+            <g class="dns-svg-node${isActive ? " is-active" : ""}" data-dns-idx="${idx}" tabindex="0" role="button" aria-label="Etapa ${s.step}: ${escapeHtml(s.svgTitle)}">
+              <rect x="${x}" y="${boxY}" width="${boxW}" height="${boxH}" rx="11"
+                fill="${fill}" stroke="${stroke}" stroke-width="${strokeW}" />
+              <text x="${cx}" y="${boxY + 21}" text-anchor="middle" fill="${kickerColor}" font-size="9.2" font-weight="700" font-family="JetBrains Mono, monospace">PASSO ${s.step}${isPast ? " ✓" : ""}</text>
+              <text x="${cx}" y="${boxY + 43}" text-anchor="middle" fill="var(--ink-primary)" font-size="13" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">${escapeHtml(s.svgTitle)}</text>
+              <text x="${cx}" y="${boxY + 61}" text-anchor="middle" fill="var(--ink-secondary)" font-size="10" font-family="JetBrains Mono, monospace">${escapeHtml(s.svgSub)}</text>
+            </g>
+          `;
+        })
+        .join("");
+
+      dnsSvgWrapEl.innerHTML = `
+        <svg viewBox="0 0 680 132" role="img" aria-label="Fluxo em 4 passos da consulta DNS até o cadeado HTTPS">
+          <defs>
+            <marker id="dns-arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="var(--accent-blue)" />
+            </marker>
+            <marker id="dns-arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="var(--accent-green)" />
+            </marker>
+            <marker id="dns-arr-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="var(--border-strong)" />
+            </marker>
+          </defs>
+          ${arrows}
+          ${nodes}
+          <text x="340" y="120" text-anchor="middle" fill="var(--ink-muted)" font-size="9.8" font-family="JetBrains Mono, monospace">
+            ETAPA ${activeDnsIdx + 1} DE ${dnsSteps.length} · CLIQUE EM QUALQUER BLOCO ACIMA PARA INSPECIONAR
+          </text>
+        </svg>
+      `;
+    }
+
+    function renderDnsStep(idx, restoreSvgFocus) {
+      activeDnsIdx = Math.max(0, Math.min(dnsSteps.length - 1, idx));
+      const item = dnsSteps[activeDnsIdx];
+
+      if (dnsStepsBarEl) {
+        Array.from(dnsStepsBarEl.querySelectorAll(".dns-step-tab")).forEach((btn, i) => {
+          const active = i === activeDnsIdx;
+          btn.classList.toggle("is-active", active);
+          btn.setAttribute("aria-selected", String(active));
+        });
+      }
+
+      if (dnsDetailEl) {
+        dnsDetailEl.innerHTML = `
+          <div class="dns-detail-head">
+            <span class="dns-detail-badge${activeDnsIdx === 3 ? " is-https" : ""}">${escapeHtml(item.badge)}</span>
+            <h5 class="dns-detail-title">${escapeHtml(item.title)}</h5>
+          </div>
+          <p class="dns-detail-desc">${escapeHtml(item.desc)}</p>
+          <div class="dns-detail-example">${escapeHtml(item.example)}</div>
+          <p class="dns-detail-tip">${escapeHtml(item.tip)}</p>
+        `;
+      }
+
+      if (dnsCounterEl) dnsCounterEl.textContent = `Passo ${activeDnsIdx + 1} de ${dnsSteps.length}`;
+      if (dnsPrevBtn) dnsPrevBtn.disabled = activeDnsIdx === 0;
+      if (dnsNextBtn) dnsNextBtn.disabled = activeDnsIdx === dnsSteps.length - 1;
+
+      renderDnsSvg();
+
+      if (restoreSvgFocus && dnsSvgWrapEl) {
+        const target = dnsSvgWrapEl.querySelector(`.dns-svg-node[data-dns-idx="${activeDnsIdx}"]`);
+        if (target) target.focus();
+      }
+    }
+
+    if (dnsStepsBarEl) {
+      dnsStepsBarEl.innerHTML = dnsSteps
+        .map(
+          (s, idx) =>
+            `<button type="button" class="dns-step-tab${idx === 0 ? " is-active" : ""}" role="tab" aria-selected="${
+              idx === 0
+            }" data-dns-idx="${idx}">${escapeHtml(s.tab)}</button>`
+        )
+        .join("");
+
+      dnsStepsBarEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".dns-step-tab");
+        if (btn && btn.dataset.dnsIdx !== undefined) {
+          renderDnsStep(Number(btn.dataset.dnsIdx), false);
+        }
+      });
+
+      bindTablistKeyboard(dnsStepsBarEl, ".dns-step-tab", (btn) => {
+        if (btn.dataset.dnsIdx !== undefined) {
+          renderDnsStep(Number(btn.dataset.dnsIdx), false);
+        }
+      });
+    }
+
+    if (dnsSvgWrapEl) {
+      dnsSvgWrapEl.addEventListener("click", (e) => {
+        const node = e.target.closest(".dns-svg-node");
+        if (node && node.dataset.dnsIdx !== undefined) {
+          renderDnsStep(Number(node.dataset.dnsIdx), false);
+        }
+      });
+
+      dnsSvgWrapEl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          const node = e.target.closest(".dns-svg-node");
+          if (node && node.dataset.dnsIdx !== undefined) {
+            e.preventDefault();
+            renderDnsStep(Number(node.dataset.dnsIdx), true);
+          }
+        }
+      });
+    }
+
+    if (dnsPrevBtn) {
+      dnsPrevBtn.addEventListener("click", () => renderDnsStep(activeDnsIdx - 1, false));
+    }
+    if (dnsNextBtn) {
+      dnsNextBtn.addEventListener("click", () => renderDnsStep(activeDnsIdx + 1, false));
+    }
+
+    renderDnsStep(0, false);
+  }
+
   /* Cross-links: open specific instruction layer or <details> accordion when jumped to */
   document.addEventListener("click", (e) => {
     const layerLink = e.target.closest("a[data-open-layer]");

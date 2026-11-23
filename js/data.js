@@ -828,6 +828,11 @@ window.GUIDE_DATA = {
       def: "Domínio é o endereço bonito; DNS traduz o nome para o servidor; HTTPS é o cadeado de criptografia; CDN guarda cópias perto do visitante para abrir rápido."
     },
     {
+      term: "Registros DNS (A, CNAME, TXT, MX) & TTL",
+      category: "Sistemas",
+      def: "Regras na agenda do seu domínio: A aponta para um número IP; CNAME cria um apelido (ex: www); TXT comprova que o domínio é seu; MX direciona e-mails; TTL é o prazo de cache que explica a espera de propagação."
+    },
+    {
       term: "Autenticação (Auth) & Autorização",
       category: "Sistemas",
       def: "Autenticação confirma quem é a pessoa (ex: login com Google); Autorização define o que ela pode ver ou editar dentro do sistema."
@@ -1848,5 +1853,57 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
         storageNote: "Sincronizado na nuvem via API — aparece no seu celular e no seu computador!"
       }
     }
-  }
+  },
+
+  /* Section 06 — Interactive DNS 100ms Journey Simulator */
+  dnsJourney: [
+    {
+      id: "digitou",
+      step: 1,
+      tab: "1. Você digita",
+      svgTitle: "Navegador",
+      svgSub: "meusite.com.br",
+      badge: "Passo 1 · ~0 ms",
+      title: "Você digita um endereço fácil de lembrar (Domínio)",
+      desc: "Humanos decoram nomes como meusite.com.br, mas servidores na internet só se encontram por números chamados Endereço IP (como 76.76.21.21). O navegador ainda não sabe onde esse site mora — então pede ajuda ao DNS.",
+      example: "Você digita: https://meusite.com.br  →  Navegador pergunta: \"Qual é o IP desse site?\"",
+      tip: "Analogia: você procura \"Padaria do João\" na agenda do celular porque não precisa decorar o número de telefone."
+    },
+    {
+      id: "agenda",
+      step: 2,
+      tab: "2. Agenda DNS",
+      svgTitle: "Agenda DNS",
+      svgSub: "A / CNAME",
+      badge: "Passo 2 · ~25 ms",
+      title: "O DNS consulta a agenda mundial do seu domínio",
+      desc: "A pergunta vai até o DNS (Domain Name System), que lê os \"bilhetes\" cadastrados no painel do seu domínio (no Registro.br ou na Cloudflare) — como um registro A (IP direto) ou CNAME (apelido).",
+      example: "Agenda DNS responde:  A  @ → 76.76.21.21   |   CNAME  www → cname.vercel-dns.com",
+      tip: "Propagação & TTL: operadoras guardam uma cópia rápida (cache) dessa resposta por um prazo chamado TTL. Por isso, ao editar o DNS, esperar de 5 minutos a algumas horas para atualizar em todo lugar é 100% normal!"
+    },
+    {
+      id: "servidor",
+      step: 3,
+      tab: "3. Servidor",
+      svgTitle: "Servidor",
+      svgSub: "Vercel / Pages",
+      badge: "Passo 3 · ~60 ms",
+      title: "O navegador bate direto na porta da Vercel ou GitHub Pages",
+      desc: "Com o número IP ou apelido CNAME em mãos, o navegador vai direto ao servidor onde o seu sistema está hospedado (Vercel, GitHub Pages ou Cloudflare) — mesmo que o domínio tenha sido comprado em outra empresa.",
+      example: "Navegador acessa 76.76.21.21 (Vercel)  →  Vercel entrega HTML, CSS, JS e conversa com o Backend",
+      tip: "Economia real: Registrador (onde você registra o .com.br) ≠ Hospedagem (onde o site roda). Você paga só o registro anual do nome (~R$ 40/ano) e continua hospedando de graça!"
+    },
+    {
+      id: "https",
+      step: 4,
+      tab: "4. Cadeado HTTPS",
+      svgTitle: "HTTPS 🔒",
+      svgSub: "Cadeado grátis",
+      badge: "Passo 4 · ~100 ms",
+      title: "A página abre dentro de um envelope lacrado (HTTPS / SSL)",
+      desc: "Assim que o DNS aponta para o servidor certo, Vercel, GitHub Pages e Cloudflare emitem automaticamente e de graça um certificado SSL — o cadeado HTTPS que criptografa tudo entre o celular do visitante e o seu site.",
+      example: "https://meusite.com.br 🔒  →  Conexão criptografada e site carregado em menos de 1 segundo!",
+      tip: "Se aparecer \"Não seguro\" nos primeiros minutos após configurar um domínio novo, não se assuste: o certificado HTTPS automático só finaliza assim que o DNS termina de propagar."
+    }
+  ]
 };
