@@ -1163,13 +1163,15 @@
   }
 
   /* ------------------------------------------------------------------------
-     13. Section 05 — Antigravity Visual Tour Carousel & Fullscreen Lightbox
+     13. Section 05 — Antigravity Visual Tour Carousel, Interactive Hotspots & Lightbox
      ------------------------------------------------------------------------ */
   const tourWidgetEl = document.getElementById("widget-antigravity-tour");
   const tourTabsEl = document.getElementById("tour-step-tabs");
   const tourFrameMetaEl = document.getElementById("tour-frame-meta");
   const tourImgEl = document.getElementById("tour-slide-img");
   const tourImgTriggerEl = document.getElementById("tour-img-trigger");
+  const tourHotspotsLayerEl = document.getElementById("tour-hotspots-layer");
+  const tourPinsToggleBtn = document.getElementById("tour-pins-toggle");
   const tourZoomBtn = document.getElementById("tour-zoom-btn");
   const tourPrevBtn = document.getElementById("tour-prev-btn");
   const tourNextBtn = document.getElementById("tour-next-btn");
@@ -1180,6 +1182,7 @@
   const lbStepEl = document.getElementById("lightbox-step-pill");
   const lbTitleEl = document.getElementById("lightbox-title");
   const lbImgEl = document.getElementById("lightbox-img");
+  const lbHotspotsLayerEl = document.getElementById("lightbox-hotspots-layer");
   const lbPinsEl = document.getElementById("lightbox-pins-inline");
   const lbCloseBtn = document.getElementById("lightbox-close");
   const lbPrevBtn = document.getElementById("lightbox-prev-btn");
@@ -1187,13 +1190,132 @@
 
   const tourSlides = Array.isArray(DATA.antigravityTour) ? DATA.antigravityTour : [];
   let tourIdx = 0;
+  let lockedTourPinNum = null;
+  let hoverTourPinNum = null;
+  let showTourPins = true;
   let lastTriggerBeforeLb = null;
+
+  function getActiveTourPinNum() {
+    return hoverTourPinNum || lockedTourPinNum;
+  }
+
+  function slideHasHotspots(slide) {
+    return Boolean(
+      slide &&
+        Array.isArray(slide.pins) &&
+        slide.pins.some((p) => typeof p.x === "number" && typeof p.y === "number")
+    );
+  }
+
+  function buildHotspotsHtml(slide) {
+    if (!slideHasHotspots(slide) || !showTourPins) return "";
+    const currentPin = getActiveTourPinNum();
+
+    const boxesHtml = slide.pins
+      .filter((p) => p.box && typeof p.box.x === "number")
+      .map((pin) => {
+        const num = String(pin.num);
+        const isActive = currentPin === num;
+        return `<span class="tour-hotspot-box${isActive ? " is-active" : ""}" data-pin-num="${escapeHtml(
+          num
+        )}" style="left:${pin.box.x}%;top:${pin.box.y}%;width:${pin.box.w}%;height:${pin.box.h}%;" aria-hidden="true"></span>`;
+      })
+      .join("");
+
+    const pinsHtml = slide.pins
+      .filter((p) => typeof p.x === "number" && typeof p.y === "number")
+      .map((pin) => {
+        const num = String(pin.num);
+        const isActive = currentPin === num;
+        const safeLabel = escapeHtml(pin.label);
+        return `
+          <button
+            type="button"
+            class="tour-hotspot-pin${isActive ? " is-active" : ""}"
+            data-pin-num="${escapeHtml(num)}"
+            style="left:${pin.x}%;top:${pin.y}%;"
+            aria-label="Destacar item ${escapeHtml(num)}: ${safeLabel}"
+            aria-pressed="${String(lockedTourPinNum === num)}"
+            title="${escapeHtml(num)}. ${safeLabel}"
+          >
+            <span class="tour-hotspot-pin-num">${escapeHtml(num)}</span>
+          </button>
+        `;
+      })
+      .join("");
+
+    return boxesHtml + pinsHtml;
+  }
+
+  function syncTourPinHighlight() {
+    const activePin = getActiveTourPinNum();
+
+    [tourHotspotsLayerEl, lbHotspotsLayerEl].forEach((layer) => {
+      if (!layer) return;
+      Array.from(layer.querySelectorAll(".tour-hotspot-pin, .tour-hotspot-box")).forEach((el) => {
+        const match = activePin !== null && el.dataset.pinNum === activePin;
+        el.classList.toggle("is-active", match);
+        if (el.classList.contains("tour-hotspot-pin")) {
+          el.setAttribute("aria-pressed", String(lockedTourPinNum !== null && el.dataset.pinNum === lockedTourPinNum));
+        }
+      });
+    });
+
+    if (tourCaptionEl) {
+      Array.from(tourCaptionEl.querySelectorAll(".tour-pin-item[data-pin-num]")).forEach((card) => {
+        const match = activePin !== null && card.dataset.pinNum === activePin;
+        card.classList.toggle("is-highlighted", match);
+      });
+    }
+
+    if (lbPinsEl) {
+      Array.from(lbPinsEl.querySelectorAll(".lightbox-pin-chip[data-pin-num]")).forEach((chip) => {
+        const match = activePin !== null && chip.dataset.pinNum === activePin;
+        chip.classList.toggle("is-highlighted", match);
+        if (chip.tagName === "BUTTON") {
+          chip.setAttribute("aria-pressed", String(lockedTourPinNum !== null && chip.dataset.pinNum === lockedTourPinNum));
+        }
+      });
+    }
+  }
+
+  function toggleLockedTourPin(pinNum) {
+    const num = pinNum ? String(pinNum) : null;
+    lockedTourPinNum = lockedTourPinNum === num ? null : num;
+    if (lockedTourPinNum === null) {
+      hoverTourPinNum = null;
+    }
+    syncTourPinHighlight();
+  }
+
+  function renderTourHotspots(slide) {
+    const hasPins = slideHasHotspots(slide);
+
+    if (tourPinsToggleBtn) {
+      tourPinsToggleBtn.hidden = !hasPins;
+      tourPinsToggleBtn.setAttribute("aria-pressed", String(showTourPins));
+      tourPinsToggleBtn.innerHTML = `<span>${showTourPins ? "Ocultar pinos" : "Mostrar pinos"}</span>`;
+    }
+
+    const markup = buildHotspotsHtml(slide);
+    if (tourHotspotsLayerEl) {
+      tourHotspotsLayerEl.innerHTML = markup;
+      tourHotspotsLayerEl.hidden = !hasPins || !showTourPins;
+    }
+    if (lbHotspotsLayerEl && lbModalEl && !lbModalEl.hidden) {
+      lbHotspotsLayerEl.innerHTML = markup;
+      lbHotspotsLayerEl.hidden = !hasPins || !showTourPins;
+    }
+  }
 
   function renderTourSlide(index) {
     if (!tourSlides.length) return;
     const total = tourSlides.length;
     tourIdx = ((index % total) + total) % total;
+    lockedTourPinNum = null;
+    hoverTourPinNum = null;
     const slide = tourSlides[tourIdx];
+    const hasPins = slideHasHotspots(slide);
 
     if (tourTabsEl) {
       Array.from(tourTabsEl.querySelectorAll(".tour-tab-btn")).forEach((btn, idx) => {
@@ -1204,13 +1326,16 @@
     }
 
     if (tourFrameMetaEl) {
-      tourFrameMetaEl.textContent = `Passo ${slide.step} de ${total} · Tela ilustrativa`;
+      const frameTag = slide.frameTag || (hasPins ? "Print real · Pinos interativos" : "Tela ilustrativa");
+      tourFrameMetaEl.textContent = `Passo ${slide.step} de ${total} · ${frameTag}`;
     }
 
     if (tourImgEl) {
       tourImgEl.src = slide.img;
       tourImgEl.alt = slide.alt;
     }
+
+    renderTourHotspots(slide);
 
     if (tourDotsEl) {
       Array.from(tourDotsEl.querySelectorAll(".tour-dot")).forEach((dot, idx) => {
@@ -1231,9 +1356,11 @@
           ${slide.pins
             .map(
               (pin) => `
-                <div class="tour-pin-item">
+                <div class="tour-pin-item${hasPins ? " is-interactive" : ""}" data-pin-num="${escapeHtml(
+                String(pin.num)
+              )}"${hasPins ? ' tabindex="0" role="button"' : ""}>
                   <div class="tour-pin-head">
-                    <span class="tour-pin-badge" aria-hidden="true">${pin.num}</span>
+                    <span class="tour-pin-badge" aria-hidden="true">${escapeHtml(String(pin.num))}</span>
                     <span class="tour-pin-label">${pin.label}</span>
                   </div>
                   <p class="tour-pin-text">${pin.text}</p>
@@ -1252,18 +1379,32 @@
   }
 
   function syncLightbox(slide, total) {
+    const hasPins = slideHasHotspots(slide);
+    const activePin = getActiveTourPinNum();
     if (lbStepEl) lbStepEl.textContent = `Passo ${slide.step} de ${total} · Tour Visual do Google Antigravity`;
     if (lbTitleEl) lbTitleEl.textContent = slide.title;
     if (lbImgEl) {
       lbImgEl.src = slide.img;
       lbImgEl.alt = slide.alt;
     }
+    if (lbHotspotsLayerEl) {
+      lbHotspotsLayerEl.innerHTML = buildHotspotsHtml(slide);
+      lbHotspotsLayerEl.hidden = !hasPins || !showTourPins;
+    }
     if (lbPinsEl) {
       lbPinsEl.innerHTML = slide.pins
-        .map(
-          (pin) =>
-            `<span class="lightbox-pin-chip"><span class="tour-pin-badge">${pin.num}</span><strong>${pin.label}</strong></span>`
-        )
+        .map((pin) => {
+          const num = escapeHtml(String(pin.num));
+          const highlighted = activePin === String(pin.num);
+          if (hasPins) {
+            return `<button type="button" class="lightbox-pin-chip is-interactive${
+              highlighted ? " is-highlighted" : ""
+            }" data-pin-num="${num}" aria-pressed="${String(lockedTourPinNum === String(pin.num))}"><span class="tour-pin-badge">${num}</span><strong>${
+              pin.label
+            }</strong></button>`;
+          }
+          return `<span class="lightbox-pin-chip"><span class="tour-pin-badge">${num}</span><strong>${pin.label}</strong></span>`;
+        })
         .join("");
     }
     if (lbPrevBtn) lbPrevBtn.disabled = tourIdx === 0;
@@ -1337,12 +1478,113 @@
       });
     }
 
+    if (tourPinsToggleBtn) {
+      tourPinsToggleBtn.addEventListener("click", () => {
+        showTourPins = !showTourPins;
+        if (!showTourPins) {
+          lockedTourPinNum = null;
+          hoverTourPinNum = null;
+        }
+        renderTourHotspots(tourSlides[tourIdx]);
+        syncTourPinHighlight();
+      });
+    }
+
     if (tourZoomBtn) {
       tourZoomBtn.addEventListener("click", () => openTourLightbox(tourZoomBtn));
     }
 
+    // Bind interactive hotspot clicks/hover inside carousel & lightbox layers
+    function bindHotspotLayerEvents(layerEl) {
+      if (!layerEl) return;
+      layerEl.addEventListener("click", (e) => {
+        const pinBtn = e.target.closest(".tour-hotspot-pin[data-pin-num]");
+        if (!pinBtn) return;
+        e.stopPropagation();
+        toggleLockedTourPin(pinBtn.dataset.pinNum);
+      });
+      layerEl.addEventListener("mouseover", (e) => {
+        const pinBtn = e.target.closest(".tour-hotspot-pin[data-pin-num]");
+        if (pinBtn) {
+          hoverTourPinNum = pinBtn.dataset.pinNum;
+          syncTourPinHighlight();
+        }
+      });
+      layerEl.addEventListener("mouseout", (e) => {
+        const pinBtn = e.target.closest(".tour-hotspot-pin[data-pin-num]");
+        if (pinBtn && hoverTourPinNum === pinBtn.dataset.pinNum) {
+          hoverTourPinNum = null;
+          syncTourPinHighlight();
+        }
+      });
+    }
+    bindHotspotLayerEvents(tourHotspotsLayerEl);
+    bindHotspotLayerEvents(lbHotspotsLayerEl);
+
+    // Bidirectional highlight from legend cards
+    if (tourCaptionEl) {
+      tourCaptionEl.addEventListener("click", (e) => {
+        const card = e.target.closest(".tour-pin-item.is-interactive[data-pin-num]");
+        if (!card) return;
+        if (!showTourPins) {
+          showTourPins = true;
+          renderTourHotspots(tourSlides[tourIdx]);
+        }
+        toggleLockedTourPin(card.dataset.pinNum);
+      });
+      tourCaptionEl.addEventListener("mouseover", (e) => {
+        const card = e.target.closest(".tour-pin-item.is-interactive[data-pin-num]");
+        if (card && showTourPins) {
+          hoverTourPinNum = card.dataset.pinNum;
+          syncTourPinHighlight();
+        }
+      });
+      tourCaptionEl.addEventListener("mouseout", (e) => {
+        const card = e.target.closest(".tour-pin-item.is-interactive[data-pin-num]");
+        if (card && !card.contains(e.relatedTarget) && hoverTourPinNum === card.dataset.pinNum) {
+          hoverTourPinNum = null;
+          syncTourPinHighlight();
+        }
+      });
+      tourCaptionEl.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        const card = e.target.closest(".tour-pin-item.is-interactive[data-pin-num]");
+        if (!card) return;
+        e.preventDefault();
+        if (!showTourPins) {
+          showTourPins = true;
+          renderTourHotspots(tourSlides[tourIdx]);
+        }
+        toggleLockedTourPin(card.dataset.pinNum);
+      });
+    }
+
+    // Bidirectional highlight from lightbox footer chips
+    if (lbPinsEl) {
+      lbPinsEl.addEventListener("click", (e) => {
+        const chip = e.target.closest(".lightbox-pin-chip.is-interactive[data-pin-num]");
+        if (!chip) return;
+        if (!showTourPins) {
+          showTourPins = true;
+          renderTourHotspots(tourSlides[tourIdx]);
+        }
+        toggleLockedTourPin(chip.dataset.pinNum);
+      });
+    }
+
     if (tourImgTriggerEl) {
-      tourImgTriggerEl.addEventListener("click", () => openTourLightbox(tourImgTriggerEl));
+      tourImgTriggerEl.addEventListener("click", (e) => {
+        if (e.target.closest(".tour-hotspot-pin")) return;
+        openTourLightbox(tourImgTriggerEl);
+      });
+
+      tourImgTriggerEl.addEventListener("keydown", (e) => {
+        if (e.target !== tourImgTriggerEl) return;
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openTourLightbox(tourImgTriggerEl);
+        }
+      });
 
       // Touch swipe navigation on mobile
       let swipeStartX = 0;

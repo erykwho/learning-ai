@@ -17,7 +17,7 @@
     property="og:description"
     content="Guia interativo e gratuito em português para entender IA do zero até agentes, Google Antigravity e engenharia de sistemas sem precisar saber programar."
   />
-  <meta property="og:image" content="https://erykwho.github.io/learning-ai/assets/tour/01-projeto.png" />
+  <meta property="og:image" content="https://erykwho.github.io/learning-ai/assets/tour/01-inicio-comandos.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="IA na Prática: do Zero aos Agentes" />
   <meta
@@ -1071,13 +1071,100 @@
           </p>
         </div>
 
+        <!-- Projects, Resources & Permissions Concept (Section 05) -->
+        <h3 id="sec-projetos-permissoes">Projetos e Permissões: o agente só vê o que você autoriza</h3>
+        <p>
+          Antes de sair clicando, existe um conceito central que evita 90% dos sustos e travamentos no Google Antigravity: o <strong>Projeto</strong>. Pense num Projeto como uma <strong>sala de reunião fechada com chave</strong>. Por padrão, o agente entra numa sala vazia — ele <strong>não sai vasculhando</strong> o seu computador, nem todas as suas planilhas do Google Drive, nem todos os seus repositórios do GitHub. Ele só consegue enxergar e alterar aquilo que você <strong>conecta e coloca dentro daquele Projeto</strong>.
+        </p>
+
+        <div class="project-steps-strip" aria-label="As duas chaves para o agente enxergar seus dados">
+          <div class="project-step-box">
+            <span class="project-step-num">Chave 1 · Na sua Conta</span>
+            <h4>Conectar o Plugin (Customizations)</h4>
+            <p>
+              Em <strong>Customizations → Marketplace</strong>, você conecta a integração do serviço (ex.: <em>Google Drive</em>, <em>Google Sheets</em> ou <em>GitHub</em>) via login seguro (OAuth). Suas credenciais ficam guardadas no <strong>Sidecar</strong>, fora do código.
+            </p>
+          </div>
+          <div class="project-step-arrow" aria-hidden="true">→</div>
+          <div class="project-step-box">
+            <span class="project-step-num">Chave 2 · No Projeto</span>
+            <h4>Configurar Recursos e Permissões</h4>
+            <p>
+              Dentro do <strong>Projeto</strong> (em <strong>Project Settings → Resources</strong> na nuvem, ou em <strong>Folders</strong> no computador), você escolhe <em>exatamente quais</em> planilhas, pastas ou repositórios o agente pode ver — e define quando ele deve pausar para pedir aprovação.
+            </p>
+          </div>
+        </div>
+
+        <p>
+          Veja como essas duas chaves funcionam na prática nos dois cenários mais comuns do dia a dia:
+        </p>
+
+        <div class="project-examples-grid">
+          <article class="project-example-card">
+            <div class="project-example-head">
+              <span class="project-example-icon is-sheets" aria-hidden="true">GS</span>
+              <div>
+                <span class="project-example-badge">Exemplo 1 · Planilhas &amp; Drive</span>
+                <h4>Google Sheets (e Google Drive)</h4>
+              </div>
+            </div>
+            <p class="project-example-goal">
+              <strong>Objetivo:</strong> ler recibos numa pasta do Drive e lançar tudo numa planilha de gastos no Google Sheets.
+            </p>
+            <ul class="project-example-list">
+              <li><strong>1. Conectar plugins:</strong> ative <em>Google Drive</em> e <em>Google Sheets</em> em <strong>Customizations</strong> e autorize sua conta Google.</li>
+              <li><strong>2. Configurar o Projeto:</strong> em <strong>Project Settings → Resources → Add Resource</strong>, selecione a pasta ou planilha específica no Google Drive (ou informe o link autorizado na conversa).</li>
+            </ul>
+            <p class="project-example-guard">
+              <strong>Por que isso te protege:</strong> se você não conectar o plugin ou não der acesso ao arquivo, o agente simplesmente não enxerga a planilha (e avisa pedindo permissão). Suas outras pastas pessoais seguem fora do caminho e o agente pausa antes de gravar alterações importantes.
+            </p>
+          </article>
+
+          <article class="project-example-card">
+            <div class="project-example-head">
+              <span class="project-example-icon is-github" aria-hidden="true">GH</span>
+              <div>
+                <span class="project-example-badge">Exemplo 2 · Código &amp; Sites</span>
+                <h4>GitHub (Repositórios e Pages)</h4>
+              </div>
+            </div>
+            <p class="project-example-goal">
+              <strong>Objetivo:</strong> criar ou atualizar um site (como este guia!), salvar versões e publicar no ar pelo GitHub.
+            </p>
+            <ul class="project-example-list">
+              <li><strong>1. Conectar plugin:</strong> autorize sua conta do <em>GitHub</em> em <strong>Customizations</strong>.</li>
+              <li><strong>2. Vincular ao Projeto:</strong> no modo nuvem, adicione o repositório exato em <strong>Project Settings → Resources → GitHub</strong> (no App desktop, adicione a pasta local em <strong>Folders</strong>).</li>
+            </ul>
+            <p class="project-example-guard">
+              <strong>Por que isso te protege:</strong> o agente só clona e recebe permissão de leitura e escrita para o repositório vinculado àquele Projeto — todos os seus outros repositórios privados continuam 100% invisíveis para ele.
+            </p>
+          </article>
+        </div>
+
+        <div class="gemini4-note-strip">
+          <p>
+            <strong>Nuvem vs. Computador (sem complicar):</strong> usando o Antigravity na web (<span class="inline-code">antigravity.google.com</span>) ou em <em>Remote Projects</em>, você anexa itens em <strong>Resources</strong> (GitHub, Google Drive/Sheets e arquivos enviados). No <strong>Antigravity App</strong> instalado no computador, um Projeto também pode trabalhar direto em <strong>pastas locais</strong> (<em>Folders</em>).
+          </p>
+          <p>
+            <strong>Controle de autonomia por Projeto:</strong> cada projeto permite escolher o nível de aprovação — <strong>Request Review</strong> (pede seu clique antes de cada comando), <strong>Default</strong> (testa livremente na Sandbox e pede aprovação fora dela) ou <strong>Auto</strong> (só pausa em ações arriscadas ou irreversíveis).
+          </p>
+          <p>
+            <strong>Dica para quem não programa:</strong> no Antigravity App, você pode ativar o layout <strong>Knowledge Work</strong> (em <em>Settings → General → Interface Layout</em>), que esconde painéis técnicos de código e deixa a tela ainda mais limpa, focada em documentos, planilhas e artefatos.
+          </p>
+          <div class="gemini4-note-links">
+            <a class="era-ref-chip" href="https://antigravity.google/docs/projects/" target="_blank" rel="noopener noreferrer">Documentação: Projects no Antigravity ↗</a>
+            <a class="era-ref-chip" href="https://antigravity.google/docs/remote-agents/" target="_blank" rel="noopener noreferrer">Remote Projects &amp; Resources (GitHub / Drive) ↗</a>
+            <a class="era-ref-chip" href="https://antigravity.google/blog/antigravity-for-knowledge-work/" target="_blank" rel="noopener noreferrer">Layout Knowledge Work (para não-programadores) ↗</a>
+          </div>
+        </div>
+
         <!-- Visual Tour Carousel: Antigravity Basic Functions -->
         <div class="interactive-stage" id="widget-antigravity-tour" aria-label="Carrossel passo a passo visual do Google Antigravity">
           <div class="stage-header">
             <div class="stage-title-group">
-              <p class="stage-eyebrow">Tour Visual · Telas ilustrativas das funções básicas</p>
+              <p class="stage-eyebrow">Tour Visual · Prints reais anonimizados + Pinos interativos</p>
               <h3 class="stage-title">Passo a passo com prints: onde clicar no Google Antigravity</h3>
-              <p class="stage-hint">Passe pelos 5 passos abaixo (ou use as setas ← → do teclado) para não ter nenhuma dúvida de onde clicar. Clique na imagem para ampliar em tela cheia.</p>
+              <p class="stage-hint">Passe pelos 5 passos abaixo (ou use as setas ← → do teclado). Passe o mouse ou clique nos <strong>pinos numerados</strong> ou nos cartões da legenda para destacar onde clicar — e clique no print para ampliar em tela cheia.</p>
             </div>
           </div>
 
@@ -1085,28 +1172,34 @@
 
           <div class="tour-viewport">
             <div class="tour-frame-bar">
-              <span class="tour-frame-meta" id="tour-frame-meta">Passo 1 de 5 · Tela ilustrativa</span>
-              <button type="button" class="tour-zoom-btn" id="tour-zoom-btn" aria-label="Ampliar print em tela cheia">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="15 3 21 3 21 9" />
-                  <polyline points="9 21 3 21 3 15" />
-                  <line x1="21" y1="3" x2="14" y2="10" />
-                  <line x1="3" y1="21" x2="10" y2="14" />
-                </svg>
-                <span>Ampliar print</span>
-              </button>
+              <span class="tour-frame-meta" id="tour-frame-meta">Passo 1 de 5 · Print real · Pinos interativos</span>
+              <div class="tour-frame-actions">
+                <button type="button" class="tour-zoom-btn" id="tour-pins-toggle" aria-pressed="true" hidden>
+                  <span>Ocultar pinos</span>
+                </button>
+                <button type="button" class="tour-zoom-btn" id="tour-zoom-btn" aria-label="Ampliar print em tela cheia">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg>
+                  <span>Ampliar print</span>
+                </button>
+              </div>
             </div>
-            <button type="button" class="tour-img-trigger" id="tour-img-trigger" aria-label="Abrir print ampliado em tela cheia">
-              <img
-                id="tour-slide-img"
-                class="tour-slide-img"
-                src="assets/tour/01-projeto.png"
-                alt="Tela ilustrativa inicial do Google Antigravity"
-                width="1120"
-                height="680"
-                loading="lazy"
-              />
-            </button>
+            <div class="tour-stage-wrap" id="tour-img-trigger" role="button" tabindex="0" aria-label="Abrir print ampliado em tela cheia">
+              <div class="tour-hotspot-stage">
+                <img
+                  id="tour-slide-img"
+                  class="tour-slide-img"
+                  src="assets/tour/01-inicio-comandos.png"
+                  alt="Tela inicial real do Google Antigravity"
+                  loading="lazy"
+                />
+                <div class="tour-hotspots-layer" id="tour-hotspots-layer" aria-label="Marcadores interativos do passo"></div>
+              </div>
+            </div>
           </div>
 
           <div class="tour-nav-bar">
@@ -1140,7 +1233,7 @@ Quero que você:
 3. Crie uma nova planilha no Google Sheets chamada "Controle de Gastos" com uma aba de lançamentos formatada em Reais (R$) e uma segunda aba "Resumo" com a soma por categoria.
 4. Antes de gravar a planilha final, me mostre uma prévia dos itens lidos para eu confirmar se algum valor precisa de ajuste.</pre>
             <ol class="recipe-steps">
-              <li><strong>Pré-requisito:</strong> conectar os plugins de <em>Google Drive</em> e <em>Google Sheets</em> na tela de personalização do Antigravity.</li>
+              <li><strong>Pré-requisito:</strong> conectar os plugins de <em>Google Drive</em> e <em>Google Sheets</em> em <strong>Customizations</strong> e criar um <strong>Projeto</strong> com acesso à pasta/planilha em <strong>Resources</strong> (como explicamos acima).</li>
               <li><strong>Por que funciona bem:</strong> começar com <span class="inline-code">/plan</span> e pedir confirmação antes de gravar evita surpresas e mantém você no controle.</li>
             </ol>
           </div>
@@ -1784,9 +1877,9 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             aria-label="Buscar termo no glossário"
           />
           <div class="pill-tabs" id="glossary-tabs" role="group" aria-label="Filtrar termos do glossário por categoria" style="margin-bottom:0;">
-            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (39)</button>
+            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (40)</button>
             <button type="button" class="pill-tab" data-cat="Fundamentos" aria-pressed="false">Fundamentos (13)</button>
-            <button type="button" class="pill-tab" data-cat="Agentes" aria-pressed="false">Agentes (11)</button>
+            <button type="button" class="pill-tab" data-cat="Agentes" aria-pressed="false">Agentes (12)</button>
             <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (15)</button>
           </div>
         </div>
@@ -1807,12 +1900,15 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
       <div class="lightbox-header">
         <div class="lightbox-title-wrap">
           <span class="lightbox-step-pill" id="lightbox-step-pill">Passo 1 de 5 · Tour Visual</span>
-          <h3 class="lightbox-title" id="lightbox-title">Passo 1 — Abrir um projeto e conhecer a tela inicial</h3>
+          <h3 class="lightbox-title" id="lightbox-title">Passo 1 — Tela inicial, barra lateral e comandos com barra (/)</h3>
         </div>
         <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Fechar ampliação">Fechar ✕</button>
       </div>
       <div class="lightbox-body">
-        <img id="lightbox-img" class="lightbox-img" src="assets/tour/01-projeto.png" alt="" />
+        <div class="tour-hotspot-stage is-lightbox">
+          <img id="lightbox-img" class="lightbox-img" src="assets/tour/01-inicio-comandos.png" alt="" />
+          <div class="tour-hotspots-layer" id="lightbox-hotspots-layer" aria-label="Marcadores interativos do print ampliado"></div>
+        </div>
       </div>
       <div class="lightbox-footer">
         <div class="lightbox-pins-inline" id="lightbox-pins-inline"></div>

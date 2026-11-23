@@ -33,7 +33,7 @@ Este arquivo define o contrato permanente deste repositório para agentes de IA 
   - `js/data.js` — fonte única de dados estruturados (`window.GUIDE_DATA`: widgets, biblioteca das 5 eras, tour visual, pilares, mapa de engenharia, cursos/playlists, glossário e checklist).
   - `js/app.js` — interatividade, SVGs dinâmicos temáticos, carrossel com Lightbox, filtros e persistência do checklist em `localStorage`.
   - `css/style.css` — tema claro papel editorial quente (`#faf8f4`) e tema escuro grafite nítido (`#111418`), tipografia `Newsreader` + `Plus Jakarta Sans` + `JetBrains Mono`.
-  - `assets/tour/` — prints ilustrativos 2x Retina do carrossel do Google Antigravity (Seção 05).
+  - `assets/tour/` — prints reais anonimizados do Google Antigravity para o carrossel com hotspots interativos (Seção 05).
 - **Regras visuais:**
   - Todo gráfico SVG novo deve usar variáveis CSS (`var(--ink-primary)`, `var(--bg-surface)`, `var(--accent-*)`, e `var(--ink-inverse)` para texto sobre fundos sólidos de destaque) para funcionar com alto contraste tanto em modo claro quanto em modo escuro.
   - Mantenha estética editorial limpa; evite clichês visuais (gradientes neon/roxo sobre fundo escuro, texto com gradiente, bordas brilhantes artificiais).

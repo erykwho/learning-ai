@@ -2825,7 +2825,165 @@ input {
 }
 
 /* ==========================================================================
-   Section 05: Antigravity Visual Tour Carousel & Fullscreen Lightbox
+   Section 05: Projects, Resources & Permissions (Google Sheets & GitHub)
+   ========================================================================== */
+
+.project-steps-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 12px;
+  margin: 18px 0 18px;
+}
+
+.project-step-box {
+  padding: 15px 17px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.project-step-num {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-blue);
+  background: var(--accent-blue-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.project-step-box h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.project-step-box p {
+  margin: 0;
+  font-size: 13.8px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+}
+
+.project-step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  padding: 0 2px;
+}
+
+.project-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 14px 0 16px;
+}
+
+.project-example-card {
+  padding: 17px 18px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-example-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.project-example-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.project-example-icon.is-sheets {
+  background: var(--accent-green-soft);
+  color: var(--accent-green);
+  border: 1px solid var(--accent-green);
+}
+
+.project-example-icon.is-github {
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+}
+
+.project-example-badge {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+}
+
+.project-example-head h4 {
+  margin: 2px 0 0;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.project-example-goal {
+  margin: 0;
+  font-size: 13.6px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
+.project-example-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.52;
+  color: var(--ink-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-example-list li {
+  margin: 0;
+}
+
+.project-example-guard {
+  margin: auto 0 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent-green);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
+/* ==========================================================================
+   Section 05: Antigravity Visual Tour Carousel, Hotspots & Fullscreen Lightbox
    ========================================================================== */
 
 .tour-step-tabs {
@@ -2880,6 +3038,13 @@ input {
   border-bottom: 1px solid var(--border-subtle);
 }
 
+.tour-frame-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .tour-frame-meta {
   font-family: var(--font-mono);
   font-size: 11.5px;
@@ -2909,28 +3074,103 @@ input {
   color: var(--accent-blue);
 }
 
+.tour-zoom-btn[hidden] {
+  display: none;
+}
+
 .tour-zoom-btn svg {
   width: 14px;
   height: 14px;
 }
 
-.tour-img-trigger {
-  display: block;
+.tour-stage-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 0;
-  border: none;
-  background: transparent;
+  background: var(--bg-subtle);
   cursor: zoom-in;
+  line-height: 0;
+}
+
+.tour-stage-wrap:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: -2px;
+}
+
+.tour-hotspot-stage {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
   line-height: 0;
 }
 
 .tour-slide-img {
   display: block;
-  width: 100%;
+  max-width: 100%;
+  max-height: 540px;
+  width: auto;
   height: auto;
-  aspect-ratio: 1120 / 680;
-  object-fit: contain;
   background: #eef1f6;
+}
+
+.tour-hotspots-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tour-hotspots-layer[hidden] {
+  display: none;
+}
+
+.tour-hotspot-box {
+  position: absolute;
+  border-radius: 8px;
+  border: 2px dashed rgba(180, 83, 9, 0.65);
+  background: rgba(217, 119, 6, 0.08);
+  transition: border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.tour-hotspot-box.is-active {
+  border-style: solid;
+  border-color: #d97706;
+  background: rgba(217, 119, 6, 0.16);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.24);
+}
+
+.tour-hotspot-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background: #b45309;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.tour-hotspot-pin:hover,
+.tour-hotspot-pin:focus-visible,
+.tour-hotspot-pin.is-active {
+  transform: translate(-50%, -50%) scale(1.18);
+  background: #d97706;
+  box-shadow: 0 0 0 5px rgba(217, 119, 6, 0.32), 0 3px 10px rgba(0, 0, 0, 0.4);
+  z-index: 4;
+  outline: none;
 }
 
 .tour-nav-bar {
@@ -3005,6 +3245,18 @@ input {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.tour-pin-item.is-interactive {
+  cursor: pointer;
+}
+
+.tour-pin-item.is-interactive:hover,
+.tour-pin-item.is-highlighted {
+  border-color: #d97706;
+  background: var(--accent-amber-soft);
+  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18);
 }
 
 .tour-pin-head {
@@ -3133,11 +3385,16 @@ input {
   justify-content: center;
 }
 
-.lightbox-img {
-  width: 100%;
-  height: auto;
+.tour-hotspot-stage.is-lightbox {
   max-height: 68vh;
-  object-fit: contain;
+}
+
+.lightbox-img {
+  display: block;
+  max-width: 100%;
+  max-height: 68vh;
+  width: auto;
+  height: auto;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-subtle);
   background: #eef1f6;
@@ -3168,6 +3425,23 @@ input {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+button.lightbox-pin-chip.is-interactive {
+  padding: 4px 10px 4px 5px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-subtle);
+  color: var(--ink-primary);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+button.lightbox-pin-chip.is-interactive:hover,
+button.lightbox-pin-chip.is-highlighted {
+  border-color: #d97706;
+  background: var(--accent-amber-soft);
 }
 
 .lightbox-pin-chip .tour-pin-badge {
@@ -3982,6 +4256,7 @@ input {
   .era-body-grid,
   .compass-goals,
   .agent-xray-grid,
+  .project-examples-grid,
   .instr-layers-grid,
   .instr-dodont-grid,
   .gemini-hub-grid,
@@ -4023,8 +4298,20 @@ input {
     text-align: center;
   }
 
+  .project-steps-strip {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .project-step-arrow {
+    transform: rotate(90deg);
+    padding: 0;
+    line-height: 1;
+  }
+
   .tour-frame-bar {
     padding: 8px 10px;
+    flex-wrap: wrap;
   }
 
   .tour-frame-meta {
@@ -4034,6 +4321,13 @@ input {
   .tour-zoom-btn {
     padding: 5px 9px;
     font-size: 11.5px;
+  }
+
+  .tour-hotspot-pin {
+    width: 20px;
+    height: 20px;
+    font-size: 10.5px;
+    border-width: 1.5px;
   }
 
   .tour-nav-bar {

@@ -693,6 +693,11 @@ window.GUIDE_DATA = {
       def: "O 'README para agentes': arquivo de texto na raiz da pasta do projeto lido automaticamente em toda conversa para guardar objetivo, público, regras e checklist de verificação."
     },
     {
+      term: "Projeto & Recursos (Antigravity)",
+      category: "Agentes",
+      def: "A 'sala fechada' de trabalho do agente: define exatamente quais pastas locais ou recursos na nuvem (repositórios do GitHub, arquivos/planilhas do Google Drive e Sheets) o agente tem permissão para ver e alterar."
+    },
+    {
       term: "Artifacts (Painel de Artefatos)",
       category: "Agentes",
       def: "Painel lateral usado em ferramentas como Antigravity e Claude para exibir planos, documentos, tabelas e prévias interativas separados da conversa."
@@ -906,135 +911,185 @@ window.GUIDE_DATA = {
     }
   ],
 
-  /* Antigravity Visual Tour Carousel (Section 05) */
+  /* Antigravity Visual Tour Carousel (Section 05 — Real Anonymized UI + Interactive Hotspots) */
   antigravityTour: [
     {
       step: 1,
-      shortTab: "1. Projeto",
-      title: "Passo 1 — Abrir um projeto e conhecer a tela inicial",
-      img: "assets/tour/01-projeto.png",
-      alt: "Tela ilustrativa inicial do Google Antigravity destacando o botão Novo Projeto (1), a caixa de pedido com barra de anexos (2) e o atalho Customizations para Plugins na barra lateral (3).",
+      shortTab: "1. Início & /",
+      frameTag: "Print real · Pinos interativos",
+      title: "Passo 1 — Tela inicial, barra lateral e comandos com barra (/)",
+      img: "assets/tour/01-inicio-comandos.png",
+      alt: "Tela inicial real do Google Antigravity mostrando a barra lateral com New Conversation, Customizations e Projects (1), o menu de comandos com barra aberto com /plan, /grill-me, /gdrive e /goal (2), e a caixa de mensagem com seletor de projeto e modelo Gemini 4 Neon (3).",
       intro:
-        "Ao abrir o Google Antigravity, você já tem uma mesa equipada com Sandbox pronta — basta criar um projeto e descrever seu objetivo em português simples.",
+        "Esta é a interface real do Google Antigravity: à esquerda ficam seus Projetos e o menu Customizations; no centro você digita seu objetivo — ou digita a barra / para abrir atalhos guiados.",
       pins: [
         {
           num: "1",
-          label: "Novo Projeto / Conversa",
-          text: "Separe seus assuntos em projetos (ex: Finanças ou Catálogo) para manter arquivos, histórico e permissões organizados."
+          x: 11.4,
+          y: 17.5,
+          box: { x: 0.3, y: 3.3, w: 10.3, h: 33.2 },
+          label: "Barra lateral: Projects e Customizations",
+          text: "Aqui você inicia uma nova conversa, abre Customizations (para conectar plugins) e organiza seus assuntos em Projetos separados."
         },
         {
           num: "2",
-          label: "Caixa de pedido (Prompt)",
-          text: "Escreva em português normal, anexe prints da sua tela ou digite \"/\" para abrir os atalhos guiados."
+          x: 37.3,
+          y: 75.5,
+          box: { x: 37.7, y: 75.3, w: 33.5, h: 11.7 },
+          label: "Menu de comandos com barra (/)",
+          text: "Digite \"/\" para escolher modos prontos como /plan (planeja antes de agir), /grill-me (faz perguntas simples) ou skills conectadas como /gdrive."
         },
         {
           num: "3",
-          label: "Customizations (Plugins e Skills)",
-          text: "Atalho no canto inferior esquerdo para conectar Google Drive, Sheets, GitHub e ver suas Skills salvas."
+          x: 71.9,
+          y: 92.2,
+          box: { x: 37.7, y: 87.4, w: 33.5, h: 10.4 },
+          label: "Projeto ativo, Modelo e Permissões",
+          text: "Acima da caixa você vê em qual Projeto está (ex.: meu-site); embaixo escolhe o motor (ex.: Gemini 4 Neon) e o modo de aprovação."
         }
       ]
     },
     {
       step: 2,
       shortTab: "2. Plugins",
-      title: "Passo 2 — Conectar Google Drive, Sheets e GitHub em 1 clique",
+      frameTag: "Print real · Pinos interativos",
+      title: "Passo 2 — Conectar Google Sheets, Drive e GitHub em Customizations",
       img: "assets/tour/02-plugins.png",
-      alt: "Tela ilustrativa de Customizations e Plugins no Google Antigravity destacando o menu Plugins e MCP (1), os cartões de conexão em 1 clique do Drive, Sheets e GitHub (2) e as abas Plugins Oficiais, Skills e Servidores MCP (3).",
+      alt: "Tela real de Customizations no Google Antigravity destacando o menu Customizations na barra lateral (1), os plugins do Google Workspace incluindo Google Sheets e Google Drive (2) e o plugin do GitHub em More Plugins (3).",
       intro:
-        "Antes de automatizar planilhas ou publicar sites, conecte só os serviços necessários. Suas senhas reais ficam protegidas no Sidecar, fora da cápsula.",
+        "Chave 1 de acesso: abra Customizations para conectar sua conta Google Workspace (Sheets, Drive, Docs) e o GitHub via login seguro (OAuth protegido no Sidecar).",
       pins: [
         {
           num: "1",
-          label: "Menu Plugins & MCP",
-          text: "Dentro de Customizations, é o painel central onde você controla quais serviços externos o agente pode acessar."
+          x: 11.4,
+          y: 7.5,
+          box: { x: 0.3, y: 5.8, w: 10.3, h: 3.4 },
+          label: "Menu Customizations (Marketplace / Installed)",
+          text: "Na barra lateral, clique em Customizations. No topo da tela você alterna entre Marketplace (descobrir novos plugins) e Installed (gerenciar os conectados)."
         },
         {
           num: "2",
-          label: "Conectar em 1 clique",
-          text: "Clique em \"Conectar\" para autorizar sua conta Google ou GitHub; assim que mudar para \"Conectado ✓\", já funciona."
+          x: 72.2,
+          y: 20.5,
+          box: { x: 36.3, y: 20.1, w: 35.6, h: 19.3 },
+          label: "Plugins do Google Workspace (Sheets & Drive)",
+          text: "Clique em \"+\" para conectar Google Docs, Slides, Calendar ou Gmail — e em \"⋮\" nos já conectados (como Google Sheets e Google Drive) para configurar ou desconectar."
         },
         {
           num: "3",
-          label: "Plugins, Regras, Skills e MCP",
-          text: "Alterne entre Plugins oficiais prontos, suas Regras globais, suas Skills reutilizáveis e servidores MCP extras — tudo visível em Customizations → Installed."
+          x: 55.4,
+          y: 49.6,
+          box: { x: 36.3, y: 46.1, w: 18.2, h: 7.2 },
+          label: "Plugin do GitHub (More Plugins)",
+          text: "Autorize o GitHub aqui para permitir que o agente clone repositórios, crie branches e publique atualizações — sempre restrito aos repositórios que você vincular ao Projeto. Em Installed você também gerencia suas Regras e Skills."
         }
       ]
     },
     {
       step: 3,
-      shortTab: "3. Comandos /",
-      title: "Passo 3 — Usar comandos com barra (/) e anexar prints",
-      img: "assets/tour/03-comandos.png",
-      alt: "Tela ilustrativa mostrando o menu de Slash Commands aberto ao digitar barra no Antigravity destacando o menu de atalhos (1), a opção recomendada /plan (2) e um print de recibo anexado na mensagem (3).",
+      shortTab: "3. Projeto",
+      frameTag: "Print real · Pinos interativos",
+      title: "Passo 3 — Abrir Project Settings no seu Projeto",
+      img: "assets/tour/03-menu-projeto.png",
+      alt: "Tela real do Google Antigravity mostrando a lista de Projects na barra lateral (1), o menu de três pontinhos aberto sobre o projeto com a opção Project Settings (2) e o topo indicando o projeto e conversa ativos (3).",
       intro:
-        "Não precisa decorar fórmulas de prompt: digite a barra / para abrir modos guiados — e cole prints da tela sempre que quiser mostrar algo visual.",
+        "Conectar um plugin na sua conta é só a metade do caminho. Para liberar o que o agente pode enxergar naquele assunto, abra as configurações do Projeto.",
       pins: [
         {
           num: "1",
-          label: "Menu de Slash Commands",
-          text: "Digitar \"/\" abre modos prontos: /plan (planeja antes), /grill-me (faz perguntas simples) e /goal (tarefas longas)."
+          x: 11.3,
+          y: 32.5,
+          box: { x: 0.3, y: 15.8, w: 10.2, h: 20.0 },
+          label: "Projetos isolados na barra lateral",
+          text: "Cada projeto (ex.: meu-site, financas-pessoais, estudos-pdf) funciona como uma sala fechada com suas próprias conversas e permissões."
         },
         {
           num: "2",
-          label: "Comece sempre com /plan",
-          text: "Modo ideal para iniciantes: o agente explica o passo a passo e espera sua confirmação antes de alterar qualquer coisa."
+          x: 18.4,
+          y: 22.8,
+          box: { x: 7.9, y: 18.2, w: 9.7, h: 10.5 },
+          label: "Menu ⋮ → Project Settings",
+          text: "Passe o mouse sobre o nome do projeto, clique nos três pontinhos (⋮) e escolha \"Project Settings\" para gerenciar os recursos autorizados."
         },
         {
           num: "3",
-          label: "Anexar print ou arquivo",
-          text: "Arraste ou cole (Ctrl+V) fotos de recibos, PDFs ou prints de erro direto na caixa de mensagem."
+          x: 26.0,
+          y: 2.6,
+          box: { x: 10.9, y: 0.4, w: 14.3, h: 3.1 },
+          label: "Projeto e conversa ativos",
+          text: "O caminho no topo confirma exatamente em qual Projeto (meu-site) e conversa o agente está trabalhando agora."
         }
       ]
     },
     {
       step: 4,
-      shortTab: "4. Aprovação",
-      title: "Passo 4 — Revisar o plano e aprovar com segurança",
-      img: "assets/tour/04-aprovacao.png",
-      alt: "Tela ilustrativa dividida no Google Antigravity mostrando o painel lateral de Artifacts com o plano em etapas (1), o cartão amarelo de pausa de segurança para ação no Google Sheets (2) e os botões Aprovar e Executar ou Pedir ajuste (3).",
+      shortTab: "4. Recursos",
+      frameTag: "Print real · Pinos interativos",
+      title: "Passo 4 — Anexar Recursos (GitHub e Google Drive/Sheets) no Projeto",
+      img: "assets/tour/04-recursos-projeto.png",
+      alt: "Modal real de Project Settings no Google Antigravity destacando a lista de projetos nas configurações (1), o repositório GitHub anexado na seção Resources (2) e o botão + Add Resource para adicionar repositórios, arquivos do Google Drive/Sheets ou uploads (3).",
       intro:
-        "Você segue no controle o tempo todo: o agente mostra o plano organizado ao lado e pausa para pedir autorização antes de gravar ou mudar dados reais.",
+        "Chave 2 de acesso: é aqui em Resources que você decide o que entra na mesa do agente. O que não for anexado ao Projeto continua invisível e protegido.",
       pins: [
         {
           num: "1",
-          label: "Painel lateral de Artifacts (Artefatos)",
-          text: "Área ao lado do chat onde o agente exibe planos completos (plano.md), prévias interativas e relatórios organizados sem se perder no meio das mensagens."
+          x: 26.8,
+          y: 26.8,
+          box: { x: 27.7, y: 22.3, w: 8.6, h: 10.8 },
+          label: "Configuração separada por Projeto",
+          text: "Na coluna esquerda do modal Settings, cada projeto (meu-site, financas-pessoais, estudos-pdf) guarda sua própria lista independente de recursos."
         },
         {
           num: "2",
-          label: "Pausa de segurança",
-          text: "Antes de gravar na sua planilha ou publicar alterações, surge um cartão explicando exatamente qual ação será executada."
+          x: 54.0,
+          y: 18.6,
+          box: { x: 40.5, y: 19.8, w: 26.8, h: 3.8 },
+          label: "Recurso anexado (ex.: repositório GitHub)",
+          text: "Aqui o repositório seu-usuario/meu-site foi liberado para este projeto — seus outros repositórios privados do GitHub seguem fora do alcance do agente."
         },
         {
           num: "3",
-          label: "Aprovar ou pedir ajuste",
-          text: "Clique em \"✓ Aprovar e Executar\" se estiver tudo certo — ou em \"Pedir ajuste\" para corrigir qualquer detalhe antes."
+          x: 68.2,
+          y: 25.8,
+          box: { x: 40.5, y: 23.8, w: 26.8, h: 3.5 },
+          label: "Botão + Add Resource (GitHub, Drive/Sheets, arquivos)",
+          text: "Clique aqui para vincular outro repositório do GitHub, selecionar planilhas/pastas do Google Drive e Sheets ou subir arquivos de referência do seu computador."
         }
       ]
     },
     {
       step: 5,
-      shortTab: "5. Resultado",
-      title: "Passo 5 — Testar o resultado ao vivo e pedir ajustes",
-      img: "assets/tour/05-resultado.png",
-      alt: "Tela ilustrativa do resultado pronto no Google Antigravity destacando o Preview ao vivo do catálogo de metas e livros no painel lateral (1), o cartão com o link público pronto para compartilhar (2) e a caixa de conversa para pedir novos ajustes (3).",
+      shortTab: "5. Plano & Aprovação",
+      frameTag: "Print real · Pinos interativos",
+      title: "Passo 5 — Revisar o Implementation Plan e acompanhar a execução",
+      img: "assets/tour/05-plano-execucao.png",
+      alt: "Tela real de conversa no Google Antigravity mostrando o cartão do artefato Implementation Plan gerado pelo agente (1), a confirmação Proceeded with Implementation Plan após revisão humana (2) e os ícones de abertura do Side Panel e Overview no canto superior direito (3).",
       intro:
-        "Com a tarefa pronta, você testa tudo no preview ao vivo, recebe o link pronto para compartilhar e pode pedir ajustes conversando normalmente.",
+        "Quando você começa com /plan, o agente primeiro cria um plano organizado (Implementation Plan) e só começa a mexer nos arquivos depois do seu clique de aprovação.",
       pins: [
         {
           num: "1",
-          label: "Preview ao vivo",
-          text: "Clique nos botões e teste sua página ou aplicativo direto na tela dividida — sem instalar nada no seu computador."
+          x: 72.9,
+          y: 15.8,
+          box: { x: 38.5, y: 11.5, w: 33.7, h: 8.8 },
+          label: "Artefato Implementation Plan",
+          text: "Clique neste cartão para abrir o plano completo no painel lateral, ler cada etapa em português e comentar se quiser mudar alguma decisão."
         },
         {
           num: "2",
-          label: "Link para compartilhar",
-          text: "Páginas publicadas no GitHub Pages ou planilhas criadas viram cartões clicáveis prontos para abrir ou enviar."
+          x: 37.5,
+          y: 27.8,
+          box: { x: 38.5, y: 25.7, w: 33.7, h: 4.1 },
+          label: "Aprovação registrada (Proceeded with...)",
+          text: "O agente só sai do planejamento para a execução após você clicar em Proceed — mantendo você sempre no comando antes de alterar arquivos ou planilhas."
         },
         {
           num: "3",
-          label: "Ajustes em português natural",
-          text: "Quer mudar uma cor, texto ou filtro? Basta pedir na conversa (ou mandar um print mostrando o que melhorar)."
+          x: 94.2,
+          y: 5.5,
+          box: { x: 91.0, y: 0.4, w: 6.4, h: 3.3 },
+          label: "Overview & Side Panel (Arquivos e Prévias)",
+          text: "Use os ícones no canto superior direito para abrir o painel lateral com seus Artefatos, arquivos modificados, links salvos e prévias ao vivo."
         }
       ]
     }
@@ -1521,8 +1576,8 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
     },
     {
       id: "step-antigravity",
-      title: "Rodar uma automação guiada no Google Antigravity",
-      desc: "Conecte o plugin do Google Drive ou Google Sheets e teste o Roteiro 1 da Seção 5 começando com /plan."
+      title: "Configurar seu primeiro Projeto e rodar uma automação no Google Antigravity",
+      desc: "Conecte o plugin de Google Drive/Sheets (ou GitHub) em Customizations, anexe o recurso no Projeto e teste o Roteiro 1 da Seção 5 começando com /plan."
     },
     {
       id: "step-agents-md",
