@@ -773,6 +773,16 @@ window.GUIDE_DATA = {
       def: "Na analogia do restaurante: Frontend é o salão/telas que o usuário vê; Backend é a cozinha que processa regras e acessa o banco; API é o garçom que leva pedidos e traz respostas entre sistemas."
     },
     {
+      term: "HTML, CSS & JavaScript",
+      category: "Sistemas",
+      def: "O trio base de toda tela na web: HTML é a estrutura (textos, fotos e botões); CSS é o visual (cores, fontes e layout); JavaScript é a interatividade (faz botões, filtros e cálculos reagirem ao clique)."
+    },
+    {
+      term: "Framework de Frontend (React, Next.js, Tailwind)",
+      category: "Sistemas",
+      def: "Kits de peças pré-moldadas (componentes reutilizáveis) que aceleram apps maiores com várias telas e dados vivos. Para páginas simples e guias, HTML, CSS e JS puros já bastam."
+    },
+    {
       term: "Git & GitHub",
       category: "Sistemas",
       def: "Sistema de versionamento ('máquina do tempo' do código) e plataforma na nuvem onde o projeto fica guardado, revisado e compartilhado."
@@ -1754,5 +1764,89 @@ description: Revisa textos e e-mails deixando a leitura clara e sem jargão. Use
       url: "https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA",
       note: "A playlist mais famosa do Brasil sobre o Pilar 1: ensina repositórios, commits, branches e GitHub Pages visualmente, sem assustar com tela preta."
     }
-  ]
+  ],
+
+  /* Section 05 — Interactive Web Layers Lab (Frontend HTML/CSS/JS + Backend & API) */
+  webLayersLab: {
+    presets: [
+      { id: "raw", label: "1. Só HTML (1995)", css: false, js: false, backend: false },
+      { id: "styled", label: "2. HTML + CSS", css: true, js: false, backend: false },
+      { id: "browser", label: "3. + JavaScript", css: true, js: true, backend: false },
+      { id: "fullstack", label: "4. + Backend & API", css: true, js: true, backend: true }
+    ],
+    layers: [
+      {
+        id: "html",
+        name: "HTML",
+        file: "index.html",
+        analogy: "Paredes e esqueleto",
+        role: "Define o que existe na tela: título, texto, estrelas e botão."
+      },
+      {
+        id: "css",
+        name: "CSS",
+        file: "style.css",
+        analogy: "Pintura e decoração",
+        role: "Dá cores, fontes legíveis, espaçamento, bordas e modo escuro."
+      },
+      {
+        id: "js",
+        name: "JavaScript",
+        file: "app.js",
+        analogy: "Eletricidade e ação",
+        role: "Faz os botões, notas e filtros reagirem na hora quando você clica."
+      },
+      {
+        id: "backend",
+        name: "Backend",
+        file: "api/livros.js",
+        analogy: "Cozinha + API na nuvem",
+        role: "Valida regras com segurança e grava no Banco para aparecer no celular e no PC."
+      }
+    ],
+    states: {
+      raw: {
+        badge: "Apenas HTML · Sem visual nem ação",
+        title: "A página existe, mas parece um rascunho de 1995",
+        summary:
+          "O navegador recebeu só o arquivo index.html. O texto, a lista de notas e o botão já existem ali, mas sem CSS tudo fica sem cor nem alinhamento — e sem JavaScript clicar no botão não faz nada.",
+        storageNote: "Estático: não guarda nenhuma alteração."
+      },
+      styledOnly: {
+        badge: "HTML + CSS · Vitrine bonita, ainda estática",
+        title: "Ganhou cara profissional, mas os botões ainda não reagem",
+        summary:
+          "Com o style.css ligado, o mesmo HTML virou um cartão limpo e agradável de ler. Ótimo para páginas informativas — experimente clicar nas estrelas ou em 'Marcar como lido' para ver por que falta o JavaScript!",
+        storageNote: "Página estática: só exibe conteúdo, sem salvar cliques."
+      },
+      rawJs: {
+        badge: "HTML + JavaScript · Funciona, mas sem maquiagem",
+        title: "Os cliques funcionam de verdade — só faltou o acabamento visual!",
+        summary:
+          "Mesmo com cara crua (sem CSS), o JavaScript deu vida aos botões: você já pode dar nota e marcar como lido. As mudanças ficam guardadas apenas na memória local deste navegador.",
+        storageNote: "Salvo só neste navegador (localStorage) — se abrir no celular, começa zerado."
+      },
+      browserApp: {
+        badge: "100% Frontend (HTML + CSS + JS) · Resultado típico do Roteiro 2",
+        title: "Mini-app bonito e vivo — sem precisar de servidor complexo!",
+        summary:
+          "É exatamente o que o Antigravity entrega na versão 1 do Roteiro 2: bonito (CSS), clicável na hora (JavaScript) e grátis para publicar. Só falta um detalhe: os dados vivem apenas neste aparelho.",
+        storageNote: "Salvo só neste navegador (localStorage) — ideal para uso pessoal rápido."
+      },
+      backendNoJs: {
+        badge: "Cozinha pronta, mas sem eletricidade no salão",
+        title: "O Backend está esperando, mas sem JavaScript a tela não consegue chamar a API",
+        summary:
+          "Mesmo com o servidor (Backend) pronto nos bastidores, é o JavaScript no navegador quem aciona o garçom (API) quando você clica. Ligue o JavaScript acima para ver o pedido viajar até a nuvem!",
+        storageNote: "Ligue o JavaScript para o botão conseguir conversar com o Backend."
+      },
+      fullStack: {
+        badge: "Frontend + API + Backend · Sistema completo na nuvem",
+        title: "Salão bonito + Cozinha conectada: seus dados sobrevivem em qualquer aparelho",
+        summary:
+          "Agora cada clique dispara o JavaScript, que manda uma comanda leve em JSON pelo garçom (API) até o Backend. A cozinha confere tudo com segurança, guarda no Banco de Dados e responde em milissegundos.",
+        storageNote: "Sincronizado na nuvem via API — aparece no seu celular e no seu computador!"
+      }
+    }
+  }
 };

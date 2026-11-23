@@ -2739,6 +2739,336 @@
     renderInstrLayer(0, false);
   }
 
+  /* ------------------------------------------------------------------------
+     18. Section 05 — Interactive Web Layers Lab (Frontend HTML/CSS/JS + Backend)
+     ------------------------------------------------------------------------ */
+  const webLabEl = document.getElementById("widget-web-layers");
+  const webLabPresetsEl = document.getElementById("weblab-presets");
+  const webLabTogglesEl = document.getElementById("weblab-toggles");
+  const webLabFilesEl = document.getElementById("weblab-file-chips");
+  const webLabCanvasEl = document.getElementById("weblab-preview-canvas");
+  const webLabLogEl = document.getElementById("weblab-action-log");
+  const webLabStateEl = document.getElementById("weblab-state-box");
+  const webLabSvgEl = document.getElementById("weblab-svg-box");
+
+  if (webLabEl && DATA.webLayersLab) {
+    const labData = DATA.webLayersLab;
+    const labState = {
+      css: true,
+      js: true,
+      backend: false,
+      isDone: false,
+      rating: 4,
+      logTone: "neutral",
+      logText: "Teste clicar nas estrelas ou em 'Marcar como lido' — depois desligue o CSS ou o JavaScript acima!"
+    };
+
+    function getLabStateKey() {
+      if (!labState.css && !labState.js && !labState.backend) return "raw";
+      if (labState.css && !labState.js && !labState.backend) return "styledOnly";
+      if (!labState.css && labState.js && !labState.backend) return "rawJs";
+      if (labState.backend && !labState.js) return "backendNoJs";
+      if (labState.backend && labState.js) return "fullStack";
+      return "browserApp";
+    }
+
+    function renderWebLabSvg() {
+      if (!webLabSvgEl) return;
+      const cssOn = labState.css;
+      const jsOn = labState.js;
+      const backOn = labState.backend;
+      const apiLive = backOn && jsOn;
+
+      const pillFill = (on, soft) => (on ? soft : "var(--bg-subtle)");
+      const pillStroke = (on, solid) => (on ? solid : "var(--border-strong)");
+      const pillText = (on) => (on ? "var(--ink-primary)" : "var(--ink-muted)");
+
+      const arrowStroke = apiLive
+        ? "var(--accent-green)"
+        : backOn
+        ? "var(--accent-amber)"
+        : "var(--border-strong)";
+      const apiStatusText = apiLive ? "JSON em ação ✓" : backOn ? "Precisa de JS" : "Opcional";
+      const apiStatusColor = apiLive
+        ? "var(--accent-green)"
+        : backOn
+        ? "var(--accent-amber)"
+        : "var(--ink-muted)";
+
+      webLabSvgEl.innerHTML = `
+        <svg viewBox="0 0 380 156" role="img" aria-label="Diagrama ao vivo de Frontend (HTML, CSS, JS), API e Backend">
+          <defs>
+            <marker id="weblab-arr-right" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="${arrowStroke}" />
+            </marker>
+            <marker id="weblab-arr-left" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 9 1.5 L 1 5 L 9 8.5 z" fill="${arrowStroke}" />
+            </marker>
+          </defs>
+
+          <!-- FRONTEND BOX -->
+          <rect x="8" y="14" width="134" height="128" rx="11"
+            fill="var(--bg-surface)" stroke="var(--accent-blue)" stroke-width="1.6" />
+          <text x="20" y="34" fill="var(--accent-blue)" font-size="8.8" font-weight="700" font-family="JetBrains Mono, monospace">FRONTEND · SALÃO</text>
+          <text x="20" y="48" fill="var(--ink-secondary)" font-size="9.5" font-family="Plus Jakarta Sans, sans-serif">Roda no navegador</text>
+
+          <rect x="20" y="58" width="110" height="22" rx="6"
+            fill="var(--accent-blue-soft)" stroke="var(--accent-blue)" stroke-width="1.2" />
+          <text x="75" y="72.5" text-anchor="middle" fill="var(--ink-primary)" font-size="9.5" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">HTML · Estrutura ✓</text>
+
+          <rect x="20" y="85" width="110" height="22" rx="6"
+            fill="${pillFill(cssOn, "var(--accent-blue-soft)")}"
+            stroke="${pillStroke(cssOn, "var(--accent-blue)")}"
+            stroke-width="1.2" stroke-dasharray="${cssOn ? "none" : "3 3"}" />
+          <text x="75" y="99.5" text-anchor="middle" fill="${pillText(cssOn)}" font-size="9.5" font-weight="${cssOn ? "700" : "500"}" font-family="Plus Jakarta Sans, sans-serif">CSS · Visual ${cssOn ? "✓" : "✕"}</text>
+
+          <rect x="20" y="112" width="110" height="22" rx="6"
+            fill="${pillFill(jsOn, "var(--accent-amber-soft)")}"
+            stroke="${pillStroke(jsOn, "var(--accent-amber)")}"
+            stroke-width="1.2" stroke-dasharray="${jsOn ? "none" : "3 3"}" />
+          <text x="75" y="126.5" text-anchor="middle" fill="${pillText(jsOn)}" font-size="9.5" font-weight="${jsOn ? "700" : "500"}" font-family="Plus Jakarta Sans, sans-serif">JS · Ação ${jsOn ? "✓" : "✕"}</text>
+
+          <!-- API CONNECTOR -->
+          <text x="190" y="50" text-anchor="middle" fill="${apiStatusColor}" font-size="8.6" font-weight="700" font-family="JetBrains Mono, monospace">API · GARÇOM</text>
+          <line x1="147" y1="64" x2="229" y2="64" stroke="${arrowStroke}" stroke-width="1.7"
+            stroke-dasharray="${apiLive ? "none" : "4 3"}" marker-end="url(#weblab-arr-right)" />
+          <rect x="166" y="72" width="48" height="20" rx="5"
+            fill="${apiLive ? "var(--accent-green-soft)" : "var(--bg-subtle)"}"
+            stroke="${arrowStroke}" stroke-width="1.1" />
+          <text x="190" y="85.5" text-anchor="middle" fill="${apiLive ? "var(--ink-primary)" : "var(--ink-muted)"}" font-size="9" font-weight="700" font-family="JetBrains Mono, monospace">JSON</text>
+          <line x1="233" y1="100" x2="151" y2="100" stroke="${arrowStroke}" stroke-width="1.7"
+            stroke-dasharray="${apiLive ? "none" : "4 3"}" marker-end="url(#weblab-arr-left)" />
+          <text x="190" y="119" text-anchor="middle" fill="${apiStatusColor}" font-size="9.2" font-weight="600" font-family="Plus Jakarta Sans, sans-serif">${apiStatusText}</text>
+
+          <!-- BACKEND BOX -->
+          <rect x="238" y="14" width="134" height="128" rx="11"
+            fill="${backOn ? "var(--bg-surface)" : "var(--bg-subtle)"}"
+            stroke="${backOn ? "var(--accent-green)" : "var(--border-strong)"}"
+            stroke-width="${backOn ? "1.6" : "1.2"}"
+            stroke-dasharray="${backOn ? "none" : "4 3"}" />
+          <text x="250" y="34" fill="${backOn ? "var(--accent-green)" : "var(--ink-muted)"}" font-size="8.8" font-weight="700" font-family="JetBrains Mono, monospace">BACKEND · COZINHA</text>
+          <text x="250" y="48" fill="${backOn ? "var(--ink-secondary)" : "var(--ink-muted)"}" font-size="9.5" font-family="Plus Jakarta Sans, sans-serif">${backOn ? "Servidor na nuvem" : "Não necessário ainda"}</text>
+
+          <rect x="250" y="60" width="110" height="30" rx="6"
+            fill="${pillFill(backOn, "var(--accent-green-soft)")}"
+            stroke="${pillStroke(backOn, "var(--accent-green)")}" stroke-width="1.2" />
+          <text x="305" y="79" text-anchor="middle" fill="${pillText(backOn)}" font-size="9.4" font-weight="${backOn ? "700" : "500"}" font-family="Plus Jakarta Sans, sans-serif">${backOn ? "Regras &amp; .env ✓" : "Sem servidor"}</text>
+
+          <rect x="250" y="98" width="110" height="30" rx="6"
+            fill="${pillFill(backOn, "var(--accent-green-soft)")}"
+            stroke="${pillStroke(backOn, "var(--accent-green)")}" stroke-width="1.2" />
+          <text x="305" y="117" text-anchor="middle" fill="${pillText(backOn)}" font-size="9.4" font-weight="${backOn ? "700" : "500"}" font-family="Plus Jakarta Sans, sans-serif">${backOn ? "Banco na Nuvem ✓" : "Só navegador"}</text>
+        </svg>
+      `;
+    }
+
+    function renderWebLab() {
+      const stateKey = getLabStateKey();
+      const info = labData.states[stateKey] || labData.states.browserApp;
+
+      // 1. Presets bar
+      if (webLabPresetsEl) {
+        webLabPresetsEl.innerHTML =
+          `<span class="weblab-presets-label">Cenários rápidos:</span>` +
+          labData.presets
+            .map((p) => {
+              const active =
+                p.css === labState.css && p.js === labState.js && p.backend === labState.backend;
+              return `<button type="button" class="weblab-preset-btn${active ? " is-active" : ""}" data-preset="${p.id}" aria-pressed="${String(active)}">${escapeHtml(p.label)}</button>`;
+            })
+            .join("");
+      }
+
+      // 2. Individual layer toggles
+      if (webLabTogglesEl) {
+        webLabTogglesEl.innerHTML = labData.layers
+          .map((layer) => {
+            const isHtml = layer.id === "html";
+            const isOn = isHtml ? true : Boolean(labState[layer.id]);
+            return `
+              <button
+                type="button"
+                class="weblab-toggle-btn is-${layer.id}${isOn ? " is-on" : " is-off"}${isHtml ? " is-base" : ""}"
+                data-layer="${layer.id}"
+                aria-pressed="${String(isOn)}"
+              >
+                <span class="weblab-toggle-top">
+                  <span class="weblab-toggle-name">${escapeHtml(layer.name)}</span>
+                  <span class="weblab-toggle-pill">${isHtml ? "Base ✓" : isOn ? "Ligado" : "Desligado"}</span>
+                </span>
+                <span class="weblab-toggle-analogy">${escapeHtml(layer.analogy)}</span>
+              </button>
+            `;
+          })
+          .join("");
+      }
+
+      // 3. Browser header active file chips
+      if (webLabFilesEl) {
+        const files = [
+          { name: "index.html", on: true },
+          { name: "style.css", on: labState.css },
+          { name: "app.js", on: labState.js }
+        ];
+        if (labState.backend) {
+          files.push({ name: "api/livros.js", on: true, isBack: true });
+        }
+        webLabFilesEl.innerHTML = files
+          .map(
+            (f) =>
+              `<span class="weblab-file-chip${f.on ? " is-on" : " is-off"}${f.isBack ? " is-back" : ""}">${escapeHtml(f.name)}</span>`
+          )
+          .join("");
+      }
+
+      // 4. Live mini-card preview (Roteiro 2 Book Catalog card)
+      if (webLabCanvasEl) {
+        const starsHtml = [1, 2, 3, 4, 5]
+          .map((n) => {
+            const filled = n <= labState.rating;
+            return `<button type="button" class="weblab-star-btn${filled ? " is-filled" : ""}" data-star="${n}" aria-label="Dar nota ${n} de 5" aria-pressed="${String(n === labState.rating)}">${filled ? "★" : "☆"}</button>`;
+          })
+          .join("");
+
+        webLabCanvasEl.classList.toggle("is-raw-mode", !labState.css);
+        webLabCanvasEl.innerHTML = `
+          <div class="weblab-card${labState.css ? " is-styled" : " is-raw-html"}${labState.isDone ? " is-done" : ""}">
+            <div class="weblab-card-top">
+              <span class="weblab-card-badge">Livro · Meta 2026</span>
+              <span class="weblab-card-status">${labState.isDone ? "Concluído ✓" : "Na fila"}</span>
+            </div>
+            <h5 class="weblab-card-title">Hábitos Atômicos</h5>
+            <p class="weblab-card-sub">James Clear · Pequenas mudanças diárias que geram grandes resultados.</p>
+            <div class="weblab-card-controls">
+              <div class="weblab-stars-row" role="group" aria-label="Nota do livro de 1 a 5">
+                <span class="weblab-stars-label">Nota:</span>
+                ${starsHtml}
+                <span class="weblab-stars-val">${labState.rating}/5</span>
+              </div>
+              <button type="button" class="weblab-done-btn" id="weblab-done-btn">
+                ${labState.isDone ? "✓ Lido (desmarcar)" : "Marcar como lido"}
+              </button>
+            </div>
+            <p class="weblab-storage-note">${escapeHtml(info.storageNote)}</p>
+          </div>
+        `;
+      }
+
+      // 5. Action feedback log
+      if (webLabLogEl) {
+        webLabLogEl.className = `weblab-action-log is-${labState.logTone}`;
+        webLabLogEl.textContent = labState.logText;
+      }
+
+      // 6. State explanation box
+      if (webLabStateEl) {
+        webLabStateEl.innerHTML = `
+          <span class="weblab-state-badge">${escapeHtml(info.badge)}</span>
+          <h5 class="weblab-state-title">${escapeHtml(info.title)}</h5>
+          <p class="weblab-state-summary">${escapeHtml(info.summary)}</p>
+        `;
+      }
+
+      // 7. Mini thematic SVG
+      renderWebLabSvg();
+    }
+
+    if (webLabPresetsEl) {
+      webLabPresetsEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".weblab-preset-btn");
+        if (!btn) return;
+        const preset = labData.presets.find((p) => p.id === btn.dataset.preset);
+        if (!preset) return;
+        labState.css = preset.css;
+        labState.js = preset.js;
+        labState.backend = preset.backend;
+        if (!preset.css && !preset.js) {
+          labState.logTone = "neutral";
+          labState.logText = "HTML puro ligado! Tente clicar nos botões acima — sem JavaScript eles não reagem.";
+        } else if (preset.css && !preset.js) {
+          labState.logTone = "neutral";
+          labState.logText = "CSS ligado! O visual ficou limpo, mas experimente clicar num botão para ver o papel do JavaScript.";
+        } else if (preset.backend) {
+          labState.logTone = "cloud";
+          labState.logText = "Backend + API ligados! Clique nas estrelas ou em 'Marcar como lido' para ver o pedido viajar em JSON até a nuvem.";
+        } else {
+          labState.logTone = "active";
+          labState.logText = "HTML + CSS + JavaScript ligados! Agora os botões funcionam na hora direto no navegador.";
+        }
+        renderWebLab();
+      });
+    }
+
+    if (webLabTogglesEl) {
+      webLabTogglesEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".weblab-toggle-btn");
+        if (!btn) return;
+        const layerId = btn.dataset.layer;
+        if (layerId === "html") {
+          labState.logTone = "neutral";
+          labState.logText = "O HTML é a estrutura obrigatória: sem ele, não existe texto nem botão na tela!";
+          renderWebLab();
+          return;
+        }
+        labState[layerId] = !labState[layerId];
+        if (layerId === "css") {
+          labState.logTone = "neutral";
+          labState.logText = labState.css
+            ? "CSS religado: cores, tipografia e espaçamento voltaram na hora sem mudar uma letra do HTML!"
+            : "CSS desligado: o conteúdo continua intacto, mas sem estilo o navegador mostra tudo cru!";
+        } else if (layerId === "js") {
+          labState.logTone = labState.js ? "active" : "warn";
+          labState.logText = labState.js
+            ? "JavaScript ligado: os botões e estrelas voltaram a responder ao clique!"
+            : "JavaScript desligado: experimente clicar em 'Marcar como lido' ou numa estrela agora!";
+        } else if (layerId === "backend") {
+          labState.logTone = labState.backend ? (labState.js ? "cloud" : "warn") : "neutral";
+          labState.logText = labState.backend
+            ? labState.js
+              ? "Backend + API ligados: cada clique agora envia um pedido JSON para a cozinha salvar na nuvem!"
+              : "Backend ligado, mas falta ligar o JavaScript na tela para enviar o pedido até a API!"
+            : "Backend desligado: o app voltou a rodar 100% no Frontend (só no seu navegador).";
+        }
+        renderWebLab();
+      });
+    }
+
+    if (webLabCanvasEl) {
+      webLabCanvasEl.addEventListener("click", (e) => {
+        const starBtn = e.target.closest(".weblab-star-btn");
+        const doneBtn = e.target.closest("#weblab-done-btn");
+        if (!starBtn && !doneBtn) return;
+
+        if (!labState.js) {
+          labState.logTone = "warn";
+          labState.logText =
+            "Clique bloqueado! O botão existe no HTML, mas sem JavaScript a página não sabe reagir ao clique.";
+          renderWebLab();
+          return;
+        }
+
+        if (starBtn) {
+          labState.rating = Number(starBtn.dataset.star) || 4;
+        } else if (doneBtn) {
+          labState.isDone = !labState.isDone;
+        }
+
+        if (labState.backend) {
+          labState.logTone = "cloud";
+          labState.logText = `API (Garçom) enviou { livro: "Hábitos Atômicos", nota: ${labState.rating}, lido: ${labState.isDone} } → Backend validou e salvou no Banco! ✓`;
+        } else {
+          labState.logTone = "active";
+          labState.logText = `JavaScript atualizou na hora (nota ${labState.rating}/5 · ${
+            labState.isDone ? "Concluído" : "Na fila"
+          }) e guardou só neste navegador.`;
+        }
+        renderWebLab();
+      });
+    }
+
+    renderWebLab();
+  }
+
   /* Cross-links: open specific instruction layer or <details> accordion when jumped to */
   document.addEventListener("click", (e) => {
     const layerLink = e.target.closest("a[data-open-layer]");

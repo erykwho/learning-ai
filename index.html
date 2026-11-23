@@ -162,7 +162,7 @@
         </p>
         <div class="hero-meta">
           <span>Trilha essencial: ~15–20 min · Completo: ~35–40 min</span>
-          <span>8 gráficos interativos · Tour visual · Guia das 3 camadas</span>
+          <span>8 gráficos interativos · Tour visual · Laboratório Web · 3 camadas</span>
           <span>Foco prático · Sem pré-requisitos de código</span>
         </div>
 
@@ -1089,8 +1089,9 @@
           <a href="#sec-antigravity-nuvem">2. Nuvem vs. PC</a>
           <a href="#widget-antigravity-tour">3. Tour Visual</a>
           <a href="#sec-roteiros">4. 2 Roteiros</a>
-          <a href="#sec-agents-md">5. Memória (Opcional)</a>
-          <a href="#sec-truques">6. 8 Truques</a>
+          <a href="#sec-frontend-backend">5. Frontend &amp; Backend</a>
+          <a href="#sec-agents-md">6. Memória (Opcional)</a>
+          <a href="#sec-truques">7. 8 Truques</a>
         </nav>
 
         <!-- Projects, Resources & Permissions Concept (Section 05) -->
@@ -1340,6 +1341,133 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           </div>
         </div>
 
+        <!-- Frontend, Backend, HTML/CSS/JS & Frameworks (Result of Section 05) -->
+        <h3 id="sec-frontend-backend">O que o agente acabou de construir? Frontend, Backend e a Web por Dentro</h3>
+        <p>
+          Quando o Antigravity terminar o <strong>Roteiro 2</strong> acima (o seu catálogo web), você vai notar que ele criou alguns arquivos com nomes como <span class="inline-code">index.html</span>, <span class="inline-code">style.css</span> e <span class="inline-code">app.js</span> — ou talvez mencione palavras como <em>Frontend</em>, <em>Backend</em>, <em>React</em> ou <em>Next.js</em> no plano. Você <strong>não precisa saber programar nenhum deles</strong>, mas levar 3 minutos para entender o papel de cada peça te dá superpoderes para conversar com o agente e entender o que vem na Seção 06.
+        </p>
+
+        <div class="web-trio-grid" aria-label="Analogia do restaurante: Frontend, API e Backend">
+          <article class="web-trio-card is-front">
+            <span class="web-trio-kicker">1. Frontend · O Salão e o Cardápio</span>
+            <h4>Tudo o que você vê e toca na tela</h4>
+            <p>
+              Roda direto no navegador do seu celular ou computador. São os textos, cores, fotos, botões, filtros e animações com os quais o visitante interage.
+            </p>
+          </article>
+          <article class="web-trio-card is-api">
+            <span class="web-trio-kicker">2. API · O Garçom</span>
+            <h4>A ponte que leva pedidos e traz respostas</h4>
+            <p>
+              Quando a tela precisa salvar ou buscar algo na nuvem, ela manda uma "comanda" leve (geralmente em <strong>JSON</strong>) pela API até o servidor — e recebe a resposta pronta.
+            </p>
+          </article>
+          <article class="web-trio-card is-back">
+            <span class="web-trio-kicker">3. Backend · A Cozinha nos Bastidores</span>
+            <h4>Regras seguras, chaves e Banco de Dados</h4>
+            <p>
+              Roda escondido num servidor 24h. Confere logins e pagamentos, protege senhas secretas (<span class="inline-code">.env</span>) e grava informações permanentes no Banco de Dados.
+            </p>
+          </article>
+        </div>
+
+        <div class="web-need-strip">
+          <div class="web-need-item is-simple">
+            <strong>Quando SÓ Frontend já basta (sem Backend)</strong>
+            <span>Páginas informativas, portfólios, guias (como este que você está lendo!) ou ferramentas pessoais que salvam listas apenas no próprio navegador. É mais rápido, mais simples e grátis para publicar.</span>
+          </div>
+          <div class="web-need-item is-cloud">
+            <strong>Quando você precisa somar um Backend</strong>
+            <span>Quando quer sincronizar dados entre celular e computador, ter login de várias pessoas, aceitar pagamentos ou chamar serviços externos usando chaves secretas que não podem ficar expostas no navegador.</span>
+          </div>
+        </div>
+
+        <!-- Interactive Web Layers Lab (Frontend HTML/CSS/JS + Backend & API) -->
+        <div class="interactive-stage" id="widget-web-layers" aria-label="Laboratório interativo de HTML, CSS, JavaScript e Backend">
+          <div class="stage-header">
+            <div class="stage-title-group">
+              <p class="stage-eyebrow">Laboratório Interativo · Anatomia de um App Web</p>
+              <h4 class="stage-title">Ligue e desligue HTML, CSS, JavaScript e Backend ao vivo</h4>
+              <p class="stage-hint">Abaixo está um cartão real do <strong>Catálogo de Livros</strong> do Roteiro 2. Experimente <strong>desligar o CSS</strong> para ver o esqueleto cru de 1995, <strong>desligar o JavaScript</strong> e tentar clicar nos botões — ou <strong>ligar o Backend</strong> para enviar dados pela API até a nuvem.</p>
+            </div>
+          </div>
+
+          <div class="weblab-presets" id="weblab-presets" role="group" aria-label="Cenários rápidos do laboratório web"></div>
+          <div class="weblab-toggles" id="weblab-toggles" role="group" aria-label="Ligar ou desligar camadas da página"></div>
+
+          <div class="weblab-stage">
+            <div class="weblab-preview-col">
+              <div class="weblab-browser-bar">
+                <div class="weblab-browser-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="weblab-browser-url">meu-catalogo.app</span>
+                <div class="weblab-file-chips" id="weblab-file-chips"></div>
+              </div>
+              <div class="weblab-preview-canvas" id="weblab-preview-canvas"></div>
+              <div class="weblab-action-log" id="weblab-action-log" aria-live="polite"></div>
+            </div>
+
+            <div class="weblab-explain-col">
+              <div class="weblab-state-box" id="weblab-state-box" aria-live="polite"></div>
+              <div class="weblab-svg-box" id="weblab-svg-box"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frameworks in Frontend: Vanilla vs. React / Next.js / Tailwind -->
+        <h4>E quando o agente fala em "Frameworks" no Frontend (React, Next.js, Tailwind)?</h4>
+        <p>
+          Todo navegador entende apenas três línguas no Frontend: <strong>HTML</strong>, <strong>CSS</strong> e <strong>JavaScript</strong>. Mas, quando um projeto cresce e passa a ter dezenas de telas, menus e listas que mudam o tempo todo, montar cada pedaço manualmente dá trabalho repetitivo. É aí que entram os <strong>Frameworks</strong> — pense neles como um <strong>kit de peças pré-moldadas (tipo LEGO profissional)</strong> que o agente usa para montar telas complexas em blocos reutilizáveis (chamados de <em>componentes</em>), mantendo tudo organizado e sincronizado.
+        </p>
+
+        <div class="frameworks-compare-grid">
+          <article class="framework-card is-vanilla">
+            <span class="framework-tag">Sem framework · "Artesanal e leve"</span>
+            <h5>HTML + CSS + JavaScript puros</h5>
+            <p>
+              Vai direto ao ponto, sem bibliotecas pesadas nem etapa de empacotamento (<em>build</em>). Abre quase instantaneamente em qualquer celular.
+            </p>
+            <ul>
+              <li><strong>Ótimo para:</strong> páginas de apresentação, blogs, calculadoras, ferramentas simples e guias interativos (como este próprio site!).</li>
+              <li><strong>Vantagem para iniciantes:</strong> poucos arquivos, super fácil de publicar no GitHub Pages em 2 cliques.</li>
+            </ul>
+          </article>
+
+          <article class="framework-card is-framework">
+            <span class="framework-tag">Com framework · "Kit de peças pré-moldadas"</span>
+            <h5>React, Next.js, Vue e Tailwind CSS</h5>
+            <p>
+              <strong>React</strong> (e <strong>Vue</strong>) organizam a tela em peças reutilizáveis; <strong>Next.js</strong> soma rotas de Backend e publicação fácil na Vercel; <strong>Tailwind CSS</strong> é um atalho de estilo muito popular que agentes de IA dominam bem.
+            </p>
+            <ul>
+              <li><strong>Ótimo para:</strong> apps com várias páginas, painéis financeiros, login de usuários, carrinhos e dados vivos sincronizados com banco.</li>
+              <li><strong>Vantagem com agentes:</strong> evita código bagunçado quando o sistema cresce e ganha novos recursos.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="weblab-prompt-box">
+          <div class="weblab-prompt-top">
+            <span class="weblab-prompt-label">Regra de ouro · Você não precisa escolher sozinho! Cole isto no /plan:</span>
+            <button type="button" class="copy-btn trick-copy-mini" data-copy-target="prompt-web-stack">Copiar frase</button>
+          </div>
+          <pre class="weblab-prompt-quote" id="prompt-web-stack">Prefiro a opção mais simples possível para o meu objetivo. Se der para fazer só com HTML, CSS e JavaScript puros (sem Backend), ótimo! Se você recomendar um framework (como React/Next.js) ou um Backend, me explique o porquê em 2 linhas simples antes de começar.</pre>
+        </div>
+
+        <details class="deep-dive is-compact web-backend-details">
+          <summary>
+            <span>Curiosidade opcional: e no Backend, o que são Node.js, TypeScript e Python?</span>
+            <span>
+              <span class="deep-dive-badge">Opcional</span>
+              <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="deep-dive-body">
+            <p>
+              Assim como o Frontend usa JavaScript na tela, a "cozinha" (Backend) também precisa de uma linguagem para rodar no servidor. Os dois nomes que o Antigravity mais usa são: <strong>Node.js / TypeScript</strong> (o mesmo JavaScript rodando no servidor — com <em>TypeScript</em> atuando como um corretor ortográfico automático para evitar bugs) e <strong>Python</strong> (a língua favorita para automações de planilhas, PDFs e Inteligência Artificial). Você não precisa estudar nenhum deles: só saber que ambos são escolhas modernas e confiáveis quando aparecerem no plano!
+            </p>
+          </div>
+        </details>
+
         <!-- Agent Instructions, AGENTS.md & Skills (Practical 3-Layer Workshop) -->
         <h3 id="sec-agents-md">Como fazer o agente lembrar de você: Instruções Globais, <span class="inline-code">AGENTS.md</span> e Skills</h3>
         <div class="optional-banner">
@@ -1572,12 +1700,9 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
           A boa notícia: você não precisa pagar caro nem virar especialista em infraestrutura. Um sistema profissional moderno se apoia em <strong>três pilares gratuitos para começar</strong> e em um <strong>Escudo Anti-Quebra</strong> de três hábitos simples.
         </p>
 
-        <div class="analogy-box">
-          <p class="analogy-label">Analogia Rápida: Frontend, Backend e API</p>
-          <p>
-            Antes de abrir os 3 pilares, imagine um sistema web como um <strong>restaurante</strong>: o <strong>Frontend</strong> é o salão bonito e o cardápio (as telas que você vê no celular ou navegador); o <strong>Backend</strong> é a cozinha nos bastidores (onde as regras rodam e os dados são buscados no banco); e a <strong>API</strong> é o <strong>garçom</strong> que leva o pedido do salão até a cozinha — ou até outros serviços externos — e volta com a resposta pronta.
-          </p>
-        </div>
+        <p class="inline-editorial-note">
+          <strong>Ponte rápida com a Seção 05:</strong> agora que você já viu como o agente monta o <strong>Frontend</strong> (HTML, CSS, JS ou frameworks) e, quando necessário, o <strong>Backend + API</strong> (<a href="#sec-frontend-backend">relembrar o Laboratório Web ↑</a>), falta apenas entender onde esses arquivos vivem, onde os dados ficam guardados e como publicar tudo com segurança.
+        </p>
 
         <h3>Os 3 Pilares de um Sistema Moderno (com cota gratuita)</h3>
 
@@ -1985,10 +2110,10 @@ Me faça perguntas uma de cada vez para decidirmos o visual e os detalhes antes 
             aria-label="Buscar termo no glossário"
           />
           <div class="pill-tabs glossary-tabs-inline" id="glossary-tabs" role="group" aria-label="Filtrar termos do glossário por categoria">
-            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (49)</button>
+            <button type="button" class="pill-tab is-active" data-cat="Todos" aria-pressed="true">Todos (51)</button>
             <button type="button" class="pill-tab" data-cat="Fundamentos" aria-pressed="false">Fundamentos (16)</button>
             <button type="button" class="pill-tab" data-cat="Agentes" aria-pressed="false">Agentes (16)</button>
-            <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (17)</button>
+            <button type="button" class="pill-tab" data-cat="Sistemas" aria-pressed="false">Sistemas (19)</button>
           </div>
         </div>
 
