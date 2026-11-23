@@ -1,4 +1,4 @@
-# IA sem Mistério — Guia Interativo em Português
+# IA na Prática: do Zero aos Agentes — Guia Interativo em Português
 
 Página interativa estilo blog post feita para leigos aprenderem Inteligência Artificial do zero até automações e sistemas reais — com foco no ecossistema Google (Gemini, NotebookLM, Google AI Studio e Google Antigravity) e boas práticas de sistemas (GitHub, Neon/Supabase e Vercel/GitHub Pages).
 

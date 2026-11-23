@@ -1,10 +1,10 @@
-# AGENTS.md — Guia Interativo "IA sem Mistério"
+# AGENTS.md — Guia Interativo "IA na Prática: do Zero aos Agentes"
 
 Este arquivo define o contrato permanente deste repositório para agentes de IA (Google Antigravity e outros harnesses compatíveis). Leia antes de propor ou editar qualquer conteúdo.
 
 ## 1. Missão e Público-Alvo do Projeto
 
-- **O que é este projeto:** uma página web pública, compartilhável e interativa (estilo blog post editorial) em **português brasileiro (`pt-BR`)** chamada **"Inteligência Artificial sem Mistério: Do Primeiro Prompt ao Seu Próprio Sistema"**.
+- **O que é este projeto:** uma página web pública, compartilhável e interativa (estilo blog post editorial) em **português brasileiro (`pt-BR`)** chamada **"IA na Prática: do Zero aos Agentes"**.
 - **Público-alvo:** pessoas **leigas em IA e programação** que querem entender o cenário atual e aprender a usar IA de verdade no dia a dia — sem pré-requisitos de código nem matemática avançada.
 - **Objetivo principal:** conduzir o leitor por uma **curva de aprendizado gradual** (do simples e abstrato ao prático e profissional), sem perder tempo excessivo na profundidade matemática de como modelos funcionam por dentro, priorizando:
   1. Como usar modelos e ferramentas de IA hoje na prática.
